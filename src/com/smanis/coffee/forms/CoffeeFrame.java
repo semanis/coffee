@@ -6,17 +6,13 @@ import com.smanis.coffee.AppPreferences;
 import com.smanis.coffee.models.NonEditableTableModel;
 import com.smanis.coffee.service.TableService;
 import com.smanis.coffee.Utility;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
-import javax.swing.JTable;
 import javax.swing.KeyStroke;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -66,7 +62,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         btnDeleteRoastLog = new javax.swing.JButton();
         panelBeans = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableBeans = new javax.swing.JTable();
         panelPurchases = new javax.swing.JPanel();
         buttonExit = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
@@ -258,8 +254,8 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
         panelBeans.setLayout(new java.awt.GridBagLayout());
 
-        jTable1.setModel(TableService.getInstance().getTableModelBeans());
-        jScrollPane4.setViewportView(jTable1);
+        tableBeans.setModel(TableService.getInstance().getTableModelBeans());
+        jScrollPane4.setViewportView(tableBeans);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -521,20 +517,8 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private void initOther() {
         try {
             TableService.getInstance().setupTableRoastLog(this.tableRoasts, this.textRoastNotes, this.textTastingNotes);
-            TableService.getInstance().hideColumnsRoastLog(this.tableRoasts);
-            TableService.getInstance().setColumnWidthsRoastLog(this.tableRoasts);
-
-            //this.tableRoasts.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-            this.tableRoasts.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-            this.tableRoasts.setIntercellSpacing(new Dimension(10, 10));
-            this.tableRoasts.setRowHeight(40);
-            // auto-select the first row.
-            this.tableRoasts.setRowSelectionInterval(0, 0);
-
-            TableModel model = this.tableRoasts.getModel();
-            this.textRoastNotes.setText((String) model.getValueAt(0, 13));
-            this.textTastingNotes.setText((String) model.getValueAt(0, 14));
-
+            TableService.getInstance().setupTableBeans(this.tableBeans);
+            
             AppPreferences.loadWindowPreferences(this);
 
             JRootPane jrp = this.getRootPane();
@@ -577,7 +561,6 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelFilter;
     private javax.swing.JLabel labelRoastNotes;
@@ -604,6 +587,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JPanel panelRoastLogs;
     private javax.swing.JPanel panelRoastTable;
     private javax.swing.JTabbedPane tabbedPanel;
+    private javax.swing.JTable tableBeans;
     private javax.swing.JTable tableRoasts;
     private javax.swing.JTextArea textRoastNotes;
     private javax.swing.JTextArea textTastingNotes;

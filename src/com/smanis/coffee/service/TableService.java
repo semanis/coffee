@@ -253,12 +253,12 @@ public class TableService {
     }
 
     public void setColumnWidthsBeans(JTable table) {
-        this.setColumnWidth(table, "Name", 285);
-        this.setColumnWidth(table, "Origin", 285);
+        this.setColumnWidth(table, "Name", 385);
+        this.setColumnWidth(table, "Origin", 420);
         this.setColumnWidth(table, "Altitude", 150);
-        this.setColumnWidth(table, "Process Method", 175);
-        this.setColumnWidth(table, "Density Grams", 175);
-        this.setColumnWidth(table, "Density", 170);
+        this.setColumnWidth(table, "Process Method", 155);
+        this.setColumnWidth(table, "Density Grams", 145);
+        this.setColumnWidth(table, "Density", 70);
     }
 
     /**
@@ -302,7 +302,29 @@ public class TableService {
         col.setWidth(width);
     }
     
+
+
+    public void setupTableBeans(JTable table) {
+            TableService.getInstance().hideColumnsBeans(table);
+            TableService.getInstance().setColumnWidthsBeans(table);
+
+            table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            table.setIntercellSpacing(new Dimension(10, 10));
+            table.setRowHeight(40);
+            
+            // auto-select the first row.
+            table.setRowSelectionInterval(0, 0);
+    }
+
+
     
+    /**
+     * Performs setup duties for the Roast Log table.
+     * 
+     * @param table A reference to the Roast Log table.
+     * @param roastNotes A reference to the roast notes textarea field.
+     * @param tastingNotes A reference to the tasting notes textarea field.
+     */
     public void setupTableRoastLog(JTable table, JTextArea roastNotes, JTextArea tastingNotes) {
 
             TableService.getInstance().hideColumnsRoastLog(table);
