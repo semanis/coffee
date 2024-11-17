@@ -1,6 +1,4 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.smanis.coffee.forms;
 
@@ -17,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 /**
@@ -66,6 +65,8 @@ public class CoffeeFrame extends javax.swing.JFrame {
         btnEditRoastLog = new javax.swing.JButton();
         btnDeleteRoastLog = new javax.swing.JButton();
         panelBeans = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         panelPurchases = new javax.swing.JPanel();
         buttonExit = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
@@ -86,7 +87,6 @@ public class CoffeeFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Coffee Roasting Log");
         setName("roastLogs"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1600, 900));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 exitForm(evt);
@@ -145,7 +145,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 0.25;
+        gridBagConstraints.weighty = 0.5;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 10);
         panelRoastLogs.add(panelNotes, gridBagConstraints);
 
@@ -155,6 +155,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane1.setAutoscrolls(true);
 
+        tableRoasts.setAutoCreateRowSorter(true);
         tableRoasts.setModel(TableService.getInstance().getTableModelRoastLogs());
         tableRoasts.setName(""); // NOI18N
         tableRoasts.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -202,6 +203,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
         panelButtons.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
+        btnAddRoastLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/addSmall.png"))); // NOI18N
         btnAddRoastLog.setMnemonic('a');
         btnAddRoastLog.setText("Add");
         btnAddRoastLog.addActionListener(new java.awt.event.ActionListener() {
@@ -211,6 +213,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         });
         panelButtons.add(btnAddRoastLog);
 
+        btnEditRoastLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/editSmall.png"))); // NOI18N
         btnEditRoastLog.setMnemonic('e');
         btnEditRoastLog.setText("Edit");
         btnEditRoastLog.addActionListener(new java.awt.event.ActionListener() {
@@ -220,6 +223,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         });
         panelButtons.add(btnEditRoastLog);
 
+        btnDeleteRoastLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/deleteSmall.png"))); // NOI18N
         btnDeleteRoastLog.setMnemonic('d');
         btnDeleteRoastLog.setText("Delete");
         btnDeleteRoastLog.addActionListener(new java.awt.event.ActionListener() {
@@ -247,10 +251,22 @@ public class CoffeeFrame extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.weighty = 0.5;
         panelRoastLogs.add(panelRoastTable, gridBagConstraints);
 
         tabbedPanel.addTab(" Roast Logs ", panelRoastLogs);
+
+        panelBeans.setLayout(new java.awt.GridBagLayout());
+
+        jTable1.setModel(TableService.getInstance().getTableModelBeans());
+        jScrollPane4.setViewportView(jTable1);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        panelBeans.add(jScrollPane4, gridBagConstraints);
+
         tabbedPanel.addTab(" Beans ", panelBeans);
         tabbedPanel.addTab(" Bean Purchases ", panelPurchases);
 
@@ -281,6 +297,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         menuFile.setText("File");
         menuFile.add(jSeparator1);
 
+        menuItemExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/exitSmall.png"))); // NOI18N
         menuItemExit.setText("Exit");
         menuItemExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,9 +311,11 @@ public class CoffeeFrame extends javax.swing.JFrame {
         menuView.setMnemonic('v');
         menuView.setText("View");
 
+        menuLookAndFeel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/glasses.png"))); // NOI18N
         menuLookAndFeel.setMnemonic('L');
         menuLookAndFeel.setText("Look And Feel");
 
+        menuItemGtk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/tux.png"))); // NOI18N
         menuItemGtk.setText("GTK");
         menuItemGtk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -305,6 +324,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         });
         menuLookAndFeel.add(menuItemGtk);
 
+        menuItemMetal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/anvil.png"))); // NOI18N
         menuItemMetal.setText("Metal");
         menuItemMetal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,6 +333,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         });
         menuLookAndFeel.add(menuItemMetal);
 
+        menuItemMotif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/motif.png"))); // NOI18N
         menuItemMotif.setText("Motif");
         menuItemMotif.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -321,6 +342,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         });
         menuLookAndFeel.add(menuItemMotif);
 
+        menuItemNimbus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/nimbus.png"))); // NOI18N
         menuItemNimbus.setText("Nimbus");
         menuItemNimbus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,6 +351,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         });
         menuLookAndFeel.add(menuItemNimbus);
 
+        menuItemWindows.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/windows.png"))); // NOI18N
         menuItemWindows.setText("Windows");
         menuItemWindows.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -337,6 +360,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         });
         menuLookAndFeel.add(menuItemWindows);
 
+        menuItemWindowsClassic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/windowsClassic.png"))); // NOI18N
         menuItemWindowsClassic.setText("Windows Classic");
         menuItemWindowsClassic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -353,6 +377,11 @@ public class CoffeeFrame extends javax.swing.JFrame {
         menuHellp.setText("Help");
 
         menuItemAbout.setText("About...");
+        menuItemAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemAboutActionPerformed(evt);
+            }
+        });
         menuHellp.add(menuItemAbout);
 
         menuBar.add(menuHellp);
@@ -471,6 +500,10 @@ public class CoffeeFrame extends javax.swing.JFrame {
         this.populateNotes((NonEditableTableModel)this.tableRoasts.getModel(), currentRow);
     }//GEN-LAST:event_tableRoastsKeyReleased
 
+    private void menuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAboutActionPerformed
+        new AboutDialog(this, true).setVisible(true);
+    }//GEN-LAST:event_menuItemAboutActionPerformed
+
     private void editRoastLog(NonEditableTableModel model, int tableRow) {
         String roastLogId = (String) model.getValueAt(tableRow, 0);
 
@@ -487,6 +520,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
     private void initOther() {
         try {
+            TableService.getInstance().setupTableRoastLog(this.tableRoasts, this.textRoastNotes, this.textTastingNotes);
             TableService.getInstance().hideColumnsRoastLog(this.tableRoasts);
             TableService.getInstance().setColumnWidthsRoastLog(this.tableRoasts);
 
@@ -541,7 +575,9 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelFilter;
     private javax.swing.JLabel labelRoastNotes;

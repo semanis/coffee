@@ -2,6 +2,7 @@ package com.smanis.coffee.service;
 
 import com.smanis.coffee.models.NonEditableTableModel;
 import com.smanis.coffee.Utility;
+import java.awt.Dimension;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
@@ -9,6 +10,8 @@ import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.table.TableModel;
 
 /**
  * Singleton Service for Table related methods. Everything dealing with the main
@@ -51,6 +54,24 @@ public class TableService {
         return INSTANCE;
     }
 
+    /**
+     * The column layout for the Beans table.
+     */
+    public Vector getColumnsBeans() {
+        Vector v = new Vector();
+
+        v.add("Id");
+        v.add("Name");
+        v.add("Origin");
+        v.add("Altitude");
+        v.add("Process Method");
+        v.add("Density Grams");
+        v.add("Density");
+        v.add("Comments");
+
+        return v;
+    }
+    
     
     /**
      * The data table uses a simple Vector of Strings as column header names.
@@ -61,11 +82,11 @@ public class TableService {
         v.add("Id");
         v.add("Bean Id");
         v.add("Bean Name");
-        v.add("Charge Temp");
         v.add("Density");
+        v.add("Charge Temp");
         v.add("Green Weight");
         v.add("Roasted Weight");
-        v.add("Moisture Loss%");
+        v.add("Moisture Loss %");
         v.add("Roast Start");
         v.add("Dry Time");
         v.add("FC Start");
@@ -73,6 +94,10 @@ public class TableService {
         v.add("End Roast");
         v.add("Roast Notes");
         v.add("Tasting Notes");
+        v.add("Total Dry Time");
+        v.add("Total FC Time");
+        v.add("Total Dev. Time");
+        v.add("Total Roast Time");
 
         return v;
     }
@@ -95,13 +120,12 @@ public class TableService {
         while (rs.next()) {
             Vector<Object> data = new Vector<Object>();
 
-
             // Be sure you add the data in the same order as the columns are set in getColumnsRoastLog() above.
             data.add(rs.getString("Id"));
             data.add(rs.getString("BeanId"));
             data.add(rs.getString("BeanName"));
-            data.add(rs.getString("ChargeTemp"));
             data.add(String.format("%.2f", rs.getFloat("Density")));
+            data.add(rs.getString("ChargeTemp"));
             data.add(Utility.sqlFloatToString(rs.getFloat("GreenWeight"), "%5.1f"));
             data.add(Utility.sqlFloatToString(rs.getFloat("RoastedWeight"), "%5.1f"));
             data.add(Utility.sqlFloatToString(rs.getFloat("MoistureLossPercentage"), "%5.1f"));
@@ -112,6 +136,10 @@ public class TableService {
             data.add(Utility.sqlDateToString(rs.getDate("EndRoast"), "hh:mm:ss a"));
             data.add(rs.getString("RoastNotes"));
             data.add(rs.getString("TastingNotes"));
+            data.add(rs.getString("TotalDryTime"));
+            data.add(rs.getString("TotalFirstCrackTime"));
+            data.add(rs.getString("TotalDevelopmentTime"));
+            data.add(rs.getString("TotalRoastTime"));
 
             dataContainer.add(data);
         }
@@ -120,14 +148,56 @@ public class TableService {
     }
 
     
-    
+     public Vector<Vector<Object>> getTableDataBeans() throws Exception {
+        ResultSet rs = DataService.getInstance().getBeans();
+
+        Vector<Vector<Object>> dataContainer = new Vector<Vector<Object>>();
+
+        // Enforce an ISP-8601 datetime format.
+        DateFormat formatterDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+        while (rs.next()) {
+            Vector<Object> data = new Vector<Object>();
+
+            // Be sure you add the data in the same order as the columns are set in getColumnsBeans() above.
+            data.add(rs.getString("Id"));
+            data.add(rs.getString("Name"));
+            data.add(rs.getString("Origin"));
+            data.add(rs.getString("Altitude"));
+            data.add(rs.getString("ProcessMethod"));
+            data.add(rs.getString("DensityGrams"));
+            data.add(rs.getString("Density"));
+            data.add(rs.getString("Comments"));
+            dataContainer.add(data);
+        }
+
+        return dataContainer;
+    }
+     
+    public NonEditableTableModel getTableModelBeans() {
+        Vector tableColumns = this.getColumnsBeans();
+        Vector tableData = null;
+
+        try {
+            tableData = this.getTableDataBeans();
+        } catch (Exception e) {
+            tableData = new Vector();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return new NonEditableTableModel(tableData, tableColumns);
+    }
+
+     
     /**
-     * This builds and returns the fully populated and ready to render DefaultTableModel which 
-     * backs the main JTable of roast log data.  Note that I extended the standard DefaultTableModel
-     * and tacked on a sprinkle of logic to make all table cells non-editable.  I'm lazy and just 
-     * don't want to code the headache of letting you also do direct data updates via the JTable....
-     * 
-     * @return 
+     * This builds and returns the fully populated and ready to render
+     * DefaultTableModel which backs the main JTable of roast log data. Note
+     * that I extended the standard DefaultTableModel and tacked on a sprinkle
+     * of logic to make all table cells non-editable. I'm lazy and just don't
+     * want to code the headache of letting you also do direct data updates via
+     * the JTable....
+     *
+     * @return
      */
     public NonEditableTableModel getTableModelRoastLogs() {
         Vector tableColumns = this.getColumnsRoastLog();
@@ -143,11 +213,19 @@ public class TableService {
         return new NonEditableTableModel(tableData, tableColumns);
     }
 
+    
+    public void hideColumnsBeans(JTable table) {
+        this.hideColumn(table, "Id");
+        this.hideColumn(table, "Comments");
+    }
+    
+
     /**
-     * Simple method to hide columns in the Roast Log JTable, to reduce visual clutter,
-     * hide primary keys, etc.
-     * 
-     * @param table The Roast Lot JTable that will have some of its columns hidden,
+     * Simple method to hide columns in the Roast Log JTable, to reduce visual
+     * clutter, hide primary keys, etc.
+     *
+     * @param table The Roast Lot JTable that will have some of its columns
+     * hidden,
      */
     public void hideColumnsRoastLog(JTable table) {
         this.hideColumn(table, "Id");
@@ -157,12 +235,13 @@ public class TableService {
     }
 
     /**
-     * The actual implementation of hiding a column consists of just setting all of 
-     * its width-related properties to zero, where this could be reverted on demand at any time
-     * by setting a width on these values from code.
-     * 
-     * @param table A reference to the JTable object for which you wan to hide one of its columns.
-     * 
+     * The actual implementation of hiding a column consists of just setting all
+     * of its width-related properties to zero, where this could be reverted on
+     * demand at any time by setting a width on these values from code.
+     *
+     * @param table A reference to the JTable object for which you wan to hide
+     * one of its columns.
+     *
      * @param columnName The name of the column to be hidden.
      */
     private void hideColumn(JTable table, String columnName) {
@@ -173,12 +252,20 @@ public class TableService {
         col.setMaxWidth(0);
     }
 
-    
+    public void setColumnWidthsBeans(JTable table) {
+        this.setColumnWidth(table, "Name", 285);
+        this.setColumnWidth(table, "Origin", 285);
+        this.setColumnWidth(table, "Altitude", 150);
+        this.setColumnWidth(table, "Process Method", 175);
+        this.setColumnWidth(table, "Density Grams", 175);
+        this.setColumnWidth(table, "Density", 170);
+    }
+
     /**
-     * Sets sane default widths for all data columns.  The user can still drag columns around
-     * but none of those changes are currently (I'm lazy, remember?) being written to application
-     * Preferences and restored on load.
-     * 
+     * Sets sane default widths for all data columns. The user can still drag
+     * columns around but none of those changes are currently (I'm lazy,
+     * remember?) being written to application Preferences and restored on load.
+     *
      * @param table A reference to the Roast Log Jtable.
      */
     public void setColumnWidthsRoastLog(JTable table) {
@@ -187,21 +274,25 @@ public class TableService {
         this.setColumnWidth(table, "Charge Temp", 120);
         this.setColumnWidth(table, "Green Weight", 130);
         this.setColumnWidth(table, "Roasted Weight", 140);
-        this.setColumnWidth(table, "Moisture Loss%", 145);
+        this.setColumnWidth(table, "Moisture Loss %", 145);
         this.setColumnWidth(table, "Dry Time", 190);
         this.setColumnWidth(table, "FC Start", 190);
         this.setColumnWidth(table, "FC End", 190);
-
         this.setColumnWidth(table, "End Roast", 180);
+        this.setColumnWidth(table, "Total Dry Time", 180);
+        this.setColumnWidth(table, "Total FC Time", 180);
+        this.setColumnWidth(table, "Total Dev. Time", 180);
+        this.setColumnWidth(table, "Total Roast Time", 180);
+
     }
 
     /**
      * The actual implementation of the logic to set a column's width.
-     * 
+     *
      * @param table A reference to the Roast Log JTable.
      *
      * @param columnName The name of the column to have its width adjusted.
-     * 
+     *
      * @param width The desired column width sort/kinda in pixelcount.
      */
     private void setColumnWidth(JTable table, String columnName, int width) {
@@ -209,5 +300,24 @@ public class TableService {
         col.setPreferredWidth(width);
         col.setMinWidth(width);
         col.setWidth(width);
+    }
+    
+    
+    public void setupTableRoastLog(JTable table, JTextArea roastNotes, JTextArea tastingNotes) {
+
+            TableService.getInstance().hideColumnsRoastLog(table);
+            TableService.getInstance().setColumnWidthsRoastLog(table);
+
+            //this.tableRoasts.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+            table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            table.setIntercellSpacing(new Dimension(10, 10));
+            table.setRowHeight(40);
+            // auto-select the first row.
+            table.setRowSelectionInterval(0, 0);
+
+            TableModel model = table.getModel();
+            roastNotes.setText((String) model.getValueAt(0, 13));
+            tastingNotes.setText((String) model.getValueAt(0, 14));
+
     }
 }

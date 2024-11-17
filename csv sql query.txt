@@ -1,0 +1,2 @@
+select r.Id, b.Name, r.ChargeTemp, r.GreenWeight, r.RoastedWeight, r.MoistureLossWeight, r.MoistureLossPercentage, r.RoastStart, r.DryTime, r.FirstCrackStart, r.FirstCrackEnd, r.EndRoast, r.TotalDryTime, r.TotalFirstCrackTime, r.TotalDevelopmentTime, r.TotalRoastTime INTO OUTFILE '/home/semanis/roastlog.csv' FIELD TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' FROM RoastLog r, Beans b WHERE r.BeanId = b.Id ORDER By b.Name ASC, r.RoastStart;
+
