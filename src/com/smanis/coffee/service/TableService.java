@@ -84,9 +84,11 @@ public class TableService {
         v.add("Bean Name");
         v.add("Density");
         v.add("Charge Temp");
-        v.add("Green Weight");
-        v.add("Roasted Weight");
+        v.add("Green Weight (g)");
+        v.add("Roasted Weight (g)");
+        v.add("Difference (g)");
         v.add("Moisture Loss %");
+        v.add("Roast Level");
         v.add("Roast Start");
         v.add("Dry Time");
         v.add("FC Start");
@@ -128,7 +130,9 @@ public class TableService {
             data.add(rs.getString("ChargeTemp"));
             data.add(Utility.sqlFloatToString(rs.getFloat("GreenWeight"), "%5.1f"));
             data.add(Utility.sqlFloatToString(rs.getFloat("RoastedWeight"), "%5.1f"));
+            data.add(Utility.sqlFloatToString(rs.getFloat("MoistureLossWeight"), "%5.1f"));
             data.add(Utility.sqlFloatToString(rs.getFloat("MoistureLossPercentage"), "%5.1f"));
+            data.add(rs.getString("RoastLevel"));
             data.add(Utility.sqlDateToString(rs.getDate("RoastStart"), "MM/dd/yyyy hh:mm a"));
             data.add(Utility.sqlDateToString(rs.getDate("DryTime"), "hh:mm:ss a"));
             data.add(Utility.sqlDateToString(rs.getDate("FirstCrackStart"), "hh:mm:ss a"));
@@ -272,9 +276,11 @@ public class TableService {
         this.setColumnWidth(table, "Bean Name", 385);
         this.setColumnWidth(table, "Roast Start", 200);
         this.setColumnWidth(table, "Charge Temp", 120);
-        this.setColumnWidth(table, "Green Weight", 130);
-        this.setColumnWidth(table, "Roasted Weight", 140);
+        this.setColumnWidth(table, "Green Weight (g)", 160);
+        this.setColumnWidth(table, "Roasted Weight (g)", 170);
+        this.setColumnWidth(table, "Difference (g)", 130);
         this.setColumnWidth(table, "Moisture Loss %", 145);
+        this.setColumnWidth(table, "Roast Level", 240);
         this.setColumnWidth(table, "Dry Time", 190);
         this.setColumnWidth(table, "FC Start", 190);
         this.setColumnWidth(table, "FC End", 190);
@@ -338,8 +344,8 @@ public class TableService {
             table.setRowSelectionInterval(0, 0);
 
             TableModel model = table.getModel();
-            roastNotes.setText((String) model.getValueAt(0, 13));
-            tastingNotes.setText((String) model.getValueAt(0, 14));
+            roastNotes.setText((String) model.getValueAt(0, 14));
+            tastingNotes.setText((String) model.getValueAt(0, 15));
 
     }
 }

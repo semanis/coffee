@@ -13,6 +13,11 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
+import javax.swing.RowFilter;
+import javax.swing.RowFilter.Entry;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -55,7 +60,9 @@ public class CoffeeFrame extends javax.swing.JFrame {
         panelFilter = new javax.swing.JPanel();
         labelFilter = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        textSearch = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
         panelButtons = new javax.swing.JPanel();
         btnAddRoastLog = new javax.swing.JButton();
         btnEditRoastLog = new javax.swing.JButton();
@@ -185,12 +192,37 @@ public class CoffeeFrame extends javax.swing.JFrame {
         labelFilter.setText("Filter");
         panelFilter.add(labelFilter);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bean Name", "Roast Date" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bean Name", "Density", "Roast Date" }));
         jComboBox1.setPreferredSize(new java.awt.Dimension(175, 31));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
         panelFilter.add(jComboBox1);
 
-        jTextField1.setPreferredSize(new java.awt.Dimension(124, 26));
-        panelFilter.add(jTextField1);
+        textSearch.setMaximumSize(new java.awt.Dimension(174, 26));
+        textSearch.setMinimumSize(new java.awt.Dimension(174, 26));
+        textSearch.setPreferredSize(new java.awt.Dimension(174, 26));
+        textSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textSearchKeyReleased(evt);
+            }
+        });
+        panelFilter.add(textSearch);
+
+        btnSearch.setMnemonic('s');
+        btnSearch.setText("Search");
+        panelFilter.add(btnSearch);
+
+        btnClear.setMnemonic('c');
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+        panelFilter.add(btnClear);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -493,12 +525,42 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
     private void tableRoastsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableRoastsKeyReleased
         int currentRow = this.tableRoasts.getSelectedRow();
-        this.populateNotes((NonEditableTableModel)this.tableRoasts.getModel(), currentRow);
+        this.populateNotes((NonEditableTableModel) this.tableRoasts.getModel(), currentRow);
     }//GEN-LAST:event_tableRoastsKeyReleased
 
     private void menuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAboutActionPerformed
         new AboutDialog(this, true).setVisible(true);
     }//GEN-LAST:event_menuItemAboutActionPerformed
+
+    private void textSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSearchKeyReleased
+            RowFilter<Object, Object> filter = new RowFilter<Object, Object>() {
+                public boolean include(Entry entry) {
+                    String text = (String) entry.getValue(2);
+
+                    return text.toLowerCase().contains(textSearch.getText());
+                }
+            };
+
+            TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(((DefaultTableModel) this.tableRoasts.getModel()));
+            
+            sorter.setRowFilter(filter);
+
+            this.tableRoasts.setRowSorter(sorter);
+    }//GEN-LAST:event_textSearchKeyReleased
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        this.textSearch.setText("");
+        
+        // KeyReleased events are what cause the search to execute, so after clearing the field, no key events fire and
+        // the table is still in a filtered state. Passing a KeyEvent for the ENTER key fires the search with an empty search string, 
+        // so the table is restored to it's normal state.
+        KeyEvent ke = new KeyEvent(this.textSearch, KeyEvent.KEY_RELEASED, System.currentTimeMillis(), 0, KeyEvent.VK_ENTER, KeyEvent.CHAR_UNDEFINED);
+        this.textSearch.dispatchEvent(ke);
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void editRoastLog(NonEditableTableModel model, int tableRow) {
         String roastLogId = (String) model.getValueAt(tableRow, 0);
@@ -510,15 +572,15 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
     private void populateNotes(NonEditableTableModel model, int tableRow) {
         // refresh roast notes/tasting nodes based on the clicked row.
-        this.textRoastNotes.setText((String) model.getValueAt(tableRow, 13));
-        this.textTastingNotes.setText((String) model.getValueAt(tableRow, 14));
+        this.textRoastNotes.setText((String) model.getValueAt(tableRow, 15));
+        this.textTastingNotes.setText((String) model.getValueAt(tableRow, 16));
     }
 
     private void initOther() {
         try {
             TableService.getInstance().setupTableRoastLog(this.tableRoasts, this.textRoastNotes, this.textTastingNotes);
             TableService.getInstance().setupTableBeans(this.tableBeans);
-            
+
             AppPreferences.loadWindowPreferences(this);
 
             JRootPane jrp = this.getRootPane();
@@ -542,7 +604,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("initOther! " + e.getMessage() + " " + " " + e.getClass());
         }
-        
+
         this.tableRoasts.requestFocus();
     }
 
@@ -552,8 +614,10 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddRoastLog;
+    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDeleteRoastLog;
     private javax.swing.JButton btnEditRoastLog;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton buttonExit;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -561,7 +625,6 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelFilter;
     private javax.swing.JLabel labelRoastNotes;
     private javax.swing.JLabel labelTastingNotes;
@@ -590,6 +653,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JTable tableBeans;
     private javax.swing.JTable tableRoasts;
     private javax.swing.JTextArea textRoastNotes;
+    private javax.swing.JTextField textSearch;
     private javax.swing.JTextArea textTastingNotes;
     // End of variables declaration//GEN-END:variables
 }
