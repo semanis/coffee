@@ -756,7 +756,7 @@ public class RoastLogEdit extends javax.swing.JDialog {
         map.put("FirstCrackEnd", iso8601Date + " " + firstCrackEnd);
         map.put("EndRoast", iso8601Date + " " + endRoast);
         map.put("RoastNotes", roastNotes);
-        map.put("TasingNotes",tastingNotes);        
+        map.put("TastingNotes",tastingNotes);        
 
         
         try {

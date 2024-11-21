@@ -11,6 +11,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -36,20 +37,19 @@ public class DatabaseLogin extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnLogin = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         labelUsername = new javax.swing.JLabel();
         textUsername = new javax.swing.JTextField();
         labelPassword = new javax.swing.JLabel();
         textPassword = new javax.swing.JPasswordField();
-        btnLogin = new javax.swing.JButton();
-        btnExit = new javax.swing.JButton();
         checkboxRememberUsername = new javax.swing.JCheckBox();
 
-        setTitle("Database Login");
+        setTitle("Coffee Roasting Log");
         setName("databaseLogin"); // NOI18N
-
-        labelUsername.setText("Username");
-
-        labelPassword.setText("Password");
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnLogin.setMnemonic('L');
         btnLogin.setText("Login");
@@ -58,6 +58,7 @@ public class DatabaseLogin extends javax.swing.JDialog {
                 btnLoginActionPerformed(evt);
             }
         });
+        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, -1));
 
         btnExit.setMnemonic('x');
         btnExit.setText("Exit");
@@ -66,53 +67,25 @@ public class DatabaseLogin extends javax.swing.JDialog {
                 btnExitActionPerformed(evt);
             }
         });
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, -1, -1));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("  Database Credentials  "));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelUsername.setText("Username");
+        jPanel1.add(labelUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        jPanel1.add(textUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 160, -1));
+
+        labelPassword.setText("Password");
+        jPanel1.add(labelPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        jPanel1.add(textPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 160, -1));
 
         checkboxRememberUsername.setText("remember username");
+        jPanel1.add(checkboxRememberUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnExit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLogin)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelUsername)
-                    .addComponent(labelPassword))
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkboxRememberUsername)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(textUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                        .addComponent(textPassword)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelUsername)
-                    .addComponent(textUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelPassword))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(checkboxRememberUsername)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogin)
-                    .addComponent(btnExit))
-                .addContainerGap())
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 360, 160));
 
-        pack();
+        setSize(new java.awt.Dimension(407, 271));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -193,7 +166,15 @@ public class DatabaseLogin extends javax.swing.JDialog {
 
         if (this.checkboxRememberUsername.isSelected()) {
             this.textUsername.setText(AppPreferences.getRememberedUsername());
-            this.textPassword.requestFocus();
+
+            // Spin off the focus request to a separate thread so the renderer can finish the 
+            // initial render of the view,
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    textPassword.requestFocus();
+                }
+            });
+            
         }
     }
 
@@ -203,6 +184,7 @@ public class DatabaseLogin extends javax.swing.JDialog {
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnLogin;
     private javax.swing.JCheckBox checkboxRememberUsername;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelPassword;
     private javax.swing.JLabel labelUsername;
     private javax.swing.JPasswordField textPassword;

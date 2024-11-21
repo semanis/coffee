@@ -286,6 +286,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
         panelBeans.setLayout(new java.awt.GridBagLayout());
 
+        tableBeans.setAutoCreateRowSorter(true);
         tableBeans.setModel(TableService.getInstance().getTableModelBeans());
         jScrollPane4.setViewportView(tableBeans);
 
@@ -571,6 +572,8 @@ public class CoffeeFrame extends javax.swing.JFrame {
     }
 
     private void populateNotes(NonEditableTableModel model, int tableRow) {
+        int colCount = model.getColumnCount();
+
         // refresh roast notes/tasting nodes based on the clicked row.
         this.textRoastNotes.setText((String) model.getValueAt(tableRow, 15));
         this.textTastingNotes.setText((String) model.getValueAt(tableRow, 16));

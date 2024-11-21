@@ -7,6 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.HashMap;
 
+/**
+ * Singleton service which encapsulates and deals with everything JDBC Connection and SQL-related.
+ * 
+ * @author semanis
+ */
 public final class DataService {
 
     private static DataService INSTANCE;
@@ -14,10 +19,20 @@ public final class DataService {
     private static String dbLogin;
     private static String dbPassword;
 
+    /**
+     * Singleton's can't be manually constructed, so constructor is private.s
+     */
     private DataService() {
     }
 
+    /**
+     * Primary method for getting the Singleton instance of the DataService. 
+     * 
+     * @return The Singleton instance of DataService.
+     */
     public static DataService getInstance() {
+        // IF the local, private copy is null, create the service and cache it
+        // locally for all future calls.
         if (INSTANCE == null) {
             INSTANCE = new DataService();
         }
@@ -25,11 +40,25 @@ public final class DataService {
         return INSTANCE;
     }
 
+    /**
+     * Persists the database credentials so that they're later available for use in the {@link #getConnection() getConnection}
+     * method.
+     * 
+     * @param username
+     * @param password 
+     */
     public void setCredentials(String username, String password) {
         DataService.dbLogin = username;
         DataService.dbPassword = password;
     }
 
+    /**
+     * Gets a Connection to the database, noting that the Connection object is also cached as a Singleton in this class.
+     * 
+     * @return A JDBC Connection object.
+     * 
+     * @throws Exception If an error occurs when creating a Connection.
+     */
     public Connection getConnection() throws Exception {
         if (this.conn == null) {
             this.conn = DriverManager.getConnection("jdbc:mariadb://192.168.0.254:3306/Coffee", DataService.dbLogin, DataService.dbPassword);
@@ -137,7 +166,7 @@ public final class DataService {
                 break;
 
             case "getBeans":
-                query = "SELECT Id, Name, Origin, Altitude, ProcessMethod, DensityGrams, Density, Comments "
+                query = "SELECT Id, Name, Origin, Altitude, ProcessMethod, DensityGrams, Density, InStock, Comments "
                         + "FROM Beans "
                         + "ORDER BY Name";
                 break;
@@ -163,13 +192,13 @@ public final class DataService {
             case "insertRoastLog":
                 query = "INSERT INTO RoastLog " +
                         "SET BeanId = ?, RoastStart = ?, DryTime = ?, FirstCrackStart = ?, FirstCrackEnd = ?, EndRoast = ?, GreenWeight = ?, " +
-                        "RoastedWeight = ?, ChargeTemp = ?,RoastNotes = ?, TastingNotes = ? ";
+                        "RoastedWeight = ?, ChargeTemp = ?, RoastNotes = ?, TastingNotes = ?";
                 break;
 
             case "updateRoastLog":
                 query = "UPDATE RoastLog " +
                         "SET BeanId = ?, RoastStart = ?, DryTime = ?, FirstCrackStart = ?, FirstCrackEnd = ?, EndRoast = ?, GreenWeight = ?, " +
-                        "RoastedWeight = ?, ChargeTemp = ?,RoastNotes = ?, TastingNotes = ? " +
+                        "RoastedWeight = ?, ChargeTemp = ?, RoastNotes = ?, TastingNotes = ? " +
                         "WHERE Id = ?";
                 break;
 

@@ -67,12 +67,12 @@ public class TableService {
         v.add("Process Method");
         v.add("Density Grams");
         v.add("Density");
+        v.add("In Stock?");
         v.add("Comments");
 
         return v;
     }
-    
-    
+
     /**
      * The data table uses a simple Vector of Strings as column header names.
      */
@@ -102,6 +102,34 @@ public class TableService {
         v.add("Total Roast Time");
 
         return v;
+    }
+
+
+    public Vector<Vector<Object>> getTableDataBeans() throws Exception {
+        ResultSet rs = DataService.getInstance().getBeans();
+
+        Vector<Vector<Object>> dataContainer = new Vector<Vector<Object>>();
+
+        // Enforce an ISP-8601 datetime format.
+        DateFormat formatterDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+        while (rs.next()) {
+            Vector<Object> data = new Vector<Object>();
+
+            // Be sure you add the data in the same order as the columns are set in getColumnsBeans() above.
+            data.add(rs.getString("Id"));
+            data.add(rs.getString("Name"));
+            data.add(rs.getString("Origin"));
+            data.add(rs.getString("Altitude"));
+            data.add(rs.getString("ProcessMethod"));
+            data.add(rs.getString("DensityGrams"));
+            data.add(rs.getString("Density"));
+            data.add(rs.getInt("InStock") == 1 ? "*" : "");
+            data.add(rs.getString("Comments"));
+            dataContainer.add(data);
+        }
+
+        return dataContainer;
     }
 
     /**
@@ -151,33 +179,7 @@ public class TableService {
         return dataContainer;
     }
 
-    
-     public Vector<Vector<Object>> getTableDataBeans() throws Exception {
-        ResultSet rs = DataService.getInstance().getBeans();
 
-        Vector<Vector<Object>> dataContainer = new Vector<Vector<Object>>();
-
-        // Enforce an ISP-8601 datetime format.
-        DateFormat formatterDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-
-        while (rs.next()) {
-            Vector<Object> data = new Vector<Object>();
-
-            // Be sure you add the data in the same order as the columns are set in getColumnsBeans() above.
-            data.add(rs.getString("Id"));
-            data.add(rs.getString("Name"));
-            data.add(rs.getString("Origin"));
-            data.add(rs.getString("Altitude"));
-            data.add(rs.getString("ProcessMethod"));
-            data.add(rs.getString("DensityGrams"));
-            data.add(rs.getString("Density"));
-            data.add(rs.getString("Comments"));
-            dataContainer.add(data);
-        }
-
-        return dataContainer;
-    }
-     
     public NonEditableTableModel getTableModelBeans() {
         Vector tableColumns = this.getColumnsBeans();
         Vector tableData = null;
@@ -192,7 +194,6 @@ public class TableService {
         return new NonEditableTableModel(tableData, tableColumns);
     }
 
-     
     /**
      * This builds and returns the fully populated and ready to render
      * DefaultTableModel which backs the main JTable of roast log data. Note
@@ -217,12 +218,10 @@ public class TableService {
         return new NonEditableTableModel(tableData, tableColumns);
     }
 
-    
     public void hideColumnsBeans(JTable table) {
         this.hideColumn(table, "Id");
         this.hideColumn(table, "Comments");
     }
-    
 
     /**
      * Simple method to hide columns in the Roast Log JTable, to reduce visual
@@ -263,6 +262,7 @@ public class TableService {
         this.setColumnWidth(table, "Process Method", 155);
         this.setColumnWidth(table, "Density Grams", 145);
         this.setColumnWidth(table, "Density", 70);
+        this.setColumnWidth(table, "In Stock?", 130);
     }
 
     /**
@@ -307,45 +307,48 @@ public class TableService {
         col.setMinWidth(width);
         col.setWidth(width);
     }
-    
-
 
     public void setupTableBeans(JTable table) {
-            TableService.getInstance().hideColumnsBeans(table);
-            TableService.getInstance().setColumnWidthsBeans(table);
+        TableService.getInstance().hideColumnsBeans(table);
+        TableService.getInstance().setColumnWidthsBeans(table);
 
-            table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-            table.setIntercellSpacing(new Dimension(10, 10));
-            table.setRowHeight(40);
-            
-            // auto-select the first row.
-            table.setRowSelectionInterval(0, 0);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table.setIntercellSpacing(new Dimension(10, 10));
+        table.setRowHeight(40);
+
+        // auto-select the first row.
+        table.setRowSelectionInterval(0, 0);
     }
 
-
-    
     /**
      * Performs setup duties for the Roast Log table.
-     * 
+     *
      * @param table A reference to the Roast Log table.
      * @param roastNotes A reference to the roast notes textarea field.
      * @param tastingNotes A reference to the tasting notes textarea field.
      */
     public void setupTableRoastLog(JTable table, JTextArea roastNotes, JTextArea tastingNotes) {
 
-            TableService.getInstance().hideColumnsRoastLog(table);
-            TableService.getInstance().setColumnWidthsRoastLog(table);
+        TableService.getInstance().hideColumnsRoastLog(table);
+        TableService.getInstance().setColumnWidthsRoastLog(table);
 
-            //this.tableRoasts.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-            table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-            table.setIntercellSpacing(new Dimension(10, 10));
-            table.setRowHeight(40);
-            // auto-select the first row.
-            table.setRowSelectionInterval(0, 0);
+        //this.tableRoasts.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table.setIntercellSpacing(new Dimension(10, 10));
+        table.setRowHeight(40);
+        // auto-select the first row.
+        table.setRowSelectionInterval(0, 0);
 
-            TableModel model = table.getModel();
-            roastNotes.setText((String) model.getValueAt(0, 14));
-            tastingNotes.setText((String) model.getValueAt(0, 15));
+        TableModel model = table.getModel();
+
+        int rowCount = model.getRowCount();
+
+        for (int i = 0; i > rowCount; i++) {
+            System.out.println("Value for column " + i + " is: " + model.getValueAt(0, i));
+        }
+
+        roastNotes.setText((String) model.getValueAt(0, 15));
+        tastingNotes.setText((String) model.getValueAt(0, 16));
 
     }
 }

@@ -4,7 +4,8 @@ import com.smanis.coffee.forms.CoffeeFrame;
 import com.smanis.coffee.forms.DatabaseLogin;
 
 /**
- *
+ * This is the main entry point into the Coffee Roasting Log
+ * 
  * @author semanis
  */
 public class Main {
