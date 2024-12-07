@@ -1,5 +1,6 @@
 package com.smanis.coffee.service;
 
+import com.smanis.coffee.IconTableCellRenderer;
 import com.smanis.coffee.models.NonEditableTableModel;
 import com.smanis.coffee.Utility;
 import java.awt.Dimension;
@@ -11,6 +12,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 import javax.swing.table.TableModel;
 
 /**
@@ -58,7 +60,7 @@ public class TableService {
      * The column layout for the Beans table.
      */
     public Vector getColumnsBeans() {
-        Vector v = new Vector();
+        Vector<Object> v = new Vector<Object>();
 
         v.add("Id");
         v.add("Name");
@@ -67,6 +69,8 @@ public class TableService {
         v.add("Process Method");
         v.add("Density Grams");
         v.add("Density");
+        v.add("Grind Setting");
+        v.add("Anaerobic?");
         v.add("In Stock?");
         v.add("Comments");
 
@@ -77,10 +81,11 @@ public class TableService {
      * The data table uses a simple Vector of Strings as column header names.
      */
     public Vector getColumnsRoastLog() {
-        Vector v = new Vector();
+        Vector<Object> v = new Vector<Object>();
 
         v.add("Id");
         v.add("Bean Id");
+        v.add("Roast Start");
         v.add("Bean Name");
         v.add("Density");
         v.add("Charge Temp");
@@ -89,7 +94,6 @@ public class TableService {
         v.add("Difference (g)");
         v.add("Moisture Loss %");
         v.add("Roast Level");
-        v.add("Roast Start");
         v.add("Dry Time");
         v.add("FC Start");
         v.add("FC End");
@@ -103,7 +107,6 @@ public class TableService {
 
         return v;
     }
-
 
     public Vector<Vector<Object>> getTableDataBeans() throws Exception {
         ResultSet rs = DataService.getInstance().getBeans();
@@ -124,7 +127,9 @@ public class TableService {
             data.add(rs.getString("ProcessMethod"));
             data.add(rs.getString("DensityGrams"));
             data.add(rs.getString("Density"));
-            data.add(rs.getInt("InStock") == 1 ? "*" : "");
+            data.add(rs.getString("GrindSetting"));
+            data.add(rs.getInt("Anaerobic"));
+            data.add(rs.getInt("InStock"));
             data.add(rs.getString("Comments"));
             dataContainer.add(data);
         }
@@ -153,6 +158,7 @@ public class TableService {
             // Be sure you add the data in the same order as the columns are set in getColumnsRoastLog() above.
             data.add(rs.getString("Id"));
             data.add(rs.getString("BeanId"));
+            data.add(Utility.sqlDateToString(rs.getDate("RoastStart"), "MM/dd/yyyy hh:mm a"));
             data.add(rs.getString("BeanName"));
             data.add(String.format("%.2f", rs.getFloat("Density")));
             data.add(rs.getString("ChargeTemp"));
@@ -161,7 +167,6 @@ public class TableService {
             data.add(Utility.sqlFloatToString(rs.getFloat("MoistureLossWeight"), "%5.1f"));
             data.add(Utility.sqlFloatToString(rs.getFloat("MoistureLossPercentage"), "%5.1f"));
             data.add(rs.getString("RoastLevel"));
-            data.add(Utility.sqlDateToString(rs.getDate("RoastStart"), "MM/dd/yyyy hh:mm a"));
             data.add(Utility.sqlDateToString(rs.getDate("DryTime"), "hh:mm:ss a"));
             data.add(Utility.sqlDateToString(rs.getDate("FirstCrackStart"), "hh:mm:ss a"));
             data.add(Utility.sqlDateToString(rs.getDate("FirstCrackEnd"), "hh:mm:ss a"));
@@ -178,7 +183,6 @@ public class TableService {
 
         return dataContainer;
     }
-
 
     public NonEditableTableModel getTableModelBeans() {
         Vector tableColumns = this.getColumnsBeans();
@@ -261,7 +265,9 @@ public class TableService {
         this.setColumnWidth(table, "Altitude", 150);
         this.setColumnWidth(table, "Process Method", 155);
         this.setColumnWidth(table, "Density Grams", 145);
-        this.setColumnWidth(table, "Density", 70);
+        this.setColumnWidth(table, "Density", 76);
+        this.setColumnWidth(table, "Grind Setting", 125);
+        this.setColumnWidth(table, "Anaerobic?", 130);
         this.setColumnWidth(table, "In Stock?", 130);
     }
 
@@ -318,6 +324,13 @@ public class TableService {
 
         // auto-select the first row.
         table.setRowSelectionInterval(0, 0);
+
+        IconTableCellRenderer iconRenderer = new IconTableCellRenderer();
+        iconRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        table.getColumnModel().getColumn(8).setCellRenderer(iconRenderer);
+        table.getColumnModel().getColumn(9).setCellRenderer(iconRenderer);
+        
+
     }
 
     /**

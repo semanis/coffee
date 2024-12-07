@@ -449,7 +449,6 @@
         <Component class="javax.swing.JButton" name="buttonNow1">
           <Properties>
             <Property name="text" type="java.lang.String" value="now"/>
-            <Property name="focusable" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[84, 32]"/>
             </Property>
@@ -505,7 +504,6 @@
         <Component class="javax.swing.JButton" name="buttonNow2">
           <Properties>
             <Property name="text" type="java.lang.String" value="now"/>
-            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonNow2ActionPerformed"/>
@@ -519,7 +517,6 @@
         <Component class="javax.swing.JButton" name="buttonNow3">
           <Properties>
             <Property name="text" type="java.lang.String" value="now"/>
-            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonNow3ActionPerformed"/>
@@ -533,7 +530,6 @@
         <Component class="javax.swing.JButton" name="buttonNow6">
           <Properties>
             <Property name="text" type="java.lang.String" value="now"/>
-            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonNow6ActionPerformed"/>
@@ -665,7 +661,6 @@
         <Component class="javax.swing.JButton" name="buttonNow">
           <Properties>
             <Property name="text" type="java.lang.String" value="now"/>
-            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonNowActionPerformed"/>
@@ -709,7 +704,6 @@
         <Component class="javax.swing.JButton" name="buttonNow7">
           <Properties>
             <Property name="text" type="java.lang.String" value="now"/>
-            <Property name="focusable" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[84, 32]"/>
             </Property>

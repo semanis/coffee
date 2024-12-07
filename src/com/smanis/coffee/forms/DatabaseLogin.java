@@ -51,6 +51,7 @@ public class DatabaseLogin extends javax.swing.JDialog {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/login.png"))); // NOI18N
         btnLogin.setMnemonic('L');
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -58,8 +59,9 @@ public class DatabaseLogin extends javax.swing.JDialog {
                 btnLoginActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, -1));
+        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, -1, -1));
 
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/exitSmall.png"))); // NOI18N
         btnExit.setMnemonic('x');
         btnExit.setText("Exit");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +69,7 @@ public class DatabaseLogin extends javax.swing.JDialog {
                 btnExitActionPerformed(evt);
             }
         });
-        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, -1, -1));
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("  Database Credentials  "));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -109,7 +111,7 @@ public class DatabaseLogin extends javax.swing.JDialog {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         String username = this.textUsername.getText();
-        String password = this.textPassword.getText();
+        String password = String.valueOf(this.textPassword.getPassword());
 
         this.handleRememberUsername();
 

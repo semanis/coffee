@@ -276,7 +276,6 @@ public class RoastLogEdit extends javax.swing.JDialog {
         panelRoastTimes.add(ftDryTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 100, -1));
 
         buttonNow1.setText("now");
-        buttonNow1.setFocusable(false);
         buttonNow1.setMaximumSize(new java.awt.Dimension(84, 32));
         buttonNow1.setMinimumSize(new java.awt.Dimension(84, 32));
         buttonNow1.setPreferredSize(new java.awt.Dimension(84, 32));
@@ -300,7 +299,6 @@ public class RoastLogEdit extends javax.swing.JDialog {
         panelRoastTimes.add(labelFcStart4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 110, -1));
 
         buttonNow2.setText("now");
-        buttonNow2.setFocusable(false);
         buttonNow2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonNow2ActionPerformed(evt);
@@ -309,7 +307,6 @@ public class RoastLogEdit extends javax.swing.JDialog {
         panelRoastTimes.add(buttonNow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 80, -1));
 
         buttonNow3.setText("now");
-        buttonNow3.setFocusable(false);
         buttonNow3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonNow3ActionPerformed(evt);
@@ -318,7 +315,6 @@ public class RoastLogEdit extends javax.swing.JDialog {
         panelRoastTimes.add(buttonNow3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, 80, -1));
 
         buttonNow6.setText("now");
-        buttonNow6.setFocusable(false);
         buttonNow6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonNow6ActionPerformed(evt);
@@ -377,7 +373,6 @@ public class RoastLogEdit extends javax.swing.JDialog {
         panelRoastTimes.add(ftRoastDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 120, -1));
 
         buttonNow.setText("now");
-        buttonNow.setFocusable(false);
         buttonNow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonNowActionPerformed(evt);
@@ -399,7 +394,6 @@ public class RoastLogEdit extends javax.swing.JDialog {
         panelRoastTimes.add(ftRoastTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 100, -1));
 
         buttonNow7.setText("now");
-        buttonNow7.setFocusable(false);
         buttonNow7.setMaximumSize(new java.awt.Dimension(84, 32));
         buttonNow7.setMinimumSize(new java.awt.Dimension(84, 32));
         buttonNow7.setPreferredSize(new java.awt.Dimension(84, 32));

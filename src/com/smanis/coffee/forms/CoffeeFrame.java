@@ -70,6 +70,9 @@ public class CoffeeFrame extends javax.swing.JFrame {
         panelBeans = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tableBeans = new javax.swing.JTable();
+        panelComments = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        textAreaComments = new javax.swing.JTextArea();
         panelPurchases = new javax.swing.JPanel();
         buttonExit = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
@@ -296,6 +299,31 @@ public class CoffeeFrame extends javax.swing.JFrame {
         gridBagConstraints.weighty = 1.0;
         panelBeans.add(jScrollPane4, gridBagConstraints);
 
+        panelComments.setBorder(javax.swing.BorderFactory.createTitledBorder(" Comments "));
+        panelComments.setLayout(new java.awt.GridBagLayout());
+
+        textAreaComments.setColumns(20);
+        textAreaComments.setRows(5);
+        jScrollPane5.setViewportView(textAreaComments);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 0.5;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelComments.add(jScrollPane5, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 0.5;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelBeans.add(panelComments, gridBagConstraints);
+
         tabbedPanel.addTab(" Beans ", panelBeans);
         tabbedPanel.addTab(" Bean Purchases ", panelPurchases);
 
@@ -308,6 +336,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         getContentPane().add(tabbedPanel, gridBagConstraints);
 
+        buttonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/exitSmall.png"))); // NOI18N
         buttonExit.setMnemonic('x');
         buttonExit.setText("Exit");
         buttonExit.addActionListener(new java.awt.event.ActionListener() {
@@ -502,19 +531,19 @@ public class CoffeeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddRoastLogActionPerformed
 
     private void btnDeleteRoastLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRoastLogActionPerformed
-        int selectedRow = this.tableRoasts.getSelectedRow();
-
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a Roast Log to delete.");
-            return;
-        }
-
-        NonEditableTableModel model = (NonEditableTableModel) this.tableRoasts.getModel();
-        String roastLogId = (String) model.getValueAt(selectedRow, 0);
-
-        if (JOptionPane.showConfirmDialog(this, "Delete Roast Log?", "Confirm Delete", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.CANCEL_OPTION) {
-            return;
-        }
+//        int selectedRow = this.tableRoasts.getSelectedRow();
+//
+//        if (selectedRow == -1) {
+//            JOptionPane.showMessageDialog(this, "Please select a Roast Log to delete.");
+//            return;
+//        }
+//
+//        NonEditableTableModel model = (NonEditableTableModel) this.tableRoasts.getModel();
+//        String roastLogId = (String) model.getValueAt(selectedRow, 0);
+//
+//        if (JOptionPane.showConfirmDialog(this, "Delete Roast Log?", "Confirm Delete", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.CANCEL_OPTION) {
+//            return;
+//        }
 
         //TableService.deleteRoastLog();
 
@@ -566,7 +595,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private void editRoastLog(NonEditableTableModel model, int tableRow) {
         String roastLogId = (String) model.getValueAt(tableRow, 0);
 
-        RoastLogEdit rle = new com.smanis.coffee.forms.RoastLogEdit(this, true);
+        RoastLogEdit rle = new com.smanis.coffee.forms.RoastLogEdit(this, false);
         rle.setRoastLogId(roastLogId); // set the roast log Id to be edited.
         rle.setVisible(true);
     }
@@ -627,6 +656,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JLabel labelFilter;
     private javax.swing.JLabel labelRoastNotes;
@@ -646,6 +676,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JMenu menuView;
     private javax.swing.JPanel panelBeans;
     private javax.swing.JPanel panelButtons;
+    private javax.swing.JPanel panelComments;
     private javax.swing.JPanel panelContainer;
     private javax.swing.JPanel panelFilter;
     private javax.swing.JPanel panelNotes;
@@ -655,6 +686,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabbedPanel;
     private javax.swing.JTable tableBeans;
     private javax.swing.JTable tableRoasts;
+    private javax.swing.JTextArea textAreaComments;
     private javax.swing.JTextArea textRoastNotes;
     private javax.swing.JTextField textSearch;
     private javax.swing.JTextArea textTastingNotes;
