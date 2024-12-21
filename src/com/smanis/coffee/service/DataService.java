@@ -114,6 +114,17 @@ public final class DataService {
         return rs;
     }
 
+    public ResultSet getRoastLogsByBeanId(String beanId) throws Exception {
+        String query = this.getSql("getRoastLogsByBeanId");
+        PreparedStatement ps = this.getConnection().prepareStatement(query);
+        ps.setString(1, beanId);
+        ResultSet rs = ps.executeQuery();
+        ps.close();
+
+        return rs;
+    }
+
+
     public void insertRoastLog(HashMap map) throws Exception {
         String query = this.getSql("insertRoastLog");
         PreparedStatement ps = this.getConnection().prepareStatement(query);
@@ -176,15 +187,25 @@ public final class DataService {
                 break;
 
             case "getRoastLogs":
-                query = "SELECT r.Id, r.BeanId, b.Name as BeanName, r.RoastStart, r.DryTime, r.FirstCrackStart, r.FirstCrackEnd, r.EndRoast, r.GreenWeight, r.RoastedWeight, r.MoistureLossWeight, r.MoistureLossPercentage, r.RoastLevel, r.ChargeTemp, " +
-                        "b.DensityGrams, b.Density, r.RoastNotes, r.TastingNotes, r.TotalDryTime, r.TotalFirstCrackTime, r.TotalDevelopmentTime, r.TotalRoastTime "
+                query = "SELECT r.Id, r.BeanId, b.Name, r.RoastStart, r.RoastLevel, b.Density, r.TotalRoastTime, r.TotalDryTime, r.TotalFirstCrackTime,r.GreenWeight, " +
+                        "r.RoastedWeight, r.MoistureLossWeight, r.MoistureLossPercentage,  r.ChargeTemp, " +
+                        "r.RoastNotes, r.TastingNotes, r.TotalDryTime, r.TotalFirstCrackTime, r.TotalDevelopmentTime, r.TotalRoastTime "
                         + "FROM RoastLog r, Beans b "
                         + "WHERE r.beanId = b.id "
                         + "ORDER BY b.Name ASC, r.roastStart DESC";
                 break;
                 
+            case "getRoastLogsByBeanId":
+                query = "SELECT r.Id, r.BeanId, r.RoastStart, r.RoastLevel, b.Density,  r.GreenWeight, r.RoastedWeight, r.MoistureLossPercentage, r.TotalRoastTime, " +
+                        "r.TotalDryTime, r.TotalBrowningTime, r.TotalFirstCrackTime, r.TotalDevelopmentTime, r.RoastNotes, r.TastingNotes  "
+                        + "FROM RoastLog r, Beans b "
+                        + "WHERE r.beanId = b.id AND r.beanId = ? "
+                        + "ORDER BY b.Name ASC, r.roastStart DESC";
+                break;
+
             case "getRoastLogById":
-                query = "SELECT r.Id, r.BeanId, r.RoastStart, r.DryTime, r.FirstCrackStart, r.FirstCrackEnd, r.EndRoast, r.GreenWeight, r.RoastedWeight, r.ChargeTemp, b.Density, r.RoastNotes, r.TastingNotes " +
+                query = "SELECT r.Id, r.BeanId, r.RoastStart, r.DryTime, r.FirstCrackStart, r.FirstCrackEnd, r.EndRoast, r.GreenWeight, r.RoastedWeight, " +
+                        "r.ChargeTemp, b.Density, r.RoastNotes, r.TastingNotes " +
                         "FROM RoastLog r, Beans b " +
                         "WHERE r.Id = ?";
                 break;

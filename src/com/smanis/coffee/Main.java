@@ -1,7 +1,10 @@
 package com.smanis.coffee;
 
+import static com.smanis.coffee.Utility.setUIFont;
 import com.smanis.coffee.forms.CoffeeFrame;
 import com.smanis.coffee.forms.DatabaseLogin;
+import java.awt.Font;
+import javax.swing.plaf.FontUIResource;
 
 /**
  * This is the main entry point into the Coffee Roasting Log
@@ -17,13 +20,14 @@ public class Main {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    //setUIFont(new FontUIResource(new Font("Liberation Sans", Font.PLAIN, 20)));
+                    setUIFont(new FontUIResource(new Font("Liberation Sans", Font.PLAIN, 20)));
                     
                     // If a look and feel was saved to preferences, restore the look and feel.
                     String lookAndFeel = AppPreferences.getSettingsPrefs().get("lookAndFeel", "");
 
                     DatabaseLogin dbLogin = new com.smanis.coffee.forms.DatabaseLogin(null, true);
-
+                    
+                    
                     if (!lookAndFeel.isBlank()) {
                         Utility.setLookAndFeel(lookAndFeel, dbLogin);
                     }

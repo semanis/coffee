@@ -6,6 +6,7 @@ import com.smanis.coffee.AppPreferences;
 import com.smanis.coffee.service.DataService;
 import com.smanis.coffee.Utility;
 import com.smanis.coffee.models.BeanModel;
+import com.smanis.coffee.service.TableService;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -14,7 +15,6 @@ import java.sql.SQLException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -167,6 +167,7 @@ public class RoastLogEdit extends javax.swing.JDialog {
         labelBeans.setText("Bean :");
         panelRoastInfo.add(labelBeans, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, 20));
 
+        comboBeans.setModel(TableService.getInstance().getComboboxModelBeans());
         comboBeans.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBeansItemStateChanged(evt);
@@ -528,17 +529,6 @@ public class RoastLogEdit extends javax.swing.JDialog {
      */
     private void buildComboboxModel() {
         try {
-            // Query which returns just the Bean ID and Name.
-            ResultSet rs = DataService.getInstance().getBeanIdsAndNames();
-
-            Vector<Object> data = new Vector<Object>();
-
-            while (rs.next()) {
-                Float density = rs.getFloat("Density");
-                data.add(new BeanModel(rs.getString("Id"), rs.getString("Name"), String.format("%.2f", density)));
-            }
-
-            this.comboBeans.setModel(new DefaultComboBoxModel(data));
             this.comboBeans.setMaximumRowCount(15);
         } catch (Exception e) {
             Logger.getLogger(RoastLogEdit.class.getName()).log(Level.SEVERE, e.getMessage());

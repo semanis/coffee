@@ -6,18 +6,16 @@ import com.smanis.coffee.AppPreferences;
 import com.smanis.coffee.models.NonEditableTableModel;
 import com.smanis.coffee.service.TableService;
 import com.smanis.coffee.Utility;
+import com.smanis.coffee.models.BeanModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
-import javax.swing.RowFilter;
-import javax.swing.RowFilter.Entry;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -46,6 +44,14 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
         tabbedPanel = new javax.swing.JTabbedPane();
         panelRoastLogs = new javax.swing.JPanel();
+        panelRoastTable = new javax.swing.JPanel();
+        panelBeanSelection = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listBeans = new javax.swing.JList<>();
+        panelRoastLogTable = new javax.swing.JPanel();
+        scrollPaneRoasts = new javax.swing.JScrollPane();
+        tableRoasts = new javax.swing.JTable();
         panelNotes = new javax.swing.JPanel();
         labelRoastNotes = new javax.swing.JLabel();
         labelTastingNotes = new javax.swing.JLabel();
@@ -53,16 +59,6 @@ public class CoffeeFrame extends javax.swing.JFrame {
         textRoastNotes = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         textTastingNotes = new javax.swing.JTextArea();
-        panelRoastTable = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableRoasts = new javax.swing.JTable();
-        panelContainer = new javax.swing.JPanel();
-        panelFilter = new javax.swing.JPanel();
-        labelFilter = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        textSearch = new javax.swing.JTextField();
-        btnSearch = new javax.swing.JButton();
-        btnClear = new javax.swing.JButton();
         panelButtons = new javax.swing.JPanel();
         btnAddRoastLog = new javax.swing.JButton();
         btnEditRoastLog = new javax.swing.JButton();
@@ -101,6 +97,72 @@ public class CoffeeFrame extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         panelRoastLogs.setLayout(new java.awt.GridBagLayout());
+
+        panelRoastTable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelRoastTable.setLayout(new java.awt.GridBagLayout());
+
+        panelBeanSelection.setLayout(new java.awt.GridBagLayout());
+
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(403, 3));
+
+        listBeans.setModel(TableService.getInstance().getListModelBeans()  );
+        listBeans.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listBeansMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(listBeans);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.weighty = 1.0;
+        jPanel1.add(jScrollPane1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelBeanSelection.add(jPanel1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weighty = 1.0;
+        panelRoastTable.add(panelBeanSelection, gridBagConstraints);
+
+        panelRoastLogTable.setLayout(new java.awt.GridBagLayout());
+
+        scrollPaneRoasts.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        scrollPaneRoasts.setAutoscrolls(true);
+
+        tableRoasts.setAutoCreateRowSorter(true);
+        tableRoasts.setModel(new DefaultTableModel());
+        tableRoasts.setName(""); // NOI18N
+        tableRoasts.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tableRoasts.setShowGrid(true);
+        tableRoasts.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClick(evt);
+            }
+        });
+        tableRoasts.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tableRoastsKeyReleased(evt);
+            }
+        });
+        scrollPaneRoasts.setViewportView(tableRoasts);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        panelRoastLogTable.add(scrollPaneRoasts, gridBagConstraints);
 
         panelNotes.setBorder(javax.swing.BorderFactory.createTitledBorder(" Notes "));
         panelNotes.setLayout(new java.awt.GridBagLayout());
@@ -147,92 +209,21 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 0.5;
+        gridBagConstraints.weighty = 0.4;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 10);
-        panelRoastLogs.add(panelNotes, gridBagConstraints);
-
-        panelRoastTable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        panelRoastTable.setLayout(new java.awt.GridBagLayout());
-
-        jScrollPane1.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jScrollPane1.setAutoscrolls(true);
-
-        tableRoasts.setAutoCreateRowSorter(true);
-        tableRoasts.setModel(TableService.getInstance().getTableModelRoastLogs());
-        tableRoasts.setName(""); // NOI18N
-        tableRoasts.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tableRoasts.setShowGrid(true);
-        tableRoasts.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableMouseClick(evt);
-            }
-        });
-        tableRoasts.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                tableRoastsKeyReleased(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tableRoasts);
+        panelRoastLogTable.add(panelNotes, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
-        panelRoastTable.add(jScrollPane1, gridBagConstraints);
-
-        panelContainer.setLayout(new java.awt.GridBagLayout());
-
-        panelFilter.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        labelFilter.setText("Filter");
-        panelFilter.add(labelFilter);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bean Name", "Density", "Roast Date" }));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(175, 31));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        panelFilter.add(jComboBox1);
-
-        textSearch.setMaximumSize(new java.awt.Dimension(174, 26));
-        textSearch.setMinimumSize(new java.awt.Dimension(174, 26));
-        textSearch.setPreferredSize(new java.awt.Dimension(174, 26));
-        textSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                textSearchKeyReleased(evt);
-            }
-        });
-        panelFilter.add(textSearch);
-
-        btnSearch.setMnemonic('s');
-        btnSearch.setText("Search");
-        panelFilter.add(btnSearch);
-
-        btnClear.setMnemonic('c');
-        btnClear.setText("Clear");
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
-            }
-        });
-        panelFilter.add(btnClear);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelContainer.add(panelFilter, gridBagConstraints);
-
-        panelButtons.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelRoastTable.add(panelRoastLogTable, gridBagConstraints);
 
         btnAddRoastLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/addSmall.png"))); // NOI18N
         btnAddRoastLog.setMnemonic('a');
@@ -265,20 +256,16 @@ public class CoffeeFrame extends javax.swing.JFrame {
         panelButtons.add(btnDeleteRoastLog);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.weightx = 1.0;
-        panelContainer.add(panelButtons, gridBagConstraints);
+        panelRoastTable.add(panelButtons, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        panelRoastTable.add(panelContainer, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
         gridBagConstraints.weightx = 1.0;
@@ -290,7 +277,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         panelBeans.setLayout(new java.awt.GridBagLayout());
 
         tableBeans.setAutoCreateRowSorter(true);
-        tableBeans.setModel(TableService.getInstance().getTableModelBeans());
+        tableBeans.setModel(new DefaultTableModel());
         jScrollPane4.setViewportView(tableBeans);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -455,6 +442,12 @@ public class CoffeeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonExitActionPerformed
 
     private void exitForm(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_exitForm
+
+
+
+
+
+
         AppPreferences.saveWindowPreferences(this);
         this.dispose();
         System.exit(0);
@@ -562,35 +555,12 @@ public class CoffeeFrame extends javax.swing.JFrame {
         new AboutDialog(this, true).setVisible(true);
     }//GEN-LAST:event_menuItemAboutActionPerformed
 
-    private void textSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSearchKeyReleased
-            RowFilter<Object, Object> filter = new RowFilter<Object, Object>() {
-                public boolean include(Entry entry) {
-                    String text = (String) entry.getValue(2);
-
-                    return text.toLowerCase().contains(textSearch.getText());
-                }
-            };
-
-            TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(((DefaultTableModel) this.tableRoasts.getModel()));
-            
-            sorter.setRowFilter(filter);
-
-            this.tableRoasts.setRowSorter(sorter);
-    }//GEN-LAST:event_textSearchKeyReleased
-
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        this.textSearch.setText("");
-        
-        // KeyReleased events are what cause the search to execute, so after clearing the field, no key events fire and
-        // the table is still in a filtered state. Passing a KeyEvent for the ENTER key fires the search with an empty search string, 
-        // so the table is restored to it's normal state.
-        KeyEvent ke = new KeyEvent(this.textSearch, KeyEvent.KEY_RELEASED, System.currentTimeMillis(), 0, KeyEvent.VK_ENTER, KeyEvent.CHAR_UNDEFINED);
-        this.textSearch.dispatchEvent(ke);
-    }//GEN-LAST:event_btnClearActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void listBeansMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listBeansMouseClicked
+       DefaultListModel modelData = (DefaultListModel)this.listBeans.getModel();
+       BeanModel modelBean = (BeanModel)modelData.get(this.listBeans.getSelectedIndex());
+       this.refreshRoastLogTable(modelBean.getBeanId());
+       
+    }//GEN-LAST:event_listBeansMouseClicked
 
     private void editRoastLog(NonEditableTableModel model, int tableRow) {
         String roastLogId = (String) model.getValueAt(tableRow, 0);
@@ -604,21 +574,45 @@ public class CoffeeFrame extends javax.swing.JFrame {
         int colCount = model.getColumnCount();
 
         // refresh roast notes/tasting nodes based on the clicked row.
-        this.textRoastNotes.setText((String) model.getValueAt(tableRow, 15));
-        this.textTastingNotes.setText((String) model.getValueAt(tableRow, 16));
+        this.textRoastNotes.setText((String) model.getValueAt(tableRow, TableService.getInstance().getColumnIndex("RoastLog", "Roast Notes")));
+        this.textTastingNotes.setText((String) model.getValueAt(tableRow, TableService.getInstance().getColumnIndex("RoastLog", "Tasting Notes")));
+    }
+
+    private void refreshRoastLogTable(String beanId) {
+        // Populate the rost log table for the specified bean ID.
+        NonEditableTableModel model = TableService.getInstance().getTableModelRoastLogsByBeanId(beanId);
+        this.tableRoasts.setModel(model);
+
+        // General table layout stuff, column widths, hidden columns, etc.
+        TableService.getInstance().setupTableRoastLog(this.tableRoasts, this.textRoastNotes, this.textTastingNotes);
+        //TableService.getInstance().setupTableBeans(this.tableBeans);
     }
 
     private void initOther() {
         try {
-            TableService.getInstance().setupTableRoastLog(this.tableRoasts, this.textRoastNotes, this.textTastingNotes);
-            TableService.getInstance().setupTableBeans(this.tableBeans);
 
-            AppPreferences.loadWindowPreferences(this);
+//            BeanModel bm = (BeanModel) this.comboBeanSelection.getSelectedItem();
+//
+//            String beanId = bm.getBeanId();
+//            NonEditableTableModel newModel = TableService.getInstance().getTableModelRoastLogsByBeanId(beanId);
+//            this.tableRoasts.setModel(newModel);
+//            TableService.getInstance().setupTableRoastLog(this.tableRoasts, this.textRoastNotes, this.textTastingNotes);
+            // Select the first bean in the list by default.
+            this.listBeans.setSelectedIndex(0);
+
+            // Get the first bean ID from the bean selection combobox.
+            DefaultListModel listModel = (DefaultListModel) this.listBeans.getModel();
+            BeanModel beanModel = (BeanModel) listModel.getElementAt(0);
+            String beanId = beanModel.getBeanId();
+
+            // Load up the Roast Log JTable with the selected bean.
+            this.refreshRoastLogTable(beanId);
 
             JRootPane jrp = this.getRootPane();
 
-            // "ENTER" at any time activates the default button.
-            // jrp.setDefaultButton(this.buttonExit);
+            // activates the default button on a particular key press..
+            jrp.setDefaultButton(this.buttonExit);
+
             // register an action listener on the Escape key which performs a click
             // of the Exit button.
             ActionListener actionListener = new ActionListener() {
@@ -630,11 +624,16 @@ public class CoffeeFrame extends javax.swing.JFrame {
                 }
             };
 
+            // Register ESCAPE as the keystroke to confirm exiting the program.
             KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
             jrp.registerKeyboardAction(actionListener, stroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
 
+            // Load up the window preferences, which restores the size/location of the window.
+            AppPreferences.loadWindowPreferences(this);
+
         } catch (Exception e) {
             System.out.println("initOther! " + e.getMessage() + " " + " " + e.getClass());
+            e.printStackTrace();
         }
 
         this.tableRoasts.requestFocus();
@@ -646,21 +645,19 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddRoastLog;
-    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDeleteRoastLog;
     private javax.swing.JButton btnEditRoastLog;
-    private javax.swing.JButton btnSearch;
     private javax.swing.JButton buttonExit;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JLabel labelFilter;
     private javax.swing.JLabel labelRoastNotes;
     private javax.swing.JLabel labelTastingNotes;
+    private javax.swing.JList<String> listBeans;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuFile;
     private javax.swing.JMenu menuHellp;
@@ -674,21 +671,21 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemWindowsClassic;
     private javax.swing.JMenu menuLookAndFeel;
     private javax.swing.JMenu menuView;
+    private javax.swing.JPanel panelBeanSelection;
     private javax.swing.JPanel panelBeans;
     private javax.swing.JPanel panelButtons;
     private javax.swing.JPanel panelComments;
-    private javax.swing.JPanel panelContainer;
-    private javax.swing.JPanel panelFilter;
     private javax.swing.JPanel panelNotes;
     private javax.swing.JPanel panelPurchases;
+    private javax.swing.JPanel panelRoastLogTable;
     private javax.swing.JPanel panelRoastLogs;
     private javax.swing.JPanel panelRoastTable;
+    private javax.swing.JScrollPane scrollPaneRoasts;
     private javax.swing.JTabbedPane tabbedPanel;
     private javax.swing.JTable tableBeans;
     private javax.swing.JTable tableRoasts;
     private javax.swing.JTextArea textAreaComments;
     private javax.swing.JTextArea textRoastNotes;
-    private javax.swing.JTextField textSearch;
     private javax.swing.JTextArea textTastingNotes;
     // End of variables declaration//GEN-END:variables
 }
