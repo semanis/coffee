@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
@@ -111,12 +112,12 @@ public class Utility {
      */
     public static String getTimeDeltaString(JFormattedTextField fieldRoastDate, JFormattedTextField fieldStart, JFormattedTextField fieldEnd) {
         String delta = "";
-        
+
         if (Utility.isEmptyDate(fieldRoastDate) || Utility.isEmptyTime(fieldStart) || Utility.isEmptyTime(fieldEnd)) {
             return delta;
         }
 
-        String stringRoastDate = (String)fieldRoastDate.getValue();
+        String stringRoastDate = (String) fieldRoastDate.getValue();
         String stringStartTime = (String) fieldStart.getValue();
         String stringEndTime = (String) fieldEnd.getValue();
 
@@ -227,6 +228,19 @@ public class Utility {
         }
 
         return result;
+    }
+
+    /**
+     * JFormattedTextFields won't highlight their contents on focus via a call to its own selectAll()
+     * method.  This generic method cures that issues by way of a runnable, which gets the process 
+     * off the main Swing GUI thread, so that the GUI thread can finish it's work first.
+     * 
+     * @param field Any field which is/extends a JTextField instance.
+     */
+    public static void selectAll(JTextField field) {
+        Runnable runner = () -> field.selectAll();
+        SwingUtilities.invokeLater(runner);
+
     }
 
     public static Date stringToDate(String stringDate) {

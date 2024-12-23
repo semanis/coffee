@@ -143,9 +143,7 @@ public class TableService {
 
     public int getColumnIndex(String tableName, String columnName) {
         Vector<String> columnNames = TABLE_COLUMNS.get(tableName);
-        System.out.println(tableName + " column count: " + columnNames.size());
         int columnIndex = columnNames.indexOf(columnName);
-        System.out.println(columnName + " index: " + columnIndex);
 
         return columnIndex;
     }
@@ -359,7 +357,7 @@ public class TableService {
                 data.add(rs.getString("BeanId"));
                 data.add(Utility.sqlDateToString(rs.getDate("RoastStart"), "MM/dd/yyyy hh:mm a"));
                 data.add(rs.getString("RoastLevel"));
-                data.add(String.format("%.2f", rs.getFloat("Density")));
+                //data.add(String.format("%.2f", rs.getFloat("Density")));
                 data.add(Utility.sqlFloatToString(rs.getFloat("GreenWeight"), "%5.1f"));
                 data.add(Utility.sqlFloatToString(rs.getFloat("RoastedWeight"), "%5.1f"));
                 data.add(Utility.sqlFloatToString(rs.getFloat("MoistureLossPercentage"), "%5.1f"));

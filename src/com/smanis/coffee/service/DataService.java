@@ -196,7 +196,7 @@ public final class DataService {
                 break;
                 
             case "getRoastLogsByBeanId":
-                query = "SELECT r.Id, r.BeanId, r.RoastStart, r.RoastLevel, b.Density,  r.GreenWeight, r.RoastedWeight, r.MoistureLossPercentage, r.TotalRoastTime, " +
+                query = "SELECT r.Id, r.BeanId, r.RoastStart, r.RoastLevel, r.GreenWeight, r.RoastedWeight, r.MoistureLossPercentage, r.TotalRoastTime, " +
                         "r.TotalDryTime, r.TotalBrowningTime, r.TotalFirstCrackTime, r.TotalDevelopmentTime, r.RoastNotes, r.TastingNotes  "
                         + "FROM RoastLog r, Beans b "
                         + "WHERE r.beanId = b.id AND r.beanId = ? "
