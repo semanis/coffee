@@ -111,7 +111,8 @@ public class TableService {
 
     /**
      * Extracts column names from a ResultSet for a given table name, and
-     * returns the column names as a Vector<String>.
+     * returns the column names as a Vector<String>. Proper-cased columns names like
+     * "TotalRoastTime" are split out into "Total Roast Time".
      *
      * @param rs A ResultSet.
      *
@@ -131,6 +132,7 @@ public class TableService {
                 if (word.equals("Percentage")) {
                     word = "%";
                 }
+
                 // separate each word by a space.
                 splitName += (splitName.isEmpty() ? "" : " ") + word;
             }
@@ -155,20 +157,14 @@ public class TableService {
         return TABLE_COLUMNS.get(tableName);
     }
 
-//    /**
-//     * The data table uses a simple Vector of Strings as column header names.
-//     */
-//    public Vector<String> getTableColumnsBeans() {
-//        return getColumns("Beans");
-//    }
-//
-//
-//    /**
-//     * Gets column names for the RoastLog table as Vector<String>.
-//     */
-//    public Vector<String> getTableColumnsRoastLog() {
-//        return getColumns("RoastLog");
-//    }
+    /**
+     * Get a DefaultComboBoxModel for the Beans table,  returning
+     * field Id, Name, and formatted Density as a BeanModel instance for each
+     * row in the Model.
+     * 
+     * @return DefaultComboBoxModel A default implementation of a ComboBox model, 
+     * using the Beans table as a data source..
+     */
     public DefaultComboBoxModel getComboboxModelBeans() {
         DefaultComboBoxModel model = null;
 
@@ -240,71 +236,6 @@ public class TableService {
         return dataContainer;
     }
 
-//    public Vector<Vector<Object>> getTableDataRoastLogs() throws Exception {
-//        ResultSet rs = DataService.getInstance().getRoastLogs();
-//
-//        Vector<String> columnNames = getColumns("RoastLog");
-//        
-//        // column names are cached after the first call.
-//        if (columnNames == null) {
-//            columnNames = getColumnsFromResultSet(rs);
-//            TABLE_COLUMNS.put("RoastLog", columnNames);
-//        }
-//
-//        return buildTableDataRoastLogs(rs);
-//    }
-//
-//    public Vector<Vector<Object>> getTableDataRoastLogsByBeanId(String beanId) throws Exception {
-//        ResultSet rs = DataService.getInstance().getRoastLogsByBeanId(beanId);
-//
-//        return buildTableDataRoastLogs(rs);
-//    }
-    /**
-     * The data table accepts data as a Vector of Vectors. Each entry in the
-     * parent Vector is a table "row" and the list of values in the child Vector
-     * are the data for the row's cells. The child Vector is typed as containing
-     * "Object", so we can shove any data type into it and later pull it out and
-     * cast it to the correct data type.
-     */
-//    private Vector<Vector<Object>> buildTableDataRoastLogs(ResultSet rs) throws Exception {
-//        //ResultSet rs = DataService.getInstance().getRoastLogs();
-//
-//        Vector<Vector<Object>> dataContainer = new Vector<Vector<Object>>();
-//
-//        // Enforce an ISP-8601 datetime format.
-//        DateFormat formatterDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-//
-//        while (rs.next()) {
-//            Vector<Object> data = new Vector<Object>();
-//
-//            // Be sure you add the data in the same order as the columns are set in getColumnsRoastLog() above.
-//            data.add(rs.getString("Id"));
-//            data.add(rs.getString("BeanId"));
-//            data.add(Utility.sqlDateToString(rs.getDate("RoastStart"), "MM/dd/yyyy hh:mm a"));
-//            data.add(rs.getString("BeanName"));
-//            data.add(String.format("%.2f", rs.getFloat("Density")));
-//            data.add(rs.getString("ChargeTemp"));
-//            data.add(Utility.sqlFloatToString(rs.getFloat("GreenWeight"), "%5.1f"));
-//            data.add(Utility.sqlFloatToString(rs.getFloat("RoastedWeight"), "%5.1f"));
-//            data.add(Utility.sqlFloatToString(rs.getFloat("MoistureLossWeight"), "%5.1f"));
-//            data.add(Utility.sqlFloatToString(rs.getFloat("MoistureLossPercentage"), "%5.1f"));
-//            data.add(rs.getString("RoastLevel"));
-//            data.add(Utility.sqlDateToString(rs.getDate("DryTime"), "hh:mm:ss a"));
-//            data.add(Utility.sqlDateToString(rs.getDate("FirstCrackStart"), "hh:mm:ss a"));
-//            data.add(Utility.sqlDateToString(rs.getDate("FirstCrackEnd"), "hh:mm:ss a"));
-//            data.add(Utility.sqlDateToString(rs.getDate("EndRoast"), "hh:mm:ss a"));
-//            data.add(rs.getString("RoastNotes"));
-//            data.add(rs.getString("TastingNotes"));
-//            data.add(rs.getString("TotalDryTime"));
-//            data.add(rs.getString("TotalFirstCrackTime"));
-//            data.add(rs.getString("TotalDevelopmentTime"));
-//            data.add(rs.getString("TotalRoastTime"));
-//
-//            dataContainer.add(data);
-//        }
-//
-//        return dataContainer;
-//    }
     public NonEditableTableModel getTableModelBeans() {
         Vector<String> tableColumns = this.getColumns("Beans");
         Vector tableData = null;
@@ -504,14 +435,12 @@ public class TableService {
     public void setupTableRoastLog(JTable table, JTextArea roastNotes, JTextArea tastingNotes) {
 
         TableService.getInstance().hideColumnsRoastLog(table);
-        // TableService.getInstance().setColumnWidthsRoastLog(table);
 
         //this.tableRoasts.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setIntercellSpacing(new Dimension(10, 10));
         table.setRowHeight(40);
 
-// auto-select the first row.
         table.setRowSelectionInterval(0, 0);
 
         TableModel model = table.getModel();
