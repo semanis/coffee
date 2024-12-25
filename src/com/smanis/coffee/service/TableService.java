@@ -109,6 +109,18 @@ public class TableService {
 
     }
 
+    
+    public void deleteRoastLog(String roastLogId) throws Exception {
+        DataService.getInstance().deleteRoastLog(roastLogId);
+    }
+    
+    public int getColumnIndex(String tableName, String columnName) {
+        Vector<String> columnNames = TABLE_COLUMNS.get(tableName);
+        int columnIndex = columnNames.indexOf(columnName);
+
+        return columnIndex;
+    }
+
     /**
      * Extracts column names from a ResultSet for a given table name, and
      * returns the column names as a Vector<String>. Proper-cased columns names like
@@ -132,6 +144,9 @@ public class TableService {
                 if (word.equals("Percentage")) {
                     word = "%";
                 }
+                else if (word.equals("Total")) {
+                    continue;
+                }
 
                 // separate each word by a space.
                 splitName += (splitName.isEmpty() ? "" : " ") + word;
@@ -143,12 +158,6 @@ public class TableService {
         return columnNames;
     }
 
-    public int getColumnIndex(String tableName, String columnName) {
-        Vector<String> columnNames = TABLE_COLUMNS.get(tableName);
-        int columnIndex = columnNames.indexOf(columnName);
-
-        return columnIndex;
-    }
 
     /**
      * Get column names as a Vector<String> for the specified table name.
@@ -441,12 +450,19 @@ public class TableService {
         table.setIntercellSpacing(new Dimension(10, 10));
         table.setRowHeight(40);
 
-        table.setRowSelectionInterval(0, 0);
 
         TableModel model = table.getModel();
+        
+        if (model.getRowCount() > 0) {
+            table.setRowSelectionInterval(0, 0);
+            roastNotes.setText((String) model.getValueAt(0, getColumnIndex("RoastLog", "Roast Notes")));
+            tastingNotes.setText((String) model.getValueAt(0, getColumnIndex("RoastLog", "Tasting Notes")));
+        }
+        else {
+            roastNotes.setText("");
+            tastingNotes.setText("");
+        }
 
-        roastNotes.setText((String) model.getValueAt(0, getColumnIndex("RoastLog", "Roast Notes")));
-        tastingNotes.setText((String) model.getValueAt(0, getColumnIndex("RoastLog", "Tasting Notes")));
 
         this.adjustTableColumnWidths(table);
     }

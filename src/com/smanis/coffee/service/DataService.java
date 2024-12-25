@@ -67,6 +67,15 @@ public final class DataService {
         return this.conn;
     }
 
+    public void deleteRoastLog(String roastLogId) throws Exception {
+        String sql = this.getSql("deleteRoastLogById");
+
+        PreparedStatement ps = this.getConnection().prepareStatement(sql);
+        ps.setString(1, roastLogId);
+        ps.execute();
+        ps.close();
+    }
+    
     public ResultSet doQuery(String queryName) throws Exception {
         Statement st = this.getConnection().createStatement();
         String query = this.getSql(queryName);
@@ -172,6 +181,10 @@ public final class DataService {
         String query = "";
 
         switch (queryName) {
+            case "deleteRoastLogById":
+                query = "DELETE FROM RoastLog WHERE Id = ?";
+                
+                break;
             case "getBeanIdsAndNames":
                 query = "SELECT Id, Name, Density FROM Beans ORDER BY Name";
                 break;

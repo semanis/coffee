@@ -10,6 +10,8 @@ import com.smanis.coffee.models.BeanModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -530,8 +532,10 @@ public class CoffeeFrame extends javax.swing.JFrame {
         RoastLogEdit rle = new com.smanis.coffee.forms.RoastLogEdit(this, true);
         rle.setRoastLogId(roastLogId);
         rle.setVisible(true);
-        if (rle.wasPersisted == true) {
+        
+        if (rle.wasUpdated == true) {
             this.refreshRoastLogTable();
+            this.tableRoasts.setRowSelectionInterval(selectedRow, selectedRow);
         }
         
         rle.dispose();
@@ -541,7 +545,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         RoastLogEdit rle = new com.smanis.coffee.forms.RoastLogEdit(this, true);
         rle.setVisible(true);
 
-        if (rle.wasPersisted == true) {
+        if (rle.wasInserted == true) {
             this.refreshRoastLogTable();
         }
         
@@ -550,21 +554,26 @@ public class CoffeeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddRoastLogActionPerformed
 
     private void btnDeleteRoastLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRoastLogActionPerformed
-//        int selectedRow = this.tableRoasts.getSelectedRow();
-//
-//        if (selectedRow == -1) {
-//            JOptionPane.showMessageDialog(this, "Please select a Roast Log to delete.");
-//            return;
-//        }
-//
-//        NonEditableTableModel model = (NonEditableTableModel) this.tableRoasts.getModel();
-//        String roastLogId = (String) model.getValueAt(selectedRow, 0);
-//
-//        if (JOptionPane.showConfirmDialog(this, "Delete Roast Log?", "Confirm Delete", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.CANCEL_OPTION) {
-//            return;
-//        }
+        int selectedRow = this.tableRoasts.getSelectedRow();
 
-        //TableService.deleteRoastLog();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a Roast Log to delete.");
+            return;
+        }
+
+        NonEditableTableModel model = (NonEditableTableModel) this.tableRoasts.getModel();
+        String roastLogId = (String) model.getValueAt(selectedRow, 0);
+
+        if (JOptionPane.showConfirmDialog(this, "Delete Roast Log?", "Confirm Delete", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.CANCEL_OPTION) {
+            return;
+        }
+
+        try {
+            TableService.getInstance().deleteRoastLog(roastLogId);
+            this.refreshRoastLogTable();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnDeleteRoastLogActionPerformed
 

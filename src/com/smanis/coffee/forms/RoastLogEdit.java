@@ -51,7 +51,6 @@ public class RoastLogEdit extends javax.swing.JDialog {
 
         panelBean = new javax.swing.JPanel();
         labelBeans = new javax.swing.JLabel();
-        labelDensity = new javax.swing.JLabel();
         textDensity = new javax.swing.JTextField();
         comboBeans = new javax.swing.JComboBox<>();
         labelGreenWeight = new javax.swing.JLabel();
@@ -122,10 +121,6 @@ public class RoastLogEdit extends javax.swing.JDialog {
         labelBeans.setText("Bean");
         getContentPane().add(labelBeans, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
 
-        labelDensity.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        labelDensity.setText("Density");
-        getContentPane().add(labelDensity, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, -1, -1));
-
         textDensity.setText(" ");
         textDensity.setFocusable(false);
         getContentPane().add(textDensity, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 70, 70, -1));
@@ -148,7 +143,7 @@ public class RoastLogEdit extends javax.swing.JDialog {
 
         labelGreenWeight.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelGreenWeight.setText("Green Weight");
-        getContentPane().add(labelGreenWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
+        getContentPane().add(labelGreenWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
 
         ftGreenWeight.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("###.#")));
         ftGreenWeight.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -164,11 +159,11 @@ public class RoastLogEdit extends javax.swing.JDialog {
                 ftGreenWeightFocusLost(evt);
             }
         });
-        getContentPane().add(ftGreenWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, 110, -1));
+        getContentPane().add(ftGreenWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 110, -1));
 
         labelRoastDate.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelRoastDate.setText("Roast Date");
-        getContentPane().add(labelRoastDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, -1));
+        getContentPane().add(labelRoastDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
 
         ftRoastDate.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("##/##/####")));
         ftRoastDate.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
@@ -178,19 +173,22 @@ public class RoastLogEdit extends javax.swing.JDialog {
                 ftRoastDateFocusGained(evt);
             }
         });
-        getContentPane().add(ftRoastDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 120, -1));
+        getContentPane().add(ftRoastDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 120, -1));
 
         btnRoastDate.setText("now");
+        btnRoastDate.setMaximumSize(new java.awt.Dimension(72, 26));
+        btnRoastDate.setMinimumSize(new java.awt.Dimension(72, 26));
+        btnRoastDate.setPreferredSize(new java.awt.Dimension(72, 26));
         btnRoastDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRoastDateActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRoastDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, 80, 30));
+        getContentPane().add(btnRoastDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 80, 30));
 
         labelStartTime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelStartTime.setText("Start Time");
-        getContentPane().add(labelStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 130, -1));
+        getContentPane().add(labelStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 130, -1));
 
         ftStartTime.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("##:##:##")));
         ftStartTime.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
@@ -200,23 +198,23 @@ public class RoastLogEdit extends javax.swing.JDialog {
                 ftStartTimeFocusGained(evt);
             }
         });
-        getContentPane().add(ftStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 110, -1));
+        getContentPane().add(ftStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 110, -1));
 
         btnStartTime.setText("now");
-        btnStartTime.setMaximumSize(new java.awt.Dimension(84, 32));
-        btnStartTime.setMinimumSize(new java.awt.Dimension(84, 32));
+        btnStartTime.setMaximumSize(new java.awt.Dimension(72, 26));
+        btnStartTime.setMinimumSize(new java.awt.Dimension(72, 26));
         btnStartTime.setNextFocusableComponent(ftDryEnd);
-        btnStartTime.setPreferredSize(new java.awt.Dimension(84, 32));
+        btnStartTime.setPreferredSize(new java.awt.Dimension(72, 26));
         btnStartTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStartTimeActionPerformed(evt);
             }
         });
-        getContentPane().add(btnStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 80, 30));
+        getContentPane().add(btnStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 80, 30));
 
         labelDryEnd.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelDryEnd.setText("Dry End");
-        getContentPane().add(labelDryEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, -1));
+        getContentPane().add(labelDryEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
 
         ftDryEnd.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("##:##:##")));
         ftDryEnd.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
@@ -229,23 +227,23 @@ public class RoastLogEdit extends javax.swing.JDialog {
                 ftDryEndFocusLost(evt);
             }
         });
-        getContentPane().add(ftDryEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 110, -1));
+        getContentPane().add(ftDryEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 110, -1));
 
         btnDryEnd.setText("now");
-        btnDryEnd.setMaximumSize(new java.awt.Dimension(84, 32));
-        btnDryEnd.setMinimumSize(new java.awt.Dimension(84, 32));
+        btnDryEnd.setMaximumSize(new java.awt.Dimension(72, 26));
+        btnDryEnd.setMinimumSize(new java.awt.Dimension(72, 26));
         btnDryEnd.setNextFocusableComponent(ftFcStart);
-        btnDryEnd.setPreferredSize(new java.awt.Dimension(84, 32));
+        btnDryEnd.setPreferredSize(new java.awt.Dimension(72, 26));
         btnDryEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDryEndActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDryEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, 80, -1));
+        getContentPane().add(btnDryEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 80, -1));
 
         labelFcStart.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelFcStart.setText("FC Start");
-        getContentPane().add(labelFcStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
+        getContentPane().add(labelFcStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
 
         ftFcStart.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("##:##:##")));
         ftFcStart.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
@@ -258,28 +256,34 @@ public class RoastLogEdit extends javax.swing.JDialog {
                 ftFcStartFocusLost(evt);
             }
         });
-        getContentPane().add(ftFcStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 110, -1));
+        getContentPane().add(ftFcStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 110, -1));
 
         btnFcStart.setText("now");
+        btnFcStart.setMaximumSize(new java.awt.Dimension(72, 26));
+        btnFcStart.setMinimumSize(new java.awt.Dimension(72, 26));
+        btnFcStart.setPreferredSize(new java.awt.Dimension(72, 26));
         btnFcStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFcStartActionPerformed(evt);
             }
         });
-        getContentPane().add(btnFcStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 80, -1));
+        getContentPane().add(btnFcStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 80, -1));
 
         labelFcEnd.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelFcEnd.setText("FC End");
-        getContentPane().add(labelFcEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, -1));
+        getContentPane().add(labelFcEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, -1, -1));
 
         btnFcEnd.setText("now");
+        btnFcEnd.setMaximumSize(new java.awt.Dimension(72, 26));
+        btnFcEnd.setMinimumSize(new java.awt.Dimension(72, 26));
         btnFcEnd.setNextFocusableComponent(ftEndRoast);
+        btnFcEnd.setPreferredSize(new java.awt.Dimension(72, 26));
         btnFcEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFcEndActionPerformed(evt);
             }
         });
-        getContentPane().add(btnFcEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 80, -1));
+        getContentPane().add(btnFcEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 80, -1));
 
         ftFcEnd.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("##:##:##")));
         ftFcEnd.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
@@ -292,11 +296,11 @@ public class RoastLogEdit extends javax.swing.JDialog {
                 ftFcEndFocusLost(evt);
             }
         });
-        getContentPane().add(ftFcEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 110, -1));
+        getContentPane().add(ftFcEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 110, -1));
 
         labelEndRoast.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelEndRoast.setText("End Roast");
-        getContentPane().add(labelEndRoast, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, -1));
+        getContentPane().add(labelEndRoast, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, -1, -1));
 
         ftEndRoast.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("##:##:##")));
         ftEndRoast.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
@@ -308,20 +312,23 @@ public class RoastLogEdit extends javax.swing.JDialog {
                 ftEndRoastFocusLost(evt);
             }
         });
-        getContentPane().add(ftEndRoast, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 110, -1));
+        getContentPane().add(ftEndRoast, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 110, -1));
 
         btnEndRoast.setText("now");
+        btnEndRoast.setMaximumSize(new java.awt.Dimension(72, 26));
+        btnEndRoast.setMinimumSize(new java.awt.Dimension(72, 26));
         btnEndRoast.setNextFocusableComponent(ftGreenWeight);
+        btnEndRoast.setPreferredSize(new java.awt.Dimension(72, 26));
         btnEndRoast.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEndRoastActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEndRoast, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 360, 80, -1));
+        getContentPane().add(btnEndRoast, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 80, -1));
 
         labelRoastedWeight.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelRoastedWeight.setText("Roasted Weight");
-        getContentPane().add(labelRoastedWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
+        getContentPane().add(labelRoastedWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
 
         ftRoastedWeight.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("###.#")));
         ftRoastedWeight.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -336,34 +343,34 @@ public class RoastLogEdit extends javax.swing.JDialog {
                 ftRoastedWeightFocusLost(evt);
             }
         });
-        getContentPane().add(ftRoastedWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 450, 110, -1));
+        getContentPane().add(ftRoastedWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 430, 110, -1));
 
         labelDifference.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelDifference.setText("Difference");
-        getContentPane().add(labelDifference, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 490, -1, -1));
+        getContentPane().add(labelDifference, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, -1, -1));
 
         textDifferenceMsg.setText("   ");
         textDifferenceMsg.setFocusable(false);
-        getContentPane().add(textDifferenceMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 490, 110, -1));
+        getContentPane().add(textDifferenceMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 470, 110, -1));
 
         labelMoistureLoss.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelMoistureLoss.setText("Moisture Loss");
         labelMoistureLoss.setAlignmentY(0.0F);
-        getContentPane().add(labelMoistureLoss, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, -1, -1));
+        getContentPane().add(labelMoistureLoss, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, -1, -1));
 
         textMoistureLossMsg.setText(" ");
         textMoistureLossMsg.setFocusable(false);
-        getContentPane().add(textMoistureLossMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 530, 110, -1));
+        getContentPane().add(textMoistureLossMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 510, 110, -1));
 
         labelRoastLevel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelRoastLevel.setText("Roast Level");
-        getContentPane().add(labelRoastLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 570, -1, -1));
+        getContentPane().add(labelRoastLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 550, -1, -1));
 
         textRoastLevelMsg.setFocusable(false);
         textRoastLevelMsg.setMaximumSize(new java.awt.Dimension(350, 26));
         textRoastLevelMsg.setMinimumSize(new java.awt.Dimension(350, 26));
         textRoastLevelMsg.setPreferredSize(new java.awt.Dimension(350, 26));
-        getContentPane().add(textRoastLevelMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 570, 360, -1));
+        getContentPane().add(textRoastLevelMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 550, 360, -1));
 
         panelNotes.setBorder(javax.swing.BorderFactory.createTitledBorder(" Notes "));
         panelNotes.setLayout(new java.awt.GridBagLayout());
@@ -483,7 +490,7 @@ public class RoastLogEdit extends javax.swing.JDialog {
         });
         getContentPane().add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 600, -1, -1));
 
-        setSize(new java.awt.Dimension(1452, 684));
+        setSize(new java.awt.Dimension(1452, 674));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -813,11 +820,14 @@ public class RoastLogEdit extends javax.swing.JDialog {
 
         try {
             // if Id is null, it's a new Roast Log.
-            if (((String) map.get("Id")).isEmpty()) {
+            String roastId = (String)map.get("Id");
+            if (roastId.equals(null) || roastId.equals("")) {
                 DataService.getInstance().insertRoastLog(map);
+                this.wasInserted = true;
             } else {
                 // otherwise, you're editing.
                 DataService.getInstance().updateRoastLog(map);
+                this.wasUpdated = true;
             }
 
             JOptionPane.showMessageDialog(this, "Saved.", "Roast Log Saved", JOptionPane.INFORMATION_MESSAGE);
@@ -898,6 +908,7 @@ public class RoastLogEdit extends javax.swing.JDialog {
 
         // Register an action listener on the Escape key which performs a click of the Exit button.
         ActionListener actionListener = new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 int response = JOptionPane.showConfirmDialog(RoastLogEdit.this, "Cancel editing?", "Confirm", JOptionPane.OK_CANCEL_OPTION);
                 if (response == JOptionPane.OK_OPTION) {
@@ -940,6 +951,8 @@ public class RoastLogEdit extends javax.swing.JDialog {
     //
     private String roastId = "";
     public Boolean wasPersisted = false;
+    public Boolean wasUpdated = false;
+    public Boolean wasInserted = false;
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -964,7 +977,6 @@ public class RoastLogEdit extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel labelBeans;
     private javax.swing.JLabel labelBrowningTime;
-    private javax.swing.JLabel labelDensity;
     private javax.swing.JLabel labelDevTime;
     private javax.swing.JLabel labelDifference;
     private javax.swing.JLabel labelDryEnd;
