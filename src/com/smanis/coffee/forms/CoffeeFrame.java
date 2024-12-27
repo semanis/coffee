@@ -10,8 +10,6 @@ import com.smanis.coffee.models.BeanModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -67,8 +65,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         btnEditRoastLog = new javax.swing.JButton();
         btnDeleteRoastLog = new javax.swing.JButton();
         panelBeans = new javax.swing.JPanel();
-        panelBeanList = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         tableBeans = new javax.swing.JTable();
         panelComments = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -298,24 +295,16 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
         panelBeans.setLayout(new java.awt.GridBagLayout());
 
-        panelBeanList.setLayout(new java.awt.GridBagLayout());
-
         tableBeans.setModel(TableService.getInstance().getTableModelBeans());
-        jScrollPane4.setViewportView(tableBeans);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        panelBeanList.add(jScrollPane4, gridBagConstraints);
+        jScrollPane2.setViewportView(tableBeans);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        panelBeans.add(panelBeanList, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        panelBeans.add(jScrollPane2, gridBagConstraints);
 
         panelComments.setBorder(javax.swing.BorderFactory.createTitledBorder(" Comments "));
         panelComments.setLayout(new java.awt.GridBagLayout());
@@ -342,8 +331,10 @@ public class CoffeeFrame extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelBeans.add(panelComments, gridBagConstraints);
 
-        tabbedPanel.addTab(" Beans ", panelBeans);
+        tabbedPanel.addTab("    Beans    ", panelBeans);
         tabbedPanel.addTab(" Bean Purchases ", panelPurchases);
+
+        tabbedPanel.setSelectedIndex(1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 2;
@@ -643,13 +634,6 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
     private void initOther() {
         try {
-
-            // Select the first bean in the list by default.
-            this.listBeans.setSelectedIndex(0);
-
-            // Load up the Roast Log JTable with the selected bean.
-            this.refreshRoastLogTable();
-
             JRootPane jrp = this.getRootPane();
 
             // activates the default button on a particular key press..
@@ -672,6 +656,16 @@ public class CoffeeFrame extends javax.swing.JFrame {
             // Load up the window preferences, which restores the size/location of the window.
             AppPreferences.loadWindowPreferences(this);
 
+            // Select the first bean in the list by default.
+            this.listBeans.setSelectedIndex(0);
+
+            // Load up the Roast Log JTable with the selected bean.
+            this.refreshRoastLogTable();
+            
+            // General table layout stuff, column widths, hidden columns, etc.
+            TableService.getInstance().setupTableBeans(this.tableBeans);
+
+
         } catch (Exception e) {
             System.out.println("initOther! " + e.getMessage() + " " + " " + e.getClass());
             e.printStackTrace();
@@ -691,7 +685,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JButton buttonExit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
@@ -712,7 +706,6 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemWindowsClassic;
     private javax.swing.JMenu menuLookAndFeel;
     private javax.swing.JMenu menuView;
-    private javax.swing.JPanel panelBeanList;
     private javax.swing.JPanel panelBeans;
     private javax.swing.JPanel panelButtons;
     private javax.swing.JPanel panelComments;

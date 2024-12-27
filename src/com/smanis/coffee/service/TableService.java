@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 /**
@@ -94,26 +95,21 @@ public class TableService {
             String headerValue = (String) tableColumn.getHeaderValue();
             FontMetrics metrics = table.getGraphics().getFontMetrics(new Font("Liberation Sans", Font.PLAIN, 20));
             int headerWidth = metrics.stringWidth(headerValue);
-            
-//            System.out.println("header: " + headerValue + ", width: " + headerWidth);
-//            System.out.println("preferredWidth: " + preferredWidth);
-//            System.out.println("=====================================");
-            
+
             if (headerWidth > preferredWidth) {
                 preferredWidth = headerWidth;
             }
-            
+
             preferredWidth += 20;
             tableColumn.setPreferredWidth(preferredWidth);
         }
 
     }
 
-    
     public void deleteRoastLog(String roastLogId) throws Exception {
         DataService.getInstance().deleteRoastLog(roastLogId);
     }
-    
+
     public int getColumnIndex(String tableName, String columnName) {
         Vector<String> columnNames = TABLE_COLUMNS.get(tableName);
         int columnIndex = columnNames.indexOf(columnName);
@@ -123,8 +119,8 @@ public class TableService {
 
     /**
      * Extracts column names from a ResultSet for a given table name, and
-     * returns the column names as a Vector<String>. Proper-cased columns names like
-     * "TotalRoastTime" are split out into "Total Roast Time".
+     * returns the column names as a Vector<String>. Proper-cased columns names
+     * like "TotalRoastTime" are split out into "Total Roast Time".
      *
      * @param rs A ResultSet.
      *
@@ -143,8 +139,7 @@ public class TableService {
             for (String word : splitColumnName) {
                 if (word.equals("Percentage")) {
                     word = "%";
-                }
-                else if (word.equals("Total")) {
+                } else if (word.equals("Total")) {
                     continue;
                 }
 
@@ -158,7 +153,6 @@ public class TableService {
         return columnNames;
     }
 
-
     /**
      * Get column names as a Vector<String> for the specified table name.
      */
@@ -167,12 +161,11 @@ public class TableService {
     }
 
     /**
-     * Get a DefaultComboBoxModel for the Beans table,  returning
-     * field Id, Name, and formatted Density as a BeanModel instance for each
-     * row in the Model.
-     * 
-     * @return DefaultComboBoxModel A default implementation of a ComboBox model, 
-     * using the Beans table as a data source..
+     * Get a DefaultComboBoxModel for the Beans table, returning field Id, Name,
+     * and formatted Density as a BeanModel instance for each row in the Model.
+     *
+     * @return DefaultComboBoxModel A default implementation of a ComboBox
+     * model, using the Beans table as a data source..
      */
     public DefaultComboBoxModel getComboboxModelBeans() {
         DefaultComboBoxModel model = null;
@@ -203,7 +196,7 @@ public class TableService {
         try {
             // Query which returns just the Bean ID and Name.
             ResultSet rs = DataService.getInstance().getBeanIdsAndNames();
-            
+
             while (rs.next()) {
                 Float density = rs.getFloat("Density");
                 model.addElement(new BeanModel(rs.getString("Id"), rs.getString("Name"), String.format("%.2f", density)));
@@ -216,52 +209,51 @@ public class TableService {
         return model;
     }
 
-    public Vector<Vector<Object>> getTableDataBeans() throws Exception {
-        ResultSet rs = DataService.getInstance().getBeans();
-
-        Vector<Vector<Object>> dataContainer = new Vector<Vector<Object>>();
-
-        // Enforce an ISP-8601 datetime format.
-        DateFormat formatterDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-
-        while (rs.next()) {
-            Vector<Object> data = new Vector<Object>();
-
-            // Be sure you add the data in the same order as the columns are set in getColumnsBeans() above.
-            data.add(rs.getString("Id"));
-            data.add(rs.getString("Name"));
-            data.add(rs.getString("Origin"));
-            data.add(rs.getString("Altitude"));
-            data.add(rs.getString("ProcessMethod"));
-            data.add(rs.getString("DensityGrams"));
-            data.add(rs.getString("Density"));
-            data.add(rs.getString("GrindSetting"));
-            data.add(rs.getInt("Anaerobic"));
-            data.add(rs.getInt("InStock"));
-            data.add(rs.getString("Comments"));
-            dataContainer.add(data);
-        }
-
-        return dataContainer;
-    }
-
     public NonEditableTableModel getTableModelBeans() {
         Vector<String> tableColumns = this.getColumns("Beans");
-        Vector tableData = null;
+        Vector<Vector<Object>> tableData = new Vector<Vector<Object>>();
+        NonEditableTableModel model = null;
 
         try {
-            tableData = this.getTableDataBeans();
+            ResultSet rs = DataService.getInstance().getBeans();
+
+            // column names are cached after the first call.
+            if (tableColumns == null) {
+                tableColumns = getColumnsFromResultSet(rs);
+                TABLE_COLUMNS.put("Beans", tableColumns);
+            }
+
+            // Enforce an ISP-8601 datetime format.
+            DateFormat formatterDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+            while (rs.next()) {
+                Vector<Object> data = new Vector<Object>();
+
+                // Be sure you add the data in the same order as the columns are set in getColumnsBeans() above.
+                data.add(rs.getString("Id"));
+                data.add(rs.getString("Name"));
+                data.add(rs.getString("Origin"));
+                data.add(rs.getString("Altitude"));
+                data.add(rs.getString("ProcessMethod"));
+                data.add(rs.getString("DensityGrams"));
+                data.add(rs.getString("Density"));
+                data.add(rs.getString("GrindSetting"));
+                data.add(rs.getInt("Anaerobic"));
+                data.add(rs.getInt("InStock"));
+                data.add(rs.getString("Comments"));
+
+                tableData.add(data);
+            }
+
+            model = new NonEditableTableModel(tableData, tableColumns);
+
         } catch (Exception e) {
-            tableData = new Vector();
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        return new NonEditableTableModel(tableData, tableColumns);
+        return model;
     }
 
-
-
-    
     /**
      * This builds and returns the fully populated and ready to render
      * DefaultTableModel which backs the main JTable of roast log data. Note
@@ -359,18 +351,17 @@ public class TableService {
         col.setMaxWidth(0);
     }
 
-    public void setColumnWidthsBeans(JTable table) {
-        this.setColumnWidth(table, "Name", 385);
-        this.setColumnWidth(table, "Origin", 420);
-        this.setColumnWidth(table, "Altitude", 150);
-        this.setColumnWidth(table, "Process Method", 155);
-        this.setColumnWidth(table, "Density Grams", 145);
-        this.setColumnWidth(table, "Density", 76);
-        this.setColumnWidth(table, "Grind Setting", 125);
-        this.setColumnWidth(table, "Anaerobic?", 130);
-        this.setColumnWidth(table, "In Stock?", 130);
-    }
-
+//    public void setColumnWidthsBeans(JTable table) {
+//        this.setColumnWidth(table, "Name", 385);
+//        this.setColumnWidth(table, "Origin", 420);
+//        this.setColumnWidth(table, "Altitude", 150);
+//        this.setColumnWidth(table, "Process Method", 155);
+//        this.setColumnWidth(table, "Density Grams", 145);
+//        this.setColumnWidth(table, "Density", 76);
+//        this.setColumnWidth(table, "Grind Setting", 125);
+//        this.setColumnWidth(table, "Anaerobic?", 130);
+//        this.setColumnWidth(table, "In Stock?", 130);
+//    }
     /**
      * Sets sane default widths for all data columns. The user can still drag
      * columns around but none of those changes are currently (I'm lazy,
@@ -378,15 +369,14 @@ public class TableService {
      *
      * @param table A reference to the Roast Log Jtable.
      */
-    public void setColumnWidthsRoastLog(JTable table) {
-        this.setColumnWidth(table, "Name", 385);
-        this.setColumnWidth(table, "Density", 100);
-        this.setColumnWidth(table, "Roast Level", 270);
-        this.setColumnWidth(table, "Green Weight", 160);
-        this.setColumnWidth(table, "Roasted Weight", 170);
-        this.setColumnWidth(table, "Moisture Loss Percentage", 170);
-        this.setColumnWidth(table, "Total Roast Time", 150);
-
+//    public void setColumnWidthsRoastLog(JTable table) {
+//        this.setColumnWidth(table, "Name", 385);
+//        this.setColumnWidth(table, "Density", 100);
+//        this.setColumnWidth(table, "Roast Level", 270);
+//        this.setColumnWidth(table, "Green Weight", 160);
+//        this.setColumnWidth(table, "Roasted Weight", 170);
+//        this.setColumnWidth(table, "Moisture Loss Percentage", 170);
+//        this.setColumnWidth(table, "Total Roast Time", 150);
 //        this.setColumnWidth(table, "Roast Start", 200);
 //        //this.setColumnWidth(table, "Charge Temp", 120);
 //        this.setColumnWidth(table, "Difference (g)", 130);
@@ -398,8 +388,7 @@ public class TableService {
 //        this.setColumnWidth(table, "Total Dry Time", 180);
 //        this.setColumnWidth(table, "Total FC Time", 180);
 //        this.setColumnWidth(table, "Total Dev. Time", 180);
-    }
-
+//    }
     /**
      * The actual implementation of the logic to set a column's width.
      *
@@ -418,20 +407,31 @@ public class TableService {
 
     public void setupTableBeans(JTable table) {
         TableService.getInstance().hideColumnsBeans(table);
-        TableService.getInstance().setColumnWidthsBeans(table);
 
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setIntercellSpacing(new Dimension(10, 10));
         table.setRowHeight(40);
 
-        // auto-select the first row.
-        table.setRowSelectionInterval(0, 0);
+        TableModel model = table.getModel();
+
+        if (model.getRowCount() > 0) {
+            // auto-select the first row.            
+            table.setRowSelectionInterval(0, 0);
+        }
 
         IconTableCellRenderer iconRenderer = new IconTableCellRenderer();
         iconRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        table.getColumnModel().getColumn(8).setCellRenderer(iconRenderer);
-        table.getColumnModel().getColumn(9).setCellRenderer(iconRenderer);
 
+        TableColumnModel colModel = table.getColumnModel();
+        int colCount = colModel.getColumnCount();
+        for (int i = 0; i < colCount; i++) {
+            System.out.println("index " + i + " - " + colModel.getColumn(i).getIdentifier());
+        }
+
+        table.getColumnModel().getColumn(getColumnIndex("Beans", "In Stock")).setCellRenderer(iconRenderer);
+        table.getColumnModel().getColumn(getColumnIndex("Beans", "Anaerobic")).setCellRenderer(iconRenderer);
+
+        this.adjustTableColumnWidths(table);
     }
 
     /**
@@ -445,24 +445,20 @@ public class TableService {
 
         TableService.getInstance().hideColumnsRoastLog(table);
 
-        //this.tableRoasts.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setIntercellSpacing(new Dimension(10, 10));
         table.setRowHeight(40);
 
-
         TableModel model = table.getModel();
-        
+
         if (model.getRowCount() > 0) {
             table.setRowSelectionInterval(0, 0);
             roastNotes.setText((String) model.getValueAt(0, getColumnIndex("RoastLog", "Roast Notes")));
             tastingNotes.setText((String) model.getValueAt(0, getColumnIndex("RoastLog", "Tasting Notes")));
-        }
-        else {
+        } else {
             roastNotes.setText("");
             tastingNotes.setText("");
         }
-
 
         this.adjustTableColumnWidths(table);
     }
