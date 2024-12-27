@@ -334,8 +334,6 @@ public class CoffeeFrame extends javax.swing.JFrame {
         tabbedPanel.addTab("    Beans    ", panelBeans);
         tabbedPanel.addTab(" Bean Purchases ", panelPurchases);
 
-        tabbedPanel.setSelectedIndex(1);
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;

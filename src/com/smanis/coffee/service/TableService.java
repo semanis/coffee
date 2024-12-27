@@ -233,15 +233,20 @@ public class TableService {
                 data.add(rs.getString("Id"));
                 data.add(rs.getString("Name"));
                 data.add(rs.getString("Origin"));
+                data.add(rs.getString("Variety"));
                 data.add(rs.getString("Altitude"));
                 data.add(rs.getString("ProcessMethod"));
-                data.add(rs.getString("DensityGrams"));
-                data.add(rs.getString("Density"));
+                data.add(rs.getString("Vendor"));
+                data.add(rs.getInt("WeightInPounds"));
+                data.add(rs.getFloat("Price"));
+                data.add(rs.getFloat("PricePerPound"));
+                data.add(rs.getFloat("DensityGrams"));
+                data.add(rs.getFloat("Density"));
                 data.add(rs.getString("GrindSetting"));
                 data.add(rs.getInt("Anaerobic"));
                 data.add(rs.getInt("InStock"));
                 data.add(rs.getString("Comments"));
-
+                
                 tableData.add(data);
             }
 

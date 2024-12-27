@@ -190,13 +190,13 @@ public final class DataService {
                 break;
 
             case "getBeans":
-                query = "SELECT Id, Name, Origin, Altitude, ProcessMethod, DensityGrams, Density, GrindSetting, Anaerobic, InStock, Comments "
+                query = "SELECT Id, Name, Origin, Variety, Altitude, ProcessMethod, Vendor, WeightInPounds, Price, PricePerPound, DensityGrams, Density, GrindSetting, Anaerobic, InStock, Comments "
                         + "FROM Beans "
                         + "ORDER BY InStock DESC, Name ASC";
                 break;
 
             case "getBeanById":
-                query = "SELECT Id, Name, Origin, Altitude, ProcessMethod, DensityGrams, Density, Comments FROM Beans WHERE Id = ?";
+                query = "SELECT Id, Name, Origin, Variety, Altitude, ProcessMethod, Vendor, WeightInPounds, Price, PricePerPound, DensityGrams, Density, GrindSetting, Anaerobic, InStock, Comments FROM Beans WHERE Id = ?";
                 break;
 
             case "getRoastLogs":
