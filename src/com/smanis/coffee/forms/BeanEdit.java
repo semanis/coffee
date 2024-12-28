@@ -4,6 +4,14 @@
  */
 package com.smanis.coffee.forms;
 
+import com.smanis.coffee.Utility;
+import com.smanis.coffee.service.DataService;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
+import javax.swing.text.DefaultFormatterFactory;
+
 /**
  *
  * @author semanis
@@ -26,125 +34,420 @@ public class BeanEdit extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabel1 = new javax.swing.JLabel();
+        panelDetails = new javax.swing.JPanel();
+        labelBean = new javax.swing.JLabel();
+        textBean = new javax.swing.JTextField();
+        labelVendor = new javax.swing.JLabel();
+        textVendor = new javax.swing.JTextField();
+        labelPrice = new javax.swing.JLabel();
+        ftPrice = new JFormattedTextField(Utility.createMaskFormatter("###.#"));
+        labelWeight = new javax.swing.JLabel();
+        ftWeight = new JFormattedTextField(Utility.createMaskFormatter("###.#"));
+        labelPricePerPound = new javax.swing.JLabel();
+        textPricePerPound = new javax.swing.JTextField();
+        labelOrigin = new javax.swing.JLabel();
+        textOrigin = new javax.swing.JTextField();
+        labelAltitude = new javax.swing.JLabel();
+        textAltitude = new javax.swing.JTextField();
+        labelProcess = new javax.swing.JLabel();
+        comboProcess = new javax.swing.JComboBox<>();
+        labelDensityGrams = new javax.swing.JLabel();
+        ftDensityGrams = new JFormattedTextField(Utility.createMaskFormatter("###.#"));
+        labelDensity = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        labelAnaerobic = new javax.swing.JLabel();
+        checkboxAnaerobic = new javax.swing.JCheckBox();
+        labelVariety = new javax.swing.JLabel();
+        textVariety = new javax.swing.JTextField();
+        labelInStock = new javax.swing.JLabel();
+        checkboxInStock = new javax.swing.JCheckBox();
+        labelGrindSetting = new javax.swing.JLabel();
+        textGrindSetting = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textAreaComments = new javax.swing.JTextArea();
+        labelComments = new javax.swing.JLabel();
+        panelButtons = new javax.swing.JPanel();
+        btnSave = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("Bean");
+        panelDetails.setLayout(new java.awt.GridBagLayout());
+
+        labelBean.setText("Bean");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        panelDetails.add(labelBean, gridBagConstraints);
+
+        textBean.setText(" ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 400;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelDetails.add(textBean, gridBagConstraints);
+
+        labelVendor.setText("Vendor");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        panelDetails.add(labelVendor, gridBagConstraints);
+
+        textVendor.setMaximumSize(new java.awt.Dimension(300, 26));
+        textVendor.setMinimumSize(new java.awt.Dimension(300, 26));
+        textVendor.setPreferredSize(new java.awt.Dimension(300, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelDetails.add(textVendor, gridBagConstraints);
+
+        labelPrice.setText("Price");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        panelDetails.add(labelPrice, gridBagConstraints);
+
+        ftPrice.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("$##.##")));
+        ftPrice.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        ftPrice.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        ftPrice.setMaximumSize(new java.awt.Dimension(75, 26));
+        ftPrice.setMinimumSize(new java.awt.Dimension(75, 26));
+        ftPrice.setPreferredSize(new java.awt.Dimension(75, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelDetails.add(ftPrice, gridBagConstraints);
+
+        labelWeight.setText("Weight (lbs)");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        panelDetails.add(labelWeight, gridBagConstraints);
+
+        ftWeight.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("###.#")));
+        ftWeight.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        ftWeight.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        ftWeight.setMaximumSize(new java.awt.Dimension(75, 26));
+        ftWeight.setMinimumSize(new java.awt.Dimension(75, 26));
+        ftWeight.setPreferredSize(new java.awt.Dimension(75, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelDetails.add(ftWeight, gridBagConstraints);
+
+        labelPricePerPound.setText("Price Per Lbs");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelDetails.add(labelPricePerPound, gridBagConstraints);
+
+        textPricePerPound.setText(" ");
+        textPricePerPound.setFocusable(false);
+        textPricePerPound.setMaximumSize(new java.awt.Dimension(100, 26));
+        textPricePerPound.setMinimumSize(new java.awt.Dimension(100, 26));
+        textPricePerPound.setPreferredSize(new java.awt.Dimension(100, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelDetails.add(textPricePerPound, gridBagConstraints);
+
+        labelOrigin.setText("Origin");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        panelDetails.add(labelOrigin, gridBagConstraints);
+
+        textOrigin.setText(" ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.ipadx = 567;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelDetails.add(textOrigin, gridBagConstraints);
+
+        labelAltitude.setText("Alltitude");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        panelDetails.add(labelAltitude, gridBagConstraints);
+
+        textAltitude.setText(" ");
+        textAltitude.setMaximumSize(new java.awt.Dimension(250, 26));
+        textAltitude.setMinimumSize(new java.awt.Dimension(250, 26));
+        textAltitude.setPreferredSize(new java.awt.Dimension(250, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelDetails.add(textAltitude, gridBagConstraints);
+
+        labelProcess.setText("Process");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        panelDetails.add(labelProcess, gridBagConstraints);
+
+        comboProcess.setEditable(true);
+        comboProcess.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dry", "Honey", "Natural", "Washed" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.ipadx = 118;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelDetails.add(comboProcess, gridBagConstraints);
+
+        labelDensityGrams.setText("Density Grams");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        panelDetails.add(labelDensityGrams, gridBagConstraints);
+
+        ftDensityGrams.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("###.#")));
+        ftDensityGrams.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        ftDensityGrams.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        ftDensityGrams.setMaximumSize(new java.awt.Dimension(75, 26));
+        ftDensityGrams.setMinimumSize(new java.awt.Dimension(75, 26));
+        ftDensityGrams.setPreferredSize(new java.awt.Dimension(75, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelDetails.add(ftDensityGrams, gridBagConstraints);
+
+        labelDensity.setText("Density");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        panelDetails.add(labelDensity, gridBagConstraints);
 
         jTextField1.setText(" ");
+        jTextField1.setEnabled(false);
+        jTextField1.setFocusable(false);
+        jTextField1.setMaximumSize(new java.awt.Dimension(100, 26));
+        jTextField1.setMinimumSize(new java.awt.Dimension(100, 26));
+        jTextField1.setPreferredSize(new java.awt.Dimension(100, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelDetails.add(jTextField1, gridBagConstraints);
 
-        jLabel2.setText("Origin");
+        labelAnaerobic.setText("Anaerobic?");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        panelDetails.add(labelAnaerobic, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 8, 10, 0);
+        panelDetails.add(checkboxAnaerobic, gridBagConstraints);
 
-        jTextField2.setText(" ");
+        labelVariety.setText("Variety");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelDetails.add(labelVariety, gridBagConstraints);
 
-        jLabel3.setText("Alltitude");
+        textVariety.setMaximumSize(new java.awt.Dimension(300, 26));
+        textVariety.setMinimumSize(new java.awt.Dimension(300, 26));
+        textVariety.setPreferredSize(new java.awt.Dimension(300, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelDetails.add(textVariety, gridBagConstraints);
 
-        jTextField3.setText(" ");
+        labelInStock.setText("In Stock?");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        panelDetails.add(labelInStock, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 8, 10, 0);
+        panelDetails.add(checkboxInStock, gridBagConstraints);
 
-        jLabel4.setText("Process");
+        labelGrindSetting.setText("Grind Setting");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelDetails.add(labelGrindSetting, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dry", "Honey", "Natural", "Washed" }));
+        textGrindSetting.setMaximumSize(new java.awt.Dimension(104, 26));
+        textGrindSetting.setMinimumSize(new java.awt.Dimension(104, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelDetails.add(textGrindSetting, gridBagConstraints);
 
-        jCheckBox1.setText("Anaerobic ");
-        jCheckBox1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        textAreaComments.setColumns(20);
+        textAreaComments.setRows(5);
+        jScrollPane1.setViewportView(textAreaComments);
 
-        jLabel5.setText("Density Grams");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelDetails.add(jScrollPane1, gridBagConstraints);
 
-        jTextField4.setText(" ");
+        labelComments.setText("Comments");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        panelDetails.add(labelComments, gridBagConstraints);
 
-        jButton1.setMnemonic('s');
-        jButton1.setText("Save");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        getContentPane().add(panelDetails, gridBagConstraints);
 
-        jButton2.setMnemonic('c');
-        jButton2.setText("Cancel");
+        btnSave.setMnemonic('s');
+        btnSave.setText("Save");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jCheckBox1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap())
+        btnCancel.setMnemonic('c');
+        btnCancel.setText("Cancel");
+
+        javax.swing.GroupLayout panelButtonsLayout = new javax.swing.GroupLayout(panelButtons);
+        panelButtons.setLayout(panelButtonsLayout);
+        panelButtonsLayout.setHorizontalGroup(
+            panelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 175, Short.MAX_VALUE)
+            .addGroup(panelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelButtonsLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(btnCancel)
+                    .addGap(5, 5, 5)
+                    .addComponent(btnSave)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap())
+        panelButtonsLayout.setVerticalGroup(
+            panelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 32, Short.MAX_VALUE)
+            .addGroup(panelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelButtonsLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(panelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnCancel)
+                        .addComponent(btnSave))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 10);
+        getContentPane().add(panelButtons, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     /**
+     * Loads database ResultSet data into the editing form fields.
+     *
+     * @param rs The target ResultSet.
+     */
+    private void loadData(String beanId) {
+
+        // Now load the resultset data into the appropriate fields.
+        try {
+            ResultSet rs = DataService.getInstance().getBeanById(beanId);
+            
+            
+            this.beanId = (String) rs.getString("Id");
+            this.textBean.setText(rs.getString("Name"));
+            this.ftPrice.setValue(Utility.sqlFloatToString(rs.getFloat("Price"), "%05.2f"));
+            this.ftWeight.setValue(rs.getInt("WeightInPounds"));
+//            this.ftRoastDate.setValue(Utility.sqlDateToString(rs.getDate("RoastStart"), "MM/dd/yyyy"));
+//            this.ftStartTime.setValue(Utility.sqlDateToString(rs.getDate("RoastStart"), "HH:mm:ss"));
+//            // this.ftChargeTemp.setText(rs.getString("ChargeTemp"));
+//            this.ftGreenWeight.setValue(Utility.sqlFloatToString(rs.getFloat("GreenWeight"), "%05.1f"));
+//            this.ftRoastedWeight.setValue(Utility.sqlFloatToString(rs.getFloat("RoastedWeight"), "%05.1f"));
+//            this.ftDryEnd.setValue(Utility.sqlDateToString(rs.getDate("DryTime"), "HH:mm:ss"));
+//            this.ftFcStart.setValue(Utility.sqlDateToString(rs.getDate("FirstCrackStart"), "HH:mm:ss"));
+//            this.ftFcEnd.setValue(Utility.sqlDateToString(rs.getDate("FirstCrackEnd"), "HH:mm:ss"));
+//            this.ftEndRoast.setValue(Utility.sqlDateToString(rs.getDate("EndRoast"), "HH:mm:ss"));
+//            this.textAreaRoastNotes.setText(rs.getString("RoastNotes"));
+//            this.textAreaTastingNotes.setText(rs.getString("TastingNotes"));
+
+        } catch (Exception e) {
+            Logger.getLogger(RoastLogEdit.class.getName()).log(Level.SEVERE, e.getMessage());
+        }
+    }
+
+    
+    public void setBeanId(String editBeanId) {
+       this.beanId = editBeanId;
+       
+       this.loadData(this.beanId);
+    }
+    /**
      * @param args the command line arguments
      */
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -184,19 +487,43 @@ public class BeanEdit extends javax.swing.JDialog {
         });
     }
 
+    private String beanId;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JCheckBox checkboxAnaerobic;
+    private javax.swing.JCheckBox checkboxInStock;
+    private javax.swing.JComboBox<String> comboProcess;
+    private javax.swing.JFormattedTextField ftDensityGrams;
+    private javax.swing.JFormattedTextField ftPrice;
+    private javax.swing.JFormattedTextField ftWeight;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel labelAltitude;
+    private javax.swing.JLabel labelAnaerobic;
+    private javax.swing.JLabel labelBean;
+    private javax.swing.JLabel labelComments;
+    private javax.swing.JLabel labelDensity;
+    private javax.swing.JLabel labelDensityGrams;
+    private javax.swing.JLabel labelGrindSetting;
+    private javax.swing.JLabel labelInStock;
+    private javax.swing.JLabel labelOrigin;
+    private javax.swing.JLabel labelPrice;
+    private javax.swing.JLabel labelPricePerPound;
+    private javax.swing.JLabel labelProcess;
+    private javax.swing.JLabel labelVariety;
+    private javax.swing.JLabel labelVendor;
+    private javax.swing.JLabel labelWeight;
+    private javax.swing.JPanel panelButtons;
+    private javax.swing.JPanel panelDetails;
+    private javax.swing.JTextField textAltitude;
+    private javax.swing.JTextArea textAreaComments;
+    private javax.swing.JTextField textBean;
+    private javax.swing.JTextField textGrindSetting;
+    private javax.swing.JTextField textOrigin;
+    private javax.swing.JTextField textPricePerPound;
+    private javax.swing.JTextField textVariety;
+    private javax.swing.JTextField textVendor;
     // End of variables declaration//GEN-END:variables
 }

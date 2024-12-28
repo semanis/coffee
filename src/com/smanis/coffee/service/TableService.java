@@ -356,44 +356,7 @@ public class TableService {
         col.setMaxWidth(0);
     }
 
-//    public void setColumnWidthsBeans(JTable table) {
-//        this.setColumnWidth(table, "Name", 385);
-//        this.setColumnWidth(table, "Origin", 420);
-//        this.setColumnWidth(table, "Altitude", 150);
-//        this.setColumnWidth(table, "Process Method", 155);
-//        this.setColumnWidth(table, "Density Grams", 145);
-//        this.setColumnWidth(table, "Density", 76);
-//        this.setColumnWidth(table, "Grind Setting", 125);
-//        this.setColumnWidth(table, "Anaerobic?", 130);
-//        this.setColumnWidth(table, "In Stock?", 130);
-//    }
-    /**
-     * Sets sane default widths for all data columns. The user can still drag
-     * columns around but none of those changes are currently (I'm lazy,
-     * remember?) being written to application Preferences and restored on load.
-     *
-     * @param table A reference to the Roast Log Jtable.
-     */
-//    public void setColumnWidthsRoastLog(JTable table) {
-//        this.setColumnWidth(table, "Name", 385);
-//        this.setColumnWidth(table, "Density", 100);
-//        this.setColumnWidth(table, "Roast Level", 270);
-//        this.setColumnWidth(table, "Green Weight", 160);
-//        this.setColumnWidth(table, "Roasted Weight", 170);
-//        this.setColumnWidth(table, "Moisture Loss Percentage", 170);
-//        this.setColumnWidth(table, "Total Roast Time", 150);
-//        this.setColumnWidth(table, "Roast Start", 200);
-//        //this.setColumnWidth(table, "Charge Temp", 120);
-//        this.setColumnWidth(table, "Difference (g)", 130);
-//        this.setColumnWidth(table, "Moisture Loss %", 145);
-//        this.setColumnWidth(table, "Dry Time", 190);
-//        this.setColumnWidth(table, "FC Start", 190);
-//        this.setColumnWidth(table, "FC End", 190);
-//        this.setColumnWidth(table, "End Roast", 180);
-//        this.setColumnWidth(table, "Total Dry Time", 180);
-//        this.setColumnWidth(table, "Total FC Time", 180);
-//        this.setColumnWidth(table, "Total Dev. Time", 180);
-//    }
+
     /**
      * The actual implementation of the logic to set a column's width.
      *
@@ -403,12 +366,12 @@ public class TableService {
      *
      * @param width The desired column width sort/kinda in pixelcount.
      */
-    private void setColumnWidth(JTable table, String columnName, int width) {
-        TableColumn col = table.getColumn(columnName);
-        col.setPreferredWidth(width);
-        col.setMinWidth(width);
-        col.setWidth(width);
-    }
+//    private void setColumnWidth(JTable table, String columnName, int width) {
+//        TableColumn col = table.getColumn(columnName);
+//        col.setPreferredWidth(width);
+//        col.setMinWidth(width);
+//        col.setWidth(width);
+//    }
 
     public void setupTableBeans(JTable table) {
         TableService.getInstance().hideColumnsBeans(table);
@@ -426,12 +389,6 @@ public class TableService {
 
         IconTableCellRenderer iconRenderer = new IconTableCellRenderer();
         iconRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-
-        TableColumnModel colModel = table.getColumnModel();
-        int colCount = colModel.getColumnCount();
-        for (int i = 0; i < colCount; i++) {
-            System.out.println("index " + i + " - " + colModel.getColumn(i).getIdentifier());
-        }
 
         table.getColumnModel().getColumn(getColumnIndex("Beans", "In Stock")).setCellRenderer(iconRenderer);
         table.getColumnModel().getColumn(getColumnIndex("Beans", "Anaerobic")).setCellRenderer(iconRenderer);

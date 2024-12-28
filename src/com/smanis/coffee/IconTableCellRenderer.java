@@ -16,10 +16,15 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class IconTableCellRenderer extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        Integer val = (Integer)value;
+        Integer val = null;
+        
+        if(value instanceof Integer && value != null) {
+            val = (Integer)value;
+        }
+        
         ImageIcon icon = null;
         
-        setIcon(val == 0 ? null : new ImageIcon(IconTableCellRenderer.class.getResource("/com/smanis/coffee/assets/checkmark.png")));
+        setIcon(val == null || val == 0 ? null : new ImageIcon(IconTableCellRenderer.class.getResource("/com/smanis/coffee/assets/checkmark.png")));
         setText(null);
 
         value = null;
