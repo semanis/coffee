@@ -20,6 +20,11 @@ public class Main {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 try {
+                    
+                    
+                    // System.out.println(String.format("%d", 0));
+                    
+                    
                     setUIFont(new FontUIResource(new Font("Liberation Sans", Font.PLAIN, 20)));
                     
                     // If a look and feel was saved to preferences, restore the look and feel.

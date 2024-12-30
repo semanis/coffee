@@ -99,10 +99,10 @@ public final class DataService {
 
     public ResultSet getBeanById(String beanId) throws Exception {
         String sql = this.getSql("getBeanById");
-        
+
         PreparedStatement ps = this.getConnection().prepareStatement(sql);
         ps.setString(1, beanId);
-        
+
         ResultSet rs = ps.executeQuery();
         ps.close();
 
@@ -145,6 +145,60 @@ public final class DataService {
         ps.close();
 
         return rs;
+    }
+
+    public void insertBean(HashMap map) throws Exception {
+        String query = this.getSql("insertBean");
+        PreparedStatement ps = this.getConnection().prepareStatement(query);
+
+        ps.setString(1, (String) map.get("Name"));
+        ps.setString(2, (String) map.get("Vendor"));
+        ps.setString(3, (String) map.get("ProcessMethod"));
+        ps.setFloat(4, (float) map.get("Price"));
+        ps.setInt(5, Integer.valueOf((String)map.get("WeightInPounds")));
+        ps.setString(6, (String) map.get("Origin"));
+        ps.setString(7, (String) map.get("Variety"));
+        ps.setString(8, (String) map.get("Altitude"));
+        ps.setFloat(9, (float) map.get("DensityGrams"));
+        ps.setInt(10, (int) map.get("Anaerobic"));
+        ps.setInt(11, (int) map.get("InStock"));
+        ps.setString(12, (String) map.get("GrindSetting"));
+        ps.setString(13, (String) map.get("Comments"));
+
+        int insertCount = ps.executeUpdate();
+
+        ps.close();
+    }
+                
+                
+    public void updateBean(HashMap map) throws Exception {
+        String query = this.getSql("updateBean");
+        PreparedStatement ps = this.getConnection().prepareStatement(query);
+
+        ps.setString(1, (String) map.get("Name"));
+        ps.setString(2, (String) map.get("Vendor"));
+        ps.setString(3, (String) map.get("ProcessMethod"));
+        ps.setFloat(4, (float) map.get("Price"));
+
+        Integer weight = (Integer)map.get("WeightInPounds");
+        if (weight == null) {
+            weight = Integer.valueOf(0);
+        }
+        ps.setInt(5, weight);
+        
+        ps.setString(6, (String) map.get("Origin"));
+        ps.setString(7, (String) map.get("Variety"));
+        ps.setString(8, (String) map.get("Altitude"));
+        ps.setFloat(9, (float) map.get("DensityGrams"));
+        ps.setInt(10, (int) map.get("Anaerobic"));
+        ps.setInt(11, (int) map.get("InStock"));
+        ps.setString(12, (String) map.get("GrindSetting"));
+        ps.setString(13, (String) map.get("Comments"));
+        ps.setString(14, (String)map.get("Id"));
+
+        int updateCount = ps.executeUpdate();
+
+        ps.close();
     }
 
     public void insertRoastLog(HashMap map) throws Exception {
@@ -205,20 +259,20 @@ public final class DataService {
                         + "ORDER BY Name";
                 break;
 
-            case "getBeans":
-                query = "SELECT "
-                        + "Id, Name, Vendor, Price, WeightInPounds, PricePerPound, Origin, Variety, Altitude, ProcessMethod, "
-                        + "DensityGrams, Density, Anaerobic, InStock, GrindSetting, Comments "
-                        + "FROM Beans "
-                        + "ORDER BY InStock DESC, Name ASC";
-                break;
-
             case "getBeanById":
                 query = "SELECT "
-                        + "Id, Name, Vendor, Price, WeightInPounds, PricePerPound, Origin, Variety, Altitude, ProcessMethod, "
+                        + "Id, Name, Vendor, ProcessMethod, Price, WeightInPounds, PricePerPound, Origin, Variety, Altitude, "
                         + "DensityGrams, Density, Anaerobic, InStock, GrindSetting, Comments "
                         + "FROM Beans "
                         + "WHERE Id = ?";
+                break;
+
+            case "getBeans":
+                query = "SELECT "
+                        + "Id, Name, Vendor, ProcessMethod, Price, WeightInPounds, PricePerPound, Origin, Variety, Altitude, "
+                        + "DensityGrams, Density, Anaerobic, InStock, GrindSetting, Comments "
+                        + "FROM Beans "
+                        + "ORDER BY Names";
                 break;
 
             case "getRoastLogs":
@@ -246,6 +300,22 @@ public final class DataService {
                         + "r.GreenWeight, r.RoastedWeight, r.ChargeTemp, b.Density, r.RoastNotes, r.TastingNotes "
                         + "FROM RoastLog r, Beans b "
                         + "WHERE r.Id = ?";
+                break;
+
+            case "insertBean":
+                query = "INSERT INTO Beans "
+                        + "SET " 
+                        + "Name = ?, Vendor = ?, ProcessMethod = ?, Price = ?, WeightInPounds = ?, "
+                        + "Origin = ?, Variety = ?, Altitude = ?, DensityGrams  = ?, "
+                        + "Anaerobic = ?, InStock = ?, GrindSetting = ?, Comments = ?";
+                break;
+
+            case "updateBean":
+                query = "UPDATE Beans "
+                        + "SET Name = ?, Vendor = ?, ProcessMethod = ?, Price = ?, WeightInPounds = ?, "
+                        + "Origin = ?, Variety = ?, Altitude = ?, DensityGrams  = ?, "
+                        + "Anaerobic = ?, InStock = ?, GrindSetting = ?, Comments = ? " 
+                        + "Where Id = ?";
                 break;
 
             case "insertRoastLog":

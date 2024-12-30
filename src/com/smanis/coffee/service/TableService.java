@@ -25,7 +25,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 /**
@@ -232,19 +231,19 @@ public class TableService {
                 // Be sure you add the data in the same order as the columns are set in getColumnsBeans() above.
                 data.add(rs.getString("Id"));
                 data.add(rs.getString("Name"));
+                data.add(rs.getString("Vendor"));
+                data.add(rs.getString("ProcessMethod"));
+                data.add(rs.getFloat("Price"));
+                data.add(rs.getInt("WeightInPounds"));
+                data.add(rs.getFloat("PricePerPound"));
                 data.add(rs.getString("Origin"));
                 data.add(rs.getString("Variety"));
                 data.add(rs.getString("Altitude"));
-                data.add(rs.getString("ProcessMethod"));
-                data.add(rs.getString("Vendor"));
-                data.add(rs.getInt("WeightInPounds"));
-                data.add(rs.getFloat("Price"));
-                data.add(rs.getFloat("PricePerPound"));
                 data.add(rs.getFloat("DensityGrams"));
                 data.add(rs.getFloat("Density"));
-                data.add(rs.getString("GrindSetting"));
                 data.add(rs.getInt("Anaerobic"));
                 data.add(rs.getInt("InStock"));
+                data.add(rs.getString("GrindSetting"));
                 data.add(rs.getString("Comments"));
                 
                 tableData.add(data);

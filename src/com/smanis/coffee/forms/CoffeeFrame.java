@@ -10,6 +10,7 @@ import com.smanis.coffee.models.BeanModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import javax.swing.AbstractAction;
 import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -60,7 +61,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         textRoastNotes = new javax.swing.JTextArea();
         jScrollPane7 = new javax.swing.JScrollPane();
         textTastingNotes = new javax.swing.JTextArea();
-        panelButtons = new javax.swing.JPanel();
+        panelButtonsRoastLog = new javax.swing.JPanel();
         btnAddRoastLog = new javax.swing.JButton();
         btnEditRoastLog = new javax.swing.JButton();
         btnDeleteRoastLog = new javax.swing.JButton();
@@ -70,6 +71,10 @@ public class CoffeeFrame extends javax.swing.JFrame {
         panelComments = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         textAreaComments = new javax.swing.JTextArea();
+        panelButtonsBean = new javax.swing.JPanel();
+        btnAddBean = new javax.swing.JButton();
+        btnEditBean = new javax.swing.JButton();
+        btnDeleteBean = new javax.swing.JButton();
         panelPurchases = new javax.swing.JPanel();
         buttonExit = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
@@ -236,7 +241,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         gridBagConstraints.weighty = 1.0;
         panelRoastTable.add(panelRoastLogTable, gridBagConstraints);
 
-        panelButtons.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
+        panelButtonsRoastLog.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
 
         btnAddRoastLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/addSmall.png"))); // NOI18N
         btnAddRoastLog.setMnemonic('a');
@@ -249,7 +254,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
                 btnAddRoastLogActionPerformed(evt);
             }
         });
-        panelButtons.add(btnAddRoastLog);
+        panelButtonsRoastLog.add(btnAddRoastLog);
 
         btnEditRoastLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/editSmall.png"))); // NOI18N
         btnEditRoastLog.setMnemonic('e');
@@ -262,7 +267,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
                 btnEditRoastLogActionPerformed(evt);
             }
         });
-        panelButtons.add(btnEditRoastLog);
+        panelButtonsRoastLog.add(btnEditRoastLog);
 
         btnDeleteRoastLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/deleteSmall.png"))); // NOI18N
         btnDeleteRoastLog.setMnemonic('d');
@@ -272,7 +277,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
                 btnDeleteRoastLogActionPerformed(evt);
             }
         });
-        panelButtons.add(btnDeleteRoastLog);
+        panelButtonsRoastLog.add(btnDeleteRoastLog);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -280,7 +285,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        panelRoastTable.add(panelButtons, gridBagConstraints);
+        panelRoastTable.add(panelButtonsRoastLog, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -296,9 +301,21 @@ public class CoffeeFrame extends javax.swing.JFrame {
         panelBeans.setLayout(new java.awt.GridBagLayout());
 
         tableBeans.setModel(TableService.getInstance().getTableModelBeans());
+        tableBeans.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableBeansMouseClicked(evt);
+            }
+        });
+        tableBeans.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tableBeansKeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tableBeans);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
@@ -324,12 +341,58 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 0.5;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelBeans.add(panelComments, gridBagConstraints);
+
+        panelButtonsBean.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
+
+        btnAddBean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/addSmall.png"))); // NOI18N
+        btnAddBean.setMnemonic('a');
+        btnAddBean.setText("Add");
+        btnAddBean.setMaximumSize(new java.awt.Dimension(121, 34));
+        btnAddBean.setMinimumSize(new java.awt.Dimension(121, 34));
+        btnAddBean.setPreferredSize(new java.awt.Dimension(121, 34));
+        btnAddBean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddBeanActionPerformed(evt);
+            }
+        });
+        panelButtonsBean.add(btnAddBean);
+
+        btnEditBean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/editSmall.png"))); // NOI18N
+        btnEditBean.setMnemonic('e');
+        btnEditBean.setText("Edit");
+        btnEditBean.setMaximumSize(new java.awt.Dimension(121, 34));
+        btnEditBean.setMinimumSize(new java.awt.Dimension(121, 34));
+        btnEditBean.setPreferredSize(new java.awt.Dimension(121, 34));
+        btnEditBean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditBeanActionPerformed(evt);
+            }
+        });
+        panelButtonsBean.add(btnEditBean);
+
+        btnDeleteBean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/deleteSmall.png"))); // NOI18N
+        btnDeleteBean.setMnemonic('d');
+        btnDeleteBean.setText("Delete");
+        btnDeleteBean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteBeanActionPerformed(evt);
+            }
+        });
+        panelButtonsBean.add(btnDeleteBean);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        panelBeans.add(panelButtonsBean, gridBagConstraints);
 
         tabbedPanel.addTab("    Beans    ", panelBeans);
         tabbedPanel.addTab(" Bean Purchases ", panelPurchases);
@@ -521,12 +584,12 @@ public class CoffeeFrame extends javax.swing.JFrame {
         RoastLogEdit rle = new com.smanis.coffee.forms.RoastLogEdit(this, true);
         rle.setRoastLogId(roastLogId);
         rle.setVisible(true);
-        
+
         if (rle.wasUpdated == true) {
             this.refreshRoastLogTable();
             this.tableRoasts.setRowSelectionInterval(selectedRow, selectedRow);
         }
-        
+
         rle.dispose();
     }//GEN-LAST:event_btnEditRoastLogActionPerformed
 
@@ -537,7 +600,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         if (rle.wasInserted == true) {
             this.refreshRoastLogTable();
         }
-        
+
         rle.dispose();
 
     }//GEN-LAST:event_btnAddRoastLogActionPerformed
@@ -593,10 +656,53 @@ public class CoffeeFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_listBeansKeyPressed
 
+    private void tableBeansMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBeansMouseClicked
+        // on double-click of a row,  open the editing dialog.
+        if (evt.getClickCount() == 2) {
+            this.editBean();
+        }
+
+    }//GEN-LAST:event_tableBeansMouseClicked
+
+    private void btnAddBeanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBeanActionPerformed
+
+    }//GEN-LAST:event_btnAddBeanActionPerformed
+
+    private void btnEditBeanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditBeanActionPerformed
+        this.editBean();
+    }//GEN-LAST:event_btnEditBeanActionPerformed
+
+    private void btnDeleteBeanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteBeanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteBeanActionPerformed
+
+    private void tableBeansKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableBeansKeyPressed
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+
+            this.editBean();
+        }
+    }//GEN-LAST:event_tableBeansKeyPressed
+
+    private void editBean() {
+        int selectedRow = this.tableBeans.getSelectedRow();
+
+        String beanId = (String) this.tableBeans.getModel().getValueAt(selectedRow, 0); // Id is always column zero.
+
+        BeanEdit dialog = new com.smanis.coffee.forms.BeanEdit(this, true);
+
+        dialog.setBeanId(beanId);
+        dialog.setVisible(true);
+
+        if (dialog.wasPersisted == true) {
+            this.refreshBeanTable();
+            this.tableBeans.setRowSelectionInterval(selectedRow, selectedRow);
+        }
+    }
+
     private void editRoastLog(NonEditableTableModel model, int tableRow) {
         String roastLogId = (String) model.getValueAt(tableRow, 0);
 
-        RoastLogEdit rle = new com.smanis.coffee.forms.RoastLogEdit(this, false);
+        RoastLogEdit rle = new com.smanis.coffee.forms.RoastLogEdit(this, true);
         rle.setRoastLogId(roastLogId); // set the roast log Id to be edited.
         rle.setVisible(true);
 
@@ -611,9 +717,18 @@ public class CoffeeFrame extends javax.swing.JFrame {
         this.textTastingNotes.setText((String) model.getValueAt(tableRow, TableService.getInstance().getColumnIndex("RoastLog", "Tasting Notes")));
     }
 
+    private void refreshBeanTable() {
+        // Populate the roast log table for the specified bean ID.
+        NonEditableTableModel model = TableService.getInstance().getTableModelBeans();
+        this.tableBeans.setModel(model);
+
+        // General table layout stuff, column widths, hidden columns, etc.
+        TableService.getInstance().setupTableBeans(this.tableBeans);
+    }
+
     private void refreshRoastLogTable() {
         int currentIndex = this.listBeans.getSelectedIndex();
-        
+
         // Get the first bean ID from the bean selection combobox.
         DefaultListModel listModel = (DefaultListModel) this.listBeans.getModel();
         BeanModel beanModel = (BeanModel) listModel.getElementAt(currentIndex);
@@ -626,7 +741,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
         // General table layout stuff, column widths, hidden columns, etc.
         TableService.getInstance().setupTableRoastLog(this.tableRoasts, this.textRoastNotes, this.textTastingNotes);
-        
+
         this.listBeans.setSelectedIndex(currentIndex);
     }
 
@@ -634,8 +749,6 @@ public class CoffeeFrame extends javax.swing.JFrame {
         try {
             JRootPane jrp = this.getRootPane();
 
-            // activates the default button on a particular key press..
-            //jrp.setDefaultButton(this.buttonExit);
             // register an action listener on the Escape key which performs a click
             // of the Exit button.
             ActionListener actionListener = new ActionListener() {
@@ -651,6 +764,14 @@ public class CoffeeFrame extends javax.swing.JFrame {
             KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
             jrp.registerKeyboardAction(actionListener, stroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
 
+            this.tableBeans.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "Enter");
+            this.tableBeans.getActionMap().put("Enter", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    // This prevents the default action of navigating down on press of ENTER.
+                }
+            });
+
             // Load up the window preferences, which restores the size/location of the window.
             AppPreferences.loadWindowPreferences(this);
 
@@ -659,14 +780,12 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
             // Load up the Roast Log JTable with the selected bean.
             this.refreshRoastLogTable();
-            
+
             // General table layout stuff, column widths, hidden columns, etc.
             TableService.getInstance().setupTableBeans(this.tableBeans);
 
-
         } catch (Exception e) {
-            System.out.println("initOther! " + e.getMessage() + " " + " " + e.getClass());
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "CoffeeFrame.initOther() " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         this.tableRoasts.requestFocus();
@@ -677,8 +796,11 @@ public class CoffeeFrame extends javax.swing.JFrame {
     //protected DefaultTableModel tableModel = new DefaultTableModel();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddBean;
     private javax.swing.JButton btnAddRoastLog;
+    private javax.swing.JButton btnDeleteBean;
     private javax.swing.JButton btnDeleteRoastLog;
+    private javax.swing.JButton btnEditBean;
     private javax.swing.JButton btnEditRoastLog;
     private javax.swing.JButton buttonExit;
     private javax.swing.JLabel jLabel1;
@@ -705,7 +827,8 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JMenu menuLookAndFeel;
     private javax.swing.JMenu menuView;
     private javax.swing.JPanel panelBeans;
-    private javax.swing.JPanel panelButtons;
+    private javax.swing.JPanel panelButtonsBean;
+    private javax.swing.JPanel panelButtonsRoastLog;
     private javax.swing.JPanel panelComments;
     private javax.swing.JPanel panelNotes;
     private javax.swing.JPanel panelPurchases;
