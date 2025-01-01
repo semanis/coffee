@@ -56,10 +56,10 @@ public class CoffeeFrame extends javax.swing.JFrame {
         tableRoasts = new javax.swing.JTable();
         panelNotes = new javax.swing.JPanel();
         labelRoastNotes = new javax.swing.JLabel();
-        labelTastingNotes = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
         textRoastNotes = new javax.swing.JTextArea();
-        jScrollPane7 = new javax.swing.JScrollPane();
+        labelTastingNotes = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
         textTastingNotes = new javax.swing.JTextArea();
         panelButtonsRoastLog = new javax.swing.JPanel();
         btnAddRoastLog = new javax.swing.JButton();
@@ -68,9 +68,6 @@ public class CoffeeFrame extends javax.swing.JFrame {
         panelBeans = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableBeans = new javax.swing.JTable();
-        panelComments = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        textAreaComments = new javax.swing.JTextArea();
         panelButtonsBean = new javax.swing.JPanel();
         btnAddBean = new javax.swing.JButton();
         btnEditBean = new javax.swing.JButton();
@@ -107,9 +104,14 @@ public class CoffeeFrame extends javax.swing.JFrame {
         panelRoastTable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         panelRoastTable.setLayout(new java.awt.GridBagLayout());
 
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(403, 3));
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(403, 300));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(403, 300));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(403, 300));
 
         listBeans.setModel(TableService.getInstance().getListModelBeans()  );
+        listBeans.setMaximumSize(new java.awt.Dimension(400, 500));
+        listBeans.setMinimumSize(new java.awt.Dimension(400, 500));
+        listBeans.setPreferredSize(new java.awt.Dimension(400, 500));
         listBeans.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listBeansMouseClicked(evt);
@@ -123,7 +125,9 @@ public class CoffeeFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(listBeans);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -138,6 +142,8 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
         textDensity.setText("  ");
         textDensity.setFocusable(false);
+        textDensity.setMaximumSize(new java.awt.Dimension(77, 26));
+        textDensity.setMinimumSize(new java.awt.Dimension(77, 26));
         textDensity.setPreferredSize(new java.awt.Dimension(77, 26));
         panelTableHeader.add(textDensity);
 
@@ -148,6 +154,9 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
         scrollPaneRoasts.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPaneRoasts.setAutoscrolls(true);
+        scrollPaneRoasts.setMaximumSize(new java.awt.Dimension(800, 800));
+        scrollPaneRoasts.setMinimumSize(new java.awt.Dimension(800, 800));
+        scrollPaneRoasts.setPreferredSize(new java.awt.Dimension(800, 800));
 
         tableRoasts.setAutoCreateRowSorter(true);
         tableRoasts.setModel(new DefaultTableModel());
@@ -177,64 +186,52 @@ public class CoffeeFrame extends javax.swing.JFrame {
         panelRoastLogTable.add(scrollPaneRoasts, gridBagConstraints);
 
         panelNotes.setBorder(javax.swing.BorderFactory.createTitledBorder(" Notes "));
-        panelNotes.setLayout(new java.awt.GridBagLayout());
+        panelNotes.setMinimumSize(new java.awt.Dimension(800, 550));
+        panelNotes.setPreferredSize(new java.awt.Dimension(800, 550));
+        panelNotes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labelRoastNotes.setText("Roasting");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        panelNotes.add(labelRoastNotes, gridBagConstraints);
+        panelNotes.add(labelRoastNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 34, -1, -1));
 
-        labelTastingNotes.setText("Tasting");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-        panelNotes.add(labelTastingNotes, gridBagConstraints);
+        jScrollPane4.setMaximumSize(new java.awt.Dimension(343, 113));
+        jScrollPane4.setMinimumSize(new java.awt.Dimension(343, 200));
+        jScrollPane4.setPreferredSize(new java.awt.Dimension(343, 200));
 
-        textRoastNotes.setEditable(false);
         textRoastNotes.setColumns(20);
         textRoastNotes.setRows(5);
-        jScrollPane6.setViewportView(textRoastNotes);
+        textRoastNotes.setWrapStyleWord(true);
+        textRoastNotes.setEnabled(false);
+        jScrollPane4.setViewportView(textRoastNotes);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        panelNotes.add(jScrollPane6, gridBagConstraints);
+        panelNotes.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 360, 220));
 
-        textTastingNotes.setEditable(false);
+        labelTastingNotes.setText("Tasting");
+        panelNotes.add(labelTastingNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
+
+        jScrollPane5.setMaximumSize(new java.awt.Dimension(343, 113));
+        jScrollPane5.setMinimumSize(new java.awt.Dimension(343, 200));
+        jScrollPane5.setPreferredSize(new java.awt.Dimension(343, 200));
+
         textTastingNotes.setColumns(20);
         textTastingNotes.setRows(5);
-        jScrollPane7.setViewportView(textTastingNotes);
+        textTastingNotes.setWrapStyleWord(true);
+        textTastingNotes.setEnabled(false);
+        jScrollPane5.setViewportView(textTastingNotes);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        panelNotes.add(jScrollPane7, gridBagConstraints);
+        panelNotes.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 370, 220));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 0.4;
+        gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelRoastLogTable.add(panelNotes, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
@@ -289,11 +286,12 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 0.5;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         panelRoastLogs.add(panelRoastTable, gridBagConstraints);
 
         tabbedPanel.addTab(" Roast Logs ", panelRoastLogs);
@@ -322,32 +320,6 @@ public class CoffeeFrame extends javax.swing.JFrame {
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         panelBeans.add(jScrollPane2, gridBagConstraints);
-
-        panelComments.setBorder(javax.swing.BorderFactory.createTitledBorder(" Comments "));
-        panelComments.setLayout(new java.awt.GridBagLayout());
-
-        textAreaComments.setColumns(20);
-        textAreaComments.setRows(5);
-        jScrollPane5.setViewportView(textAreaComments);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 0.5;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        panelComments.add(jScrollPane5, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 0.5;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        panelBeans.add(panelComments, gridBagConstraints);
 
         panelButtonsBean.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
 
@@ -665,7 +637,13 @@ public class CoffeeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_tableBeansMouseClicked
 
     private void btnAddBeanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBeanActionPerformed
+        BeanEdit dialog = new com.smanis.coffee.forms.BeanEdit(this, true);
+        dialog.setVisible(true);
 
+        if (dialog.wasPersisted == true) {
+            this.refreshBeanTable();
+            this.tableBeans.setRowSelectionInterval(0, 0);
+        }
     }//GEN-LAST:event_btnAddBeanActionPerformed
 
     private void btnEditBeanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditBeanActionPerformed
@@ -673,12 +651,31 @@ public class CoffeeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditBeanActionPerformed
 
     private void btnDeleteBeanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteBeanActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = this.tableBeans.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a Bean to delete.");
+            return;
+        }
+
+        NonEditableTableModel model = (NonEditableTableModel) this.tableBeans.getModel();
+        String beanId = (String) model.getValueAt(selectedRow, 0);
+        String beanName = (String)model.getValueAt(selectedRow, TableService.getInstance().getColumnIndex("Beans", "Name"));
+
+        if (JOptionPane.showConfirmDialog(this, "Delete Bean '" + beanName + "'?", "Confirm Delete", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.CANCEL_OPTION) {
+            return;
+        }
+
+        try {
+            TableService.getInstance().deleteBean(beanId);
+            this.refreshBeanTable();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnDeleteBeanActionPerformed
 
     private void tableBeansKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableBeansKeyPressed
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
-
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             this.editBean();
         }
     }//GEN-LAST:event_tableBeansKeyPressed
@@ -764,11 +761,11 @@ public class CoffeeFrame extends javax.swing.JFrame {
             KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
             jrp.registerKeyboardAction(actionListener, stroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
 
+            // This prevents the default action of navigating down on press of ENTER.
             this.tableBeans.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "Enter");
             this.tableBeans.getActionMap().put("Enter", new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    // This prevents the default action of navigating down on press of ENTER.
                 }
             });
 
@@ -783,9 +780,9 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
             // General table layout stuff, column widths, hidden columns, etc.
             TableService.getInstance().setupTableBeans(this.tableBeans);
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "CoffeeFrame.initOther() " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
 
         this.tableRoasts.requestFocus();
@@ -806,9 +803,8 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JLabel labelRoastNotes;
     private javax.swing.JLabel labelTastingNotes;
@@ -829,7 +825,6 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JPanel panelBeans;
     private javax.swing.JPanel panelButtonsBean;
     private javax.swing.JPanel panelButtonsRoastLog;
-    private javax.swing.JPanel panelComments;
     private javax.swing.JPanel panelNotes;
     private javax.swing.JPanel panelPurchases;
     private javax.swing.JPanel panelRoastLogTable;
@@ -840,7 +835,6 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabbedPanel;
     private javax.swing.JTable tableBeans;
     private javax.swing.JTable tableRoasts;
-    private javax.swing.JTextArea textAreaComments;
     private javax.swing.JTextField textDensity;
     private javax.swing.JTextArea textRoastNotes;
     private javax.swing.JTextArea textTastingNotes;

@@ -50,9 +50,9 @@ public class BeanEdit extends javax.swing.JDialog {
         labelVendor = new javax.swing.JLabel();
         textVendor = new javax.swing.JTextField();
         labelPrice = new javax.swing.JLabel();
-        ftPrice = new javax.swing.JFormattedTextField();
+        textPrice = new javax.swing.JTextField();
         labelWeightInPounds = new javax.swing.JLabel();
-        ftWeightInPounds = new javax.swing.JFormattedTextField();
+        textWeightInPounds = new javax.swing.JTextField();
         labelPricePerPound = new javax.swing.JLabel();
         textPricePerPound = new javax.swing.JTextField();
         labelOrigin = new javax.swing.JLabel();
@@ -62,7 +62,7 @@ public class BeanEdit extends javax.swing.JDialog {
         labelProcess = new javax.swing.JLabel();
         comboProcess = new javax.swing.JComboBox<>();
         labelDensityGrams = new javax.swing.JLabel();
-        ftDensityGrams = new JFormattedTextField(Utility.createMaskFormatter("###.#"));
+        textDensityGrams = new javax.swing.JTextField();
         labelDensity = new javax.swing.JLabel();
         textDensity = new javax.swing.JTextField();
         labelAnaerobic = new javax.swing.JLabel();
@@ -143,17 +143,14 @@ public class BeanEdit extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelPrice, gridBagConstraints);
 
-        ftPrice.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("##.##")));
-        ftPrice.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        ftPrice.setMaximumSize(new java.awt.Dimension(90, 26));
-        ftPrice.setMinimumSize(new java.awt.Dimension(90, 26));
-        ftPrice.setPreferredSize(new java.awt.Dimension(90, 26));
+        textPrice.setMinimumSize(new java.awt.Dimension(80, 26));
+        textPrice.setPreferredSize(new java.awt.Dimension(80, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
-        panelDetails.add(ftPrice, gridBagConstraints);
+        panelDetails.add(textPrice, gridBagConstraints);
 
         labelWeightInPounds.setText("Weight (lbs)");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -163,16 +160,14 @@ public class BeanEdit extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelWeightInPounds, gridBagConstraints);
 
-        ftWeightInPounds.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-        ftWeightInPounds.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        ftWeightInPounds.setMaximumSize(new java.awt.Dimension(80, 26));
-        ftWeightInPounds.setMinimumSize(new java.awt.Dimension(80, 26));
-        ftWeightInPounds.setPreferredSize(new java.awt.Dimension(80, 26));
+        textWeightInPounds.setMinimumSize(new java.awt.Dimension(50, 26));
+        textWeightInPounds.setPreferredSize(new java.awt.Dimension(50, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
-        panelDetails.add(ftWeightInPounds, gridBagConstraints);
+        panelDetails.add(textWeightInPounds, gridBagConstraints);
 
         labelPricePerPound.setText("Price Per Pound");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -265,23 +260,14 @@ public class BeanEdit extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelDensityGrams, gridBagConstraints);
 
-        ftDensityGrams.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("###.#")));
-        ftDensityGrams.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        ftDensityGrams.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
-        ftDensityGrams.setMaximumSize(new java.awt.Dimension(75, 26));
-        ftDensityGrams.setMinimumSize(new java.awt.Dimension(75, 26));
-        ftDensityGrams.setPreferredSize(new java.awt.Dimension(75, 26));
-        ftDensityGrams.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                ftDensityGramsFocusGained(evt);
-            }
-        });
+        textDensityGrams.setMinimumSize(new java.awt.Dimension(104, 26));
+        textDensityGrams.setPreferredSize(new java.awt.Dimension(104, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
-        panelDetails.add(ftDensityGrams, gridBagConstraints);
+        panelDetails.add(textDensityGrams, gridBagConstraints);
 
         labelDensity.setText("Density");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -496,10 +482,6 @@ public class BeanEdit extends javax.swing.JDialog {
         this.textAltitude.selectAll();
     }//GEN-LAST:event_textAltitudeFocusGained
 
-    private void ftDensityGramsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftDensityGramsFocusGained
-        Utility.selectAll(this.ftDensityGrams);
-    }//GEN-LAST:event_ftDensityGramsFocusGained
-
     private void textGrindSettingFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textGrindSettingFocusGained
         textGrindSetting.selectAll();
     }//GEN-LAST:event_textGrindSettingFocusGained
@@ -535,10 +517,10 @@ public class BeanEdit extends javax.swing.JDialog {
                 this.textVendor.setText(rs.getString("Vendor"));
 
                 float price = rs.getFloat("Price");
-                String formattedPrice = (price == 0.0) ? "00.00" : Utility.sqlFloatToString(price, "%5.2f"); 
-                this.ftPrice.setValue(formattedPrice);
-                
-                this.ftWeightInPounds.setValue(rs.getInt("WeightInPounds"));
+                String formattedPrice = (price == 0.0) ? "00.00" : Utility.sqlFloatToString(price, "%5.2f");
+                this.textPrice.setText(formattedPrice);
+
+                this.textWeightInPounds.setText(String.valueOf(rs.getInt("WeightInPounds")));
                 this.textPricePerPound.setText(Utility.sqlFloatToString(rs.getFloat("PricePerPound"), "%5.2f"));
                 this.textOrigin.setText(rs.getString("Origin"));
                 this.textVariety.setText(rs.getString("Variety"));
@@ -546,8 +528,8 @@ public class BeanEdit extends javax.swing.JDialog {
                 this.comboProcess.setSelectedItem(rs.getString("ProcessMethod"));
 
                 float densityGrams = rs.getFloat("DensityGrams");
-                String formattedDensityGrams = (densityGrams == 0.0) ? "######"  : Utility.sqlFloatToString(densityGrams, "%6.2f");
-                this.ftDensityGrams.setValue(formattedDensityGrams);
+                String formattedDensityGrams = (densityGrams == 0.0) ? "000.00" : Utility.sqlFloatToString(densityGrams, "%6.2f");
+                this.textDensityGrams.setText(formattedDensityGrams);
 
                 this.textDensity.setText(Utility.sqlFloatToString(rs.getFloat("Density"), "%4.2f"));
                 this.checkboxAnaerobic.setSelected(rs.getBoolean("Anaerobic"));
@@ -572,26 +554,35 @@ public class BeanEdit extends javax.swing.JDialog {
             this.textName.requestFocus();
         }
 
-        String stringPrice = (String) this.ftPrice.getValue();
+        String stringPrice = (String) this.textPrice.getText();
         float price = 0.0f;
-
-        if (stringPrice != null) {
+        
+        if (!stringPrice.isBlank()) {
             price = Float.parseFloat(stringPrice);
         }
-        
+
         HashMap<String, Object> map = new HashMap<>();
         map.put("Name", beanName);
         map.put("Vendor", this.textVendor.getText());
         map.put("ProcessMethod", (String) this.comboProcess.getSelectedItem());
         map.put("Price", price);
-        
-        Long weight = (Long)this.ftWeightInPounds.getValue();
-        map.put("WeightInPounds", weight.intValue());
+
+        String stringWeight = this.textWeightInPounds.getText();
+        if (stringWeight.isBlank()) {
+            stringWeight = "0";
+        }
+        map.put("WeightInPounds", Integer.valueOf(stringWeight).intValue());
 
         map.put("Origin", this.textOrigin.getText());
         map.put("Variety", this.textVariety.getText());
         map.put("Altitude", this.textAltitude.getText());
-        map.put("DensityGrams", Float.valueOf((String)this.ftDensityGrams.getValue()) );
+
+        String stringDensityGrams = this.textDensityGrams.getText();
+        if (stringDensityGrams.isBlank()) {
+            stringDensityGrams = "000.00";
+        }
+
+        map.put("DensityGrams", Float.valueOf(stringDensityGrams).floatValue());
         map.put("Anaerobic", this.checkboxAnaerobic.isSelected() ? 1 : 0);
         map.put("InStock", this.checkboxInStock.isSelected() ? 1 : 0);
         map.put("GrindSetting", this.textGrindSetting.getText());
@@ -600,8 +591,7 @@ public class BeanEdit extends javax.swing.JDialog {
         try {
             if (this.beanId.equals("")) {
                 DataService.getInstance().insertBean(map);
-            }
-            else {
+            } else {
                 DataService.getInstance().updateBean(map);
             }
 
@@ -635,7 +625,7 @@ public class BeanEdit extends javax.swing.JDialog {
                 if (response != JOptionPane.OK_OPTION) {
                     return;
                 }
-                
+
                 exitForm();
             }
         };
@@ -658,9 +648,6 @@ public class BeanEdit extends javax.swing.JDialog {
     private javax.swing.JCheckBox checkboxAnaerobic;
     private javax.swing.JCheckBox checkboxInStock;
     private javax.swing.JComboBox<String> comboProcess;
-    private javax.swing.JFormattedTextField ftDensityGrams;
-    private javax.swing.JFormattedTextField ftPrice;
-    private javax.swing.JFormattedTextField ftWeightInPounds;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelAltitude;
     private javax.swing.JLabel labelAnaerobic;
@@ -682,11 +669,14 @@ public class BeanEdit extends javax.swing.JDialog {
     private javax.swing.JTextField textAltitude;
     private javax.swing.JTextArea textAreaComments;
     private javax.swing.JTextField textDensity;
+    private javax.swing.JTextField textDensityGrams;
     private javax.swing.JTextField textGrindSetting;
     private javax.swing.JTextField textName;
     private javax.swing.JTextField textOrigin;
+    private javax.swing.JTextField textPrice;
     private javax.swing.JTextField textPricePerPound;
     private javax.swing.JTextField textVariety;
     private javax.swing.JTextField textVendor;
+    private javax.swing.JTextField textWeightInPounds;
     // End of variables declaration//GEN-END:variables
 }

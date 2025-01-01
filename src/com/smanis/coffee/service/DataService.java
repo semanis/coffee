@@ -69,6 +69,15 @@ public final class DataService {
         return this.conn;
     }
 
+    public void deleteBean(String beanId) throws Exception {
+        String sql = this.getSql("deleteBeanById");
+
+        PreparedStatement ps = this.getConnection().prepareStatement(sql);
+        ps.setString(1, beanId);
+        ps.execute();
+        ps.close();
+    }
+
     public void deleteRoastLog(String roastLogId) throws Exception {
         String sql = this.getSql("deleteRoastLogById");
 
@@ -155,7 +164,7 @@ public final class DataService {
         ps.setString(2, (String) map.get("Vendor"));
         ps.setString(3, (String) map.get("ProcessMethod"));
         ps.setFloat(4, (float) map.get("Price"));
-        ps.setInt(5, Integer.valueOf((String)map.get("WeightInPounds")));
+        ps.setInt(5, (int)map.get("WeightInPounds"));
         ps.setString(6, (String) map.get("Origin"));
         ps.setString(7, (String) map.get("Variety"));
         ps.setString(8, (String) map.get("Altitude"));
@@ -246,6 +255,12 @@ public final class DataService {
         String query = "";
 
         switch (queryName) {
+            case "deleteBeanById":
+                query = "DELETE "
+                        + "FROM Beans "
+                        + "WHERE Id = ?";
+
+                break;
             case "deleteRoastLogById":
                 query = "DELETE "
                         + "FROM RoastLog "
@@ -261,18 +276,18 @@ public final class DataService {
 
             case "getBeanById":
                 query = "SELECT "
-                        + "Id, Name, Vendor, ProcessMethod, Price, WeightInPounds, PricePerPound, Origin, Variety, Altitude, "
-                        + "DensityGrams, Density, Anaerobic, InStock, GrindSetting, Comments "
+                        + "Id, InStock, Name, Density, GrindSetting, Altitude, ProcessMethod, Price, WeightInPounds, PricePerPound, Vendor, Origin, Variety, "
+                        + "DensityGrams, Anaerobic, Comments "
                         + "FROM Beans "
                         + "WHERE Id = ?";
                 break;
 
             case "getBeans":
                 query = "SELECT "
-                        + "Id, Name, Vendor, ProcessMethod, Price, WeightInPounds, PricePerPound, Origin, Variety, Altitude, "
-                        + "DensityGrams, Density, Anaerobic, InStock, GrindSetting, Comments "
+                        + "Id, InStock, Name, Density, GrindSetting, Altitude, ProcessMethod, Price, WeightInPounds, PricePerPound, Vendor, Origin, Variety, "
+                        + "DensityGrams, Anaerobic, Comments "
                         + "FROM Beans "
-                        + "ORDER BY Names";
+                        + "ORDER BY Name";
                 break;
 
             case "getRoastLogs":

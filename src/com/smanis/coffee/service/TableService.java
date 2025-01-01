@@ -24,6 +24,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
@@ -105,6 +106,10 @@ public class TableService {
 
     }
 
+    public void deleteBean(String beanId) throws Exception {
+        DataService.getInstance().deleteBean(beanId);
+    }
+    
     public void deleteRoastLog(String roastLogId) throws Exception {
         DataService.getInstance().deleteRoastLog(roastLogId);
     }
@@ -230,22 +235,22 @@ public class TableService {
 
                 // Be sure you add the data in the same order as the columns are set in getColumnsBeans() above.
                 data.add(rs.getString("Id"));
+                data.add(rs.getInt("InStock"));
                 data.add(rs.getString("Name"));
-                data.add(rs.getString("Vendor"));
+                data.add(Utility.sqlFloatToString(rs.getFloat("Density"), "%.2f"));
+                data.add(rs.getString("GrindSetting"));
+                data.add(rs.getString("Altitude"));
                 data.add(rs.getString("ProcessMethod"));
                 data.add(rs.getFloat("Price"));
                 data.add(rs.getInt("WeightInPounds"));
-                data.add(rs.getFloat("PricePerPound"));
+                data.add(Utility.sqlFloatToString(rs.getFloat("PricePerPound"), "%.2f"));
+                data.add(rs.getString("Vendor"));
                 data.add(rs.getString("Origin"));
                 data.add(rs.getString("Variety"));
-                data.add(rs.getString("Altitude"));
                 data.add(rs.getFloat("DensityGrams"));
-                data.add(rs.getFloat("Density"));
                 data.add(rs.getInt("Anaerobic"));
-                data.add(rs.getInt("InStock"));
-                data.add(rs.getString("GrindSetting"));
                 data.add(rs.getString("Comments"));
-                
+
                 tableData.add(data);
             }
 
@@ -355,7 +360,6 @@ public class TableService {
         col.setMaxWidth(0);
     }
 
-
     /**
      * The actual implementation of the logic to set a column's width.
      *
@@ -371,12 +375,11 @@ public class TableService {
 //        col.setMinWidth(width);
 //        col.setWidth(width);
 //    }
-
     public void setupTableBeans(JTable table) {
         TableService.getInstance().hideColumnsBeans(table);
 
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        table.setIntercellSpacing(new Dimension(10, 10));
+        table.setIntercellSpacing(new Dimension(20, 20));
         table.setRowHeight(40);
 
         TableModel model = table.getModel();
@@ -391,6 +394,14 @@ public class TableService {
 
         table.getColumnModel().getColumn(getColumnIndex("Beans", "In Stock")).setCellRenderer(iconRenderer);
         table.getColumnModel().getColumn(getColumnIndex("Beans", "Anaerobic")).setCellRenderer(iconRenderer);
+
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+
+        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Density")).setCellRenderer(rightRenderer);
+        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Price")).setCellRenderer(rightRenderer);
+        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Weight In Pounds")).setCellRenderer(rightRenderer);
+        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Price Per Pound")).setCellRenderer(rightRenderer);
 
         this.adjustTableColumnWidths(table);
     }
