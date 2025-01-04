@@ -1,6 +1,6 @@
 package com.smanis.coffee.service;
 
-import com.smanis.coffee.IconTableCellRenderer;
+import com.smanis.coffee.forms.IconTableCellRenderer;
 import com.smanis.coffee.models.NonEditableTableModel;
 import com.smanis.coffee.Utility;
 import com.smanis.coffee.forms.RoastLogEdit;
@@ -182,7 +182,7 @@ public class TableService {
 
             while (rs.next()) {
                 Float density = rs.getFloat("Density");
-                data.add(new BeanModel(rs.getString("Id"), rs.getString("Name"), String.format("%.2f", density)));
+                data.add(new BeanModel(rs.getString("Id"), rs.getString("Name"), String.format("%.2f", density), rs.getInt("InStock")));
             }
 
             model = new DefaultComboBoxModel(data);
@@ -203,7 +203,7 @@ public class TableService {
 
             while (rs.next()) {
                 Float density = rs.getFloat("Density");
-                model.addElement(new BeanModel(rs.getString("Id"), rs.getString("Name"), String.format("%.2f", density)));
+                model.addElement(new BeanModel(rs.getString("Id"), rs.getString("Name"), String.format("%.2f", density), rs.getInt("InStock")));
             }
 
         } catch (Exception e) {

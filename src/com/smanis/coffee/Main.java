@@ -4,6 +4,7 @@ import static com.smanis.coffee.Utility.setUIFont;
 import com.smanis.coffee.forms.CoffeeFrame;
 import com.smanis.coffee.forms.DatabaseLogin;
 import java.awt.Font;
+import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 
 /**
@@ -23,7 +24,9 @@ public class Main {
                     
                     
                     // System.out.println(String.format("%d", 0));
-                    
+                    UIManager.put("OptionPane.buttonFont", new Font("Liberation Sans", Font.PLAIN, 20));
+                    UIManager.put("OptionPane.messageFont", new Font("Liberation Sans", Font.BOLD, 20));
+                    UIManager.put("OptionPane.titleText", new Font("Liberation Sans", Font.BOLD, 20));
                     
                     setUIFont(new FontUIResource(new Font("Liberation Sans", Font.PLAIN, 20)));
                     

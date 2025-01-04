@@ -21,12 +21,17 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-101,0,0,4,-112"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-79,0,0,3,111"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="panelDetails">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="20" style="0"/>
+        </Property>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
           <GridBagConstraints gridX="0" gridY="0" gridWidth="1" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="10" insetsLeft="10" insetsBottom="10" insetsRight="10" anchor="18" weightX="1.0" weightY="1.0"/>
@@ -37,6 +42,9 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="labelName">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Bean Name"/>
           </Properties>
           <Constraints>
@@ -47,7 +55,13 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textName">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value=" "/>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[11, 28]"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="textNameFocusGained"/>
@@ -60,6 +74,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelVendor">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Vendor"/>
           </Properties>
           <Constraints>
@@ -70,14 +87,17 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textVendor">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[300, 26]"/>
+              <Dimension value="[300, 28]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[300, 26]"/>
+              <Dimension value="[300, 28]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[300, 26]"/>
+              <Dimension value="[300, 28]"/>
             </Property>
           </Properties>
           <Events>
@@ -91,6 +111,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelPrice">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Price"/>
           </Properties>
           <Constraints>
@@ -101,13 +124,20 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textPrice">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[80, 26]"/>
+              <Dimension value="[80, 28]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[80, 26]"/>
+              <Dimension value="[80, 28]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="textPriceFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="textPriceFocusLost"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="1" gridY="6" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="10" insetsBottom="10" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
@@ -116,6 +146,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelWeightInPounds">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Weight (lbs)"/>
           </Properties>
           <Constraints>
@@ -126,13 +159,19 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textWeightInPounds">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[50, 26]"/>
+              <Dimension value="[50, 28]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[50, 26]"/>
+              <Dimension value="[50, 28]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="textWeightInPoundsFocusGained"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="1" gridY="7" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="10" insetsBottom="10" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
@@ -141,6 +180,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelPricePerPound">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Price Per Pound"/>
           </Properties>
           <Constraints>
@@ -151,16 +193,19 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textPricePerPound">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value=" "/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[100, 26]"/>
+              <Dimension value="[100, 28]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[100, 26]"/>
+              <Dimension value="[100, 28]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[100, 26]"/>
+              <Dimension value="[100, 28]"/>
             </Property>
           </Properties>
           <Constraints>
@@ -171,6 +216,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelOrigin">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Origin"/>
           </Properties>
           <Constraints>
@@ -181,6 +229,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textOrigin">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value=" "/>
           </Properties>
           <Events>
@@ -194,6 +245,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelAltitude">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Alltitude"/>
           </Properties>
           <Constraints>
@@ -204,15 +258,18 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textAltitude">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value=" "/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[250, 26]"/>
+              <Dimension value="[250, 28]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[250, 26]"/>
+              <Dimension value="[250, 28]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[250, 26]"/>
+              <Dimension value="[250, 28]"/>
             </Property>
           </Properties>
           <Events>
@@ -226,6 +283,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelProcess">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Process"/>
           </Properties>
           <Constraints>
@@ -237,6 +297,9 @@
         <Component class="javax.swing.JComboBox" name="comboProcess">
           <Properties>
             <Property name="editable" type="boolean" value="true"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
                 <StringItem index="0" value="Dry"/>
@@ -257,6 +320,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelDensityGrams">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Density Grams"/>
           </Properties>
           <Constraints>
@@ -267,13 +333,19 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textDensityGrams">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[104, 26]"/>
+              <Dimension value="[104, 28]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[104, 26]"/>
+              <Dimension value="[104, 28]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="textDensityGramsFocusGained"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="1" gridY="9" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="10" insetsBottom="10" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
@@ -282,6 +354,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelDensity">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Density"/>
           </Properties>
           <Constraints>
@@ -292,17 +367,20 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textDensity">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value=" "/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[80, 26]"/>
+              <Dimension value="[80, 28]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[80, 26]"/>
+              <Dimension value="[80, 28]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[80, 26]"/>
+              <Dimension value="[80, 28]"/>
             </Property>
           </Properties>
           <Constraints>
@@ -313,6 +391,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelAnaerobic">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Anaerobic?"/>
           </Properties>
           <Constraints>
@@ -322,6 +403,20 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JCheckBox" name="checkboxAnaerobic">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[21, 28]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[21, 28]"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[21, 28]"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="1" gridY="11" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="8" insetsBottom="10" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
@@ -330,6 +425,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelVariety">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Variety"/>
           </Properties>
           <Constraints>
@@ -340,14 +438,17 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textVariety">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[400, 26]"/>
+              <Dimension value="[400, 28]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[400, 26]"/>
+              <Dimension value="[400, 28]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[400, 26]"/>
+              <Dimension value="[400, 28]"/>
             </Property>
           </Properties>
           <Events>
@@ -361,6 +462,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelInStock">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="In Stock?"/>
           </Properties>
           <Constraints>
@@ -370,6 +474,20 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JCheckBox" name="checkboxInStock">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[21, 28]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[21, 28]"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[21, 28]"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="1" gridY="12" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="8" insetsBottom="10" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
@@ -378,6 +496,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelGrindSetting">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Grind Setting"/>
           </Properties>
           <Constraints>
@@ -388,14 +509,17 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textGrindSetting">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[70, 26]"/>
+              <Dimension value="[70, 28]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[70, 26]"/>
+              <Dimension value="[70, 28]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[70, 26]"/>
+              <Dimension value="[70, 28]"/>
             </Property>
           </Properties>
           <Events>
@@ -422,14 +546,23 @@
             <Component class="javax.swing.JTextArea" name="textAreaComments">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog.plain" size="20" style="0"/>
+                </Property>
                 <Property name="rows" type="int" value="5"/>
                 <Property name="wrapStyleWord" type="boolean" value="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="textAreaCommentsFocusGained"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JLabel" name="labelComments">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Comments"/>
           </Properties>
           <Constraints>
@@ -441,6 +574,11 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="panelButtons">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="20" style="0"/>
+        </Property>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
           <GridBagConstraints gridX="0" gridY="1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="10" insetsRight="10" anchor="14" weightX="0.0" weightY="0.0"/>
@@ -450,7 +588,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="175" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="189" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -464,7 +602,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="32" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="34" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -481,6 +619,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnSave">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="mnemonic" type="int" value="115"/>
             <Property name="text" type="java.lang.String" value="Save"/>
           </Properties>
@@ -490,6 +631,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnCancel">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="mnemonic" type="int" value="99"/>
             <Property name="text" type="java.lang.String" value="Cancel"/>
           </Properties>

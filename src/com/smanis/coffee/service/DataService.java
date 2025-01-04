@@ -156,9 +156,9 @@ public final class DataService {
         return rs;
     }
 
-    public void insertBean(HashMap map) throws Exception {
+    public String insertBean(HashMap map) throws Exception {
         String query = this.getSql("insertBean");
-        PreparedStatement ps = this.getConnection().prepareStatement(query);
+        PreparedStatement ps = this.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
 
         ps.setString(1, (String) map.get("Name"));
         ps.setString(2, (String) map.get("Vendor"));
@@ -175,8 +175,17 @@ public final class DataService {
         ps.setString(13, (String) map.get("Comments"));
 
         int insertCount = ps.executeUpdate();
-
+        ResultSet rs = ps.getGeneratedKeys();
+        
+        String newRecordId = null;
+        
+        if (rs.next()) {
+            newRecordId = rs.getString(0);
+        }
+        
         ps.close();
+        
+        return newRecordId;        
     }
                 
                 
@@ -269,7 +278,7 @@ public final class DataService {
                 break;
             case "getBeanIdsAndNames":
                 query = "SELECT " + ""
-                        + "Id, Name, Density "
+                        + "Id, Name, Density, InStock "
                         + "FROM Beans "
                         + "ORDER BY Name";
                 break;

@@ -51,6 +51,7 @@ public class DatabaseLogin extends javax.swing.JDialog {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnLogin.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/login.png"))); // NOI18N
         btnLogin.setMnemonic('L');
         btnLogin.setText("Login");
@@ -59,8 +60,9 @@ public class DatabaseLogin extends javax.swing.JDialog {
                 btnLoginActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, -1, -1));
+        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, -1, -1));
 
+        btnExit.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/exitSmall.png"))); // NOI18N
         btnExit.setMnemonic('x');
         btnExit.setText("Exit");
@@ -69,25 +71,34 @@ public class DatabaseLogin extends javax.swing.JDialog {
                 btnExitActionPerformed(evt);
             }
         });
-        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, -1, -1));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("  Database Credentials  "));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Database Credentials", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog.plain", 0, 20))); // NOI18N
+        jPanel1.setFocusable(false);
+        jPanel1.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        labelUsername.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         labelUsername.setText("Username");
         jPanel1.add(labelUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        textUsername.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         jPanel1.add(textUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 160, -1));
 
+        labelPassword.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         labelPassword.setText("Password");
         jPanel1.add(labelPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+
+        textPassword.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         jPanel1.add(textPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 160, -1));
 
+        checkboxRememberUsername.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         checkboxRememberUsername.setText("remember username");
-        jPanel1.add(checkboxRememberUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
+        jPanel1.add(checkboxRememberUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 360, 160));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 380, 170));
 
-        setSize(new java.awt.Dimension(407, 271));
+        setSize(new java.awt.Dimension(439, 293));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

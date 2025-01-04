@@ -1,4 +1,4 @@
-package com.smanis.coffee;
+package com.smanis.coffee.forms;
 
 import java.awt.Component;
 import javax.swing.ImageIcon;
