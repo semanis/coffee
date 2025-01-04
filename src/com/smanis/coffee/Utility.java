@@ -240,7 +240,6 @@ public class Utility {
     public static void selectAll(JTextField field) {
         Runnable runner = () -> field.selectAll();
         SwingUtilities.invokeLater(runner);
-
     }
 
     public static Date stringToDate(String stringDate) {
