@@ -96,16 +96,6 @@ public final class DataService {
         return rs;
     }
 
-    // Used to the populate the Bean combobox in the RoastLost editing view.
-    public ResultSet getBeanIdsAndNames() throws Exception {
-        Statement st = this.getConnection().createStatement();
-        String query = this.getSql("getBeanIdsAndNames");
-        ResultSet rs = st.executeQuery(query);
-        st.close();
-
-        return rs;
-    }
-
     public ResultSet getBeanById(String beanId) throws Exception {
         String sql = this.getSql("getBeanById");
 
@@ -114,6 +104,32 @@ public final class DataService {
 
         ResultSet rs = ps.executeQuery();
         ps.close();
+
+        return rs;
+    }
+
+    /**
+     * Returns the total number of Beans and the total number of In Stock beans.
+     
+     * @return A ResultSet.
+     */
+    public ResultSet getBeanCounts() throws Exception {
+        String sql = this.getSql("getBeanCounts");
+        Statement st = this.getConnection().createStatement();
+        
+        ResultSet rs = st.executeQuery(sql);
+        st.close();
+        
+        return rs;
+        
+    }
+    
+    // Used to the populate the Bean combobox in the RoastLost editing view.
+    public ResultSet getBeanIdsAndNames() throws Exception {
+        Statement st = this.getConnection().createStatement();
+        String query = this.getSql("getBeanIdsAndNames");
+        ResultSet rs = st.executeQuery(query);
+        st.close();
 
         return rs;
     }

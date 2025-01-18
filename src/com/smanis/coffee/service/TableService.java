@@ -395,13 +395,17 @@ public class TableService {
         table.getColumnModel().getColumn(getColumnIndex("Beans", "In Stock")).setCellRenderer(iconRenderer);
         table.getColumnModel().getColumn(getColumnIndex("Beans", "Anaerobic")).setCellRenderer(iconRenderer);
 
-        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
-        rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+        DefaultTableCellRenderer rendererRight = new DefaultTableCellRenderer();
+        rendererRight.setHorizontalAlignment(SwingConstants.RIGHT);
+        
+        DefaultTableCellRenderer rendererCenter = new DefaultTableCellRenderer();
+        rendererCenter.setHorizontalAlignment(SwingConstants.CENTER);
 
-        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Density")).setCellRenderer(rightRenderer);
-        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Price")).setCellRenderer(rightRenderer);
-        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Weight In Pounds")).setCellRenderer(rightRenderer);
-        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Price Per Pound")).setCellRenderer(rightRenderer);
+        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Density")).setCellRenderer(rendererRight);
+        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Price")).setCellRenderer(rendererRight);
+        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Weight In Pounds")).setCellRenderer(rendererRight);
+        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Price Per Pound")).setCellRenderer(rendererRight);
+        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Grind Setting")).setCellRenderer(rendererCenter);
 
         this.adjustTableColumnWidths(table);
     }

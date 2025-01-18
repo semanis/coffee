@@ -71,6 +71,11 @@ public class CoffeeFrame extends javax.swing.JFrame {
         panelBeans = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableBeans = new javax.swing.JTable();
+        panelSummary = new javax.swing.JPanel();
+        labelTotalBeans = new javax.swing.JLabel();
+        textTotalBeans = new javax.swing.JTextField();
+        labelInStock = new javax.swing.JLabel();
+        textInStock = new javax.swing.JTextField();
         panelButtonsBean = new javax.swing.JPanel();
         btnAddBean = new javax.swing.JButton();
         btnEditBean = new javax.swing.JButton();
@@ -108,16 +113,16 @@ public class CoffeeFrame extends javax.swing.JFrame {
         panelRoastTable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         panelRoastTable.setLayout(new java.awt.GridBagLayout());
 
-        jScrollPane1.setMaximumSize(new java.awt.Dimension(500, 300));
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(500, 300));
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(500, 300));
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(500, 500));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(500, 500));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(500, 500));
 
         listBeans.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         listBeans.setModel(TableService.getInstance().getListModelBeans()  );
         listBeans.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listBeans.setMaximumSize(new java.awt.Dimension(500, 500));
         listBeans.setMinimumSize(new java.awt.Dimension(500, 500));
-        listBeans.setPreferredSize(new java.awt.Dimension(500, 500));
+        listBeans.setPreferredSize(new java.awt.Dimension(400, 500));
         listBeans.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listBeansMouseClicked(evt);
@@ -203,7 +208,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
         labelRoastNotes.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         labelRoastNotes.setText("Roasting");
-        panelNotes.add(labelRoastNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 34, -1, -1));
+        panelNotes.add(labelRoastNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jScrollPane4.setMaximumSize(new java.awt.Dimension(450, 160));
         jScrollPane4.setMinimumSize(new java.awt.Dimension(450, 160));
@@ -219,11 +224,11 @@ public class CoffeeFrame extends javax.swing.JFrame {
         textRoastNotes.setPreferredSize(new java.awt.Dimension(450, 160));
         jScrollPane4.setViewportView(textRoastNotes);
 
-        panelNotes.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 380, 240));
+        panelNotes.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 380, 240));
 
         labelTastingNotes.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         labelTastingNotes.setText("Tasting");
-        panelNotes.add(labelTastingNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
+        panelNotes.add(labelTastingNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, -1));
 
         jScrollPane5.setMaximumSize(new java.awt.Dimension(450, 160));
         jScrollPane5.setMinimumSize(new java.awt.Dimension(450, 160));
@@ -239,7 +244,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         textTastingNotes.setPreferredSize(new java.awt.Dimension(450, 160));
         jScrollPane5.setViewportView(textTastingNotes);
 
-        panelNotes.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 380, 240));
+        panelNotes.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 380, 240));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -338,14 +343,47 @@ public class CoffeeFrame extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tableBeans);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         panelBeans.add(jScrollPane2, gridBagConstraints);
+
+        panelSummary.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelTotalBeans.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelTotalBeans.setText("Total Beans:");
+        panelSummary.add(labelTotalBeans, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 150, -1));
+
+        textTotalBeans.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textTotalBeans.setText(" ");
+        textTotalBeans.setEnabled(false);
+        textTotalBeans.setFocusable(false);
+        textTotalBeans.setMinimumSize(new java.awt.Dimension(50, 26));
+        textTotalBeans.setPreferredSize(new java.awt.Dimension(50, 26));
+        panelSummary.add(textTotalBeans, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 60, -1));
+
+        labelInStock.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelInStock.setText("In Stock:");
+        panelSummary.add(labelInStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 110, -1));
+
+        textInStock.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textInStock.setEnabled(false);
+        textInStock.setFocusable(false);
+        textInStock.setMinimumSize(new java.awt.Dimension(50, 26));
+        textInStock.setPreferredSize(new java.awt.Dimension(50, 26));
+        panelSummary.add(textInStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 60, -1));
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        panelBeans.add(panelSummary, gridBagConstraints);
 
         panelButtonsBean.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
 
@@ -389,8 +427,8 @@ public class CoffeeFrame extends javax.swing.JFrame {
         panelButtonsBean.add(btnDeleteBean);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         panelBeans.add(panelButtonsBean, gridBagConstraints);
@@ -670,20 +708,6 @@ public class CoffeeFrame extends javax.swing.JFrame {
         new AboutDialog(this, true).setVisible(true);
     }//GEN-LAST:event_menuItemAboutActionPerformed
 
-    private void listBeansMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listBeansMouseClicked
-        this.refreshRoastLogTable();
-
-    }//GEN-LAST:event_listBeansMouseClicked
-
-    private void listBeansKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listBeansKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            DefaultListModel listModel = (DefaultListModel) this.listBeans.getModel();
-            BeanModel beanModel = (BeanModel) listModel.getElementAt(this.listBeans.getSelectedIndex());
-            this.textDensity.setText(beanModel.getBeanDensity());
-            this.refreshRoastLogTable();
-        }
-    }//GEN-LAST:event_listBeansKeyPressed
-
     private void tableBeansMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBeansMouseClicked
         // on double-click of a row,  open the editing dialog.
         if (evt.getClickCount() == 2) {
@@ -735,6 +759,19 @@ public class CoffeeFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tableBeansKeyPressed
 
+    private void listBeansKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listBeansKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            DefaultListModel listModel = (DefaultListModel) this.listBeans.getModel();
+            BeanModel beanModel = (BeanModel) listModel.getElementAt(this.listBeans.getSelectedIndex());
+            this.textDensity.setText(beanModel.getBeanDensity());
+            this.refreshRoastLogTable();
+        }
+    }//GEN-LAST:event_listBeansKeyPressed
+
+    private void listBeansMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listBeansMouseClicked
+        this.refreshRoastLogTable();
+    }//GEN-LAST:event_listBeansMouseClicked
+
     private void editBean() {
         int selectedRow = this.tableBeans.getSelectedRow();
 
@@ -773,24 +810,31 @@ public class CoffeeFrame extends javax.swing.JFrame {
         // Populate the roast log table for the specified bean ID.
         NonEditableTableModel model = TableService.getInstance().getTableModelBeans();
         this.tableBeans.setModel(model);
-
+       
         // General table layout stuff, column widths, hidden columns, etc.
         TableService.getInstance().setupTableBeans(this.tableBeans);
 
         // If beanId was passed, make it the selected row in the bean table.
         if (beanId != null) {
             int rowCount = model.getRowCount();
-            BeanModel beanModel = null;
+            String tableRowId = null;
 
             for (int i = 0; i < rowCount; i++) {
-                beanModel = (BeanModel) model.getValueAt(i, TableService.getInstance().getColumnIndex("Beans", "In Stock"));
-                if (beanModel.getBeanId().equals(beanId)) {
+                tableRowId = (String)model.getValueAt(i, TableService.getInstance().getColumnIndex("Beans", "Id"));
+        
+                // Set the selected row to the BeanModel that contains the target beanId.
+                // Also make sure to scroll to the selected row, so that's it's guaranteed to be visible.
+                if (tableRowId.equals(beanId)) {
                     this.tableBeans.setRowSelectionInterval(i, i);
                     this.tableBeans.scrollRectToVisible(new Rectangle(this.tableBeans.getCellRect(i, 0, true)));
+                    
                     break;
                 }
             }
         }
+        
+        
+        
     }
 
     private void refreshRoastLogTable() {
@@ -921,8 +965,10 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JLabel labelInStock;
     private javax.swing.JLabel labelRoastNotes;
     private javax.swing.JLabel labelTastingNotes;
+    private javax.swing.JLabel labelTotalBeans;
     private javax.swing.JList<String> listBeans;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuFile;
@@ -944,13 +990,16 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JPanel panelRoastLogTable;
     private javax.swing.JPanel panelRoastLogs;
     private javax.swing.JPanel panelRoastTable;
+    private javax.swing.JPanel panelSummary;
     private javax.swing.JPanel panelTableHeader;
     private javax.swing.JScrollPane scrollPaneRoasts;
     private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JTable tableBeans;
     private javax.swing.JTable tableRoasts;
     private javax.swing.JTextField textDensity;
+    private javax.swing.JTextField textInStock;
     private javax.swing.JTextArea textRoastNotes;
     private javax.swing.JTextArea textTastingNotes;
+    private javax.swing.JTextField textTotalBeans;
     // End of variables declaration//GEN-END:variables
 }
