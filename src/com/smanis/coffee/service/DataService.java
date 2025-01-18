@@ -292,6 +292,11 @@ public final class DataService {
                         + "WHERE Id = ?";
 
                 break;
+
+            case "getBeanCounts":
+                query = "SELECT COUNT(Id) as TotalBeans, COUNT(CASE WHEN InStock = 1 THEN 1 END) as TotalInStock FROM Beans";
+                break;
+
             case "getBeanIdsAndNames":
                 query = "SELECT " + ""
                         + "Id, Name, Density, InStock "

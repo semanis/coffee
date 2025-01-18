@@ -7,11 +7,13 @@ import com.smanis.coffee.models.NonEditableTableModel;
 import com.smanis.coffee.service.TableService;
 import com.smanis.coffee.Utility;
 import com.smanis.coffee.models.BeanModel;
+import com.smanis.coffee.service.DataService;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
 import javax.swing.AbstractAction;
 import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
@@ -49,6 +51,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         tabbedPane = new javax.swing.JTabbedPane();
         panelRoastLogs = new javax.swing.JPanel();
         panelRoastTable = new javax.swing.JPanel();
+        panelBeanList = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listBeans = new javax.swing.JList<>();
         panelRoastLogTable = new javax.swing.JPanel();
@@ -113,16 +116,12 @@ public class CoffeeFrame extends javax.swing.JFrame {
         panelRoastTable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         panelRoastTable.setLayout(new java.awt.GridBagLayout());
 
-        jScrollPane1.setMaximumSize(new java.awt.Dimension(500, 500));
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(500, 500));
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(500, 500));
+        panelBeanList.setLayout(new java.awt.GridBagLayout());
 
-        listBeans.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        listBeans.setModel(TableService.getInstance().getListModelBeans()  );
-        listBeans.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listBeans.setMaximumSize(new java.awt.Dimension(500, 500));
-        listBeans.setMinimumSize(new java.awt.Dimension(500, 500));
-        listBeans.setPreferredSize(new java.awt.Dimension(400, 500));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(400, 22));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(400, 195));
+
+        listBeans.setModel(TableService.getInstance().getListModelBeans());
         listBeans.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listBeansMouseClicked(evt);
@@ -136,13 +135,14 @@ public class CoffeeFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(listBeans);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        panelRoastTable.add(jScrollPane1, gridBagConstraints);
+        panelBeanList.add(jScrollPane1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.weighty = 1.0;
+        panelRoastTable.add(panelBeanList, gridBagConstraints);
 
         panelRoastLogTable.setLayout(new java.awt.GridBagLayout());
 
@@ -691,12 +691,11 @@ public class CoffeeFrame extends javax.swing.JFrame {
         if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_ENTER) {
             Runnable runner = () -> {
                 int currentRow = this.tableRoasts.getSelectedRow();
-                
+
                 // If no roasts for bean yet, table is empty, so no selected row.
                 if (currentRow == -1) {
                     this.textRoastNotes.setText("");
-                }
-                else {
+                } else {
                     this.populateNotes((NonEditableTableModel) this.tableRoasts.getModel(), currentRow);
                 }
             };
@@ -800,6 +799,20 @@ public class CoffeeFrame extends javax.swing.JFrame {
         }
     }
 
+    private void getBeanTotals() {
+        try {
+            ResultSet rs = DataService.getInstance().getBeanCounts();
+            if (rs.next()) {
+                this.textTotalBeans.setText(String.valueOf(rs.getInt("TotalBeans")));
+                this.textInStock.setText(String.valueOf(rs.getInt("TotalInStock")));
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "CoffeeFrame.getBeanTotals() " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+
     private void populateNotes(NonEditableTableModel model, int tableRow) {
         // refresh roast notes/tasting nodes based on the clicked row.
         this.textRoastNotes.setText((String) model.getValueAt(tableRow, TableService.getInstance().getColumnIndex("RoastLog", "Roast Notes")));
@@ -810,7 +823,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         // Populate the roast log table for the specified bean ID.
         NonEditableTableModel model = TableService.getInstance().getTableModelBeans();
         this.tableBeans.setModel(model);
-       
+
         // General table layout stuff, column widths, hidden columns, etc.
         TableService.getInstance().setupTableBeans(this.tableBeans);
 
@@ -820,21 +833,19 @@ public class CoffeeFrame extends javax.swing.JFrame {
             String tableRowId = null;
 
             for (int i = 0; i < rowCount; i++) {
-                tableRowId = (String)model.getValueAt(i, TableService.getInstance().getColumnIndex("Beans", "Id"));
-        
+                tableRowId = (String) model.getValueAt(i, TableService.getInstance().getColumnIndex("Beans", "Id"));
+
                 // Set the selected row to the BeanModel that contains the target beanId.
                 // Also make sure to scroll to the selected row, so that's it's guaranteed to be visible.
                 if (tableRowId.equals(beanId)) {
                     this.tableBeans.setRowSelectionInterval(i, i);
                     this.tableBeans.scrollRectToVisible(new Rectangle(this.tableBeans.getCellRect(i, 0, true)));
-                    
+
                     break;
                 }
             }
         }
-        
-        
-        
+
     }
 
     private void refreshRoastLogTable() {
@@ -880,7 +891,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
                     if (selectedIndex < 0) {
                         return;
                     }
-                    
+
                     tabbedPane.setSelectedIndex(selectedIndex);
                 }
             };
@@ -892,23 +903,22 @@ public class CoffeeFrame extends javax.swing.JFrame {
                     if (selectedIndex >= tabCount) {
                         return;
                     }
-                    
+
                     tabbedPane.setSelectedIndex(selectedIndex);
                 }
             };
 
             // Register ESCAPE as the keystroke to confirm exiting the program.
             KeyStroke strokeEscape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
-            
+
             // Registers ALT + LEFT/RIGHT ARROW to navigate between tabs of parent tabbed pane.
             KeyStroke strokeAltLeft = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, InputEvent.ALT_DOWN_MASK);
             KeyStroke strokeAltRight = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, InputEvent.ALT_DOWN_MASK);
-            
+
             jrp.registerKeyboardAction(actionListenerExit, strokeEscape, JComponent.WHEN_IN_FOCUSED_WINDOW);
             jrp.registerKeyboardAction(actionListenerLeft, strokeAltLeft, JComponent.WHEN_IN_FOCUSED_WINDOW);
             jrp.registerKeyboardAction(actionListenerRight, strokeAltRight, JComponent.WHEN_IN_FOCUSED_WINDOW);
-            
-            
+
             // This prevents the default action of navigating down on press of ENTER, in the Beans table.
             this.tableBeans.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "Enter");
             this.tableBeans.getActionMap().put("Enter", new AbstractAction() {
@@ -925,7 +935,6 @@ public class CoffeeFrame extends javax.swing.JFrame {
                 }
             });
 
-            
             // Load up the window preferences, which restores the size/location of the window.
             AppPreferences.loadWindowPreferences(this);
 
@@ -940,6 +949,13 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
             // General table layout stuff, column widths, hidden columns, etc.
             TableService.getInstance().setupTableBeans(this.tableBeans);
+
+            this.getBeanTotals();
+
+            Runnable runner = () -> {
+                this.listBeans.requestFocus();
+            };
+            SwingUtilities.invokeLater(runner);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "CoffeeFrame.initOther() " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -983,6 +999,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemWindowsClassic;
     private javax.swing.JMenu menuLookAndFeel;
     private javax.swing.JMenu menuView;
+    private javax.swing.JPanel panelBeanList;
     private javax.swing.JPanel panelBeans;
     private javax.swing.JPanel panelButtonsBean;
     private javax.swing.JPanel panelButtonsRoastLog;
