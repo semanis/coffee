@@ -20,6 +20,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
+import javax.swing.ListModel;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -254,14 +255,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelRoastLogTable.add(panelNotes, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        panelRoastTable.add(panelRoastLogTable, gridBagConstraints);
+        panelRoastTable.add(panelRoastLogTable, new java.awt.GridBagConstraints());
 
         panelButtonsRoastLog.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
 
@@ -625,6 +619,9 @@ public class CoffeeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemWindowsClassicActionPerformed
 
     private void btnEditRoastLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditRoastLogActionPerformed
+        ListModel beanListModel = this.listBeans.getModel();
+        BeanModel beanModel = (BeanModel)beanListModel.getElementAt(this.listBeans.getSelectedIndex());
+
         int selectedRow = this.tableRoasts.getSelectedRow();
 
         if (selectedRow == -1) {
@@ -634,8 +631,10 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
         NonEditableTableModel model = (NonEditableTableModel) this.tableRoasts.getModel();
         String roastLogId = (String) model.getValueAt(selectedRow, 0);
+
         RoastLogEdit rle = new com.smanis.coffee.forms.RoastLogEdit(this, true);
         rle.setRoastLogId(roastLogId);
+        rle.setBeanModel(beanModel);
         rle.setVisible(true);
 
         if (rle.wasUpdated == true) {
@@ -647,7 +646,11 @@ public class CoffeeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditRoastLogActionPerformed
 
     private void btnAddRoastLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRoastLogActionPerformed
+        ListModel beanListModel = this.listBeans.getModel();
+        BeanModel beanModel = (BeanModel)beanListModel.getElementAt(this.listBeans.getSelectedIndex());
+        
         RoastLogEdit rle = new com.smanis.coffee.forms.RoastLogEdit(this, true);
+        rle.setBeanModel(beanModel);
         rle.setVisible(true);
 
         if (rle.wasInserted == true) {
@@ -788,13 +791,18 @@ public class CoffeeFrame extends javax.swing.JFrame {
     }
 
     private void editRoastLog(NonEditableTableModel model, int tableRow) {
+        ListModel beanListModel = this.listBeans.getModel();
+        BeanModel beanModel = (BeanModel)beanListModel.getElementAt(this.listBeans.getSelectedIndex());
+
         String roastLogId = (String) model.getValueAt(tableRow, 0);
 
+        
         RoastLogEdit rle = new com.smanis.coffee.forms.RoastLogEdit(this, true);
         rle.setRoastLogId(roastLogId); // set the roast log Id to be edited.
+        rle.setBeanModel(beanModel);
         rle.setVisible(true);
 
-        if (rle.wasPersisted == true) {
+        if (rle.wasUpdated == true) {
             this.refreshRoastLogTable();
         }
     }

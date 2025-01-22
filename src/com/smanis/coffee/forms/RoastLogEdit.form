@@ -48,6 +48,9 @@
     </Container>
     <Component class="javax.swing.JLabel" name="labelBeans">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="2"/>
         <Property name="text" type="java.lang.String" value="Bean"/>
       </Properties>
@@ -57,9 +60,22 @@
         </Constraint>
       </Constraints>
     </Component>
+    <Component class="javax.swing.JTextField" name="textBeanName">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="180" y="30" width="400" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
     <Component class="javax.swing.JTextField" name="textDensity">
       <Properties>
-        <Property name="text" type="java.lang.String" value=" "/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Constraints>
@@ -68,36 +84,11 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JComboBox" name="comboBeans">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="TableService.getInstance().getComboboxModelBeans()" type="code"/>
-        </Property>
-        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[350, 31]"/>
-        </Property>
-        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="ftRoastDate"/>
-        </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[350, 31]"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboBeansItemStateChanged"/>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="comboBeansKeyTyped"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="180" y="30" width="400" height="-1"/>
-        </Constraint>
-      </Constraints>
-    </Component>
     <Component class="javax.swing.JLabel" name="labelGreenWeight">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Green Weight"/>
       </Properties>
@@ -114,6 +105,9 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="focusLostBehavior" type="int" value="0"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[50, 26]"/>
         </Property>
@@ -139,6 +133,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labelRoastDate">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Roast Date"/>
       </Properties>
@@ -154,6 +151,9 @@
           <Connection code="new DefaultFormatterFactory(Utility.getMaskFormatter(&quot;##/##/####&quot;))" type="code"/>
         </Property>
         <Property name="focusLostBehavior" type="int" value="0"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="btnRoastDate"/>
         </Property>
@@ -166,12 +166,15 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="180" y="80" width="120" height="-1"/>
+          <AbsoluteConstraints x="180" y="80" width="140" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="btnRoastDate">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="now"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[72, 26]"/>
@@ -188,12 +191,15 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="310" y="80" width="80" height="30"/>
+          <AbsoluteConstraints x="330" y="80" width="80" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="labelStartTime">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Start Time"/>
       </Properties>
@@ -209,6 +215,9 @@
           <Connection code="new DefaultFormatterFactory(Utility.getMaskFormatter(&quot;##:##:##&quot;))" type="code"/>
         </Property>
         <Property name="focusLostBehavior" type="int" value="0"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="btnStartTime"/>
         </Property>
@@ -227,6 +236,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnStartTime">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="now"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[72, 26]"/>
@@ -246,12 +258,15 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="310" y="120" width="80" height="30"/>
+          <AbsoluteConstraints x="330" y="120" width="80" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="labelDryEnd">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Dry End"/>
       </Properties>
@@ -267,6 +282,9 @@
           <Connection code="new DefaultFormatterFactory(Utility.getMaskFormatter(&quot;##:##:##&quot;))" type="code"/>
         </Property>
         <Property name="focusLostBehavior" type="int" value="0"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="btnDryEnd"/>
         </Property>
@@ -286,6 +304,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnDryEnd">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="now"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[72, 26]"/>
@@ -305,12 +326,15 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="310" y="180" width="80" height="-1"/>
+          <AbsoluteConstraints x="330" y="180" width="80" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="labelFcStart">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="FC Start"/>
       </Properties>
@@ -326,6 +350,9 @@
           <Connection code="new DefaultFormatterFactory(Utility.getMaskFormatter(&quot;##:##:##&quot;))" type="code"/>
         </Property>
         <Property name="focusLostBehavior" type="int" value="0"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="btnFcStart"/>
         </Property>
@@ -345,6 +372,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnFcStart">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="now"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[72, 26]"/>
@@ -361,12 +391,15 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="310" y="240" width="80" height="-1"/>
+          <AbsoluteConstraints x="330" y="240" width="80" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="labelFcEnd">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="FC End"/>
       </Properties>
@@ -378,6 +411,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnFcEnd">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="now"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[72, 26]"/>
@@ -397,7 +433,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="310" y="280" width="80" height="-1"/>
+          <AbsoluteConstraints x="330" y="280" width="80" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -407,6 +443,9 @@
           <Connection code="new DefaultFormatterFactory(Utility.getMaskFormatter(&quot;##:##:##&quot;))" type="code"/>
         </Property>
         <Property name="focusLostBehavior" type="int" value="0"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="btnFcEnd"/>
         </Property>
@@ -426,6 +465,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labelEndRoast">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="End Roast"/>
       </Properties>
@@ -441,6 +483,9 @@
           <Connection code="new DefaultFormatterFactory(Utility.getMaskFormatter(&quot;##:##:##&quot;))" type="code"/>
         </Property>
         <Property name="focusLostBehavior" type="int" value="0"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="ftEndRoastFocusGained"/>
@@ -457,6 +502,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnEndRoast">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="now"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[72, 26]"/>
@@ -476,12 +524,15 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="310" y="330" width="80" height="-1"/>
+          <AbsoluteConstraints x="330" y="330" width="80" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="labelRoastedWeight">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Roasted Weight"/>
       </Properties>
@@ -498,6 +549,9 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="focusLostBehavior" type="int" value="0"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[50, 26]"/>
         </Property>
@@ -520,6 +574,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labelDifference">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Difference"/>
       </Properties>
@@ -531,6 +588,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="textDifferenceMsg">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="   "/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
@@ -542,6 +602,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labelMoistureLoss">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Moisture Loss"/>
         <Property name="alignmentY" type="float" value="0.0"/>
@@ -554,6 +617,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="textMoistureLossMsg">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value=" "/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
@@ -565,6 +631,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labelRoastLevel">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Roast Level"/>
       </Properties>
@@ -576,6 +645,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="textRoastLevelMsg">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog.plain" size="20" style="0"/>
+        </Property>
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[350, 26]"/>
@@ -611,6 +683,9 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="labelRoastNotes">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Roast"/>
           </Properties>
           <Constraints>
@@ -650,6 +725,9 @@
         </Container>
         <Component class="javax.swing.JLabel" name="labelTastingNotes">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Tasting"/>
           </Properties>
           <Constraints>
@@ -693,7 +771,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="1020" y="60" width="400" height="520"/>
+          <AbsoluteConstraints x="1020" y="60" width="400" height="290"/>
         </Constraint>
       </Constraints>
 
@@ -703,6 +781,9 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="labelDryTime">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="Dry Time"/>
           </Properties>
@@ -714,6 +795,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textDryTime">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value=" "/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
@@ -725,17 +809,23 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelBrowningTime">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="Browning Time"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="60" y="90" width="-1" height="-1"/>
+              <AbsoluteConstraints x="50" y="90" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="textBrowningTime">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value=" "/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
@@ -747,17 +837,23 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelFcDuration">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="FC Duration"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="90" y="140" width="-1" height="-1"/>
+              <AbsoluteConstraints x="80" y="140" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="textFcDuration">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value=" "/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
@@ -769,17 +865,23 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelDevTime">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="Development Time"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="190" width="-1" height="-1"/>
+              <AbsoluteConstraints x="10" y="190" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="textDevTime">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value=" "/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
@@ -791,17 +893,23 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelTotalRoastTime">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="Total Roast Time"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="50" y="240" width="-1" height="-1"/>
+              <AbsoluteConstraints x="30" y="240" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="textTotalRoastTime">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value=" "/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
@@ -841,5 +949,70 @@
         </Constraint>
       </Constraints>
     </Component>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title=" Timers"/>
+          </Border>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="1020" y="370" width="390" height="200"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="false"/>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="Roast Timer"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="38" y="60" width="160" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextField1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value=" "/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="210" y="60" width="90" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog.plain" size="20" style="0"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="FC Timer"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="40" y="90" width="160" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextField2">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="210" y="90" width="90" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
