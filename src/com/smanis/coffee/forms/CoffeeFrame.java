@@ -156,9 +156,9 @@ public class CoffeeFrame extends javax.swing.JFrame {
         textDensity.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         textDensity.setText("  ");
         textDensity.setFocusable(false);
-        textDensity.setMaximumSize(new java.awt.Dimension(77, 26));
-        textDensity.setMinimumSize(new java.awt.Dimension(77, 26));
-        textDensity.setPreferredSize(new java.awt.Dimension(77, 26));
+        textDensity.setMaximumSize(new java.awt.Dimension(77, 2));
+        textDensity.setMinimumSize(new java.awt.Dimension(77, 28));
+        textDensity.setPreferredSize(new java.awt.Dimension(77, 28));
         panelTableHeader.add(textDensity);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -215,12 +215,13 @@ public class CoffeeFrame extends javax.swing.JFrame {
         jScrollPane4.setMinimumSize(new java.awt.Dimension(450, 160));
         jScrollPane4.setPreferredSize(new java.awt.Dimension(450, 160));
 
+        textRoastNotes.setEditable(false);
         textRoastNotes.setColumns(20);
         textRoastNotes.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         textRoastNotes.setLineWrap(true);
         textRoastNotes.setRows(5);
         textRoastNotes.setWrapStyleWord(true);
-        textRoastNotes.setEnabled(false);
+        textRoastNotes.setFocusable(false);
         textRoastNotes.setMinimumSize(new java.awt.Dimension(450, 160));
         textRoastNotes.setPreferredSize(new java.awt.Dimension(450, 160));
         jScrollPane4.setViewportView(textRoastNotes);
@@ -235,12 +236,13 @@ public class CoffeeFrame extends javax.swing.JFrame {
         jScrollPane5.setMinimumSize(new java.awt.Dimension(450, 160));
         jScrollPane5.setPreferredSize(new java.awt.Dimension(450, 160));
 
+        textTastingNotes.setEditable(false);
         textTastingNotes.setColumns(20);
         textTastingNotes.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         textTastingNotes.setLineWrap(true);
         textTastingNotes.setRows(5);
         textTastingNotes.setWrapStyleWord(true);
-        textTastingNotes.setEnabled(false);
+        textTastingNotes.setFocusable(false);
         textTastingNotes.setMinimumSize(new java.awt.Dimension(450, 160));
         textTastingNotes.setPreferredSize(new java.awt.Dimension(450, 160));
         jScrollPane5.setViewportView(textTastingNotes);
@@ -255,7 +257,11 @@ public class CoffeeFrame extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelRoastLogTable.add(panelNotes, gridBagConstraints);
 
-        panelRoastTable.add(panelRoastLogTable, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        panelRoastTable.add(panelRoastLogTable, gridBagConstraints);
 
         panelButtonsRoastLog.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
 

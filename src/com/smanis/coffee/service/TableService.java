@@ -338,8 +338,13 @@ public class TableService {
     public void hideColumnsRoastLog(JTable table) {
         this.hideColumn(table, "Id");
         this.hideColumn(table, "Bean Id");
+        this.hideColumn(table, "Green Weight");
+        this.hideColumn(table, "Roasted Weight");
+        this.hideColumn(table, "Moisture Loss %");
+        this.hideColumn(table, "Tasting Notes");
         this.hideColumn(table, "Roast Notes");
         this.hideColumn(table, "Tasting Notes");
+        
     }
 
     /**
