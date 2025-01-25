@@ -29,418 +29,403 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
 /**
- * Singleton Service for Table related methods. Everything dealing with the main
- * JTable that displays the roast log data is encapsulated here.
+ * Singleton Service for Table related methods. Everything dealing with the main JTable that displays the roast log data is encapsulated here.
  *
  * Usage:
  *
  * If making a one-off call:
  *
- * NonEditableTableModel tableModel =
- * TableService.getInstance().getTableModelRoastLogs();
+ * NonEditableTableModel tableModel = TableService.getInstance().getTableModelRoastLogs();
  *
  * If making multiple calls back-to-back:
  *
- * TableService service = TableService.getInstance(); NonEditableTableModel
- * tableModel = service.getInstance().getTableModelRoastLogs(); Vector
- * tableColumns = service.getColumnsRoastLog(); Object obj =
- * service.someCrazyObjectReturning Method();
+ * TableService service = TableService.getInstance(); NonEditableTableModel tableModel = service.getInstance().getTableModelRoastLogs(); Vector tableColumns =
+ * service.getColumnsRoastLog(); Object obj = service.someCrazyObjectReturning Method();
  *
  * @author semanis
  */
 public class TableService {
 
-    // private/static property holds the static instance of the service.
-    private static TableService INSTANCE = null;
+   // private/static property holds the static instance of the service.
+   private static TableService INSTANCE = null;
 
-    private static Hashtable<String, Vector<String>> TABLE_COLUMNS = new Hashtable<String, Vector<String>>();
+   private static Hashtable<String, Vector<String>> TABLE_COLUMNS = new Hashtable<String, Vector<String>>();
 
-    // constructor is private, so the class can't be directly instantiated.
-    private TableService() {
-    }
+   // constructor is private, so the class can't be directly instantiated.
+   private TableService() {
+   }
 
-    /**
-     * The only way to get at the service is via this method, thereby enforcing
-     * its singleton-ness.
-     */
-    public static TableService getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new TableService();
-        }
+   /**
+    * The only way to get at the service is via this method, thereby enforcing its singleton-ness.
+    */
+   public static TableService getInstance() {
+      if (INSTANCE == null) {
+         INSTANCE = new TableService();
+      }
 
-        return INSTANCE;
-    }
+      return INSTANCE;
+   }
 
-    public void adjustTableColumnWidths(JTable table) {
-        int columnCount = table.getColumnCount();
+   public void adjustTableColumnWidths(JTable table) {
+      int columnCount = table.getColumnCount();
 
-        for (int column = 0; column < columnCount; column++) {
-            TableColumn tableColumn = table.getColumnModel().getColumn(column);
-            int preferredWidth = tableColumn.getMinWidth();
-            int maxWidth = tableColumn.getMaxWidth();
+      for (int column = 0; column < columnCount; column++) {
+         TableColumn tableColumn = table.getColumnModel().getColumn(column);
+         int preferredWidth = tableColumn.getMinWidth();
+         int maxWidth = tableColumn.getMaxWidth();
 
-            for (int row = 0; row < table.getRowCount(); row++) {
-                TableCellRenderer cellRenderer = table.getCellRenderer(row, column);
-                Component c = table.prepareRenderer(cellRenderer, row, column);
-                int width = c.getPreferredSize().width + table.getIntercellSpacing().width;
-                preferredWidth = Math.max(preferredWidth, width);
+         for (int row = 0; row < table.getRowCount(); row++) {
+            TableCellRenderer cellRenderer = table.getCellRenderer(row, column);
+            Component c = table.prepareRenderer(cellRenderer, row, column);
+            int width = c.getPreferredSize().width + table.getIntercellSpacing().width;
+            preferredWidth = Math.max(preferredWidth, width);
 
-                //  We've exceeded the maximum width, no need to check other rows
-                if (preferredWidth >= maxWidth) {
-                    preferredWidth = maxWidth;
-                    break;
-                }
+            //  We've exceeded the maximum width, no need to check other rows
+            if (preferredWidth >= maxWidth) {
+               preferredWidth = maxWidth;
+               break;
+            }
+         }
+
+         String headerValue = (String) tableColumn.getHeaderValue();
+         FontMetrics metrics = table.getGraphics().getFontMetrics(new Font("Liberation Sans", Font.PLAIN, 20));
+         int headerWidth = metrics.stringWidth(headerValue);
+
+         if (headerWidth > preferredWidth) {
+            preferredWidth = headerWidth;
+         }
+
+         preferredWidth += 20;
+         tableColumn.setPreferredWidth(preferredWidth);
+      }
+
+   }
+
+   public void deleteBean(String beanId) throws Exception {
+      DataService.getInstance().deleteBean(beanId);
+   }
+
+   public void deleteRoastLog(String roastLogId) throws Exception {
+      DataService.getInstance().deleteRoastLog(roastLogId);
+   }
+
+   public int getColumnIndex(String tableName, String columnName) {
+      Vector<String> columnNames = TABLE_COLUMNS.get(tableName);
+      int columnIndex = columnNames.indexOf(columnName);
+
+      return columnIndex;
+   }
+
+   /**
+    * Extracts column names from a ResultSet for a given table name, and returns the column names as a Vector<String>. Proper-cased columns names like "TotalRoastTime" are
+    * split out into "Total Roast Time".
+    *
+    * @param rs A ResultSet.
+    *
+    * @throws Exception
+    */
+   public Vector<String> getColumnsFromResultSet(ResultSet rs) throws Exception {
+      ResultSetMetaData metaData = rs.getMetaData();
+      int columnCount = metaData.getColumnCount();
+
+      Vector<String> columnNames = new Vector<String>();
+
+      for (int i = 1; i <= columnCount; i++) {
+         String columnName = metaData.getColumnName(i);
+         String[] splitColumnName = columnName.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+         String splitName = "";
+         for (String word : splitColumnName) {
+            if (word.equals("Percentage")) {
+               word = "%";
+            } else if (word.equals("Total")) {
+               continue;
             }
 
-            String headerValue = (String) tableColumn.getHeaderValue();
-            FontMetrics metrics = table.getGraphics().getFontMetrics(new Font("Liberation Sans", Font.PLAIN, 20));
-            int headerWidth = metrics.stringWidth(headerValue);
+            // separate each word by a space.
+            splitName += (splitName.isEmpty() ? "" : " ") + word;
+         }
 
-            if (headerWidth > preferredWidth) {
-                preferredWidth = headerWidth;
-            }
+         columnNames.add(splitName);
+      }
 
-            preferredWidth += 20;
-            tableColumn.setPreferredWidth(preferredWidth);
-        }
+      return columnNames;
+   }
 
-    }
+   /**
+    * Get column names as a Vector<String> for the specified table name.
+    */
+   public Vector<String> getColumns(String tableName) {
+      return TABLE_COLUMNS.get(tableName);
+   }
 
-    public void deleteBean(String beanId) throws Exception {
-        DataService.getInstance().deleteBean(beanId);
-    }
-    
-    public void deleteRoastLog(String roastLogId) throws Exception {
-        DataService.getInstance().deleteRoastLog(roastLogId);
-    }
+   /**
+    * Get a DefaultComboBoxModel for the Beans table, returning field Id, Name, and formatted Density as a BeanModel instance for each row in the Model.
+    *
+    * @return DefaultComboBoxModel A default implementation of a ComboBox model, using the Beans table as a data source..
+    */
+   public DefaultComboBoxModel getComboboxModelBeans() {
+      DefaultComboBoxModel model = null;
 
-    public int getColumnIndex(String tableName, String columnName) {
-        Vector<String> columnNames = TABLE_COLUMNS.get(tableName);
-        int columnIndex = columnNames.indexOf(columnName);
+      try {
+         // Query which returns just the Bean ID and Name.
+         ResultSet rs = DataService.getInstance().getBeanIdsAndNames();
 
-        return columnIndex;
-    }
+         Vector<Object> data = new Vector<Object>();
 
-    /**
-     * Extracts column names from a ResultSet for a given table name, and
-     * returns the column names as a Vector<String>. Proper-cased columns names
-     * like "TotalRoastTime" are split out into "Total Roast Time".
-     *
-     * @param rs A ResultSet.
-     *
-     * @throws Exception
-     */
-    public Vector<String> getColumnsFromResultSet(ResultSet rs) throws Exception {
-        ResultSetMetaData metaData = rs.getMetaData();
-        int columnCount = metaData.getColumnCount();
+         while (rs.next()) {
+            Float density = rs.getFloat("Density");
+            data.add(new BeanModel(rs.getString("Id"), rs.getString("Name"), String.format("%.2f", density), rs.getInt("InStock")));
+         }
 
-        Vector<String> columnNames = new Vector<String>();
+         model = new DefaultComboBoxModel(data);
 
-        for (int i = 1; i <= columnCount; i++) {
-            String columnName = metaData.getColumnName(i);
-            String[] splitColumnName = columnName.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
-            String splitName = "";
-            for (String word : splitColumnName) {
-                if (word.equals("Percentage")) {
-                    word = "%";
-                } else if (word.equals("Total")) {
-                    continue;
-                }
+      } catch (Exception e) {
+         Logger.getLogger(RoastLogEdit.class.getName()).log(Level.SEVERE, e.getMessage());
+      }
 
-                // separate each word by a space.
-                splitName += (splitName.isEmpty() ? "" : " ") + word;
-            }
+      return model;
+   }
 
-            columnNames.add(splitName);
-        }
+   public DefaultListModel getListModelBeans() {
+      DefaultListModel<BeanModel> model = new DefaultListModel<BeanModel>();
 
-        return columnNames;
-    }
+      try {
+         // Query which returns just the Bean ID and Name.
+         ResultSet rs = DataService.getInstance().getBeanIdsAndNames();
 
-    /**
-     * Get column names as a Vector<String> for the specified table name.
-     */
-    public Vector<String> getColumns(String tableName) {
-        return TABLE_COLUMNS.get(tableName);
-    }
+         while (rs.next()) {
+            Float density = rs.getFloat("Density");
+            model.addElement(new BeanModel(rs.getString("Id"), rs.getString("Name"), String.format("%.2f", density), rs.getInt("InStock")));
+         }
 
-    /**
-     * Get a DefaultComboBoxModel for the Beans table, returning field Id, Name,
-     * and formatted Density as a BeanModel instance for each row in the Model.
-     *
-     * @return DefaultComboBoxModel A default implementation of a ComboBox
-     * model, using the Beans table as a data source..
-     */
-    public DefaultComboBoxModel getComboboxModelBeans() {
-        DefaultComboBoxModel model = null;
+      } catch (Exception e) {
+         Logger.getLogger(RoastLogEdit.class.getName()).log(Level.SEVERE, e.getMessage());
+      }
 
-        try {
-            // Query which returns just the Bean ID and Name.
-            ResultSet rs = DataService.getInstance().getBeanIdsAndNames();
+      return model;
+   }
 
+   public NonEditableTableModel getTableModelBeans() {
+      Vector<String> tableColumns = this.getColumns("Beans");
+      Vector<Vector<Object>> tableData = new Vector<Vector<Object>>();
+      NonEditableTableModel model = null;
+
+      try {
+         ResultSet rs = DataService.getInstance().getBeans();
+
+         // column names are cached after the first call.
+         if (tableColumns == null) {
+            tableColumns = getColumnsFromResultSet(rs);
+            TABLE_COLUMNS.put("Beans", tableColumns);
+         }
+
+         // Enforce an ISP-8601 datetime format.
+         DateFormat formatterDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+         while (rs.next()) {
             Vector<Object> data = new Vector<Object>();
 
-            while (rs.next()) {
-                Float density = rs.getFloat("Density");
-                data.add(new BeanModel(rs.getString("Id"), rs.getString("Name"), String.format("%.2f", density), rs.getInt("InStock")));
-            }
+            // Be sure you add the data in the same order as the columns are set in getColumnsBeans() above.
+            data.add(rs.getString("Id"));
+            data.add(rs.getInt("InStock"));
+            data.add(rs.getString("Name"));
+            data.add(Utility.sqlFloatToString(rs.getFloat("Density"), "%.2f"));
+            data.add(rs.getString("GrindSetting"));
+            data.add(rs.getString("Altitude"));
+            data.add(rs.getString("ProcessMethod"));
+            data.add(rs.getFloat("Price"));
+            data.add(rs.getInt("WeightInPounds"));
+            data.add(Utility.sqlFloatToString(rs.getFloat("PricePerPound"), "%.2f"));
+            data.add(rs.getString("Vendor"));
+            data.add(rs.getString("Origin"));
+            data.add(rs.getString("Variety"));
+            data.add(rs.getFloat("DensityGrams"));
+            data.add(rs.getInt("Anaerobic"));
+            data.add(rs.getString("Comments"));
 
-            model = new DefaultComboBoxModel(data);
+            tableData.add(data);
+         }
 
-        } catch (Exception e) {
-            Logger.getLogger(RoastLogEdit.class.getName()).log(Level.SEVERE, e.getMessage());
-        }
+         model = new NonEditableTableModel(tableData, tableColumns);
 
-        return model;
-    }
+      } catch (Exception e) {
+         JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+      }
 
-    public DefaultListModel getListModelBeans() {
-        DefaultListModel<BeanModel> model = new DefaultListModel<BeanModel>();
+      return model;
+   }
 
-        try {
-            // Query which returns just the Bean ID and Name.
-            ResultSet rs = DataService.getInstance().getBeanIdsAndNames();
+   /**
+    * This builds and returns the fully populated and ready to render DefaultTableModel which backs the main JTable of roast log data. Note that I extended the standard
+    * DefaultTableModel and tacked on a sprinkle of logic to make all table cells non-editable. I'm lazy and just don't want to code the headache of letting you also do
+    * direct data updates via the JTable....
+    *
+    * @return
+    */
+   public NonEditableTableModel getTableModelRoastLogsByBeanId(String beanId) {
+      Vector<Vector<Object>> dataContainer = new Vector<Vector<Object>>();
+      Vector<String> columnNames = new Vector<String>();
 
-            while (rs.next()) {
-                Float density = rs.getFloat("Density");
-                model.addElement(new BeanModel(rs.getString("Id"), rs.getString("Name"), String.format("%.2f", density), rs.getInt("InStock")));
-            }
+      try {
+         ResultSet rs = DataService.getInstance().getRoastLogsByBeanId(beanId);
 
-        } catch (Exception e) {
-            Logger.getLogger(RoastLogEdit.class.getName()).log(Level.SEVERE, e.getMessage());
-        }
+         columnNames = getColumns("RoastLog");
 
-        return model;
-    }
+         // column names are cached after the first call.
+         if (columnNames == null) {
+            columnNames = getColumnsFromResultSet(rs);
+            TABLE_COLUMNS.put("RoastLog", columnNames);
+         }
 
-    public NonEditableTableModel getTableModelBeans() {
-        Vector<String> tableColumns = this.getColumns("Beans");
-        Vector<Vector<Object>> tableData = new Vector<Vector<Object>>();
-        NonEditableTableModel model = null;
+         Vector<Object> data = null;
 
-        try {
-            ResultSet rs = DataService.getInstance().getBeans();
+         while (rs.next()) {
+            data = new Vector<Object>();
 
-            // column names are cached after the first call.
-            if (tableColumns == null) {
-                tableColumns = getColumnsFromResultSet(rs);
-                TABLE_COLUMNS.put("Beans", tableColumns);
-            }
-
-            // Enforce an ISP-8601 datetime format.
-            DateFormat formatterDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-
-            while (rs.next()) {
-                Vector<Object> data = new Vector<Object>();
-
-                // Be sure you add the data in the same order as the columns are set in getColumnsBeans() above.
-                data.add(rs.getString("Id"));
-                data.add(rs.getInt("InStock"));
-                data.add(rs.getString("Name"));
-                data.add(Utility.sqlFloatToString(rs.getFloat("Density"), "%.2f"));
-                data.add(rs.getString("GrindSetting"));
-                data.add(rs.getString("Altitude"));
-                data.add(rs.getString("ProcessMethod"));
-                data.add(rs.getFloat("Price"));
-                data.add(rs.getInt("WeightInPounds"));
-                data.add(Utility.sqlFloatToString(rs.getFloat("PricePerPound"), "%.2f"));
-                data.add(rs.getString("Vendor"));
-                data.add(rs.getString("Origin"));
-                data.add(rs.getString("Variety"));
-                data.add(rs.getFloat("DensityGrams"));
-                data.add(rs.getInt("Anaerobic"));
-                data.add(rs.getString("Comments"));
-
-                tableData.add(data);
-            }
-
-            model = new NonEditableTableModel(tableData, tableColumns);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        return model;
-    }
-
-    /**
-     * This builds and returns the fully populated and ready to render
-     * DefaultTableModel which backs the main JTable of roast log data. Note
-     * that I extended the standard DefaultTableModel and tacked on a sprinkle
-     * of logic to make all table cells non-editable. I'm lazy and just don't
-     * want to code the headache of letting you also do direct data updates via
-     * the JTable....
-     *
-     * @return
-     */
-    public NonEditableTableModel getTableModelRoastLogsByBeanId(String beanId) {
-        Vector<Vector<Object>> dataContainer = new Vector<Vector<Object>>();
-        Vector<String> columnNames = new Vector<String>();
-
-        try {
-            ResultSet rs = DataService.getInstance().getRoastLogsByBeanId(beanId);
-
-            columnNames = getColumns("RoastLog");
-
-            // column names are cached after the first call.
-            if (columnNames == null) {
-                columnNames = getColumnsFromResultSet(rs);
-                TABLE_COLUMNS.put("RoastLog", columnNames);
-            }
-
-            Vector<Object> data = null;
-
-            while (rs.next()) {
-                data = new Vector<Object>();
-
-                // Be sure you add the data in the same order as the columns are in the related SQL statement.
-                data.add(rs.getString("Id"));
-                data.add(rs.getString("BeanId"));
-                data.add(Utility.sqlDateToString(rs.getDate("RoastStart"), "MM/dd/yyyy hh:mm a"));
-                data.add(rs.getString("RoastLevel"));
-                //data.add(String.format("%.2f", rs.getFloat("Density")));
-                data.add(Utility.sqlFloatToString(rs.getFloat("GreenWeight"), "%5.1f"));
-                data.add(Utility.sqlFloatToString(rs.getFloat("RoastedWeight"), "%5.1f"));
-                data.add(Utility.sqlFloatToString(rs.getFloat("MoistureLossPercentage"), "%5.1f"));
-                //data.add(Utility.sqlDateToString(rs.getDate("RoastStart"), "MM/dd/yyyy hh:mm a"));
-                data.add(rs.getString("TotalRoastTime"));
-                data.add(rs.getString("TotalDryTime"));
-                data.add(rs.getString("TotalBrowningTime"));
-                data.add(rs.getString("TotalFirstCrackTime"));
-                data.add(rs.getString("TotalDevelopmentTime"));
+            // Be sure you add the data in the same order as the columns are in the related SQL statement.
+            data.add(rs.getString("Id"));
+            data.add(rs.getString("BeanId"));
+            data.add(Utility.sqlDateToString(rs.getDate("RoastStart"), "MM/dd/yyyy hh:mm a"));
+            data.add(rs.getString("RoastLevel"));
+            //data.add(String.format("%.2f", rs.getFloat("Density")));
+            data.add(Utility.sqlFloatToString(rs.getFloat("GreenWeight"), "%5.1f"));
+            data.add(Utility.sqlFloatToString(rs.getFloat("RoastedWeight"), "%5.1f"));
+            data.add(Utility.sqlFloatToString(rs.getFloat("MoistureLossPercentage"), "%5.1f"));
+            //data.add(Utility.sqlDateToString(rs.getDate("RoastStart"), "MM/dd/yyyy hh:mm a"));
+            data.add(rs.getString("TotalRoastTime"));
+            data.add(rs.getString("TotalDryTime"));
+            data.add(rs.getString("TotalBrowningTime"));
+            data.add(rs.getString("TotalFirstCrackTime"));
+            data.add(rs.getString("TotalDevelopmentTime"));
 
 //                data.add(Utility.sqlFloatToString(rs.getFloat("MoistureLossWeight"), "%5.1f"));
-                data.add(rs.getString("RoastNotes"));
-                data.add(rs.getString("TastingNotes"));
+            data.add(rs.getString("RoastNotes"));
+            data.add(rs.getString("TastingNotes"));
 
-                dataContainer.add(data);
-            }
+            dataContainer.add(data);
+         }
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+      } catch (Exception e) {
+         JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+      }
 
-        return new NonEditableTableModel(dataContainer, columnNames);
-    }
+      return new NonEditableTableModel(dataContainer, columnNames);
+   }
 
-    public void hideColumnsBeans(JTable table) {
-        this.hideColumn(table, "Id");
-        this.hideColumn(table, "Comments");
-    }
+   public void hideColumnsBeans(JTable table) {
+      this.hideColumn(table, "Id");
+      this.hideColumn(table, "Comments");
+   }
 
-    /**
-     * Simple method to hide columns in the Roast Log JTable, to reduce visual
-     * clutter, hide primary keys, etc.
-     *
-     * @param table The Roast Lot JTable that will have some of its columns
-     * hidden,
-     */
-    public void hideColumnsRoastLog(JTable table) {
-        this.hideColumn(table, "Id");
-        this.hideColumn(table, "Bean Id");
-        this.hideColumn(table, "Green Weight");
-        this.hideColumn(table, "Roasted Weight");
-        this.hideColumn(table, "Moisture Loss %");
-        this.hideColumn(table, "Tasting Notes");
-        this.hideColumn(table, "Roast Notes");
-        this.hideColumn(table, "Tasting Notes");
-        
-    }
+   /**
+    * Simple method to hide columns in the Roast Log JTable, to reduce visual clutter, hide primary keys, etc.
+    *
+    * @param table The Roast Lot JTable that will have some of its columns hidden,
+    */
+   public void hideColumnsRoastLog(JTable table) {
+      this.hideColumn(table, "Id");
+      this.hideColumn(table, "Bean Id");
+      this.hideColumn(table, "Green Weight");
+      this.hideColumn(table, "Roasted Weight");
+      this.hideColumn(table, "Moisture Loss %");
+      this.hideColumn(table, "Tasting Notes");
+      this.hideColumn(table, "Roast Notes");
+      this.hideColumn(table, "Tasting Notes");
 
-    /**
-     * The actual implementation of hiding a column consists of just setting all
-     * of its width-related properties to zero, where this could be reverted on
-     * demand at any time by setting a width on these values from code.
-     *
-     * @param table A reference to the JTable object for which you wan to hide
-     * one of its columns.
-     *
-     * @param columnName The name of the column to be hidden.
-     */
-    private void hideColumn(JTable table, String columnName) {
-        TableColumn col = table.getColumn(columnName);
-        col.setPreferredWidth(0);
-        col.setMinWidth(0);
-        col.setWidth(0);
-        col.setMaxWidth(0);
-    }
+   }
 
-    /**
-     * The actual implementation of the logic to set a column's width.
-     *
-     * @param table A reference to the Roast Log JTable.
-     *
-     * @param columnName The name of the column to have its width adjusted.
-     *
-     * @param width The desired column width sort/kinda in pixelcount.
-     */
+   /**
+    * The actual implementation of hiding a column consists of just setting all of its width-related properties to zero, where this could be reverted on demand at any time
+    * by setting a width on these values from code.
+    *
+    * @param table A reference to the JTable object for which you wan to hide one of its columns.
+    *
+    * @param columnName The name of the column to be hidden.
+    */
+   private void hideColumn(JTable table, String columnName) {
+      TableColumn col = table.getColumn(columnName);
+      col.setPreferredWidth(0);
+      col.setMinWidth(0);
+      col.setWidth(0);
+      col.setMaxWidth(0);
+   }
+
+   /**
+    * The actual implementation of the logic to set a column's width.
+    *
+    * @param table A reference to the Roast Log JTable.
+    *
+    * @param columnName The name of the column to have its width adjusted.
+    *
+    * @param width The desired column width sort/kinda in pixelcount.
+    */
 //    private void setColumnWidth(JTable table, String columnName, int width) {
 //        TableColumn col = table.getColumn(columnName);
 //        col.setPreferredWidth(width);
 //        col.setMinWidth(width);
 //        col.setWidth(width);
 //    }
-    public void setupTableBeans(JTable table) {
-        TableService.getInstance().hideColumnsBeans(table);
+   public void setupTableBeans(JTable table) {
+      TableService.getInstance().hideColumnsBeans(table);
 
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        table.setIntercellSpacing(new Dimension(20, 20));
-        table.setRowHeight(40);
+      table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+      table.setIntercellSpacing(new Dimension(20, 20));
+      table.setRowHeight(40);
 
-        TableModel model = table.getModel();
+      TableModel model = table.getModel();
 
-        if (model.getRowCount() > 0) {
-            // auto-select the first row.            
-            table.setRowSelectionInterval(0, 0);
-        }
+      if (model.getRowCount() > 0) {
+         // auto-select the first row.            
+         table.setRowSelectionInterval(0, 0);
+      }
 
-        IconTableCellRenderer iconRenderer = new IconTableCellRenderer();
-        iconRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+      IconTableCellRenderer iconRenderer = new IconTableCellRenderer();
+      iconRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 
-        table.getColumnModel().getColumn(getColumnIndex("Beans", "In Stock")).setCellRenderer(iconRenderer);
-        table.getColumnModel().getColumn(getColumnIndex("Beans", "Anaerobic")).setCellRenderer(iconRenderer);
+      table.getColumnModel().getColumn(getColumnIndex("Beans", "In Stock")).setCellRenderer(iconRenderer);
+      table.getColumnModel().getColumn(getColumnIndex("Beans", "Anaerobic")).setCellRenderer(iconRenderer);
 
-        DefaultTableCellRenderer rendererRight = new DefaultTableCellRenderer();
-        rendererRight.setHorizontalAlignment(SwingConstants.RIGHT);
-        
-        DefaultTableCellRenderer rendererCenter = new DefaultTableCellRenderer();
-        rendererCenter.setHorizontalAlignment(SwingConstants.CENTER);
+      DefaultTableCellRenderer rendererRight = new DefaultTableCellRenderer();
+      rendererRight.setHorizontalAlignment(SwingConstants.RIGHT);
 
-        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Density")).setCellRenderer(rendererRight);
-        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Price")).setCellRenderer(rendererRight);
-        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Weight In Pounds")).setCellRenderer(rendererRight);
-        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Price Per Pound")).setCellRenderer(rendererRight);
-        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Grind Setting")).setCellRenderer(rendererCenter);
+      DefaultTableCellRenderer rendererCenter = new DefaultTableCellRenderer();
+      rendererCenter.setHorizontalAlignment(SwingConstants.CENTER);
 
-        this.adjustTableColumnWidths(table);
-    }
+      table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Density")).setCellRenderer(rendererRight);
+      table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Price")).setCellRenderer(rendererRight);
+      table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Weight In Pounds")).setCellRenderer(rendererRight);
+      table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Price Per Pound")).setCellRenderer(rendererRight);
+      table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("Beans", "Grind Setting")).setCellRenderer(rendererCenter);
 
-    /**
-     * Performs setup duties for the Roast Log table.
-     *
-     * @param table A reference to the Roast Log table.
-     * @param roastNotes A reference to the roast notes textarea field.
-     * @param tastingNotes A reference to the tasting notes textarea field.
-     */
-    public void setupTableRoastLog(JTable table, JTextArea roastNotes, JTextArea tastingNotes) {
+      this.adjustTableColumnWidths(table);
+   }
 
-        TableService.getInstance().hideColumnsRoastLog(table);
+   /**
+    * Performs setup duties for the Roast Log table.
+    *
+    * @param table A reference to the Roast Log table.
+    * @param roastNotes A reference to the roast notes textarea field.
+    * @param tastingNotes A reference to the tasting notes textarea field.
+    */
+   public void setupTableRoastLog(JTable table, JTextArea roastNotes, JTextArea tastingNotes) {
 
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        table.setIntercellSpacing(new Dimension(10, 10));
-        table.setRowHeight(40);
+      TableService.getInstance().hideColumnsRoastLog(table);
 
-        TableModel model = table.getModel();
+      table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+      table.setIntercellSpacing(new Dimension(10, 10));
+      table.setRowHeight(40);
 
-        if (model.getRowCount() > 0) {
-            table.setRowSelectionInterval(0, 0);
-            roastNotes.setText((String) model.getValueAt(0, getColumnIndex("RoastLog", "Roast Notes")));
-            tastingNotes.setText((String) model.getValueAt(0, getColumnIndex("RoastLog", "Tasting Notes")));
-        } else {
-            roastNotes.setText("");
-            tastingNotes.setText("");
-        }
+      TableModel model = table.getModel();
 
-        this.adjustTableColumnWidths(table);
-    }
+      if (model.getRowCount() > 0) {
+         table.setRowSelectionInterval(0, 0);
+         roastNotes.setText((String) model.getValueAt(0, getColumnIndex("RoastLog", "Roast Notes")));
+         tastingNotes.setText((String) model.getValueAt(0, getColumnIndex("RoastLog", "Tasting Notes")));
+      } else {
+         roastNotes.setText("");
+         tastingNotes.setText("");
+      }
+
+      this.adjustTableColumnWidths(table);
+   }
 }

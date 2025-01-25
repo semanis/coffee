@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
+import java.util.Date;
 import javax.swing.AbstractAction;
 import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
@@ -657,6 +658,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         
         RoastLogEdit rle = new com.smanis.coffee.forms.RoastLogEdit(this, true);
         rle.setBeanModel(beanModel);
+        rle.setRoastStartDate(new Date());
         rle.setVisible(true);
 
         if (rle.wasInserted == true) {
