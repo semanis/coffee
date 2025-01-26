@@ -911,9 +911,16 @@ public class RoastLogEdit extends javax.swing.JDialog {
 
       AppPreferences.loadWindowPreferences(RoastLogEdit.this);
 
+      // These are default values for when you're adding a new Roast Log. 
+      // If you're editing a Roast Log, the setRoastLogId() method overriees
+      // these values;
+      this.ftGreenWeight.setValue("250.0");
+      this.textAreaRoastNotes.setText("Start: F8 / P2\n\n");
+
       // Nice little use of a Java Lamba to set the initial field focus.
       Runnable runner = () -> this.ftGreenWeight.requestFocus();
       SwingUtilities.invokeLater(runner);
+
    }
 
    //
