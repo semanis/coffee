@@ -286,6 +286,7 @@ public class TableService {
             data.add(rs.getString("Id"));
             data.add(rs.getString("BeanId"));
             data.add(Utility.sqlDateToString(rs.getDate("RoastStart"), "MM/dd/yyyy hh:mm a"));
+            System.out.println(Utility.sqlDateToString(rs.getDate("RoastStart"), "MM/dd/yyyy hh:mm a"));
             data.add(rs.getString("RoastLevel"));
             //data.add(String.format("%.2f", rs.getFloat("Density")));
             data.add(Utility.sqlFloatToString(rs.getFloat("GreenWeight"), "%5.1f"));
