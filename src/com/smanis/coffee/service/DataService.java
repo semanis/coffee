@@ -328,12 +328,12 @@ public final class DataService {
             break;
 
          case "getRoastLogsByBeanId":
-            query = "SELECT r.Id, r.BeanId, r.RoastStart, r.RoastLevel, r.GreenWeight, r.RoastedWeight, "
-                + "r.MoistureLossPercentage, r.TotalRoastTime, r.TotalDryTime, r.TotalBrowningTime, "
-                + "r.TotalFirstCrackTime, r.TotalDevelopmentTime, r.RoastNotes, r.TastingNotes  "
-                + "FROM RoastLog r, Beans b "
-                + "WHERE r.BeanId = b.Id AND r.BeanId = ? "
-                + "ORDER BY r.RoastStart DESC,  b.Name ASC";
+            query = "SELECT Id, BeanId, RoastStart, RoastLevel, GreenWeight, RoastedWeight, "
+                + "MoistureLossPercentage, TotalRoastTime, TotalDryTime, TotalBrowningTime, "
+                + "TotalFirstCrackTime, TotalDevelopmentTime, RoastNotes, TastingNotes "
+                + "FROM RoastLog "
+                + "WHERE BeanId = ? "
+                + "ORDER BY RoastStart DESC";
             break;
 
          case "getRoastLogById":

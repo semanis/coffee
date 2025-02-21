@@ -132,9 +132,11 @@ public class TableService {
 
       for (int i = 1; i <= columnCount; i++) {
          String columnName = metaData.getColumnName(i);
+
          String[] splitColumnName = columnName.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
          String splitName = "";
          for (String word : splitColumnName) {
+            // convert the word "Percentage" to "%".
             if (word.equals("Percentage")) {
                word = "%";
             } else if (word.equals("Total")) {
@@ -286,20 +288,36 @@ public class TableService {
             data.add(rs.getString("Id"));
             data.add(rs.getString("BeanId"));
             data.add(Utility.sqlDateToString(rs.getDate("RoastStart"), "MM/dd/yyyy hh:mm a"));
-            System.out.println(Utility.sqlDateToString(rs.getDate("RoastStart"), "MM/dd/yyyy hh:mm a"));
-            data.add(rs.getString("RoastLevel"));
+
+            String roastLevel = rs.getString("RoastLevel");
+
+            if (roastLevel.startsWith("City Minus")) {
+               roastLevel += " (11.5%)";
+            } else if (roastLevel.startsWith("City / Light")) {
+               roastLevel += " (12.7%)";
+            } else if (roastLevel.startsWith("City Plus")) {
+               roastLevel += " (13.3%)";
+            } else if (roastLevel.startsWith("Full City /")) {
+               roastLevel += " (14.5%)";
+            } else if (roastLevel.startsWith("Full City Plus")) {
+               roastLevel += " (15.1%)";
+            } else if (roastLevel.startsWith("French")) {
+               roastLevel += " (15.6%)";
+            } else if (roastLevel.startsWith("Burnt")) {
+               roastLevel += " (16.6%)";
+            }
+
+            data.add(roastLevel);
+
             //data.add(String.format("%.2f", rs.getFloat("Density")));
             data.add(Utility.sqlFloatToString(rs.getFloat("GreenWeight"), "%5.1f"));
             data.add(Utility.sqlFloatToString(rs.getFloat("RoastedWeight"), "%5.1f"));
             data.add(Utility.sqlFloatToString(rs.getFloat("MoistureLossPercentage"), "%5.1f"));
-            //data.add(Utility.sqlDateToString(rs.getDate("RoastStart"), "MM/dd/yyyy hh:mm a"));
             data.add(rs.getString("TotalRoastTime"));
             data.add(rs.getString("TotalDryTime"));
             data.add(rs.getString("TotalBrowningTime"));
             data.add(rs.getString("TotalFirstCrackTime"));
             data.add(rs.getString("TotalDevelopmentTime"));
-
-//                data.add(Utility.sqlFloatToString(rs.getFloat("MoistureLossWeight"), "%5.1f"));
             data.add(rs.getString("RoastNotes"));
             data.add(rs.getString("TastingNotes"));
 
@@ -328,7 +346,7 @@ public class TableService {
       this.hideColumn(table, "Bean Id");
       this.hideColumn(table, "Green Weight");
       this.hideColumn(table, "Roasted Weight");
-      this.hideColumn(table, "Moisture Loss %");
+      //this.hideColumn(table, "Moisture Loss %");
       this.hideColumn(table, "Tasting Notes");
       this.hideColumn(table, "Roast Notes");
       this.hideColumn(table, "Tasting Notes");
