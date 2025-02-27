@@ -661,7 +661,6 @@ public class CoffeeFrame extends javax.swing.JFrame {
       RoastLogEdit rle = new com.smanis.coffee.forms.RoastLogEdit(this, true);
       rle.setBeanModel(beanModel);
       rle.setRoastStartDate(new Date());
-      rle.setGreenWeight("250.0");
       rle.setVisible(true);
 
       if (rle.wasInserted == true) {
