@@ -293,6 +293,7 @@ public class BeanEdit extends javax.swing.JDialog {
         panelDetails.add(labelDensityGrams, gridBagConstraints);
 
         textDensityGrams.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        textDensityGrams.setFocusable(false);
         textDensityGrams.setMinimumSize(new java.awt.Dimension(104, 28));
         textDensityGrams.setPreferredSize(new java.awt.Dimension(104, 28));
         textDensityGrams.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -318,7 +319,6 @@ public class BeanEdit extends javax.swing.JDialog {
 
         textDensity.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         textDensity.setText(".00");
-        textDensity.setEnabled(false);
         textDensity.setFocusable(false);
         textDensity.setMaximumSize(new java.awt.Dimension(80, 28));
         textDensity.setMinimumSize(new java.awt.Dimension(80, 28));
@@ -420,10 +420,14 @@ public class BeanEdit extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
         panelDetails.add(textGrindSetting, gridBagConstraints);
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
         textAreaComments.setColumns(20);
         textAreaComments.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        textAreaComments.setLineWrap(true);
         textAreaComments.setRows(5);
         textAreaComments.setWrapStyleWord(true);
+        textAreaComments.setMinimumSize(new java.awt.Dimension(412, 124));
         textAreaComments.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textAreaCommentsFocusGained(evt);
@@ -635,7 +639,7 @@ public class BeanEdit extends javax.swing.JDialog {
                 this.comboProcess.setSelectedItem(rs.getString("ProcessMethod"));
 
                 float densityGrams = rs.getFloat("DensityGrams");
-                String formattedDensityGrams = (densityGrams == 0.0) ? "000.00" : Utility.sqlFloatToString(densityGrams, "%6.2f");
+                String formattedDensityGrams = (densityGrams == 0.0) ? "000.0" : Utility.sqlFloatToString(densityGrams, "%5.1f");
                 this.textDensityGrams.setText(formattedDensityGrams);
 
                 this.textDensity.setText(Utility.sqlFloatToString(rs.getFloat("Density"), "%4.2f"));
@@ -686,7 +690,7 @@ public class BeanEdit extends javax.swing.JDialog {
 
         String stringDensityGrams = this.textDensityGrams.getText();
         if (stringDensityGrams.isBlank()) {
-            stringDensityGrams = "000.00";
+            stringDensityGrams = "000.0";
         }
 
         map.put("DensityGrams", Float.valueOf(stringDensityGrams).floatValue());
@@ -694,6 +698,7 @@ public class BeanEdit extends javax.swing.JDialog {
         map.put("InStock", this.checkboxInStock.isSelected() ? 1 : 0);
         map.put("GrindSetting", this.textGrindSetting.getText());
         map.put("Id", this.beanId);
+        map.put("Comments", this.textAreaComments.getText());
 
         try {
             if (this.beanId.equals("")) {
