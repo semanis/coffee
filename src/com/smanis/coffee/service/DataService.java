@@ -15,7 +15,7 @@ import java.util.HashMap;
 public final class DataService {
 
    private static DataService INSTANCE;
-   private Connection conn = null;
+ //  private Connection conn = null;
    private static String dbLogin;
    private static String dbPassword;
 
@@ -52,18 +52,15 @@ public final class DataService {
    }
 
    /**
-    * Gets a Connection to the database, noting that the Connection object is also cached as a Singleton in this class.
+    * Gets a Connection to the database.  I would normally cache the Connection as a Singleton,  but I like to leave the app running
+    * when I suspend my roasting laptop, where this causes the Connection to time out and throw an error.
     *
     * @return A JDBC Connection object.
     *
     * @throws Exception If an error occurs when creating a Connection.
     */
    public Connection getConnection() throws Exception {
-      if (this.conn == null) {
-         this.conn = DriverManager.getConnection("jdbc:mariadb://192.168.0.254:3306/Coffee", DataService.dbLogin, DataService.dbPassword);
-      }
-
-      return this.conn;
+      return DriverManager.getConnection("jdbc:mariadb://192.168.0.254:3306/Coffee", DataService.dbLogin, DataService.dbPassword);
    }
 
    public void deleteBean(String beanId) throws Exception {
