@@ -295,7 +295,7 @@ public final class DataService {
 
          case "getBeanIdsAndNames":
             query = "SELECT " + ""
-                + "Id, Name, Density, InStock "
+                + "Id, Name, Density, InStock, Comments "
                 + "FROM Beans "
                 + "ORDER BY Name";
             break;
