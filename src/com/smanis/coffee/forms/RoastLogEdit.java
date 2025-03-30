@@ -319,6 +319,7 @@ public class RoastLogEdit extends javax.swing.JDialog {
         panelTimes.add(btnStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 140, -1));
 
         ftStartTime.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("##:##:##")));
+        ftStartTime.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ftStartTime.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         ftStartTime.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         ftStartTime.setMaximumSize(new java.awt.Dimension(110, 34));
@@ -348,6 +349,7 @@ public class RoastLogEdit extends javax.swing.JDialog {
         panelTimes.add(btnDryEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 140, -1));
 
         ftDryEnd.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("##:##:##")));
+        ftDryEnd.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ftDryEnd.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         ftDryEnd.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         ftDryEnd.setMaximumSize(new java.awt.Dimension(110, 34));
@@ -380,6 +382,7 @@ public class RoastLogEdit extends javax.swing.JDialog {
         panelTimes.add(btnFcStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 140, -1));
 
         ftFcStart.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("##:##:##")));
+        ftFcStart.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ftFcStart.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         ftFcStart.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         ftFcStart.setMaximumSize(new java.awt.Dimension(110, 34));
@@ -412,6 +415,7 @@ public class RoastLogEdit extends javax.swing.JDialog {
         panelTimes.add(btnFcEnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 140, -1));
 
         ftFcEnd.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("##:##:##")));
+        ftFcEnd.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ftFcEnd.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         ftFcEnd.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         ftFcEnd.setMaximumSize(new java.awt.Dimension(110, 34));
@@ -444,6 +448,7 @@ public class RoastLogEdit extends javax.swing.JDialog {
         panelTimes.add(btnEndRoast, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 30, 140, -1));
 
         ftEndRoast.setFormatterFactory(new DefaultFormatterFactory(Utility.getMaskFormatter("##:##:##")));
+        ftEndRoast.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ftEndRoast.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         ftEndRoast.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         ftEndRoast.setMaximumSize(new java.awt.Dimension(110, 34));
