@@ -17,5 +17,8 @@ public class Constants
   
   public static final String AUTO_START_TIMER = "auto-start-time";
   public static final String REMEMBERED_USERNAME = "remembered-username";
+  public static final String REMEMBERED_PWORD = "remembered-pword";
+  
   public static final String SHOULD_REMEMBER_USERNAME = "should-remember-username";
+
 }

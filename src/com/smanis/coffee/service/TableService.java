@@ -9,6 +9,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
@@ -88,7 +89,8 @@ public class TableService {
          }
 
          String headerValue = (String) tableColumn.getHeaderValue();
-         FontMetrics metrics = table.getGraphics().getFontMetrics(new Font("Liberation Sans", Font.PLAIN, 20));
+                 
+         FontMetrics metrics = table.getFontMetrics(new Font(Font.DIALOG,  Font.PLAIN, 20));
          int headerWidth = metrics.stringWidth(headerValue);
 
          if (headerWidth > preferredWidth) {

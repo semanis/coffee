@@ -92,6 +92,15 @@ public class AppPreferences
       return AppPreferences.getPrefs().get(Constants.REMEMBERED_USERNAME, "");
   }
   
+
+  public static void setRememberedPword(String pword) {
+      AppPreferences.getPrefs().put(Constants.REMEMBERED_PWORD, pword);
+  }
+
+  public static String getRememberedPword() {
+      return AppPreferences.getPrefs().get(Constants.REMEMBERED_PWORD, "");
+  }
+  
 }
 
 
