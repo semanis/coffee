@@ -1,5 +1,3 @@
-/*
- */
 package com.smanis.coffee.forms;
 
 import com.smanis.coffee.AppPreferences;

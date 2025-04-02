@@ -9,7 +9,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
-import java.awt.Graphics;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
@@ -191,8 +190,8 @@ public class TableService {
    }
 
    public DefaultListModel getListModelBeans() {
+      //DefaultListModel<BeanModel> model = new DefaultListModel<BeanModel>();
       DefaultListModel<BeanModel> model = new DefaultListModel<BeanModel>();
-
       try {
          // Query which returns just the Bean ID and Name.
          ResultSet rs = DataService.getInstance().getBeanIdsAndNames();

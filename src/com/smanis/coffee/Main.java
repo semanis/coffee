@@ -23,11 +23,11 @@ public class Main {
                 try {
                     
                     // System.out.println(String.format("%d", 0));
-                    UIManager.put("OptionPane.buttonFont", new Font("Liberation Sans", Font.PLAIN, 20));
-                    UIManager.put("OptionPane.messageFont", new Font("Liberation Sans", Font.BOLD, 20));
-                    UIManager.put("OptionPane.titleText", new Font("Liberation Sans", Font.BOLD, 20));
+                    UIManager.put("OptionPane.buttonFont", new Font("Dialog", Font.PLAIN, 20));
+                    UIManager.put("OptionPane.messageFont", new Font("Dialog", Font.BOLD, 20));
+                    UIManager.put("OptionPane.titleText", new Font("Dialog", Font.BOLD, 20));
 
-                    setUIFont(new FontUIResource(new Font("Liberation Sans", Font.PLAIN, 20)));
+                    setUIFont(new FontUIResource(new Font("Dialog", Font.PLAIN, 20)));
 
                     // If a look and feel was saved to preferences, restore the look and feel.
                     String lookAndFeel = AppPreferences.getSettingsPrefs().get("lookAndFeel", "");
@@ -45,7 +45,7 @@ public class Main {
                     } else {
                         dbLogin.dispose();
 
-                        CoffeeFrame mainFrame = new CoffeeFrame();
+                        com.smanis.coffee.forms.CoffeeFrame mainFrame = new com.smanis.coffee.forms.CoffeeFrame();
                         mainFrame.setVisible(true);
                     }
                 } catch (Exception e) {
