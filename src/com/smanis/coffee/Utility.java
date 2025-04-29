@@ -106,6 +106,29 @@ public class Utility {
       return formatter.format(time);
    }
 
+
+   public static String getRoastLevel(float moistureLossPercentage) {
+      String roastLevel = "";
+
+      if (moistureLossPercentage < 12.7) {
+         roastLevel = "City Minus / Cinnamon (11.5%)";
+      } else if (moistureLossPercentage < 13.3) {
+         roastLevel = "City (12.7%)";
+      } else if (moistureLossPercentage < 14.5) {
+         roastLevel = "City Plus / Light-Medium (13.3%)";
+      } else if (moistureLossPercentage < 15.1) {
+         roastLevel = "Full City / Full Medium (14.5%)";
+      } else if (moistureLossPercentage < 15.6) {
+         roastLevel = "Full City Plus / Medium-Dark (15.1%)";
+      } else if (moistureLossPercentage < 16.6) {
+         roastLevel = "French Roast (15.6%)";
+      } else {
+         roastLevel = "Burnt (16.6%+)";
+      }
+      
+      return roastLevel;
+   }
+
    /**
     * Convenience method to calculate the minutes/seconds between two time-based fields.
     *

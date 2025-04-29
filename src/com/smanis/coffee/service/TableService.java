@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
@@ -49,20 +50,23 @@ public class TableService {
    // private/static property holds the static instance of the service.
    private static TableService INSTANCE = null;
 
-   private static Hashtable<String, Vector<String>> TABLE_COLUMNS = new Hashtable<String, Vector<String>>();
+   private static HashMap<String, Vector<String>> TABLE_COLUMNS = new HashMap<String, Vector<String>>();
 
+   private static final HashMap<String, HashMap<String, ColumnMapping>> COLUMNS = new HashMap<String, HashMap<String, ColumnMapping>>();
+           
    // constructor is private, so the class can't be directly instantiated.
    private TableService() {
    }
 
    /**
     * The only way to get at the service is via this method, thereby enforcing its singleton-ness.
+    * @return TableService
     */
    public static TableService getInstance() {
       if (INSTANCE == null) {
          INSTANCE = new TableService();
       }
-
+      
       return INSTANCE;
    }
 
@@ -192,6 +196,7 @@ public class TableService {
    public DefaultListModel getListModelBeans() {
       //DefaultListModel<BeanModel> model = new DefaultListModel<BeanModel>();
       DefaultListModel<BeanModel> model = new DefaultListModel<BeanModel>();
+      
       try {
          // Query which returns just the Bean ID and Name.
          ResultSet rs = DataService.getInstance().getBeanIdsAndNames();
@@ -266,17 +271,33 @@ public class TableService {
     * @return
     */
    public NonEditableTableModel getTableModelRoastLogsByBeanId(String beanId) {
+      Vector<String> columnNames = new Vector<String>() {{
+         add("Id");
+         add("Bean Id");
+         add("Roast Start");
+         add("Roast Level");
+         add("Green Weight");
+         add("Roasted Weight");
+         add("Moist. Loss");
+         add("Roast Time");
+         add("Dry Time");
+         add("Browning Time");
+         add("First Crack Time");
+         add("Development Time");
+         add("Roast Notes");
+         add("Tasting Notes");
+      }};
+      
       Vector<Vector<Object>> dataContainer = new Vector<Vector<Object>>();
-      Vector<String> columnNames = new Vector<String>();
 
       try {
          ResultSet rs = DataService.getInstance().getRoastLogsByBeanId(beanId);
 
-         columnNames = getColumns("RoastLog");
-
-         // column names are cached after the first call.
-         if (columnNames == null) {
-            columnNames = getColumnsFromResultSet(rs);
+//         columnNames = getColumns("RoastLog");
+//
+//         // column names are cached after the first call.
+         if (TABLE_COLUMNS.get("RoastLog") == null) {
+            //columnNames = getColumnsFromResultSet(rs);
             TABLE_COLUMNS.put("RoastLog", columnNames);
          }
 
@@ -289,31 +310,16 @@ public class TableService {
             data.add(rs.getString("Id"));
             data.add(rs.getString("BeanId"));
             data.add(Utility.sqlDateToString(rs.getDate("RoastStart"), "MM/dd/yyyy hh:mm a"));
-
-            String roastLevel = rs.getString("RoastLevel");
-
-            if (roastLevel.startsWith("City Minus")) {
-               roastLevel += " (11.5%)";
-            } else if (roastLevel.startsWith("City / Light")) {
-               roastLevel += " (12.7%)";
-            } else if (roastLevel.startsWith("City Plus")) {
-               roastLevel += " (13.3%)";
-            } else if (roastLevel.startsWith("Full City /")) {
-               roastLevel += " (14.5%)";
-            } else if (roastLevel.startsWith("Full City Plus")) {
-               roastLevel += " (15.1%)";
-            } else if (roastLevel.startsWith("French")) {
-               roastLevel += " (15.6%)";
-            } else if (roastLevel.startsWith("Burnt")) {
-               roastLevel += " (16.6%)";
-            }
-
-            data.add(roastLevel);
-
+            data.add(Utility.getRoastLevel(rs.getFloat("MoistureLossPercentage")));
             //data.add(String.format("%.2f", rs.getFloat("Density")));
-            data.add(Utility.sqlFloatToString(rs.getFloat("GreenWeight"), "%5.1f"));
-            data.add(Utility.sqlFloatToString(rs.getFloat("RoastedWeight"), "%5.1f"));
-            data.add(Utility.sqlFloatToString(rs.getFloat("MoistureLossPercentage"), "%5.1f"));
+
+            String greenWeight = Utility.sqlFloatToString(rs.getFloat("GreenWeight"), "%5.1f");
+            String roastedWeight = Utility.sqlFloatToString(rs.getFloat("RoastedWeight"), "%5.1f");
+            String moistureLoss = Utility.sqlFloatToString(rs.getFloat("MoistureLossPercentage"), "%5.1f");
+            
+            data.add(greenWeight);
+            data.add(roastedWeight);
+            data.add(moistureLoss + "% (" + greenWeight + "g / " + roastedWeight + "g)");
             data.add(rs.getString("TotalRoastTime"));
             data.add(rs.getString("TotalDryTime"));
             data.add(rs.getString("TotalBrowningTime"));
@@ -329,6 +335,7 @@ public class TableService {
          JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
       }
 
+      //sList<Object> returnObjs = new List<Object>();
       return new NonEditableTableModel(dataContainer, columnNames);
    }
 
@@ -347,11 +354,8 @@ public class TableService {
       this.hideColumn(table, "Bean Id");
       this.hideColumn(table, "Green Weight");
       this.hideColumn(table, "Roasted Weight");
-      //this.hideColumn(table, "Moisture Loss %");
       this.hideColumn(table, "Tasting Notes");
       this.hideColumn(table, "Roast Notes");
-      this.hideColumn(table, "Tasting Notes");
-
    }
 
    /**
@@ -391,7 +395,9 @@ public class TableService {
       table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
       table.setIntercellSpacing(new Dimension(20, 20));
       table.setRowHeight(40);
-
+      JTableHeader header = table.getTableHeader();
+      header.setFont(new Font("Dialog", Font.PLAIN, 18));
+      
       TableModel model = table.getModel();
 
       if (model.getRowCount() > 0) {
@@ -420,6 +426,7 @@ public class TableService {
       this.adjustTableColumnWidths(table);
    }
 
+   
    /**
     * Performs setup duties for the Roast Log table.
     *
@@ -434,6 +441,8 @@ public class TableService {
       table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
       table.setIntercellSpacing(new Dimension(10, 10));
       table.setRowHeight(40);
+      JTableHeader header = table.getTableHeader();
+      header.setFont(new Font("Dialog", Font.PLAIN, 18));
 
       TableModel model = table.getModel();
 
@@ -447,5 +456,59 @@ public class TableService {
       }
 
       this.adjustTableColumnWidths(table);
+   }
+
+   
+//   private void setupTableColumns() {
+//      String tableName = "RoastLog";
+//
+//      HashMap<String, HashMap> mapTableColumns = new HashMap<>();
+//
+//      HashMap<String, ColumnMapping> mapColumnsRoastLog = new HashMap<String, ColumnMapping>();
+//      mapColumnsRoastLog.put("Id", this.buildNewColumnMapping("Id", "string"));
+//      mapColumnsRoastLog.put("BeanId", this.buildNewColumnMapping("BeanId", "string"));
+//      mapColumnsRoastLog.put("RoastStart", this.buildNewColumnMapping("RoastStart", "datetime"));          
+//      mapColumnsRoastLog.put("GreenWeight", this.buildNewColumnMapping("GreenWeight", "float"));          
+//      mapColumnsRoastLog.put("RoastedWeight", this.buildNewColumnMapping("RoastedWeight", "float"));          
+//      mapColumnsRoastLog.put("ChargeTemp", this.buildNewColumnMapping("ChargeTemp", "datetime"));          
+//      mapColumnsRoastLog.put("DryTime", this.buildNewColumnMapping("DryTime", "datetime"));          
+//      mapColumnsRoastLog.put("FirstCrackStart", this.buildNewColumnMapping("FirstCrackStart", "datetime"));          
+//      mapColumnsRoastLog.put("FirstCrackEnd", this.buildNewColumnMapping("FirstCrackEnd", "datetime"));          
+//      mapColumnsRoastLog.put("SecondCrackStart", this.buildNewColumnMapping("SecondCrackStart", "datetime"));          
+//      mapColumnsRoastLog.put("SecondCrackEnd", this.buildNewColumnMapping("SecondCrackEnd", "datetime"));          
+//      mapColumnsRoastLog.put("EndRoast", this.buildNewColumnMapping("EndRoast", "datetime"));          
+//      mapColumnsRoastLog.put("RoastNotes", this.buildNewColumnMapping("RoastNotes", "string"));          
+//      mapColumnsRoastLog.put("TastingNotes", this.buildNewColumnMapping("TastingNotes", "string"));          
+//
+////TotalRoastTime
+////TotalDryTime
+////TotalBrowningTime
+////TotalFirstCrackTime
+////TotalDevelopmentTime
+////MoistureLossWeight
+////MoistureLossPercentage
+////RoastLevel
+//
+//   }
+   
+   /**
+    * Convenience method to build a new ColumnMapping to track database table column metadata. If you don't
+    * want to translate a column name, use this method.
+    * 
+    * @param columnName {String} The database table column name.
+    * @param dataType {String} The string representation of the column's data type, e.g. 'String', 'Integer", etc. 
+    * 
+    * @return ColumnMapping A fully populated ColumnMapping object.
+    */
+   private ColumnMapping buildNewColumnMapping(String columnName, String dataType) {
+      return this.buildNewColumnMapping(columnName, null, dataType);
+   }
+
+   private ColumnMapping buildNewColumnMapping(String columnName, String translatedColumnName, String dataType) {
+      ColumnMapping cm = new ColumnMapping();
+      cm.setColumnName(columnName);
+      cm.setTranslatedColumnName(translatedColumnName);
+      cm.setDataType(dataType);
+      return cm;
    }
 }

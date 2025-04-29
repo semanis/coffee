@@ -71,13 +71,13 @@ public class CoffeeFrame extends javax.swing.JFrame {
       btnEditRoastLog = new javax.swing.JButton();
       btnDeleteRoastLog = new javax.swing.JButton();
       panelBeans = new javax.swing.JPanel();
-      jScrollPane2 = new javax.swing.JScrollPane();
-      tableBeans = new javax.swing.JTable();
       panelSummary = new javax.swing.JPanel();
       labelTotalBeans = new javax.swing.JLabel();
       textTotalBeans = new javax.swing.JTextField();
       labelInStock = new javax.swing.JLabel();
       textInStock = new javax.swing.JTextField();
+      jScrollPane2 = new javax.swing.JScrollPane();
+      tableBeans = new javax.swing.JTable();
       panelButtonsBean = new javax.swing.JPanel();
       btnAddBean = new javax.swing.JButton();
       btnEditBean = new javax.swing.JButton();
@@ -221,6 +221,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
       textRoastNotes.setRows(5);
       textRoastNotes.setWrapStyleWord(true);
       textRoastNotes.setFocusable(false);
+      textRoastNotes.setMargin(new java.awt.Insets(2, 8, 2, 6));
       textRoastNotes.setMinimumSize(new java.awt.Dimension(450, 160));
       textRoastNotes.setPreferredSize(new java.awt.Dimension(450, 160));
       jScrollPane4.setViewportView(textRoastNotes);
@@ -325,6 +326,43 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
       panelBeans.setLayout(new java.awt.GridBagLayout());
 
+      panelSummary.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+      labelTotalBeans.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
+      labelTotalBeans.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+      labelTotalBeans.setText("Total Beans:");
+      panelSummary.add(labelTotalBeans, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, -1));
+
+      textTotalBeans.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
+      textTotalBeans.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+      textTotalBeans.setText(" ");
+      textTotalBeans.setFocusable(false);
+      textTotalBeans.setMaximumSize(new java.awt.Dimension(50, 32));
+      textTotalBeans.setMinimumSize(new java.awt.Dimension(50, 32));
+      textTotalBeans.setPreferredSize(new java.awt.Dimension(50, 32));
+      panelSummary.add(textTotalBeans, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 60, -1));
+
+      labelInStock.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
+      labelInStock.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+      labelInStock.setText("In Stock:");
+      panelSummary.add(labelInStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 100, -1));
+
+      textInStock.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
+      textInStock.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+      textInStock.setFocusable(false);
+      textInStock.setMaximumSize(new java.awt.Dimension(50, 32));
+      textInStock.setMinimumSize(new java.awt.Dimension(50, 32));
+      textInStock.setPreferredSize(new java.awt.Dimension(50, 32));
+      panelSummary.add(textInStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 60, -1));
+
+      gridBagConstraints = new java.awt.GridBagConstraints();
+      gridBagConstraints.gridx = 0;
+      gridBagConstraints.gridy = 0;
+      gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+      gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+      gridBagConstraints.weightx = 1.0;
+      panelBeans.add(panelSummary, gridBagConstraints);
+
       jScrollPane2.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
 
       tableBeans.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
@@ -343,48 +381,13 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
       gridBagConstraints = new java.awt.GridBagConstraints();
       gridBagConstraints.gridx = 0;
-      gridBagConstraints.gridy = 0;
+      gridBagConstraints.gridy = 1;
       gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
       gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
       gridBagConstraints.weightx = 1.0;
       gridBagConstraints.weighty = 1.0;
       gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
       panelBeans.add(jScrollPane2, gridBagConstraints);
-
-      panelSummary.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-      labelTotalBeans.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
-      labelTotalBeans.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-      labelTotalBeans.setText("Total Beans:");
-      panelSummary.add(labelTotalBeans, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 150, -1));
-
-      textTotalBeans.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
-      textTotalBeans.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-      textTotalBeans.setText(" ");
-      textTotalBeans.setFocusable(false);
-      textTotalBeans.setMinimumSize(new java.awt.Dimension(50, 26));
-      textTotalBeans.setPreferredSize(new java.awt.Dimension(50, 26));
-      panelSummary.add(textTotalBeans, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 60, -1));
-
-      labelInStock.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
-      labelInStock.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-      labelInStock.setText("In Stock:");
-      panelSummary.add(labelInStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 100, -1));
-
-      textInStock.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
-      textInStock.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-      textInStock.setFocusable(false);
-      textInStock.setMinimumSize(new java.awt.Dimension(50, 26));
-      textInStock.setPreferredSize(new java.awt.Dimension(50, 26));
-      panelSummary.add(textInStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 60, -1));
-
-      gridBagConstraints = new java.awt.GridBagConstraints();
-      gridBagConstraints.gridx = 0;
-      gridBagConstraints.gridy = 1;
-      gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-      gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-      gridBagConstraints.weightx = 1.0;
-      panelBeans.add(panelSummary, gridBagConstraints);
 
       panelButtonsBean.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
 
