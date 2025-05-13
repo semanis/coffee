@@ -100,7 +100,7 @@ public class TableService {
             preferredWidth = headerWidth;
          }
 
-         preferredWidth += 20;
+         preferredWidth += 10;
          tableColumn.setPreferredWidth(preferredWidth);
       }
 
@@ -279,11 +279,11 @@ public class TableService {
          add("Green Weight");
          add("Roasted Weight");
          add("Moist. Loss");
-         add("Roast Time");
-         add("Dry Time");
-         add("Browning Time");
-         add("First Crack Time");
-         add("Development Time");
+         add("Roast");
+         add("Dry");
+         add("Browning");
+         add("First Crack");
+         add("Development");
          add("Roast Notes");
          add("Tasting Notes");
       }};
