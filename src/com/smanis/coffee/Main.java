@@ -1,7 +1,6 @@
 package com.smanis.coffee;
 
 import static com.smanis.coffee.Utility.setUIFont;
-import com.smanis.coffee.forms.CoffeeFrame;
 import com.smanis.coffee.forms.DatabaseLogin;
 import java.awt.Font;
 import javax.swing.UIManager;

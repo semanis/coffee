@@ -43,540 +43,563 @@ public class CoffeeFrame extends javax.swing.JFrame {
     * Form Editor.
     */
    @SuppressWarnings("unchecked")
-   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-   private void initComponents() {
-      java.awt.GridBagConstraints gridBagConstraints;
-
-      tabbedPane = new javax.swing.JTabbedPane();
-      panelRoastLogs = new javax.swing.JPanel();
-      panelRoastTable = new javax.swing.JPanel();
-      panelBeanList = new javax.swing.JPanel();
-      jScrollPane1 = new javax.swing.JScrollPane();
-      listBeans = new javax.swing.JList<>();
-      panelRoastLogTable = new javax.swing.JPanel();
-      panelTableHeader = new javax.swing.JPanel();
-      jLabel1 = new javax.swing.JLabel();
-      textDensity = new javax.swing.JTextField();
-      scrollPaneRoasts = new javax.swing.JScrollPane();
-      tableRoasts = new javax.swing.JTable();
-      panelNotes = new javax.swing.JPanel();
-      labelRoastNotes = new javax.swing.JLabel();
-      jScrollPane4 = new javax.swing.JScrollPane();
-      textRoastNotes = new javax.swing.JTextArea();
-      labelTastingNotes = new javax.swing.JLabel();
-      jScrollPane5 = new javax.swing.JScrollPane();
-      textTastingNotes = new javax.swing.JTextArea();
-      panelButtonsRoastLog = new javax.swing.JPanel();
-      btnAddRoastLog = new javax.swing.JButton();
-      btnEditRoastLog = new javax.swing.JButton();
-      btnDeleteRoastLog = new javax.swing.JButton();
-      panelBeans = new javax.swing.JPanel();
-      panelSummary = new javax.swing.JPanel();
-      labelTotalBeans = new javax.swing.JLabel();
-      textTotalBeans = new javax.swing.JTextField();
-      labelInStock = new javax.swing.JLabel();
-      textInStock = new javax.swing.JTextField();
-      jScrollPane2 = new javax.swing.JScrollPane();
-      tableBeans = new javax.swing.JTable();
-      panelButtonsBean = new javax.swing.JPanel();
-      btnAddBean = new javax.swing.JButton();
-      btnEditBean = new javax.swing.JButton();
-      btnDeleteBean = new javax.swing.JButton();
-      buttonExit = new javax.swing.JButton();
-      menuBar = new javax.swing.JMenuBar();
-      menuFile = new javax.swing.JMenu();
-      jSeparator1 = new javax.swing.JPopupMenu.Separator();
-      menuItemExit = new javax.swing.JMenuItem();
-      menuView = new javax.swing.JMenu();
-      menuLookAndFeel = new javax.swing.JMenu();
-      menuItemGtk = new javax.swing.JMenuItem();
-      menuItemMetal = new javax.swing.JMenuItem();
-      menuItemMotif = new javax.swing.JMenuItem();
-      menuItemNimbus = new javax.swing.JMenuItem();
-      menuItemWindows = new javax.swing.JMenuItem();
-      menuItemWindowsClassic = new javax.swing.JMenuItem();
-      menuHellp = new javax.swing.JMenu();
-      menuItemAbout = new javax.swing.JMenuItem();
-
-      setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-      setTitle("Coffee Roasting Log");
-      setName("roastLogs"); // NOI18N
-      addWindowListener(new java.awt.event.WindowAdapter() {
-         public void windowClosing(java.awt.event.WindowEvent evt) {
-            exitForm(evt);
-         }
-      });
-      getContentPane().setLayout(new java.awt.GridBagLayout());
-
-      tabbedPane.setFont(new java.awt.Font("Dialog.plain", 0, 24)); // NOI18N
-
-      panelRoastLogs.setLayout(new java.awt.GridBagLayout());
-
-      panelRoastTable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-      panelRoastTable.setLayout(new java.awt.GridBagLayout());
-
-      panelBeanList.setLayout(new java.awt.GridBagLayout());
-
-      jScrollPane1.setMinimumSize(new java.awt.Dimension(430, 22));
-      jScrollPane1.setPreferredSize(new java.awt.Dimension(430, 195));
-
-      listBeans.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-      listBeans.setModel(TableService.getInstance().getListModelBeans());
-      listBeans.addMouseListener(new java.awt.event.MouseAdapter() {
-         public void mouseClicked(java.awt.event.MouseEvent evt) {
-            listBeansMouseClicked(evt);
-         }
-      });
-      listBeans.addKeyListener(new java.awt.event.KeyAdapter() {
-         public void keyPressed(java.awt.event.KeyEvent evt) {
-            listBeansKeyPressed(evt);
-         }
-      });
-      jScrollPane1.setViewportView(listBeans);
-
-      gridBagConstraints = new java.awt.GridBagConstraints();
-      gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-      gridBagConstraints.weighty = 1.0;
-      panelBeanList.add(jScrollPane1, gridBagConstraints);
-
-      gridBagConstraints = new java.awt.GridBagConstraints();
-      gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-      gridBagConstraints.weighty = 1.0;
-      panelRoastTable.add(panelBeanList, gridBagConstraints);
-
-      panelRoastLogTable.setLayout(new java.awt.GridBagLayout());
-
-      panelTableHeader.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-      jLabel1.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      jLabel1.setText("Density:");
-      panelTableHeader.add(jLabel1);
-
-      textDensity.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      textDensity.setText("  ");
-      textDensity.setFocusable(false);
-      textDensity.setMaximumSize(new java.awt.Dimension(77, 2));
-      textDensity.setMinimumSize(new java.awt.Dimension(77, 28));
-      textDensity.setPreferredSize(new java.awt.Dimension(77, 28));
-      panelTableHeader.add(textDensity);
-
-      gridBagConstraints = new java.awt.GridBagConstraints();
-      gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-      gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-      panelRoastLogTable.add(panelTableHeader, gridBagConstraints);
-
-      scrollPaneRoasts.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-      scrollPaneRoasts.setAutoscrolls(true);
-      scrollPaneRoasts.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      scrollPaneRoasts.setMaximumSize(new java.awt.Dimension(800, 800));
-      scrollPaneRoasts.setMinimumSize(new java.awt.Dimension(800, 800));
-      scrollPaneRoasts.setPreferredSize(new java.awt.Dimension(800, 800));
-
-      tableRoasts.setAutoCreateRowSorter(true);
-      tableRoasts.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      tableRoasts.setModel(new DefaultTableModel());
-      tableRoasts.setName(""); // NOI18N
-      tableRoasts.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-      tableRoasts.setShowGrid(true);
-      tableRoasts.addMouseListener(new java.awt.event.MouseAdapter() {
-         public void mouseClicked(java.awt.event.MouseEvent evt) {
-            tableMouseClick(evt);
-         }
-      });
-      tableRoasts.addKeyListener(new java.awt.event.KeyAdapter() {
-         public void keyReleased(java.awt.event.KeyEvent evt) {
-            tableRoastsKeyReleased(evt);
-         }
-      });
-      scrollPaneRoasts.setViewportView(tableRoasts);
-
-      gridBagConstraints = new java.awt.GridBagConstraints();
-      gridBagConstraints.gridx = 0;
-      gridBagConstraints.gridy = 1;
-      gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-      gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-      gridBagConstraints.weightx = 1.0;
-      gridBagConstraints.weighty = 1.0;
-      gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
-      panelRoastLogTable.add(scrollPaneRoasts, gridBagConstraints);
-
-      panelNotes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, " Notes ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog.plain", 0, 20))); // NOI18N
-      panelNotes.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-      panelNotes.setMinimumSize(new java.awt.Dimension(800, 360));
-      panelNotes.setPreferredSize(new java.awt.Dimension(800, 360));
-      panelNotes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-      labelRoastNotes.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      labelRoastNotes.setText("Roasting");
-      panelNotes.add(labelRoastNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
-
-      jScrollPane4.setMaximumSize(new java.awt.Dimension(450, 160));
-      jScrollPane4.setMinimumSize(new java.awt.Dimension(450, 160));
-      jScrollPane4.setPreferredSize(new java.awt.Dimension(450, 160));
-
-      textRoastNotes.setEditable(false);
-      textRoastNotes.setColumns(20);
-      textRoastNotes.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      textRoastNotes.setLineWrap(true);
-      textRoastNotes.setRows(5);
-      textRoastNotes.setWrapStyleWord(true);
-      textRoastNotes.setFocusable(false);
-      textRoastNotes.setMargin(new java.awt.Insets(2, 8, 2, 6));
-      textRoastNotes.setMinimumSize(new java.awt.Dimension(450, 160));
-      textRoastNotes.setPreferredSize(new java.awt.Dimension(450, 160));
-      jScrollPane4.setViewportView(textRoastNotes);
-
-      panelNotes.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 380, 280));
-
-      labelTastingNotes.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      labelTastingNotes.setText("Tasting");
-      panelNotes.add(labelTastingNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, -1));
-
-      jScrollPane5.setMaximumSize(new java.awt.Dimension(450, 160));
-      jScrollPane5.setMinimumSize(new java.awt.Dimension(450, 160));
-      jScrollPane5.setPreferredSize(new java.awt.Dimension(450, 160));
-
-      textTastingNotes.setEditable(false);
-      textTastingNotes.setColumns(20);
-      textTastingNotes.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      textTastingNotes.setLineWrap(true);
-      textTastingNotes.setRows(5);
-      textTastingNotes.setWrapStyleWord(true);
-      textTastingNotes.setFocusable(false);
-      textTastingNotes.setMinimumSize(new java.awt.Dimension(450, 160));
-      textTastingNotes.setPreferredSize(new java.awt.Dimension(450, 160));
-      jScrollPane5.setViewportView(textTastingNotes);
-
-      panelNotes.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 380, 280));
-
-      gridBagConstraints = new java.awt.GridBagConstraints();
-      gridBagConstraints.gridx = 0;
-      gridBagConstraints.gridy = 2;
-      gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-      gridBagConstraints.weightx = 1.0;
-      gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-      panelRoastLogTable.add(panelNotes, gridBagConstraints);
-
-      gridBagConstraints = new java.awt.GridBagConstraints();
-      gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-      gridBagConstraints.weightx = 1.0;
-      gridBagConstraints.weighty = 1.0;
-      panelRoastTable.add(panelRoastLogTable, gridBagConstraints);
-
-      panelButtonsRoastLog.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
-
-      btnAddRoastLog.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      btnAddRoastLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/addSmall.png"))); // NOI18N
-      btnAddRoastLog.setMnemonic('a');
-      btnAddRoastLog.setText("Add");
-      btnAddRoastLog.setMaximumSize(new java.awt.Dimension(127, 34));
-      btnAddRoastLog.setMinimumSize(new java.awt.Dimension(127, 34));
-      btnAddRoastLog.setPreferredSize(new java.awt.Dimension(127, 34));
-      btnAddRoastLog.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnAddRoastLogActionPerformed(evt);
-         }
-      });
-      panelButtonsRoastLog.add(btnAddRoastLog);
-
-      btnEditRoastLog.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      btnEditRoastLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/editSmall.png"))); // NOI18N
-      btnEditRoastLog.setMnemonic('e');
-      btnEditRoastLog.setText("Edit");
-      btnEditRoastLog.setMaximumSize(new java.awt.Dimension(127, 34));
-      btnEditRoastLog.setMinimumSize(new java.awt.Dimension(127, 34));
-      btnEditRoastLog.setPreferredSize(new java.awt.Dimension(127, 34));
-      btnEditRoastLog.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnEditRoastLogActionPerformed(evt);
-         }
-      });
-      panelButtonsRoastLog.add(btnEditRoastLog);
-
-      btnDeleteRoastLog.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      btnDeleteRoastLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/deleteSmall.png"))); // NOI18N
-      btnDeleteRoastLog.setMnemonic('d');
-      btnDeleteRoastLog.setText("Delete");
-      btnDeleteRoastLog.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnDeleteRoastLogActionPerformed(evt);
-         }
-      });
-      panelButtonsRoastLog.add(btnDeleteRoastLog);
-
-      gridBagConstraints = new java.awt.GridBagConstraints();
-      gridBagConstraints.gridx = 0;
-      gridBagConstraints.gridy = 1;
-      gridBagConstraints.gridwidth = 2;
-      gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-      gridBagConstraints.weightx = 1.0;
-      panelRoastTable.add(panelButtonsRoastLog, gridBagConstraints);
-
-      gridBagConstraints = new java.awt.GridBagConstraints();
-      gridBagConstraints.gridx = 0;
-      gridBagConstraints.gridy = 0;
-      gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-      gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-      gridBagConstraints.weightx = 1.0;
-      gridBagConstraints.weighty = 1.0;
-      gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
-      panelRoastLogs.add(panelRoastTable, gridBagConstraints);
-
-      tabbedPane.addTab(" Roast Logs ", panelRoastLogs);
-
-      panelBeans.setLayout(new java.awt.GridBagLayout());
-
-      panelSummary.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-      labelTotalBeans.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
-      labelTotalBeans.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-      labelTotalBeans.setText("Total Beans:");
-      panelSummary.add(labelTotalBeans, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, -1));
-
-      textTotalBeans.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
-      textTotalBeans.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-      textTotalBeans.setText(" ");
-      textTotalBeans.setFocusable(false);
-      textTotalBeans.setMaximumSize(new java.awt.Dimension(50, 32));
-      textTotalBeans.setMinimumSize(new java.awt.Dimension(50, 32));
-      textTotalBeans.setPreferredSize(new java.awt.Dimension(50, 32));
-      panelSummary.add(textTotalBeans, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 60, -1));
-
-      labelInStock.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
-      labelInStock.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-      labelInStock.setText("In Stock:");
-      panelSummary.add(labelInStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 100, -1));
-
-      textInStock.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
-      textInStock.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-      textInStock.setFocusable(false);
-      textInStock.setMaximumSize(new java.awt.Dimension(50, 32));
-      textInStock.setMinimumSize(new java.awt.Dimension(50, 32));
-      textInStock.setPreferredSize(new java.awt.Dimension(50, 32));
-      panelSummary.add(textInStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 60, -1));
-
-      gridBagConstraints = new java.awt.GridBagConstraints();
-      gridBagConstraints.gridx = 0;
-      gridBagConstraints.gridy = 0;
-      gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-      gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-      gridBagConstraints.weightx = 1.0;
-      panelBeans.add(panelSummary, gridBagConstraints);
-
-      jScrollPane2.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-
-      tableBeans.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      tableBeans.setModel(TableService.getInstance().getTableModelBeans());
-      tableBeans.addMouseListener(new java.awt.event.MouseAdapter() {
-         public void mouseClicked(java.awt.event.MouseEvent evt) {
-            tableBeansMouseClicked(evt);
-         }
-      });
-      tableBeans.addKeyListener(new java.awt.event.KeyAdapter() {
-         public void keyPressed(java.awt.event.KeyEvent evt) {
-            tableBeansKeyPressed(evt);
-         }
-      });
-      jScrollPane2.setViewportView(tableBeans);
-
-      gridBagConstraints = new java.awt.GridBagConstraints();
-      gridBagConstraints.gridx = 0;
-      gridBagConstraints.gridy = 1;
-      gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-      gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-      gridBagConstraints.weightx = 1.0;
-      gridBagConstraints.weighty = 1.0;
-      gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-      panelBeans.add(jScrollPane2, gridBagConstraints);
-
-      panelButtonsBean.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
-
-      btnAddBean.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      btnAddBean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/addSmall.png"))); // NOI18N
-      btnAddBean.setMnemonic('a');
-      btnAddBean.setText("Add");
-      btnAddBean.setMaximumSize(new java.awt.Dimension(127, 34));
-      btnAddBean.setMinimumSize(new java.awt.Dimension(127, 34));
-      btnAddBean.setPreferredSize(new java.awt.Dimension(127, 34));
-      btnAddBean.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnAddBeanActionPerformed(evt);
-         }
-      });
-      panelButtonsBean.add(btnAddBean);
-
-      btnEditBean.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      btnEditBean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/editSmall.png"))); // NOI18N
-      btnEditBean.setMnemonic('e');
-      btnEditBean.setText("Edit");
-      btnEditBean.setMaximumSize(new java.awt.Dimension(127, 34));
-      btnEditBean.setMinimumSize(new java.awt.Dimension(127, 34));
-      btnEditBean.setPreferredSize(new java.awt.Dimension(127, 34));
-      btnEditBean.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnEditBeanActionPerformed(evt);
-         }
-      });
-      panelButtonsBean.add(btnEditBean);
-
-      btnDeleteBean.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      btnDeleteBean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/deleteSmall.png"))); // NOI18N
-      btnDeleteBean.setMnemonic('d');
-      btnDeleteBean.setText("Delete");
-      btnDeleteBean.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnDeleteBeanActionPerformed(evt);
-         }
-      });
-      panelButtonsBean.add(btnDeleteBean);
-
-      gridBagConstraints = new java.awt.GridBagConstraints();
-      gridBagConstraints.gridx = 0;
-      gridBagConstraints.gridy = 2;
-      gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-      gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-      gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
-      panelBeans.add(panelButtonsBean, gridBagConstraints);
-
-      tabbedPane.addTab("    Beans    ", panelBeans);
-
-      gridBagConstraints = new java.awt.GridBagConstraints();
-      gridBagConstraints.gridwidth = 2;
-      gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-      gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-      gridBagConstraints.weightx = 1.0;
-      gridBagConstraints.weighty = 1.0;
-      gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-      getContentPane().add(tabbedPane, gridBagConstraints);
-
-      buttonExit.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      buttonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/exitSmall.png"))); // NOI18N
-      buttonExit.setMnemonic('x');
-      buttonExit.setText("Exit");
-      buttonExit.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            buttonExitActionPerformed(evt);
-         }
-      });
-      gridBagConstraints = new java.awt.GridBagConstraints();
-      gridBagConstraints.gridx = 1;
-      gridBagConstraints.gridy = 1;
-      gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-      gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-      getContentPane().add(buttonExit, gridBagConstraints);
-
-      menuBar.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-
-      menuFile.setMnemonic('f');
-      menuFile.setText("File");
-      menuFile.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      menuFile.add(jSeparator1);
-
-      menuItemExit.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      menuItemExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/exitSmall.png"))); // NOI18N
-      menuItemExit.setText("Exit");
-      menuItemExit.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            menuItemExitActionPerformed(evt);
-         }
-      });
-      menuFile.add(menuItemExit);
-
-      menuBar.add(menuFile);
-
-      menuView.setMnemonic('v');
-      menuView.setText("View");
-      menuView.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-
-      menuLookAndFeel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/glasses.png"))); // NOI18N
-      menuLookAndFeel.setMnemonic('L');
-      menuLookAndFeel.setText("Look And Feel");
-      menuLookAndFeel.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-
-      menuItemGtk.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      menuItemGtk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/tux.png"))); // NOI18N
-      menuItemGtk.setText("GTK");
-      menuItemGtk.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            menuItemGtkActionPerformed(evt);
-         }
-      });
-      menuLookAndFeel.add(menuItemGtk);
-
-      menuItemMetal.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      menuItemMetal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/anvil.png"))); // NOI18N
-      menuItemMetal.setText("Metal");
-      menuItemMetal.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            menuItemMetalActionPerformed(evt);
-         }
-      });
-      menuLookAndFeel.add(menuItemMetal);
-
-      menuItemMotif.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      menuItemMotif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/motif.png"))); // NOI18N
-      menuItemMotif.setText("Motif");
-      menuItemMotif.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            menuItemMotifActionPerformed(evt);
-         }
-      });
-      menuLookAndFeel.add(menuItemMotif);
-
-      menuItemNimbus.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      menuItemNimbus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/nimbus.png"))); // NOI18N
-      menuItemNimbus.setText("Nimbus");
-      menuItemNimbus.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            menuItemNimbusActionPerformed(evt);
-         }
-      });
-      menuLookAndFeel.add(menuItemNimbus);
-
-      menuItemWindows.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      menuItemWindows.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/windows.png"))); // NOI18N
-      menuItemWindows.setText("Windows");
-      menuItemWindows.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            menuItemWindowsActionPerformed(evt);
-         }
-      });
-      menuLookAndFeel.add(menuItemWindows);
-
-      menuItemWindowsClassic.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      menuItemWindowsClassic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/windowsClassic.png"))); // NOI18N
-      menuItemWindowsClassic.setText("Windows Classic");
-      menuItemWindowsClassic.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            menuItemWindowsClassicActionPerformed(evt);
-         }
-      });
-      menuLookAndFeel.add(menuItemWindowsClassic);
-
-      menuView.add(menuLookAndFeel);
-
-      menuBar.add(menuView);
-
-      menuHellp.setMnemonic('h');
-      menuHellp.setText("Help");
-      menuHellp.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-
-      menuItemAbout.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-      menuItemAbout.setText("About...");
-      menuItemAbout.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            menuItemAboutActionPerformed(evt);
-         }
-      });
-      menuHellp.add(menuItemAbout);
-
-      menuBar.add(menuHellp);
-
-      setJMenuBar(menuBar);
-
-      setSize(new java.awt.Dimension(1667, 1035));
-      setLocationRelativeTo(null);
-   }// </editor-fold>//GEN-END:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        tabbedPane = new javax.swing.JTabbedPane();
+        panelRoastLogs = new javax.swing.JPanel();
+        panelRoastTable = new javax.swing.JPanel();
+        panelBeanList = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listBeans = new javax.swing.JList<>();
+        panelRoastLogTable = new javax.swing.JPanel();
+        panelTableHeader = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        textDensity = new javax.swing.JTextField();
+        scrollPaneRoasts = new javax.swing.JScrollPane();
+        tableRoasts = new javax.swing.JTable();
+        panelNotes = new javax.swing.JPanel();
+        labelRoastNotes = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        textRoastNotes = new javax.swing.JTextArea();
+        labelTastingNotes = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        textTastingNotes = new javax.swing.JTextArea();
+        panelButtonsRoastLog = new javax.swing.JPanel();
+        btnAddRoastLog = new javax.swing.JButton();
+        btnEditRoastLog = new javax.swing.JButton();
+        btnDeleteRoastLog = new javax.swing.JButton();
+        panelBeans = new javax.swing.JPanel();
+        panelSummary = new javax.swing.JPanel();
+        labelTotalBeans = new javax.swing.JLabel();
+        textTotalBeans = new javax.swing.JTextField();
+        labelInStock = new javax.swing.JLabel();
+        textInStock = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableBeans = new javax.swing.JTable();
+        panelButtonsBean = new javax.swing.JPanel();
+        btnAddBean = new javax.swing.JButton();
+        btnEditBean = new javax.swing.JButton();
+        btnDeleteBean = new javax.swing.JButton();
+        buttonExit = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        labelTotalRoasts = new javax.swing.JLabel();
+        textRoastCount = new javax.swing.JTextField();
+        menuBar = new javax.swing.JMenuBar();
+        menuFile = new javax.swing.JMenu();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        menuItemExit = new javax.swing.JMenuItem();
+        menuView = new javax.swing.JMenu();
+        menuLookAndFeel = new javax.swing.JMenu();
+        menuItemGtk = new javax.swing.JMenuItem();
+        menuItemMetal = new javax.swing.JMenuItem();
+        menuItemMotif = new javax.swing.JMenuItem();
+        menuItemNimbus = new javax.swing.JMenuItem();
+        menuItemWindows = new javax.swing.JMenuItem();
+        menuItemWindowsClassic = new javax.swing.JMenuItem();
+        menuHellp = new javax.swing.JMenu();
+        menuItemAbout = new javax.swing.JMenuItem();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Coffee Roasting Log");
+        setName("roastLogs"); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                exitForm(evt);
+            }
+        });
+        getContentPane().setLayout(new java.awt.GridBagLayout());
+
+        tabbedPane.setFont(new java.awt.Font("Dialog.plain", 0, 24)); // NOI18N
+
+        panelRoastLogs.setLayout(new java.awt.GridBagLayout());
+
+        panelRoastTable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelRoastTable.setLayout(new java.awt.GridBagLayout());
+
+        panelBeanList.setLayout(new java.awt.GridBagLayout());
+
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(430, 22));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(430, 195));
+
+        listBeans.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        listBeans.setModel(TableService.getInstance().getListModelBeans());
+        listBeans.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listBeansMouseClicked(evt);
+            }
+        });
+        listBeans.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                listBeansKeyPressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(listBeans);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.weighty = 1.0;
+        panelBeanList.add(jScrollPane1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.weighty = 1.0;
+        panelRoastTable.add(panelBeanList, gridBagConstraints);
+
+        panelRoastLogTable.setLayout(new java.awt.GridBagLayout());
+
+        panelTableHeader.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        jLabel1.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        jLabel1.setText("Density:");
+        panelTableHeader.add(jLabel1);
+
+        textDensity.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        textDensity.setText("  ");
+        textDensity.setFocusable(false);
+        textDensity.setMaximumSize(new java.awt.Dimension(77, 2));
+        textDensity.setMinimumSize(new java.awt.Dimension(77, 28));
+        textDensity.setPreferredSize(new java.awt.Dimension(77, 28));
+        panelTableHeader.add(textDensity);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelRoastLogTable.add(panelTableHeader, gridBagConstraints);
+
+        scrollPaneRoasts.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        scrollPaneRoasts.setAutoscrolls(true);
+        scrollPaneRoasts.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        scrollPaneRoasts.setMaximumSize(new java.awt.Dimension(800, 800));
+        scrollPaneRoasts.setMinimumSize(new java.awt.Dimension(800, 800));
+        scrollPaneRoasts.setPreferredSize(new java.awt.Dimension(800, 800));
+
+        tableRoasts.setAutoCreateRowSorter(true);
+        tableRoasts.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        tableRoasts.setModel(new DefaultTableModel());
+        tableRoasts.setName(""); // NOI18N
+        tableRoasts.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tableRoasts.setShowGrid(true);
+        tableRoasts.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClick(evt);
+            }
+        });
+        tableRoasts.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tableRoastsKeyReleased(evt);
+            }
+        });
+        scrollPaneRoasts.setViewportView(tableRoasts);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        panelRoastLogTable.add(scrollPaneRoasts, gridBagConstraints);
+
+        panelNotes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, " Notes ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog.plain", 0, 20))); // NOI18N
+        panelNotes.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        panelNotes.setMinimumSize(new java.awt.Dimension(800, 360));
+        panelNotes.setPreferredSize(new java.awt.Dimension(800, 360));
+        panelNotes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelRoastNotes.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        labelRoastNotes.setText("Roasting");
+        panelNotes.add(labelRoastNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        jScrollPane4.setMaximumSize(new java.awt.Dimension(450, 160));
+        jScrollPane4.setMinimumSize(new java.awt.Dimension(450, 160));
+        jScrollPane4.setPreferredSize(new java.awt.Dimension(450, 160));
+
+        textRoastNotes.setEditable(false);
+        textRoastNotes.setColumns(20);
+        textRoastNotes.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        textRoastNotes.setLineWrap(true);
+        textRoastNotes.setRows(5);
+        textRoastNotes.setWrapStyleWord(true);
+        textRoastNotes.setFocusable(false);
+        textRoastNotes.setMargin(new java.awt.Insets(2, 8, 2, 6));
+        textRoastNotes.setMinimumSize(new java.awt.Dimension(450, 160));
+        textRoastNotes.setPreferredSize(new java.awt.Dimension(450, 160));
+        jScrollPane4.setViewportView(textRoastNotes);
+
+        panelNotes.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 380, 280));
+
+        labelTastingNotes.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        labelTastingNotes.setText("Tasting");
+        panelNotes.add(labelTastingNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, -1));
+
+        jScrollPane5.setMaximumSize(new java.awt.Dimension(450, 160));
+        jScrollPane5.setMinimumSize(new java.awt.Dimension(450, 160));
+        jScrollPane5.setPreferredSize(new java.awt.Dimension(450, 160));
+
+        textTastingNotes.setEditable(false);
+        textTastingNotes.setColumns(20);
+        textTastingNotes.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        textTastingNotes.setLineWrap(true);
+        textTastingNotes.setRows(5);
+        textTastingNotes.setWrapStyleWord(true);
+        textTastingNotes.setFocusable(false);
+        textTastingNotes.setMinimumSize(new java.awt.Dimension(450, 160));
+        textTastingNotes.setPreferredSize(new java.awt.Dimension(450, 160));
+        jScrollPane5.setViewportView(textTastingNotes);
+
+        panelNotes.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 380, 280));
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelRoastLogTable.add(panelNotes, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        panelRoastTable.add(panelRoastLogTable, gridBagConstraints);
+
+        panelButtonsRoastLog.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
+
+        btnAddRoastLog.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        btnAddRoastLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/addSmall.png"))); // NOI18N
+        btnAddRoastLog.setMnemonic('a');
+        btnAddRoastLog.setText("Add");
+        btnAddRoastLog.setMaximumSize(new java.awt.Dimension(127, 34));
+        btnAddRoastLog.setMinimumSize(new java.awt.Dimension(127, 34));
+        btnAddRoastLog.setPreferredSize(new java.awt.Dimension(127, 34));
+        btnAddRoastLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddRoastLogActionPerformed(evt);
+            }
+        });
+        panelButtonsRoastLog.add(btnAddRoastLog);
+
+        btnEditRoastLog.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        btnEditRoastLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/editSmall.png"))); // NOI18N
+        btnEditRoastLog.setMnemonic('e');
+        btnEditRoastLog.setText("Edit");
+        btnEditRoastLog.setMaximumSize(new java.awt.Dimension(127, 34));
+        btnEditRoastLog.setMinimumSize(new java.awt.Dimension(127, 34));
+        btnEditRoastLog.setPreferredSize(new java.awt.Dimension(127, 34));
+        btnEditRoastLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditRoastLogActionPerformed(evt);
+            }
+        });
+        panelButtonsRoastLog.add(btnEditRoastLog);
+
+        btnDeleteRoastLog.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        btnDeleteRoastLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/deleteSmall.png"))); // NOI18N
+        btnDeleteRoastLog.setMnemonic('d');
+        btnDeleteRoastLog.setText("Delete");
+        btnDeleteRoastLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteRoastLogActionPerformed(evt);
+            }
+        });
+        panelButtonsRoastLog.add(btnDeleteRoastLog);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelRoastTable.add(panelButtonsRoastLog, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
+        panelRoastLogs.add(panelRoastTable, gridBagConstraints);
+
+        tabbedPane.addTab(" Roast Logs ", panelRoastLogs);
+
+        panelBeans.setLayout(new java.awt.GridBagLayout());
+
+        panelSummary.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelTotalBeans.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
+        labelTotalBeans.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelTotalBeans.setText("Total Beans:");
+        panelSummary.add(labelTotalBeans, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, -1));
+
+        textTotalBeans.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
+        textTotalBeans.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textTotalBeans.setText(" ");
+        textTotalBeans.setFocusable(false);
+        textTotalBeans.setMaximumSize(new java.awt.Dimension(50, 32));
+        textTotalBeans.setMinimumSize(new java.awt.Dimension(50, 32));
+        textTotalBeans.setPreferredSize(new java.awt.Dimension(50, 32));
+        panelSummary.add(textTotalBeans, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 60, -1));
+
+        labelInStock.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
+        labelInStock.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelInStock.setText("In Stock:");
+        panelSummary.add(labelInStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 100, -1));
+
+        textInStock.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
+        textInStock.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textInStock.setFocusable(false);
+        textInStock.setMaximumSize(new java.awt.Dimension(50, 32));
+        textInStock.setMinimumSize(new java.awt.Dimension(50, 32));
+        textInStock.setPreferredSize(new java.awt.Dimension(50, 32));
+        panelSummary.add(textInStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 60, -1));
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        panelBeans.add(panelSummary, gridBagConstraints);
+
+        jScrollPane2.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+
+        tableBeans.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        tableBeans.setModel(TableService.getInstance().getTableModelBeans());
+        tableBeans.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableBeansMouseClicked(evt);
+            }
+        });
+        tableBeans.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tableBeansKeyPressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tableBeans);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        panelBeans.add(jScrollPane2, gridBagConstraints);
+
+        panelButtonsBean.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
+
+        btnAddBean.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        btnAddBean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/addSmall.png"))); // NOI18N
+        btnAddBean.setMnemonic('a');
+        btnAddBean.setText("Add");
+        btnAddBean.setMaximumSize(new java.awt.Dimension(127, 34));
+        btnAddBean.setMinimumSize(new java.awt.Dimension(127, 34));
+        btnAddBean.setPreferredSize(new java.awt.Dimension(127, 34));
+        btnAddBean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddBeanActionPerformed(evt);
+            }
+        });
+        panelButtonsBean.add(btnAddBean);
+
+        btnEditBean.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        btnEditBean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/editSmall.png"))); // NOI18N
+        btnEditBean.setMnemonic('e');
+        btnEditBean.setText("Edit");
+        btnEditBean.setMaximumSize(new java.awt.Dimension(127, 34));
+        btnEditBean.setMinimumSize(new java.awt.Dimension(127, 34));
+        btnEditBean.setPreferredSize(new java.awt.Dimension(127, 34));
+        btnEditBean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditBeanActionPerformed(evt);
+            }
+        });
+        panelButtonsBean.add(btnEditBean);
+
+        btnDeleteBean.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        btnDeleteBean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/deleteSmall.png"))); // NOI18N
+        btnDeleteBean.setMnemonic('d');
+        btnDeleteBean.setText("Delete");
+        btnDeleteBean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteBeanActionPerformed(evt);
+            }
+        });
+        panelButtonsBean.add(btnDeleteBean);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        panelBeans.add(panelButtonsBean, gridBagConstraints);
+
+        tabbedPane.addTab("    Beans    ", panelBeans);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        getContentPane().add(tabbedPane, gridBagConstraints);
+
+        buttonExit.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        buttonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/exitSmall.png"))); // NOI18N
+        buttonExit.setMnemonic('x');
+        buttonExit.setText("Exit");
+        buttonExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExitActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        getContentPane().add(buttonExit, gridBagConstraints);
+
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        labelTotalRoasts.setText("Total Roasts:");
+        jPanel1.add(labelTotalRoasts);
+
+        textRoastCount.setFocusable(false);
+        textRoastCount.setMargin(new java.awt.Insets(2, 10, 2, 6));
+        textRoastCount.setMaximumSize(new java.awt.Dimension(80, 47));
+        textRoastCount.setMinimumSize(new java.awt.Dimension(80, 47));
+        textRoastCount.setPreferredSize(new java.awt.Dimension(80, 47));
+        jPanel1.add(textRoastCount);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
+        getContentPane().add(jPanel1, gridBagConstraints);
+
+        menuBar.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+
+        menuFile.setMnemonic('f');
+        menuFile.setText("File");
+        menuFile.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        menuFile.add(jSeparator1);
+
+        menuItemExit.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        menuItemExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/exitSmall.png"))); // NOI18N
+        menuItemExit.setText("Exit");
+        menuItemExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemExitActionPerformed(evt);
+            }
+        });
+        menuFile.add(menuItemExit);
+
+        menuBar.add(menuFile);
+
+        menuView.setMnemonic('v');
+        menuView.setText("View");
+        menuView.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+
+        menuLookAndFeel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/glasses.png"))); // NOI18N
+        menuLookAndFeel.setMnemonic('L');
+        menuLookAndFeel.setText("Look And Feel");
+        menuLookAndFeel.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+
+        menuItemGtk.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        menuItemGtk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/tux.png"))); // NOI18N
+        menuItemGtk.setText("GTK");
+        menuItemGtk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemGtkActionPerformed(evt);
+            }
+        });
+        menuLookAndFeel.add(menuItemGtk);
+
+        menuItemMetal.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        menuItemMetal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/anvil.png"))); // NOI18N
+        menuItemMetal.setText("Metal");
+        menuItemMetal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemMetalActionPerformed(evt);
+            }
+        });
+        menuLookAndFeel.add(menuItemMetal);
+
+        menuItemMotif.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        menuItemMotif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/motif.png"))); // NOI18N
+        menuItemMotif.setText("Motif");
+        menuItemMotif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemMotifActionPerformed(evt);
+            }
+        });
+        menuLookAndFeel.add(menuItemMotif);
+
+        menuItemNimbus.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        menuItemNimbus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/nimbus.png"))); // NOI18N
+        menuItemNimbus.setText("Nimbus");
+        menuItemNimbus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemNimbusActionPerformed(evt);
+            }
+        });
+        menuLookAndFeel.add(menuItemNimbus);
+
+        menuItemWindows.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        menuItemWindows.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/windows.png"))); // NOI18N
+        menuItemWindows.setText("Windows");
+        menuItemWindows.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemWindowsActionPerformed(evt);
+            }
+        });
+        menuLookAndFeel.add(menuItemWindows);
+
+        menuItemWindowsClassic.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        menuItemWindowsClassic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/smanis/coffee/assets/windowsClassic.png"))); // NOI18N
+        menuItemWindowsClassic.setText("Windows Classic");
+        menuItemWindowsClassic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemWindowsClassicActionPerformed(evt);
+            }
+        });
+        menuLookAndFeel.add(menuItemWindowsClassic);
+
+        menuView.add(menuLookAndFeel);
+
+        menuBar.add(menuView);
+
+        menuHellp.setMnemonic('h');
+        menuHellp.setText("Help");
+        menuHellp.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+
+        menuItemAbout.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
+        menuItemAbout.setText("About...");
+        menuItemAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemAboutActionPerformed(evt);
+            }
+        });
+        menuHellp.add(menuItemAbout);
+
+        menuBar.add(menuHellp);
+
+        setJMenuBar(menuBar);
+
+        setSize(new java.awt.Dimension(1667, 1049));
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
 
     private void buttonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExitActionPerformed
       this.exitForm(null);
@@ -836,6 +859,22 @@ public class CoffeeFrame extends javax.swing.JFrame {
       }
    }
 
+   /**
+    * Gets the count of all roast logs.s
+    */
+   private void getRoastCount() {
+      try {
+         ResultSet rs = DataService.getInstance().getRoastCount();
+         if (rs.next()) {
+            this.textRoastCount.setText(String.valueOf(rs.getInt("RoastCount")));
+         }
+
+      } catch (Exception e) {
+         JOptionPane.showMessageDialog(this, "CoffeeFrame.getRoastCount() " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+         e.printStackTrace();
+      }
+   }
+   
    private void populateNotes(NonEditableTableModel model, int tableRow) {
       // refresh roast notes/tasting nodes based on the clicked row.
       this.textRoastNotes.setText((String) model.getValueAt(tableRow, TableService.getInstance().getColumnIndex("RoastLog", "Roast Notes")));
@@ -972,6 +1011,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
          this.getBeanTotals();
 
+         this.getRoastCount();
          
          Runnable runner = () -> {
             this.listBeans.requestFocus();
@@ -988,56 +1028,59 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
    public boolean shouldExit = false;
 
-   // Variables declaration - do not modify//GEN-BEGIN:variables
-   private javax.swing.JButton btnAddBean;
-   private javax.swing.JButton btnAddRoastLog;
-   private javax.swing.JButton btnDeleteBean;
-   private javax.swing.JButton btnDeleteRoastLog;
-   private javax.swing.JButton btnEditBean;
-   private javax.swing.JButton btnEditRoastLog;
-   private javax.swing.JButton buttonExit;
-   private javax.swing.JLabel jLabel1;
-   private javax.swing.JScrollPane jScrollPane1;
-   private javax.swing.JScrollPane jScrollPane2;
-   private javax.swing.JScrollPane jScrollPane4;
-   private javax.swing.JScrollPane jScrollPane5;
-   private javax.swing.JPopupMenu.Separator jSeparator1;
-   private javax.swing.JLabel labelInStock;
-   private javax.swing.JLabel labelRoastNotes;
-   private javax.swing.JLabel labelTastingNotes;
-   private javax.swing.JLabel labelTotalBeans;
-   private javax.swing.JList<String> listBeans;
-   private javax.swing.JMenuBar menuBar;
-   private javax.swing.JMenu menuFile;
-   private javax.swing.JMenu menuHellp;
-   private javax.swing.JMenuItem menuItemAbout;
-   private javax.swing.JMenuItem menuItemExit;
-   private javax.swing.JMenuItem menuItemGtk;
-   private javax.swing.JMenuItem menuItemMetal;
-   private javax.swing.JMenuItem menuItemMotif;
-   private javax.swing.JMenuItem menuItemNimbus;
-   private javax.swing.JMenuItem menuItemWindows;
-   private javax.swing.JMenuItem menuItemWindowsClassic;
-   private javax.swing.JMenu menuLookAndFeel;
-   private javax.swing.JMenu menuView;
-   private javax.swing.JPanel panelBeanList;
-   private javax.swing.JPanel panelBeans;
-   private javax.swing.JPanel panelButtonsBean;
-   private javax.swing.JPanel panelButtonsRoastLog;
-   private javax.swing.JPanel panelNotes;
-   private javax.swing.JPanel panelRoastLogTable;
-   private javax.swing.JPanel panelRoastLogs;
-   private javax.swing.JPanel panelRoastTable;
-   private javax.swing.JPanel panelSummary;
-   private javax.swing.JPanel panelTableHeader;
-   private javax.swing.JScrollPane scrollPaneRoasts;
-   private javax.swing.JTabbedPane tabbedPane;
-   private javax.swing.JTable tableBeans;
-   private javax.swing.JTable tableRoasts;
-   private javax.swing.JTextField textDensity;
-   private javax.swing.JTextField textInStock;
-   private javax.swing.JTextArea textRoastNotes;
-   private javax.swing.JTextArea textTastingNotes;
-   private javax.swing.JTextField textTotalBeans;
-   // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddBean;
+    private javax.swing.JButton btnAddRoastLog;
+    private javax.swing.JButton btnDeleteBean;
+    private javax.swing.JButton btnDeleteRoastLog;
+    private javax.swing.JButton btnEditBean;
+    private javax.swing.JButton btnEditRoastLog;
+    private javax.swing.JButton buttonExit;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JLabel labelInStock;
+    private javax.swing.JLabel labelRoastNotes;
+    private javax.swing.JLabel labelTastingNotes;
+    private javax.swing.JLabel labelTotalBeans;
+    private javax.swing.JLabel labelTotalRoasts;
+    private javax.swing.JList<String> listBeans;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu menuFile;
+    private javax.swing.JMenu menuHellp;
+    private javax.swing.JMenuItem menuItemAbout;
+    private javax.swing.JMenuItem menuItemExit;
+    private javax.swing.JMenuItem menuItemGtk;
+    private javax.swing.JMenuItem menuItemMetal;
+    private javax.swing.JMenuItem menuItemMotif;
+    private javax.swing.JMenuItem menuItemNimbus;
+    private javax.swing.JMenuItem menuItemWindows;
+    private javax.swing.JMenuItem menuItemWindowsClassic;
+    private javax.swing.JMenu menuLookAndFeel;
+    private javax.swing.JMenu menuView;
+    private javax.swing.JPanel panelBeanList;
+    private javax.swing.JPanel panelBeans;
+    private javax.swing.JPanel panelButtonsBean;
+    private javax.swing.JPanel panelButtonsRoastLog;
+    private javax.swing.JPanel panelNotes;
+    private javax.swing.JPanel panelRoastLogTable;
+    private javax.swing.JPanel panelRoastLogs;
+    private javax.swing.JPanel panelRoastTable;
+    private javax.swing.JPanel panelSummary;
+    private javax.swing.JPanel panelTableHeader;
+    private javax.swing.JScrollPane scrollPaneRoasts;
+    private javax.swing.JTabbedPane tabbedPane;
+    private javax.swing.JTable tableBeans;
+    private javax.swing.JTable tableRoasts;
+    private javax.swing.JTextField textDensity;
+    private javax.swing.JTextField textInStock;
+    private javax.swing.JTextField textRoastCount;
+    private javax.swing.JTextArea textRoastNotes;
+    private javax.swing.JTextArea textTastingNotes;
+    private javax.swing.JTextField textTotalBeans;
+    // End of variables declaration//GEN-END:variables
 }

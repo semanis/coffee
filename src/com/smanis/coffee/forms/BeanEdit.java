@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package com.smanis.coffee.forms;
 
 import com.smanis.coffee.AppPreferences;
@@ -11,6 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -74,6 +73,8 @@ public class BeanEdit extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         textAreaComments = new javax.swing.JTextArea();
         labelComments = new javax.swing.JLabel();
+        labelPurchaseDate = new javax.swing.JLabel();
+        textfPurchaseDate = new javax.swing.JFormattedTextField();
         panelButtons = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
@@ -100,7 +101,10 @@ public class BeanEdit extends javax.swing.JDialog {
 
         textName.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         textName.setText(" ");
-        textName.setMinimumSize(new java.awt.Dimension(11, 28));
+        textName.setMaximumSize(new java.awt.Dimension(102, 32));
+        textName.setMinimumSize(new java.awt.Dimension(102, 32));
+        textName.setPreferredSize(new java.awt.Dimension(102, 32));
+        textName.setRequestFocusEnabled(false);
         textName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textNameFocusGained(evt);
@@ -118,15 +122,15 @@ public class BeanEdit extends javax.swing.JDialog {
         labelVendor.setText("Vendor");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelVendor, gridBagConstraints);
 
         textVendor.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textVendor.setMaximumSize(new java.awt.Dimension(300, 28));
-        textVendor.setMinimumSize(new java.awt.Dimension(300, 28));
-        textVendor.setPreferredSize(new java.awt.Dimension(300, 28));
+        textVendor.setMaximumSize(new java.awt.Dimension(300, 32));
+        textVendor.setMinimumSize(new java.awt.Dimension(300, 32));
+        textVendor.setPreferredSize(new java.awt.Dimension(300, 32));
         textVendor.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textVendorFocusGained(evt);
@@ -134,7 +138,7 @@ public class BeanEdit extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
         panelDetails.add(textVendor, gridBagConstraints);
@@ -143,14 +147,15 @@ public class BeanEdit extends javax.swing.JDialog {
         labelPrice.setText("Price");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelPrice, gridBagConstraints);
 
         textPrice.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textPrice.setMinimumSize(new java.awt.Dimension(90, 28));
-        textPrice.setPreferredSize(new java.awt.Dimension(90, 28));
+        textPrice.setMaximumSize(new java.awt.Dimension(90, 32));
+        textPrice.setMinimumSize(new java.awt.Dimension(90, 32));
+        textPrice.setPreferredSize(new java.awt.Dimension(90, 32));
         textPrice.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textPriceFocusGained(evt);
@@ -161,7 +166,7 @@ public class BeanEdit extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
         panelDetails.add(textPrice, gridBagConstraints);
@@ -170,14 +175,15 @@ public class BeanEdit extends javax.swing.JDialog {
         labelWeightInPounds.setText("Weight (lbs)");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelWeightInPounds, gridBagConstraints);
 
         textWeightInPounds.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textWeightInPounds.setMinimumSize(new java.awt.Dimension(50, 28));
-        textWeightInPounds.setPreferredSize(new java.awt.Dimension(50, 28));
+        textWeightInPounds.setMaximumSize(new java.awt.Dimension(50, 32));
+        textWeightInPounds.setMinimumSize(new java.awt.Dimension(50, 32));
+        textWeightInPounds.setPreferredSize(new java.awt.Dimension(50, 32));
         textWeightInPounds.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textWeightInPoundsFocusGained(evt);
@@ -188,7 +194,7 @@ public class BeanEdit extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
         panelDetails.add(textWeightInPounds, gridBagConstraints);
@@ -197,17 +203,17 @@ public class BeanEdit extends javax.swing.JDialog {
         labelPricePerPound.setText("Price Per Pound");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
         panelDetails.add(labelPricePerPound, gridBagConstraints);
 
         textPricePerPound.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textPricePerPound.setMaximumSize(new java.awt.Dimension(100, 28));
-        textPricePerPound.setMinimumSize(new java.awt.Dimension(100, 28));
-        textPricePerPound.setPreferredSize(new java.awt.Dimension(100, 28));
+        textPricePerPound.setMaximumSize(new java.awt.Dimension(100, 32));
+        textPricePerPound.setMinimumSize(new java.awt.Dimension(100, 32));
+        textPricePerPound.setPreferredSize(new java.awt.Dimension(100, 32));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
         panelDetails.add(textPricePerPound, gridBagConstraints);
@@ -216,13 +222,16 @@ public class BeanEdit extends javax.swing.JDialog {
         labelOrigin.setText("Origin");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelOrigin, gridBagConstraints);
 
         textOrigin.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         textOrigin.setText(" ");
+        textOrigin.setMaximumSize(new java.awt.Dimension(102, 32));
+        textOrigin.setMinimumSize(new java.awt.Dimension(102, 32));
+        textOrigin.setPreferredSize(new java.awt.Dimension(102, 32));
         textOrigin.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textOriginFocusGained(evt);
@@ -230,7 +239,7 @@ public class BeanEdit extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.ipadx = 567;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
@@ -240,16 +249,16 @@ public class BeanEdit extends javax.swing.JDialog {
         labelAltitude.setText("Alltitude");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelAltitude, gridBagConstraints);
 
         textAltitude.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         textAltitude.setText(" ");
-        textAltitude.setMaximumSize(new java.awt.Dimension(250, 28));
-        textAltitude.setMinimumSize(new java.awt.Dimension(250, 28));
-        textAltitude.setPreferredSize(new java.awt.Dimension(250, 28));
+        textAltitude.setMaximumSize(new java.awt.Dimension(250, 32));
+        textAltitude.setMinimumSize(new java.awt.Dimension(250, 32));
+        textAltitude.setPreferredSize(new java.awt.Dimension(250, 32));
         textAltitude.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textAltitudeFocusGained(evt);
@@ -257,7 +266,7 @@ public class BeanEdit extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
         panelDetails.add(textAltitude, gridBagConstraints);
@@ -266,7 +275,7 @@ public class BeanEdit extends javax.swing.JDialog {
         labelProcess.setText("Process");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelProcess, gridBagConstraints);
@@ -274,9 +283,12 @@ public class BeanEdit extends javax.swing.JDialog {
         comboProcess.setEditable(true);
         comboProcess.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         comboProcess.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dry", "Honey", "Monsooned", "Natural", "Washed" }));
+        comboProcess.setMaximumSize(new java.awt.Dimension(173, 32));
+        comboProcess.setMinimumSize(new java.awt.Dimension(173, 32));
+        comboProcess.setPreferredSize(new java.awt.Dimension(173, 32));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.ipadx = 118;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
@@ -286,14 +298,15 @@ public class BeanEdit extends javax.swing.JDialog {
         labelDensityGrams.setText("Density Grams");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelDensityGrams, gridBagConstraints);
 
         textDensityGrams.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textDensityGrams.setMinimumSize(new java.awt.Dimension(104, 28));
-        textDensityGrams.setPreferredSize(new java.awt.Dimension(104, 28));
+        textDensityGrams.setMaximumSize(new java.awt.Dimension(104, 32));
+        textDensityGrams.setMinimumSize(new java.awt.Dimension(104, 32));
+        textDensityGrams.setPreferredSize(new java.awt.Dimension(104, 32));
         textDensityGrams.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textDensityGramsFocusGained(evt);
@@ -304,7 +317,7 @@ public class BeanEdit extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
         panelDetails.add(textDensityGrams, gridBagConstraints);
@@ -313,7 +326,7 @@ public class BeanEdit extends javax.swing.JDialog {
         labelDensity.setText("Density");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelDensity, gridBagConstraints);
@@ -323,10 +336,10 @@ public class BeanEdit extends javax.swing.JDialog {
         textDensity.setFocusable(false);
         textDensity.setMaximumSize(new java.awt.Dimension(80, 32));
         textDensity.setMinimumSize(new java.awt.Dimension(80, 32));
-        textDensity.setPreferredSize(new java.awt.Dimension(80, 28));
+        textDensity.setPreferredSize(new java.awt.Dimension(80, 32));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
         panelDetails.add(textDensity, gridBagConstraints);
@@ -335,18 +348,18 @@ public class BeanEdit extends javax.swing.JDialog {
         labelAnaerobic.setText("Anaerobic?");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelAnaerobic, gridBagConstraints);
 
         checkboxAnaerobic.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        checkboxAnaerobic.setMaximumSize(new java.awt.Dimension(21, 28));
-        checkboxAnaerobic.setMinimumSize(new java.awt.Dimension(21, 28));
-        checkboxAnaerobic.setPreferredSize(new java.awt.Dimension(21, 28));
+        checkboxAnaerobic.setMaximumSize(new java.awt.Dimension(21, 32));
+        checkboxAnaerobic.setMinimumSize(new java.awt.Dimension(21, 32));
+        checkboxAnaerobic.setPreferredSize(new java.awt.Dimension(21, 32));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 8, 10, 0);
         panelDetails.add(checkboxAnaerobic, gridBagConstraints);
@@ -355,15 +368,15 @@ public class BeanEdit extends javax.swing.JDialog {
         labelVariety.setText("Variety");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
         panelDetails.add(labelVariety, gridBagConstraints);
 
         textVariety.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textVariety.setMaximumSize(new java.awt.Dimension(400, 28));
-        textVariety.setMinimumSize(new java.awt.Dimension(400, 28));
-        textVariety.setPreferredSize(new java.awt.Dimension(400, 28));
+        textVariety.setMaximumSize(new java.awt.Dimension(400, 32));
+        textVariety.setMinimumSize(new java.awt.Dimension(400, 32));
+        textVariety.setPreferredSize(new java.awt.Dimension(400, 32));
         textVariety.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textVarietyFocusGained(evt);
@@ -371,7 +384,7 @@ public class BeanEdit extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
         panelDetails.add(textVariety, gridBagConstraints);
@@ -380,18 +393,18 @@ public class BeanEdit extends javax.swing.JDialog {
         labelInStock.setText("In Stock?");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelInStock, gridBagConstraints);
 
         checkboxInStock.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        checkboxInStock.setMaximumSize(new java.awt.Dimension(21, 28));
-        checkboxInStock.setMinimumSize(new java.awt.Dimension(21, 28));
-        checkboxInStock.setPreferredSize(new java.awt.Dimension(21, 28));
+        checkboxInStock.setMaximumSize(new java.awt.Dimension(21, 32));
+        checkboxInStock.setMinimumSize(new java.awt.Dimension(21, 32));
+        checkboxInStock.setPreferredSize(new java.awt.Dimension(21, 32));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 8, 10, 0);
         panelDetails.add(checkboxInStock, gridBagConstraints);
@@ -400,15 +413,15 @@ public class BeanEdit extends javax.swing.JDialog {
         labelGrindSetting.setText("Grind Setting");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridy = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
         panelDetails.add(labelGrindSetting, gridBagConstraints);
 
         textGrindSetting.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textGrindSetting.setMaximumSize(new java.awt.Dimension(70, 28));
-        textGrindSetting.setMinimumSize(new java.awt.Dimension(70, 28));
-        textGrindSetting.setPreferredSize(new java.awt.Dimension(70, 28));
+        textGrindSetting.setMaximumSize(new java.awt.Dimension(70, 32));
+        textGrindSetting.setMinimumSize(new java.awt.Dimension(70, 32));
+        textGrindSetting.setPreferredSize(new java.awt.Dimension(70, 32));
         textGrindSetting.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textGrindSettingFocusGained(evt);
@@ -416,7 +429,7 @@ public class BeanEdit extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridy = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
         panelDetails.add(textGrindSetting, gridBagConstraints);
@@ -438,7 +451,7 @@ public class BeanEdit extends javax.swing.JDialog {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridy = 15;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
@@ -450,10 +463,38 @@ public class BeanEdit extends javax.swing.JDialog {
         labelComments.setText("Comments");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridy = 15;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelComments, gridBagConstraints);
+
+        labelPurchaseDate.setText("Purchase Date");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        panelDetails.add(labelPurchaseDate, gridBagConstraints);
+
+        try {
+            textfPurchaseDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        textfPurchaseDate.setMaximumSize(new java.awt.Dimension(102, 32));
+        textfPurchaseDate.setMinimumSize(new java.awt.Dimension(102, 32));
+        textfPurchaseDate.setPreferredSize(new java.awt.Dimension(102, 32));
+        textfPurchaseDate.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textfPurchaseDateFocusGained(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelDetails.add(textfPurchaseDate, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -489,7 +530,7 @@ public class BeanEdit extends javax.swing.JDialog {
         panelButtons.setLayout(panelButtonsLayout);
         panelButtonsLayout.setHorizontalGroup(
             panelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 189, Short.MAX_VALUE)
+            .addGap(0, 233, Short.MAX_VALUE)
             .addGroup(panelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelButtonsLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -500,7 +541,7 @@ public class BeanEdit extends javax.swing.JDialog {
         );
         panelButtonsLayout.setVerticalGroup(
             panelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 34, Short.MAX_VALUE)
+            .addGap(0, 44, Short.MAX_VALUE)
             .addGroup(panelButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelButtonsLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -589,7 +630,7 @@ public class BeanEdit extends javax.swing.JDialog {
     private void textDensityGramsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textDensityGramsFocusLost
         String densityGrams = this.textDensityGrams.getText();
         String densityText = "0.00";
-        
+
         if (!densityGrams.isEmpty()) {
             float density = Float.parseFloat(densityGrams);
             densityText = String.format("%.2f", density / 250.0);
@@ -597,6 +638,10 @@ public class BeanEdit extends javax.swing.JDialog {
         this.textDensity.setText(densityText);
 
     }//GEN-LAST:event_textDensityGramsFocusLost
+
+    private void textfPurchaseDateFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textfPurchaseDateFocusGained
+        this.textfPurchaseDate.selectAll();
+    }//GEN-LAST:event_textfPurchaseDateFocusGained
 
     private void calculatePricePerPound() {
         String strPrice = this.textPrice.getText();
@@ -638,6 +683,13 @@ public class BeanEdit extends javax.swing.JDialog {
             if (rs.next()) {
                 this.beanId = (String) rs.getString("Id");
                 this.textName.setText(rs.getString("Name"));
+
+                String tmp = rs.getString("PurchaseDate");
+                if (tmp != null) {
+                    Date purchaseDate = new SimpleDateFormat("yyyy-MM-dd").parse(tmp);
+                    this.textfPurchaseDate.setValue(new SimpleDateFormat("MM/dd/yy").format(purchaseDate));
+                }
+
                 this.textVendor.setText(rs.getString("Vendor"));
 
                 float price = rs.getFloat("Price");
@@ -687,6 +739,24 @@ public class BeanEdit extends javax.swing.JDialog {
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("Name", beanName);
+
+        String isoPurchaseDate = null;
+
+        try {
+            String tmp = (String)this.textfPurchaseDate.getValue();
+
+            if (tmp != null && !tmp.isEmpty()) {
+                Date purchaseDate = new SimpleDateFormat("MM/dd/yy").parse(tmp);
+                isoPurchaseDate = new SimpleDateFormat("yyyy-MM-dd").format(purchaseDate);
+            }
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(this, "Unable to parse Purchase Date.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            return;
+        }
+
+        map.put("PurchaseDate", isoPurchaseDate);
+
         map.put("Vendor", this.textVendor.getText());
         map.put("ProcessMethod", (String) this.comboProcess.getSelectedItem());
         map.put("Price", price);
@@ -721,6 +791,7 @@ public class BeanEdit extends javax.swing.JDialog {
             }
 
             JOptionPane.showMessageDialog(this, "Saved.", "Bean Saved", JOptionPane.INFORMATION_MESSAGE);
+            //Utility.showToast("Saved to database");
 
             this.wasPersisted = true;
 
@@ -793,6 +864,7 @@ public class BeanEdit extends javax.swing.JDialog {
     private javax.swing.JLabel labelPrice;
     private javax.swing.JLabel labelPricePerPound;
     private javax.swing.JLabel labelProcess;
+    private javax.swing.JLabel labelPurchaseDate;
     private javax.swing.JLabel labelVariety;
     private javax.swing.JLabel labelVendor;
     private javax.swing.JLabel labelWeightInPounds;
@@ -810,5 +882,6 @@ public class BeanEdit extends javax.swing.JDialog {
     private javax.swing.JTextField textVariety;
     private javax.swing.JTextField textVendor;
     private javax.swing.JTextField textWeightInPounds;
+    private javax.swing.JFormattedTextField textfPurchaseDate;
     // End of variables declaration//GEN-END:variables
 }
