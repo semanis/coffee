@@ -3,6 +3,7 @@
 package com.smanis.coffee.forms;
 
 import com.smanis.coffee.AppPreferences;
+import com.smanis.coffee.Constants;
 import com.smanis.coffee.service.DataService;
 import com.smanis.coffee.Utility;
 import com.smanis.coffee.models.BeanModel;
@@ -504,6 +505,12 @@ public class RoastLogEdit extends javax.swing.JDialog {
 
     private void ftGreenWeightFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftGreenWeightFocusLost
       this.calculateMoistureLoss();
+
+      String greenWeight = (String)this.ftGreenWeight.getValue();
+      
+      if (greenWeight != null && !greenWeight.isEmpty()) {
+          AppPreferences.getPrefs().put(Constants.LAST_GREEN_WEIGHT, greenWeight);
+      }
     }//GEN-LAST:event_ftGreenWeightFocusLost
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -942,7 +949,7 @@ public class RoastLogEdit extends javax.swing.JDialog {
       // These are default values for when you're adding a new Roast Log. 
       // If you're editing a Roast Log, the setRoastLogId() method overriees
       // these values;
-      this.ftGreenWeight.setValue("230.0");
+      this.ftGreenWeight.setValue(AppPreferences.getPrefs().get(Constants.LAST_GREEN_WEIGHT, ""));
       this.textAreaRoastNotes.setText("Start: F8 / P2\n\n2:00 / F\n4:00 / F\n6:00 / F");
 
       // Nice little use of a Java Lamba to set the initial field focus.
