@@ -101,9 +101,9 @@ public class BeanEdit extends javax.swing.JDialog {
 
         textName.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         textName.setText(" ");
-        textName.setMaximumSize(new java.awt.Dimension(102, 32));
-        textName.setMinimumSize(new java.awt.Dimension(102, 32));
-        textName.setPreferredSize(new java.awt.Dimension(102, 32));
+        textName.setMaximumSize(new java.awt.Dimension(102, 34));
+        textName.setMinimumSize(new java.awt.Dimension(102, 34));
+        textName.setPreferredSize(new java.awt.Dimension(102, 34));
         textName.setRequestFocusEnabled(false);
         textName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -128,9 +128,9 @@ public class BeanEdit extends javax.swing.JDialog {
         panelDetails.add(labelVendor, gridBagConstraints);
 
         textVendor.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textVendor.setMaximumSize(new java.awt.Dimension(300, 32));
-        textVendor.setMinimumSize(new java.awt.Dimension(300, 32));
-        textVendor.setPreferredSize(new java.awt.Dimension(300, 32));
+        textVendor.setMaximumSize(new java.awt.Dimension(300, 34));
+        textVendor.setMinimumSize(new java.awt.Dimension(300, 34));
+        textVendor.setPreferredSize(new java.awt.Dimension(300, 34));
         textVendor.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textVendorFocusGained(evt);
@@ -153,9 +153,9 @@ public class BeanEdit extends javax.swing.JDialog {
         panelDetails.add(labelPrice, gridBagConstraints);
 
         textPrice.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textPrice.setMaximumSize(new java.awt.Dimension(90, 32));
-        textPrice.setMinimumSize(new java.awt.Dimension(90, 32));
-        textPrice.setPreferredSize(new java.awt.Dimension(90, 32));
+        textPrice.setMaximumSize(new java.awt.Dimension(90, 34));
+        textPrice.setMinimumSize(new java.awt.Dimension(90, 34));
+        textPrice.setPreferredSize(new java.awt.Dimension(90, 34));
         textPrice.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textPriceFocusGained(evt);
@@ -181,9 +181,9 @@ public class BeanEdit extends javax.swing.JDialog {
         panelDetails.add(labelWeightInPounds, gridBagConstraints);
 
         textWeightInPounds.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textWeightInPounds.setMaximumSize(new java.awt.Dimension(50, 32));
-        textWeightInPounds.setMinimumSize(new java.awt.Dimension(50, 32));
-        textWeightInPounds.setPreferredSize(new java.awt.Dimension(50, 32));
+        textWeightInPounds.setMaximumSize(new java.awt.Dimension(50, 34));
+        textWeightInPounds.setMinimumSize(new java.awt.Dimension(50, 34));
+        textWeightInPounds.setPreferredSize(new java.awt.Dimension(50, 34));
         textWeightInPounds.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textWeightInPoundsFocusGained(evt);
@@ -208,9 +208,9 @@ public class BeanEdit extends javax.swing.JDialog {
         panelDetails.add(labelPricePerPound, gridBagConstraints);
 
         textPricePerPound.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textPricePerPound.setMaximumSize(new java.awt.Dimension(100, 32));
-        textPricePerPound.setMinimumSize(new java.awt.Dimension(100, 32));
-        textPricePerPound.setPreferredSize(new java.awt.Dimension(100, 32));
+        textPricePerPound.setMaximumSize(new java.awt.Dimension(100, 34));
+        textPricePerPound.setMinimumSize(new java.awt.Dimension(100, 34));
+        textPricePerPound.setPreferredSize(new java.awt.Dimension(100, 34));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 10;
@@ -229,9 +229,9 @@ public class BeanEdit extends javax.swing.JDialog {
 
         textOrigin.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         textOrigin.setText(" ");
-        textOrigin.setMaximumSize(new java.awt.Dimension(102, 32));
-        textOrigin.setMinimumSize(new java.awt.Dimension(102, 32));
-        textOrigin.setPreferredSize(new java.awt.Dimension(102, 32));
+        textOrigin.setMaximumSize(new java.awt.Dimension(102, 34));
+        textOrigin.setMinimumSize(new java.awt.Dimension(102, 34));
+        textOrigin.setPreferredSize(new java.awt.Dimension(102, 34));
         textOrigin.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textOriginFocusGained(evt);
@@ -256,9 +256,9 @@ public class BeanEdit extends javax.swing.JDialog {
 
         textAltitude.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         textAltitude.setText(" ");
-        textAltitude.setMaximumSize(new java.awt.Dimension(250, 32));
-        textAltitude.setMinimumSize(new java.awt.Dimension(250, 32));
-        textAltitude.setPreferredSize(new java.awt.Dimension(250, 32));
+        textAltitude.setMaximumSize(new java.awt.Dimension(250, 34));
+        textAltitude.setMinimumSize(new java.awt.Dimension(250, 34));
+        textAltitude.setPreferredSize(new java.awt.Dimension(250, 34));
         textAltitude.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textAltitudeFocusGained(evt);
@@ -280,12 +280,11 @@ public class BeanEdit extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelProcess, gridBagConstraints);
 
-        comboProcess.setEditable(true);
         comboProcess.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         comboProcess.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dry", "Honey", "Monsooned", "Natural", "Washed" }));
-        comboProcess.setMaximumSize(new java.awt.Dimension(173, 32));
-        comboProcess.setMinimumSize(new java.awt.Dimension(173, 32));
-        comboProcess.setPreferredSize(new java.awt.Dimension(173, 32));
+        comboProcess.setMaximumSize(new java.awt.Dimension(173, 34));
+        comboProcess.setMinimumSize(new java.awt.Dimension(173, 34));
+        comboProcess.setPreferredSize(new java.awt.Dimension(173, 34));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
@@ -304,9 +303,9 @@ public class BeanEdit extends javax.swing.JDialog {
         panelDetails.add(labelDensityGrams, gridBagConstraints);
 
         textDensityGrams.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textDensityGrams.setMaximumSize(new java.awt.Dimension(104, 32));
-        textDensityGrams.setMinimumSize(new java.awt.Dimension(104, 32));
-        textDensityGrams.setPreferredSize(new java.awt.Dimension(104, 32));
+        textDensityGrams.setMaximumSize(new java.awt.Dimension(104, 34));
+        textDensityGrams.setMinimumSize(new java.awt.Dimension(104, 34));
+        textDensityGrams.setPreferredSize(new java.awt.Dimension(104, 34));
         textDensityGrams.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textDensityGramsFocusGained(evt);
@@ -334,9 +333,9 @@ public class BeanEdit extends javax.swing.JDialog {
         textDensity.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         textDensity.setText(".00");
         textDensity.setFocusable(false);
-        textDensity.setMaximumSize(new java.awt.Dimension(80, 32));
-        textDensity.setMinimumSize(new java.awt.Dimension(80, 32));
-        textDensity.setPreferredSize(new java.awt.Dimension(80, 32));
+        textDensity.setMaximumSize(new java.awt.Dimension(80, 34));
+        textDensity.setMinimumSize(new java.awt.Dimension(80, 34));
+        textDensity.setPreferredSize(new java.awt.Dimension(80, 34));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 12;
@@ -354,9 +353,9 @@ public class BeanEdit extends javax.swing.JDialog {
         panelDetails.add(labelAnaerobic, gridBagConstraints);
 
         checkboxAnaerobic.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        checkboxAnaerobic.setMaximumSize(new java.awt.Dimension(21, 32));
-        checkboxAnaerobic.setMinimumSize(new java.awt.Dimension(21, 32));
-        checkboxAnaerobic.setPreferredSize(new java.awt.Dimension(21, 32));
+        checkboxAnaerobic.setMaximumSize(new java.awt.Dimension(21, 34));
+        checkboxAnaerobic.setMinimumSize(new java.awt.Dimension(21, 34));
+        checkboxAnaerobic.setPreferredSize(new java.awt.Dimension(21, 34));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 13;
@@ -374,9 +373,9 @@ public class BeanEdit extends javax.swing.JDialog {
         panelDetails.add(labelVariety, gridBagConstraints);
 
         textVariety.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textVariety.setMaximumSize(new java.awt.Dimension(400, 32));
-        textVariety.setMinimumSize(new java.awt.Dimension(400, 32));
-        textVariety.setPreferredSize(new java.awt.Dimension(400, 32));
+        textVariety.setMaximumSize(new java.awt.Dimension(400, 34));
+        textVariety.setMinimumSize(new java.awt.Dimension(400, 34));
+        textVariety.setPreferredSize(new java.awt.Dimension(400, 34));
         textVariety.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textVarietyFocusGained(evt);
@@ -399,9 +398,9 @@ public class BeanEdit extends javax.swing.JDialog {
         panelDetails.add(labelInStock, gridBagConstraints);
 
         checkboxInStock.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        checkboxInStock.setMaximumSize(new java.awt.Dimension(21, 32));
-        checkboxInStock.setMinimumSize(new java.awt.Dimension(21, 32));
-        checkboxInStock.setPreferredSize(new java.awt.Dimension(21, 32));
+        checkboxInStock.setMaximumSize(new java.awt.Dimension(21, 34));
+        checkboxInStock.setMinimumSize(new java.awt.Dimension(21, 34));
+        checkboxInStock.setPreferredSize(new java.awt.Dimension(21, 34));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -419,9 +418,9 @@ public class BeanEdit extends javax.swing.JDialog {
         panelDetails.add(labelGrindSetting, gridBagConstraints);
 
         textGrindSetting.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textGrindSetting.setMaximumSize(new java.awt.Dimension(70, 32));
-        textGrindSetting.setMinimumSize(new java.awt.Dimension(70, 32));
-        textGrindSetting.setPreferredSize(new java.awt.Dimension(70, 32));
+        textGrindSetting.setMaximumSize(new java.awt.Dimension(70, 34));
+        textGrindSetting.setMinimumSize(new java.awt.Dimension(70, 34));
+        textGrindSetting.setPreferredSize(new java.awt.Dimension(70, 34));
         textGrindSetting.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textGrindSettingFocusGained(evt);
@@ -481,9 +480,9 @@ public class BeanEdit extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        textfPurchaseDate.setMaximumSize(new java.awt.Dimension(102, 32));
-        textfPurchaseDate.setMinimumSize(new java.awt.Dimension(102, 32));
-        textfPurchaseDate.setPreferredSize(new java.awt.Dimension(102, 32));
+        textfPurchaseDate.setMaximumSize(new java.awt.Dimension(102, 34));
+        textfPurchaseDate.setMinimumSize(new java.awt.Dimension(102, 34));
+        textfPurchaseDate.setPreferredSize(new java.awt.Dimension(102, 34));
         textfPurchaseDate.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textfPurchaseDateFocusGained(evt);

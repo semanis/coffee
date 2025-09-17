@@ -3,14 +3,9 @@
 package com.smanis.coffee;
 
 import com.smanis.coffee.forms.RoastLogEdit;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GraphicsEnvironment;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -21,16 +16,14 @@ import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
+import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import javax.swing.text.NumberFormatter;
 
 /**
  *
@@ -73,6 +66,21 @@ public class Utility {
         return formatter;
     }
 
+    public static DefaultFormatterFactory createDecimalFormatterFactory(String mask) {
+      // Create DecimalFormat with pattern "##0.0"
+        DecimalFormat df = new DecimalFormat("##0.0");
+        df.setMinimumFractionDigits(1); // ensure at least 1 decimal
+        df.setMaximumFractionDigits(1); // enforce exactly 1 decimal
+        df.setMinimumIntegerDigits(1);  // ensures "0.x" is valid
+
+        // Wrap DecimalFormat in a NumberFormatter
+        NumberFormatter numberFormatter = new NumberFormatter(df);
+        numberFormatter.setValueClass(Float.class);
+        numberFormatter.setAllowsInvalid(false);   // reject invalid characters immediately
+        numberFormatter.setCommitsOnValidEdit(true); // commit after valid edit
+        
+        return new javax.swing.text.DefaultFormatterFactory(numberFormatter);
+    }
     /**
      * Utility method to list available fonts on the target system.
      *
@@ -177,6 +185,13 @@ public class Utility {
         return delta;
     }
 
+
+    public static boolean hasTimeValue(JFormattedTextField field) {
+        String value = (String) field.getValue();
+        
+        return value != null && !value.equals("  :  :  ");
+    }
+    
     public static boolean isEmptyDate(JFormattedTextField field) {
         String value = (String) field.getValue();
 
