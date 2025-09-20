@@ -6,6 +6,7 @@ import com.smanis.coffee.forms.RoastLogEdit;
 import java.awt.GraphicsEnvironment;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -66,21 +67,39 @@ public class Utility {
         return formatter;
     }
 
-    public static DefaultFormatterFactory createDecimalFormatterFactory(String mask) {
-      // Create DecimalFormat with pattern "##0.0"
-        DecimalFormat df = new DecimalFormat("##0.0");
-        df.setMinimumFractionDigits(1); // ensure at least 1 decimal
-        df.setMaximumFractionDigits(1); // enforce exactly 1 decimal
-        df.setMinimumIntegerDigits(1);  // ensures "0.x" is valid
+    public static DefaultFormatterFactory createDecimalFormatterFactory(String mask, Integer minIntegerDigits, Integer minFractionDigits, Integer maxFractionDigits) {
+        DecimalFormat df = new DecimalFormat(mask);
+        df.setMinimumIntegerDigits(minIntegerDigits);  // ensures "0.x" is valid
+        df.setMinimumFractionDigits(minFractionDigits);
+        
+        df.setMaximumFractionDigits(maxFractionDigits); 
 
         // Wrap DecimalFormat in a NumberFormatter
         NumberFormatter numberFormatter = new NumberFormatter(df);
         numberFormatter.setValueClass(Float.class);
         numberFormatter.setAllowsInvalid(false);   // reject invalid characters immediately
         numberFormatter.setCommitsOnValidEdit(true); // commit after valid edit
-        
+
         return new javax.swing.text.DefaultFormatterFactory(numberFormatter);
     }
+
+    public static DefaultFormatterFactory createIntegerFormatterFactory() {
+        // Create a NumberFormat for integers only
+        NumberFormat intFormat = NumberFormat.getIntegerInstance();
+        intFormat.setGroupingUsed(false); // no commas
+
+        // Create NumberFormatter
+        NumberFormatter intFormatter = new NumberFormatter(intFormat);
+        intFormatter.setValueClass(Integer.class); // enforce integer type
+        intFormatter.setAllowsInvalid(false); // reject non-digits
+        intFormatter.setCommitsOnValidEdit(true); // commit as soon as valid
+        intFormatter.setMinimum(Integer.MIN_VALUE);
+        intFormatter.setMaximum(Integer.MAX_VALUE);
+
+        // Wrap in DefaultFormatterFactory
+        return new DefaultFormatterFactory(intFormatter);
+    }
+
     /**
      * Utility method to list available fonts on the target system.
      *
@@ -111,7 +130,7 @@ public class Utility {
      * @return A String date representation.
      */
     public static String getFormattedDate(LocalDateTime dateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy");
         return formatter.format(dateTime);
     }
 
@@ -185,13 +204,12 @@ public class Utility {
         return delta;
     }
 
-
     public static boolean hasTimeValue(JFormattedTextField field) {
         String value = (String) field.getValue();
-        
+
         return value != null && !value.equals("  :  :  ");
     }
-    
+
     public static boolean isEmptyDate(JFormattedTextField field) {
         String value = (String) field.getValue();
 
@@ -205,9 +223,9 @@ public class Utility {
     }
 
     public static boolean isEmptyWeight(JFormattedTextField field) {
-        String value = (String) field.getValue();
+        Float value = (Float) field.getValue();
 
-        return value == null || value.equals("   . ");
+        return value == null || value.equals(0.0);
     }
 
     public static boolean isValidDate(JFormattedTextField textField) {
@@ -234,19 +252,6 @@ public class Utility {
         }
 
         return isValidTime;
-    }
-
-    public static boolean isValidWeight(JFormattedTextField textField) {
-        boolean isValidWeight = true;
-        String stringWeight = (String) textField.getValue();
-
-        try {
-            float weight = Float.parseFloat(stringWeight);
-        } catch (Exception e) {
-            isValidWeight = false;
-        }
-
-        return isValidWeight;
     }
 
     public static MaskFormatter getMaskFormatter(String pattern) {
@@ -327,7 +332,7 @@ public class Utility {
 //        toastFrame.getContentPane().add(toastLabel);
 //
 //        // Show the Toast notification on screen
-////        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+    ////        javax.swing.SwingUtilities.invokeLater(new Runnable() {
 ////            public void run() {
 ////                toastFrame.setVisible(true);
 ////            }
@@ -537,11 +542,7 @@ public class Utility {
                     JOptionPane.showMessageDialog(null, "Please enter " + label + ".", "Error", JOptionPane.ERROR_MESSAGE);
                     textField.requestFocus();
                     return false;
-                } else if (!Utility.isValidWeight(textField)) {
-                    JOptionPane.showMessageDialog(null, label + " is not a valid weight.", "Error", JOptionPane.ERROR_MESSAGE);
-                    textField.requestFocus();
-                    isValid = false;
-                }
+                } 
 
                 break;
 

@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import javax.swing.JComponent;
@@ -47,11 +48,11 @@ public class BeanEdit extends javax.swing.JDialog {
         labelVendor = new javax.swing.JLabel();
         textVendor = new javax.swing.JTextField();
         labelPrice = new javax.swing.JLabel();
-        textPrice = new javax.swing.JTextField();
+        ftPrice = new javax.swing.JFormattedTextField();
         labelWeightInPounds = new javax.swing.JLabel();
-        textWeightInPounds = new javax.swing.JTextField();
+        ftWeight = new javax.swing.JFormattedTextField();
         labelPricePerPound = new javax.swing.JLabel();
-        textPricePerPound = new javax.swing.JTextField();
+        ftPricePerPound = new javax.swing.JFormattedTextField();
         labelOrigin = new javax.swing.JLabel();
         textOrigin = new javax.swing.JTextField();
         labelAltitude = new javax.swing.JLabel();
@@ -59,7 +60,7 @@ public class BeanEdit extends javax.swing.JDialog {
         labelProcess = new javax.swing.JLabel();
         comboProcess = new javax.swing.JComboBox<>();
         labelDensityGrams = new javax.swing.JLabel();
-        textDensityGrams = new javax.swing.JTextField();
+        ftDensityGrams = new javax.swing.JFormattedTextField();
         labelDensity = new javax.swing.JLabel();
         textDensity = new javax.swing.JTextField();
         labelAnaerobic = new javax.swing.JLabel();
@@ -74,7 +75,7 @@ public class BeanEdit extends javax.swing.JDialog {
         textAreaComments = new javax.swing.JTextArea();
         labelComments = new javax.swing.JLabel();
         labelPurchaseDate = new javax.swing.JLabel();
-        textfPurchaseDate = new javax.swing.JFormattedTextField();
+        textPurchaseDate = new javax.swing.JFormattedTextField();
         panelButtons = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
@@ -152,24 +153,17 @@ public class BeanEdit extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelPrice, gridBagConstraints);
 
-        textPrice.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textPrice.setMaximumSize(new java.awt.Dimension(90, 34));
-        textPrice.setMinimumSize(new java.awt.Dimension(90, 34));
-        textPrice.setPreferredSize(new java.awt.Dimension(90, 34));
-        textPrice.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                textPriceFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                textPriceFocusLost(evt);
-            }
-        });
+        ftPrice.setColumns(6);
+        ftPrice.setFormatterFactory(Utility.createDecimalFormatterFactory("#0.00", 1, 2, 2)
+        );
+        ftPrice.setMaximumSize(new java.awt.Dimension(102, 34));
+        ftPrice.setMinimumSize(new java.awt.Dimension(102, 34));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
-        panelDetails.add(textPrice, gridBagConstraints);
+        panelDetails.add(ftPrice, gridBagConstraints);
 
         labelWeightInPounds.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         labelWeightInPounds.setText("Weight (lbs)");
@@ -180,16 +174,14 @@ public class BeanEdit extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelWeightInPounds, gridBagConstraints);
 
-        textWeightInPounds.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textWeightInPounds.setMaximumSize(new java.awt.Dimension(50, 34));
-        textWeightInPounds.setMinimumSize(new java.awt.Dimension(50, 34));
-        textWeightInPounds.setPreferredSize(new java.awt.Dimension(50, 34));
-        textWeightInPounds.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                textWeightInPoundsFocusGained(evt);
-            }
+        ftWeight.setFormatterFactory(Utility.createIntegerFormatterFactory()
+        );
+        ftWeight.setMaximumSize(new java.awt.Dimension(102, 34));
+        ftWeight.setMinimumSize(new java.awt.Dimension(102, 34));
+        ftWeight.setPreferredSize(new java.awt.Dimension(102, 34));
+        ftWeight.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                textWeightInPoundsFocusLost(evt);
+                ftWeightFocusLost(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -197,7 +189,7 @@ public class BeanEdit extends javax.swing.JDialog {
         gridBagConstraints.gridy = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
-        panelDetails.add(textWeightInPounds, gridBagConstraints);
+        panelDetails.add(ftWeight, gridBagConstraints);
 
         labelPricePerPound.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         labelPricePerPound.setText("Price Per Pound");
@@ -207,16 +199,16 @@ public class BeanEdit extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
         panelDetails.add(labelPricePerPound, gridBagConstraints);
 
-        textPricePerPound.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textPricePerPound.setMaximumSize(new java.awt.Dimension(100, 34));
-        textPricePerPound.setMinimumSize(new java.awt.Dimension(100, 34));
-        textPricePerPound.setPreferredSize(new java.awt.Dimension(100, 34));
+        ftPricePerPound.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        ftPricePerPound.setMaximumSize(new java.awt.Dimension(102, 34));
+        ftPricePerPound.setMinimumSize(new java.awt.Dimension(102, 34));
+        ftPricePerPound.setPreferredSize(new java.awt.Dimension(102, 34));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
-        panelDetails.add(textPricePerPound, gridBagConstraints);
+        panelDetails.add(ftPricePerPound, gridBagConstraints);
 
         labelOrigin.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         labelOrigin.setText("Origin");
@@ -302,24 +294,16 @@ public class BeanEdit extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelDensityGrams, gridBagConstraints);
 
-        textDensityGrams.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textDensityGrams.setMaximumSize(new java.awt.Dimension(104, 34));
-        textDensityGrams.setMinimumSize(new java.awt.Dimension(104, 34));
-        textDensityGrams.setPreferredSize(new java.awt.Dimension(104, 34));
-        textDensityGrams.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                textDensityGramsFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                textDensityGramsFocusLost(evt);
-            }
-        });
+        ftDensityGrams.setFormatterFactory(Utility.createDecimalFormatterFactory("##0.0", 1, 1, 1));
+        ftDensityGrams.setMaximumSize(new java.awt.Dimension(102, 34));
+        ftDensityGrams.setMinimumSize(new java.awt.Dimension(102, 34));
+        ftDensityGrams.setPreferredSize(new java.awt.Dimension(102, 34));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
-        panelDetails.add(textDensityGrams, gridBagConstraints);
+        panelDetails.add(ftDensityGrams, gridBagConstraints);
 
         labelDensity.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         labelDensity.setText("Density");
@@ -476,16 +460,16 @@ public class BeanEdit extends javax.swing.JDialog {
         panelDetails.add(labelPurchaseDate, gridBagConstraints);
 
         try {
-            textfPurchaseDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
+            textPurchaseDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        textfPurchaseDate.setMaximumSize(new java.awt.Dimension(102, 34));
-        textfPurchaseDate.setMinimumSize(new java.awt.Dimension(102, 34));
-        textfPurchaseDate.setPreferredSize(new java.awt.Dimension(102, 34));
-        textfPurchaseDate.addFocusListener(new java.awt.event.FocusAdapter() {
+        textPurchaseDate.setMaximumSize(new java.awt.Dimension(102, 34));
+        textPurchaseDate.setMinimumSize(new java.awt.Dimension(102, 34));
+        textPurchaseDate.setPreferredSize(new java.awt.Dimension(102, 34));
+        textPurchaseDate.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                textfPurchaseDateFocusGained(evt);
+                textPurchaseDateFocusGained(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -493,7 +477,7 @@ public class BeanEdit extends javax.swing.JDialog {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
-        panelDetails.add(textfPurchaseDate, gridBagConstraints);
+        panelDetails.add(textPurchaseDate, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -602,60 +586,28 @@ public class BeanEdit extends javax.swing.JDialog {
         this.persistBean();
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void textPriceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textPriceFocusGained
-        this.textPrice.selectAll();
-    }//GEN-LAST:event_textPriceFocusGained
-
-    private void textWeightInPoundsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textWeightInPoundsFocusGained
-        this.textWeightInPounds.selectAll();
-    }//GEN-LAST:event_textWeightInPoundsFocusGained
-
-    private void textDensityGramsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textDensityGramsFocusGained
-        this.textDensityGrams.selectAll();
-    }//GEN-LAST:event_textDensityGramsFocusGained
-
     private void textAreaCommentsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textAreaCommentsFocusGained
         this.textAreaComments.selectAll();
     }//GEN-LAST:event_textAreaCommentsFocusGained
 
-    private void textPriceFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textPriceFocusLost
+    private void textPurchaseDateFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textPurchaseDateFocusGained
+        this.textPurchaseDate.selectAll();
+    }//GEN-LAST:event_textPurchaseDateFocusGained
+
+    private void ftWeightFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftWeightFocusLost
         this.calculatePricePerPound();
-    }//GEN-LAST:event_textPriceFocusLost
-
-    private void textWeightInPoundsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textWeightInPoundsFocusLost
-        this.calculatePricePerPound();
-    }//GEN-LAST:event_textWeightInPoundsFocusLost
-
-    private void textDensityGramsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textDensityGramsFocusLost
-        String densityGrams = this.textDensityGrams.getText();
-        String densityText = "0.00";
-
-        if (!densityGrams.isEmpty()) {
-            float density = Float.parseFloat(densityGrams);
-            densityText = String.format("%.2f", density / 250.0);
-        }
-        this.textDensity.setText(densityText);
-
-    }//GEN-LAST:event_textDensityGramsFocusLost
-
-    private void textfPurchaseDateFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textfPurchaseDateFocusGained
-        this.textfPurchaseDate.selectAll();
-    }//GEN-LAST:event_textfPurchaseDateFocusGained
+    }//GEN-LAST:event_ftWeightFocusLost
 
     private void calculatePricePerPound() {
-        String strPrice = this.textPrice.getText();
-        String strWeight = this.textWeightInPounds.getText();
+        Float price = (Float) this.ftPrice.getValue();
+        Float weight = Float.valueOf((int)this.ftWeight.getValue());
 
-        if (strPrice.isEmpty() || strWeight.isEmpty() || strWeight.equals("0")) {
-            this.textPricePerPound.setText("");
+        if (price == null || weight == null) {
+            this.ftPricePerPound.setValue(Float.valueOf("0.00"));
             return;
         }
 
-        float price = Float.valueOf(strPrice);
-        float weight = Float.valueOf(strWeight);
-
-        this.textPricePerPound.setText(String.format("%.2f", price / weight));
-
+        this.ftPricePerPound.setValue(price / weight);
     }
 
     /**
@@ -686,25 +638,23 @@ public class BeanEdit extends javax.swing.JDialog {
                 String tmp = rs.getString("PurchaseDate");
                 if (tmp != null) {
                     Date purchaseDate = new SimpleDateFormat("yyyy-MM-dd").parse(tmp);
-                    this.textfPurchaseDate.setValue(new SimpleDateFormat("MM/dd/yy").format(purchaseDate));
+                    this.textPurchaseDate.setValue(new SimpleDateFormat("MM/dd/yy").format(purchaseDate));
                 }
 
                 this.textVendor.setText(rs.getString("Vendor"));
-
-                float price = rs.getFloat("Price");
-                String formattedPrice = (price == 0.0) ? "00.00" : Utility.sqlFloatToString(price, "%5.2f");
-                this.textPrice.setText(formattedPrice);
-
-                this.textWeightInPounds.setText(String.valueOf(rs.getInt("WeightInPounds")));
-                this.textPricePerPound.setText(Utility.sqlFloatToString(rs.getFloat("PricePerPound"), "%5.2f"));
+                this.ftPrice.setValue(rs.getFloat("Price"));
+                this.ftWeight.setValue(rs.getInt("WeightInPounds"));
+                this.ftPricePerPound.setValue(rs.getFloat("PricePerPound"));
                 this.textOrigin.setText(rs.getString("Origin"));
                 this.textVariety.setText(rs.getString("Variety"));
                 this.textAltitude.setText(rs.getString("Altitude"));
                 this.comboProcess.setSelectedItem(rs.getString("ProcessMethod"));
 
-                float densityGrams = rs.getFloat("DensityGrams");
-                String formattedDensityGrams = (densityGrams == 0.0) ? "000.0" : Utility.sqlFloatToString(densityGrams, "%5.1f");
-                this.textDensityGrams.setText(formattedDensityGrams);
+                Float densityGrams = rs.getFloat("DensityGrams");
+                if (densityGrams == null) {
+                    densityGrams = Float.valueOf("0.0");
+                }
+                this.ftDensityGrams.setValue(densityGrams);
 
                 this.textDensity.setText(Utility.sqlFloatToString(rs.getFloat("Density"), "%4.2f"));
                 this.checkboxAnaerobic.setSelected(rs.getBoolean("Anaerobic"));
@@ -729,20 +679,11 @@ public class BeanEdit extends javax.swing.JDialog {
             this.textName.requestFocus();
         }
 
-        String stringPrice = (String) this.textPrice.getText();
-        float price = 0.0f;
-
-        if (!stringPrice.isBlank()) {
-            price = Float.parseFloat(stringPrice);
-        }
-
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("Name", beanName);
 
         String isoPurchaseDate = null;
 
         try {
-            String tmp = (String)this.textfPurchaseDate.getValue();
+            String tmp = (String) this.textPurchaseDate.getValue();
 
             if (tmp != null && !tmp.isEmpty()) {
                 Date purchaseDate = new SimpleDateFormat("MM/dd/yy").parse(tmp);
@@ -754,28 +695,34 @@ public class BeanEdit extends javax.swing.JDialog {
             return;
         }
 
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("Name", beanName);
         map.put("PurchaseDate", isoPurchaseDate);
-
         map.put("Vendor", this.textVendor.getText());
         map.put("ProcessMethod", (String) this.comboProcess.getSelectedItem());
+
+        Float price = (Float)this.ftPrice.getValue();
+        if (price == null) {
+            price = Float.valueOf("0.0");
+        }
         map.put("Price", price);
 
-        String stringWeight = this.textWeightInPounds.getText();
-        if (stringWeight.isBlank()) {
-            stringWeight = "0";
+        Integer weight = (Integer)this.ftWeight.getValue();
+        if (weight == null) {
+            weight = 0;
         }
-        map.put("WeightInPounds", Integer.valueOf(stringWeight).intValue());
+        map.put("WeightInPounds", weight);
 
         map.put("Origin", this.textOrigin.getText());
         map.put("Variety", this.textVariety.getText());
         map.put("Altitude", this.textAltitude.getText());
 
-        String stringDensityGrams = this.textDensityGrams.getText();
-        if (stringDensityGrams.isBlank()) {
-            stringDensityGrams = "000.0";
+        Float densityGrams = (Float) this.ftDensityGrams.getValue();
+        if (densityGrams == null) {
+            densityGrams = Float.valueOf("0.0");
         }
-
-        map.put("DensityGrams", Float.valueOf(stringDensityGrams).floatValue());
+        map.put("DensityGrams", densityGrams);
+        
         map.put("Anaerobic", this.checkboxAnaerobic.isSelected() ? 1 : 0);
         map.put("InStock", this.checkboxInStock.isSelected() ? 1 : 0);
         map.put("GrindSetting", this.textGrindSetting.getText());
@@ -821,8 +768,13 @@ public class BeanEdit extends javax.swing.JDialog {
         // Bind the Escape key to fire the action listener.    
         KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
         jrp.registerKeyboardAction(actionListener, stroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
-
+        
         AppPreferences.loadWindowPreferences(BeanEdit.this);
+        
+        // This assume you're adding a new Bean, where otherwise the caller invokes "setBeanId(someID)"
+        // to load data from the database.
+        this.checkboxInStock.setSelected(true);
+        this.textPurchaseDate.setText(Utility.getFormattedDate(LocalDateTime.now()));
 
     }
 
@@ -850,6 +802,10 @@ public class BeanEdit extends javax.swing.JDialog {
     private javax.swing.JCheckBox checkboxAnaerobic;
     private javax.swing.JCheckBox checkboxInStock;
     private javax.swing.JComboBox<String> comboProcess;
+    private javax.swing.JFormattedTextField ftDensityGrams;
+    private javax.swing.JFormattedTextField ftPrice;
+    private javax.swing.JFormattedTextField ftPricePerPound;
+    private javax.swing.JFormattedTextField ftWeight;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelAltitude;
     private javax.swing.JLabel labelAnaerobic;
@@ -872,15 +828,11 @@ public class BeanEdit extends javax.swing.JDialog {
     private javax.swing.JTextField textAltitude;
     private javax.swing.JTextArea textAreaComments;
     private javax.swing.JTextField textDensity;
-    private javax.swing.JTextField textDensityGrams;
     private javax.swing.JTextField textGrindSetting;
     private javax.swing.JTextField textName;
     private javax.swing.JTextField textOrigin;
-    private javax.swing.JTextField textPrice;
-    private javax.swing.JTextField textPricePerPound;
+    private javax.swing.JFormattedTextField textPurchaseDate;
     private javax.swing.JTextField textVariety;
     private javax.swing.JTextField textVendor;
-    private javax.swing.JTextField textWeightInPounds;
-    private javax.swing.JFormattedTextField textfPurchaseDate;
     // End of variables declaration//GEN-END:variables
 }
