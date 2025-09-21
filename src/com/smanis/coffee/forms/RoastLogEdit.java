@@ -82,6 +82,8 @@ public class RoastLogEdit extends javax.swing.JDialog {
         labelMoistureLoss = new javax.swing.JLabel();
         textMoistureLossMsg = new javax.swing.JTextField();
         labelRoastLevel = new javax.swing.JLabel();
+        labelCompareRoastLevel = new javax.swing.JLabel();
+        labelComparePercentage = new javax.swing.JLabel();
         panelTimes = new javax.swing.JPanel();
         btnStartTime = new javax.swing.JButton();
         ftStartTime = new JFormattedTextField(Utility.createMaskFormatter("##:##:##"));
@@ -244,7 +246,23 @@ public class RoastLogEdit extends javax.swing.JDialog {
         labelRoastLevel.setFocusable(false);
         panelRoastDate.add(labelRoastLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 400, 30));
 
-        getContentPane().add(panelRoastDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 420, 260));
+        labelCompareRoastLevel.setFont(new java.awt.Font("SansSerif.plain", 0, 24)); // NOI18N
+        labelCompareRoastLevel.setForeground(new java.awt.Color(0, 102, 0));
+        labelCompareRoastLevel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelCompareRoastLevel.setMaximumSize(new java.awt.Dimension(94, 32));
+        labelCompareRoastLevel.setMinimumSize(new java.awt.Dimension(94, 32));
+        labelCompareRoastLevel.setPreferredSize(new java.awt.Dimension(94, 32));
+        panelRoastDate.add(labelCompareRoastLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 380, 30));
+
+        labelComparePercentage.setFont(new java.awt.Font("SansSerif.plain", 0, 24)); // NOI18N
+        labelComparePercentage.setForeground(new java.awt.Color(0, 102, 51));
+        labelComparePercentage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelComparePercentage.setMaximumSize(new java.awt.Dimension(94, 32));
+        labelComparePercentage.setMinimumSize(new java.awt.Dimension(94, 32));
+        labelComparePercentage.setPreferredSize(new java.awt.Dimension(94, 32));
+        panelRoastDate.add(labelComparePercentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 380, 30));
+
+        getContentPane().add(panelRoastDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 420, 340));
 
         panelTimes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         panelTimes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -422,13 +440,13 @@ public class RoastLogEdit extends javax.swing.JDialog {
         textAreaRoastNotes.setMinimumSize(new java.awt.Dimension(101, 340));
         jScrollPane3.setViewportView(textAreaRoastNotes);
 
-        panelRoastNotes.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 390, 350));
+        panelRoastNotes.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 390, 260));
 
         jLabel2.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         jLabel2.setText("Roast Notes");
         panelRoastNotes.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        getContentPane().add(panelRoastNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 420, 410));
+        getContentPane().add(panelRoastNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 420, 320));
 
         panelTimers.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         panelTimers.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -778,6 +796,8 @@ public class RoastLogEdit extends javax.swing.JDialog {
         this.labelCompareBrownTime.setText("(" + (String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Browning")) + ")");
         this.labelCompareFcTime.setText("(" + (String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "First Crack")) + ")");
         this.labelCompareDevTime.setText("(" + (String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Development")) + ")");
+        this.labelCompareRoastLevel.setText((String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Roast Level")));
+        this.labelComparePercentage.setText((String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Moist. Loss")));
     }
     
     /**
@@ -1200,6 +1220,8 @@ public class RoastLogEdit extends javax.swing.JDialog {
     private javax.swing.JLabel labelCompareDevTime;
     private javax.swing.JLabel labelCompareDryTime;
     private javax.swing.JLabel labelCompareFcTime;
+    private javax.swing.JLabel labelComparePercentage;
+    private javax.swing.JLabel labelCompareRoastLevel;
     private javax.swing.JLabel labelCompareRoastTime;
     private javax.swing.JLabel labelDevTimer;
     private javax.swing.JLabel labelDifference;
