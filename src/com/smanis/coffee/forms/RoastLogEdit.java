@@ -260,9 +260,9 @@ public class RoastLogEdit extends javax.swing.JDialog {
         labelComparePercentage.setMaximumSize(new java.awt.Dimension(94, 32));
         labelComparePercentage.setMinimumSize(new java.awt.Dimension(94, 32));
         labelComparePercentage.setPreferredSize(new java.awt.Dimension(94, 32));
-        panelRoastDate.add(labelComparePercentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 380, 30));
+        panelRoastDate.add(labelComparePercentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 380, 30));
 
-        getContentPane().add(panelRoastDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 420, 340));
+        getContentPane().add(panelRoastDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 420, 320));
 
         panelTimes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         panelTimes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -552,7 +552,7 @@ public class RoastLogEdit extends javax.swing.JDialog {
                 btnCancelActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 740, -1, -1));
+        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 740, -1, -1));
 
         btnSave.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         btnSave.setMnemonic('v');
@@ -562,9 +562,9 @@ public class RoastLogEdit extends javax.swing.JDialog {
                 btnSaveActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 740, -1, -1));
+        getContentPane().add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 740, -1, -1));
 
-        setSize(new java.awt.Dimension(1226, 827));
+        setSize(new java.awt.Dimension(1165, 827));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
