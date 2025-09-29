@@ -252,7 +252,7 @@ public class RoastLogEdit extends javax.swing.JDialog {
         labelCompareRoastLevel.setMaximumSize(new java.awt.Dimension(94, 32));
         labelCompareRoastLevel.setMinimumSize(new java.awt.Dimension(94, 32));
         labelCompareRoastLevel.setPreferredSize(new java.awt.Dimension(94, 32));
-        panelRoastDate.add(labelCompareRoastLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 380, 30));
+        panelRoastDate.add(labelCompareRoastLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 380, 30));
 
         labelComparePercentage.setFont(new java.awt.Font("SansSerif.plain", 0, 24)); // NOI18N
         labelComparePercentage.setForeground(new java.awt.Color(0, 102, 51));
@@ -260,9 +260,9 @@ public class RoastLogEdit extends javax.swing.JDialog {
         labelComparePercentage.setMaximumSize(new java.awt.Dimension(94, 32));
         labelComparePercentage.setMinimumSize(new java.awt.Dimension(94, 32));
         labelComparePercentage.setPreferredSize(new java.awt.Dimension(94, 32));
-        panelRoastDate.add(labelComparePercentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 380, 30));
+        panelRoastDate.add(labelComparePercentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 380, 40));
 
-        getContentPane().add(panelRoastDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 420, 320));
+        getContentPane().add(panelRoastDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 420, 310));
 
         panelTimes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         panelTimes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -440,13 +440,13 @@ public class RoastLogEdit extends javax.swing.JDialog {
         textAreaRoastNotes.setMinimumSize(new java.awt.Dimension(101, 340));
         jScrollPane3.setViewportView(textAreaRoastNotes);
 
-        panelRoastNotes.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 390, 260));
+        panelRoastNotes.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 390, 300));
 
         jLabel2.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         jLabel2.setText("Roast Notes");
         panelRoastNotes.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        getContentPane().add(panelRoastNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 420, 320));
+        getContentPane().add(panelRoastNotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 420, 360));
 
         panelTimers.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         panelTimers.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
