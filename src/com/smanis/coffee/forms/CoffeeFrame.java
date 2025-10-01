@@ -95,6 +95,8 @@ public class CoffeeFrame extends javax.swing.JFrame {
         menuItemExit = new javax.swing.JMenuItem();
         menuUtility = new javax.swing.JMenu();
         menuItemCalculate = new javax.swing.JMenuItem();
+        menuItem2MinuteAlert = new javax.swing.JCheckBoxMenuItem();
+        menuItemComparisonAlert = new javax.swing.JCheckBoxMenuItem();
         menuView = new javax.swing.JMenu();
         menuLookAndFeel = new javax.swing.JMenu();
         menuItemGtk = new javax.swing.JMenuItem();
@@ -543,6 +545,14 @@ public class CoffeeFrame extends javax.swing.JFrame {
         });
         menuUtility.add(menuItemCalculate);
 
+        menuItem2MinuteAlert.setSelected(true);
+        menuItem2MinuteAlert.setText("2 Minute Audible Alerts");
+        menuUtility.add(menuItem2MinuteAlert);
+
+        menuItemComparisonAlert.setSelected(true);
+        menuItemComparisonAlert.setText("Comparison Timer Alerts");
+        menuUtility.add(menuItemComparisonAlert);
+
         menuBar.add(menuUtility);
 
         menuView.setMnemonic('v');
@@ -879,51 +889,24 @@ public class CoffeeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddCompareActionPerformed
 
     private void menuItemCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCalculateActionPerformed
+        // A bean must be selected in the bean list.
         int selectedIndex = this.listBeans.getSelectedIndex();
         if (selectedIndex == -1) {
             JOptionPane.showMessageDialog(this, "Please select a bean in the bean list.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
+        // Get currently selected Bean, so we have access to the Bean Name, Bean ID, etc.
         ListModel beanListModel = this.listBeans.getModel();
         BeanModel beanModel = (BeanModel) beanListModel.getElementAt(this.listBeans.getSelectedIndex());
 
         NonEditableTableModel roastLogModel = (NonEditableTableModel) this.tableRoasts.getModel();
 
-        int roastCount = roastLogModel.getRowCount();
-        int columnIndex = TableService.getInstance().getColumnIndex("RoastLog", "Green Weight");
-
-        float gramsUtilized = 0.0f;
-
-        // 453.592g in a pound.
-        for (int i = 0; i < roastCount; i++) {
-            gramsUtilized += Float.valueOf((String) roastLogModel.getValueAt(i, columnIndex));
-        }
-
-        ResultSet rs = null;
-        
-        try {
-            rs = DataService.getInstance().getBeanById(beanModel.getBeanId());
-            if (rs != null && rs.next()) {
-                float poundsPurchased = rs.getFloat("WeightInPounds");
-                float poundsUtilized = gramsUtilized / 453.592f;
-                float poundsRemaining = poundsPurchased - poundsUtilized;
-                poundsRemaining = poundsRemaining < 0.0f ? 0.0f : poundsRemaining; 
-                
-                String beanMessage = "Total utilization for bean '%s': \n\n";
-                String purchasedMessage = "Pounds Purchased: %.2f (%.2fg)\n";
-                String utilizedMessage = "Pounds Remaining: %.2f (%.2fg)\n\n";
-                String conversionMessage = "1 lb = 453.59g";
-                        
-                String message = String.format(beanMessage + purchasedMessage + utilizedMessage + conversionMessage, beanModel.getBeanName(), poundsPurchased, gramsUtilized, poundsRemaining, poundsRemaining * 453.592f  );
-                JOptionPane.showMessageDialog(this, message, "Total Bean Usage", JOptionPane.INFORMATION_MESSAGE);
-
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-
+        BeanUtilization beanUtilDialog = new BeanUtilization(this, true);
+        beanUtilDialog.setBeanModel(beanModel);
+        beanUtilDialog.setRoastLogModel(roastLogModel);
+        beanUtilDialog.calculateBeanUtilization();
+        beanUtilDialog.setVisible(true);
     }//GEN-LAST:event_menuItemCalculateActionPerformed
 
     private void editBean() {
@@ -1169,8 +1152,10 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuFile;
     private javax.swing.JMenu menuHellp;
+    private javax.swing.JCheckBoxMenuItem menuItem2MinuteAlert;
     private javax.swing.JMenuItem menuItemAbout;
     private javax.swing.JMenuItem menuItemCalculate;
+    private javax.swing.JCheckBoxMenuItem menuItemComparisonAlert;
     private javax.swing.JMenuItem menuItemExit;
     private javax.swing.JMenuItem menuItemGtk;
     private javax.swing.JMenuItem menuItemMetal;
