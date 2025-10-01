@@ -185,18 +185,19 @@ public final class DataService {
         PreparedStatement ps = this.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
 
         ps.setString(1, (String) map.get("Name"));
-        ps.setString(2, (String) map.get("Vendor"));
-        ps.setString(3, (String) map.get("ProcessMethod"));
-        ps.setFloat(4, (float) map.get("Price"));
-        ps.setInt(5, (int) map.get("WeightInPounds"));
-        ps.setString(6, (String) map.get("Origin"));
-        ps.setString(7, (String) map.get("Variety"));
-        ps.setString(8, (String) map.get("Altitude"));
-        ps.setFloat(9, (float) map.get("DensityGrams"));
-        ps.setInt(10, (int) map.get("Anaerobic"));
-        ps.setInt(11, (int) map.get("InStock"));
-        ps.setString(12, (String) map.get("GrindSetting"));
-        ps.setString(13, (String) map.get("Comments"));
+        ps.setString(2, (String) map.get("PurchaseDate"));
+        ps.setString(3, (String) map.get("Vendor"));
+        ps.setString(4, (String) map.get("ProcessMethod"));
+        ps.setFloat(5, (float) map.get("Price"));
+        ps.setInt(6, (int) map.get("WeightInPounds"));
+        ps.setString(7, (String) map.get("Origin"));
+        ps.setString(8, (String) map.get("Variety"));
+        ps.setString(9, (String) map.get("Altitude"));
+        ps.setFloat(10, (float) map.get("DensityGrams"));
+        ps.setInt(11, (int) map.get("Anaerobic"));
+        ps.setInt(12, (int) map.get("InStock"));
+        ps.setString(13, (String) map.get("GrindSetting"));
+        ps.setString(14, (String) map.get("Comments"));
 
         int insertCount = ps.executeUpdate();
         ResultSet rs = ps.getGeneratedKeys();
@@ -362,7 +363,7 @@ public final class DataService {
             case "insertBean":
                 query = "INSERT INTO Beans "
                         + "SET "
-                        + "Name = ?, Vendor = ?, ProcessMethod = ?, Price = ?, WeightInPounds = ?, "
+                        + "Name = ?, PurchaseDate = ?, Vendor = ?, ProcessMethod = ?, Price = ?, WeightInPounds = ?, "
                         + "Origin = ?, Variety = ?, Altitude = ?, DensityGrams  = ?, "
                         + "Anaerobic = ?, InStock = ?, GrindSetting = ?, Comments = ?";
                 break;

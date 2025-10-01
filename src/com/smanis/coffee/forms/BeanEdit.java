@@ -298,6 +298,11 @@ public class BeanEdit extends javax.swing.JDialog {
         ftDensityGrams.setMaximumSize(new java.awt.Dimension(102, 34));
         ftDensityGrams.setMinimumSize(new java.awt.Dimension(102, 34));
         ftDensityGrams.setPreferredSize(new java.awt.Dimension(102, 34));
+        ftDensityGrams.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                ftDensityGramsFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 11;
@@ -598,16 +603,27 @@ public class BeanEdit extends javax.swing.JDialog {
         this.calculatePricePerPound();
     }//GEN-LAST:event_ftWeightFocusLost
 
+    private void ftDensityGramsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftDensityGramsFocusLost
+        Float densityGrams = (Float) ftDensityGrams.getValue();
+
+        if (densityGrams == null || densityGrams == 0.0f) {                                                                                                                                                                         
+            this.textDensity.setText(".00");
+        }
+        else {
+            this.textDensity.setText(String.format("%.2f", densityGrams / 250.0f));
+        }
+    }//GEN-LAST:event_ftDensityGramsFocusLost
+
     private void calculatePricePerPound() {
         Float price = (Float) this.ftPrice.getValue();
-        Float weight = Float.valueOf((int)this.ftWeight.getValue());
+        Integer weight = (Integer) this.ftWeight.getValue();
 
         if (price == null || weight == null) {
             this.ftPricePerPound.setValue(Float.valueOf("0.00"));
             return;
         }
 
-        this.ftPricePerPound.setValue(price / weight);
+        this.ftPricePerPound.setValue(price / (float)weight);
     }
 
     /**
@@ -679,7 +695,6 @@ public class BeanEdit extends javax.swing.JDialog {
             this.textName.requestFocus();
         }
 
-
         String isoPurchaseDate = null;
 
         try {
@@ -688,6 +703,7 @@ public class BeanEdit extends javax.swing.JDialog {
             if (tmp != null && !tmp.isEmpty()) {
                 Date purchaseDate = new SimpleDateFormat("MM/dd/yy").parse(tmp);
                 isoPurchaseDate = new SimpleDateFormat("yyyy-MM-dd").format(purchaseDate);
+
             }
         } catch (ParseException e) {
             JOptionPane.showMessageDialog(this, "Unable to parse Purchase Date.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -701,13 +717,13 @@ public class BeanEdit extends javax.swing.JDialog {
         map.put("Vendor", this.textVendor.getText());
         map.put("ProcessMethod", (String) this.comboProcess.getSelectedItem());
 
-        Float price = (Float)this.ftPrice.getValue();
+        Float price = (Float) this.ftPrice.getValue();
         if (price == null) {
             price = Float.valueOf("0.0");
         }
         map.put("Price", price);
 
-        Integer weight = (Integer)this.ftWeight.getValue();
+        Integer weight = (Integer) this.ftWeight.getValue();
         if (weight == null) {
             weight = 0;
         }
@@ -722,7 +738,7 @@ public class BeanEdit extends javax.swing.JDialog {
             densityGrams = Float.valueOf("0.0");
         }
         map.put("DensityGrams", densityGrams);
-        
+
         map.put("Anaerobic", this.checkboxAnaerobic.isSelected() ? 1 : 0);
         map.put("InStock", this.checkboxInStock.isSelected() ? 1 : 0);
         map.put("GrindSetting", this.textGrindSetting.getText());
@@ -768,12 +784,15 @@ public class BeanEdit extends javax.swing.JDialog {
         // Bind the Escape key to fire the action listener.    
         KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
         jrp.registerKeyboardAction(actionListener, stroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
-        
+
         AppPreferences.loadWindowPreferences(BeanEdit.this);
-        
+
         // This assume you're adding a new Bean, where otherwise the caller invokes "setBeanId(someID)"
         // to load data from the database.
         this.checkboxInStock.setSelected(true);
+
+//        Date purchaseDate = new SimpleDateFormat("yyyy-MM-dd").parse(tmp);
+//                    this.textPurchaseDate.setValue(new SimpleDateFormat("MM/dd/yy").format(purchaseDate));
         this.textPurchaseDate.setText(Utility.getFormattedDate(LocalDateTime.now()));
 
     }
