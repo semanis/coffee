@@ -42,22 +42,21 @@ public class BeanUtilization extends javax.swing.JDialog {
         buttonExit = new javax.swing.JButton();
         textBeanName = new javax.swing.JTextField();
         labelPurchased = new javax.swing.JLabel();
-        labelPurchasedUnits = new javax.swing.JLabel();
         labelRoasted = new javax.swing.JLabel();
-        labelRoastedUnits = new javax.swing.JLabel();
         labelRemaining = new javax.swing.JLabel();
-        labelRemainingUnits = new javax.swing.JLabel();
+        textPurchased = new javax.swing.JTextField();
+        textRoasted = new javax.swing.JTextField();
+        textRemaining = new javax.swing.JTextField();
 
         jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Bean Utilization");
         setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        setMaximumSize(new java.awt.Dimension(686, 202));
-        setMinimumSize(new java.awt.Dimension(686, 202));
+        setMaximumSize(new java.awt.Dimension(504, 303));
+        setMinimumSize(new java.awt.Dimension(504, 303));
         setName("dialogBeanUtilization"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(686, 202));
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(504, 303));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -84,46 +83,61 @@ public class BeanUtilization extends javax.swing.JDialog {
         labelPurchased.setMinimumSize(new java.awt.Dimension(103, 32));
         labelPurchased.setPreferredSize(new java.awt.Dimension(103, 32));
 
-        labelPurchasedUnits.setText("lbs");
-
         labelRoasted.setText("Roasted:");
-
-        labelRoastedUnits.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        labelRoastedUnits.setText("lbs");
 
         labelRemaining.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         labelRemaining.setText("Remaining:");
 
-        labelRemainingUnits.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        labelRemainingUnits.setText("lbs");
+        textPurchased.setEditable(false);
+        textPurchased.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        textPurchased.setFocusable(false);
+        textPurchased.setMaximumSize(new java.awt.Dimension(102, 32));
+        textPurchased.setMinimumSize(new java.awt.Dimension(102, 32));
+        textPurchased.setPreferredSize(new java.awt.Dimension(102, 32));
+
+        textRoasted.setEditable(false);
+        textRoasted.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        textRoasted.setFocusable(false);
+        textRoasted.setMaximumSize(new java.awt.Dimension(102, 32));
+        textRoasted.setMinimumSize(new java.awt.Dimension(102, 32));
+        textRoasted.setPreferredSize(new java.awt.Dimension(102, 32));
+
+        textRemaining.setEditable(false);
+        textRemaining.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        textRemaining.setFocusable(false);
+        textRemaining.setMaximumSize(new java.awt.Dimension(102, 32));
+        textRemaining.setMinimumSize(new java.awt.Dimension(102, 32));
+        textRemaining.setPreferredSize(new java.awt.Dimension(102, 32));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(buttonExit))
+                        .addComponent(labelBean, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelRoasted)
-                            .addComponent(labelPurchased, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelRemaining))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelPurchasedUnits, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(labelRoastedUnits, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(labelRemainingUnits, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textBeanName, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelBean, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(23, 23, 23))
+                        .addComponent(textBeanName, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 9, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelPurchased, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelRoasted, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelRemaining, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(textRoasted, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                    .addComponent(textPurchased, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textRemaining, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonExit)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,21 +149,22 @@ public class BeanUtilization extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelPurchased, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelPurchasedUnits))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(textPurchased, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelRoasted)
-                    .addComponent(labelRoastedUnits))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(textRoasted, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelRemaining)
-                    .addComponent(labelRemainingUnits))
-                .addGap(18, 18, 18)
+                    .addComponent(textRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelRemaining))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonExit)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(684, 322));
+        setSize(new java.awt.Dimension(514, 333));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -199,9 +214,9 @@ public class BeanUtilization extends javax.swing.JDialog {
                 poundsRemaining = poundsRemaining < 0.0f ? 0.0f : poundsRemaining;
 
 
-                this.labelPurchasedUnits.setText(String.format("%2.2f lbs   (%.2f g)", poundsPurchased, poundsPurchased * gramsPerPound));
-                this.labelRoastedUnits.setText(String.format("%2.2f lbs   (%.2f g)", poundsRoasted, poundsRoasted * gramsPerPound));
-                this.labelRemainingUnits.setText(String.format("%2.2f lbs   (%.2f g)", poundsRemaining, poundsRemaining * gramsPerPound));
+                this.textPurchased.setText(String.format("%2.2f lbs   (%.2f g)", poundsPurchased, poundsPurchased * gramsPerPound));
+                this.textRoasted.setText(String.format("%2.2f lbs   (%.2f g)", poundsRoasted, poundsRoasted * gramsPerPound));
+                this.textRemaining.setText(String.format("%2.2f lbs   (%.2f g)", poundsRemaining, poundsRemaining * gramsPerPound));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -243,11 +258,11 @@ public class BeanUtilization extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel labelBean;
     private javax.swing.JLabel labelPurchased;
-    private javax.swing.JLabel labelPurchasedUnits;
     private javax.swing.JLabel labelRemaining;
-    private javax.swing.JLabel labelRemainingUnits;
     private javax.swing.JLabel labelRoasted;
-    private javax.swing.JLabel labelRoastedUnits;
     private javax.swing.JTextField textBeanName;
+    private javax.swing.JTextField textPurchased;
+    private javax.swing.JTextField textRemaining;
+    private javax.swing.JTextField textRoasted;
     // End of variables declaration//GEN-END:variables
 }
