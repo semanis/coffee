@@ -1,12 +1,14 @@
 package com.smanis.coffee.forms;
 
 import com.smanis.coffee.AppPreferences;
+import com.smanis.coffee.Constants;
 import com.smanis.coffee.models.NonEditableTableModel;
 import com.smanis.coffee.service.TableService;
 import com.smanis.coffee.Utility;
 import com.smanis.coffee.models.BeanModel;
 import com.smanis.coffee.service.DataService;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -95,6 +97,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         menuItemExit = new javax.swing.JMenuItem();
         menuUtility = new javax.swing.JMenu();
         menuItemCalculate = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         menuItem2MinuteAlert = new javax.swing.JCheckBoxMenuItem();
         menuItemComparisonAlert = new javax.swing.JCheckBoxMenuItem();
         menuView = new javax.swing.JMenu();
@@ -544,13 +547,26 @@ public class CoffeeFrame extends javax.swing.JFrame {
             }
         });
         menuUtility.add(menuItemCalculate);
+        menuUtility.add(jSeparator2);
 
+        menuItem2MinuteAlert.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         menuItem2MinuteAlert.setSelected(true);
         menuItem2MinuteAlert.setText("2 Minute Audible Alerts");
+        menuItem2MinuteAlert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItem2MinuteAlertActionPerformed(evt);
+            }
+        });
         menuUtility.add(menuItem2MinuteAlert);
 
+        menuItemComparisonAlert.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         menuItemComparisonAlert.setSelected(true);
         menuItemComparisonAlert.setText("Comparison Timer Alerts");
+        menuItemComparisonAlert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemComparisonAlertActionPerformed(evt);
+            }
+        });
         menuUtility.add(menuItemComparisonAlert);
 
         menuBar.add(menuUtility);
@@ -889,25 +905,28 @@ public class CoffeeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddCompareActionPerformed
 
     private void menuItemCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCalculateActionPerformed
-        // A bean must be selected in the bean list.
-        int selectedIndex = this.listBeans.getSelectedIndex();
-        if (selectedIndex == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a bean in the bean list.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Get currently selected Bean, so we have access to the Bean Name, Bean ID, etc.
-        ListModel beanListModel = this.listBeans.getModel();
-        BeanModel beanModel = (BeanModel) beanListModel.getElementAt(this.listBeans.getSelectedIndex());
-
-        NonEditableTableModel roastLogModel = (NonEditableTableModel) this.tableRoasts.getModel();
-
         BeanUtilization beanUtilDialog = new BeanUtilization(this, true);
-        beanUtilDialog.setBeanModel(beanModel);
-        beanUtilDialog.setRoastLogModel(roastLogModel);
-        beanUtilDialog.calculateBeanUtilization();
+        
+        
+        beanUtilDialog.setBeanModel(this.listBeans.getModel());
         beanUtilDialog.setVisible(true);
     }//GEN-LAST:event_menuItemCalculateActionPerformed
+
+    private void menuItem2MinuteAlertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItem2MinuteAlertActionPerformed
+        AppPreferences.getPrefs().putBoolean(Constants.TWO_MINUTE_ALERT, this.menuItem2MinuteAlert.isSelected());
+        
+        if (this.menuItem2MinuteAlert.isSelected()) {
+            Utility.play2MinuteAlert();
+        }
+    }//GEN-LAST:event_menuItem2MinuteAlertActionPerformed
+
+    private void menuItemComparisonAlertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemComparisonAlertActionPerformed
+        AppPreferences.getPrefs().putBoolean(Constants.COMPARISON_TIMER_ALERT, this.menuItemComparisonAlert.isSelected());
+        
+        if (this.menuItemComparisonAlert.isSelected()) {
+            Utility.playComparisonTimerAlert();
+        }
+    }//GEN-LAST:event_menuItemComparisonAlertActionPerformed
 
     private void editBean() {
         int selectedRow = this.tableBeans.getSelectedRow();
@@ -1143,6 +1162,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JLabel labelInStock;
     private javax.swing.JLabel labelRoastNotes;
     private javax.swing.JLabel labelTastingNotes;

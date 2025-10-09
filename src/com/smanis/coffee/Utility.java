@@ -16,6 +16,10 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.SourceDataLine;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -71,8 +75,8 @@ public class Utility {
         DecimalFormat df = new DecimalFormat(mask);
         df.setMinimumIntegerDigits(minIntegerDigits);  // ensures "0.x" is valid
         df.setMinimumFractionDigits(minFractionDigits);
-        
-        df.setMaximumFractionDigits(maxFractionDigits); 
+
+        df.setMaximumFractionDigits(maxFractionDigits);
 
         // Wrap DecimalFormat in a NumberFormatter
         NumberFormatter numberFormatter = new NumberFormatter(df);
@@ -284,6 +288,47 @@ public class Utility {
         }
 
         return result;
+    }
+
+    /**
+     * Utility method to play a simple tones.
+     *
+     * @param hz The frequency in Hertz of the beep to be played.
+     * @param msecs The millisecond duration of the beep.
+     *
+     * @throws LineUnavailableException If audio
+     */
+    public static void playTone(int hz, int msecs) {
+        float sampleRate = 44100;
+        byte[] buf = new byte[1];
+        AudioFormat af = new AudioFormat(sampleRate, 8, 1, true, false);
+        try (SourceDataLine sdl = AudioSystem.getSourceDataLine(af)) {
+            sdl.open(af);
+            sdl.start();
+            for (int i = 0; i < msecs * sampleRate / 1000; i++) {
+                double angle = i / (sampleRate / hz) * 2.0 * Math.PI;
+                buf[0] = (byte) (Math.sin(angle) * 127);  // generate waveform
+                sdl.write(buf, 0, 1);
+            }
+            sdl.drain();
+            sdl.stop();
+        } catch (Exception e) {
+            System.out.println("unable to play tone: " + e.getMessage());
+        }
+    }
+
+    public static void playComparisonTimerAlert() {
+        Utility.playTone(1200, 90);
+        Utility.playTone(1200, 90);
+        Utility.playTone(600, 100);
+    }
+
+    /**
+     * Alert tone for 2 minute boundary notifications.s
+     */
+    public static void play2MinuteAlert() {
+        Utility.playTone(1000, 100);
+        Utility.playTone(1000, 100);
     }
 
     /**
@@ -542,7 +587,7 @@ public class Utility {
                     JOptionPane.showMessageDialog(null, "Please enter " + label + ".", "Error", JOptionPane.ERROR_MESSAGE);
                     textField.requestFocus();
                     return false;
-                } 
+                }
 
                 break;
 

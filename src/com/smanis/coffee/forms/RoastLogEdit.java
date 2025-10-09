@@ -246,16 +246,16 @@ public class RoastLogEdit extends javax.swing.JDialog {
         labelRoastLevel.setFocusable(false);
         panelRoastDate.add(labelRoastLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 400, 30));
 
-        labelCompareRoastLevel.setFont(new java.awt.Font("SansSerif.plain", 0, 24)); // NOI18N
-        labelCompareRoastLevel.setForeground(new java.awt.Color(0, 102, 0));
+        labelCompareRoastLevel.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        labelCompareRoastLevel.setForeground(new java.awt.Color(0, 153, 0));
         labelCompareRoastLevel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelCompareRoastLevel.setMaximumSize(new java.awt.Dimension(94, 32));
         labelCompareRoastLevel.setMinimumSize(new java.awt.Dimension(94, 32));
         labelCompareRoastLevel.setPreferredSize(new java.awt.Dimension(94, 32));
         panelRoastDate.add(labelCompareRoastLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 380, 30));
 
-        labelComparePercentage.setFont(new java.awt.Font("SansSerif.plain", 0, 24)); // NOI18N
-        labelComparePercentage.setForeground(new java.awt.Color(0, 102, 51));
+        labelComparePercentage.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        labelComparePercentage.setForeground(new java.awt.Color(0, 153, 0));
         labelComparePercentage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelComparePercentage.setMaximumSize(new java.awt.Dimension(94, 32));
         labelComparePercentage.setMinimumSize(new java.awt.Dimension(94, 32));
@@ -799,7 +799,7 @@ public class RoastLogEdit extends javax.swing.JDialog {
         this.labelCompareRoastLevel.setText((String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Roast Level")));
         this.labelComparePercentage.setText((String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Moist. Loss")));
     }
-    
+
     /**
      * If adding a new Roast Log, you can pre-populate the Green Weight field
      * with a preferred value.
@@ -1106,7 +1106,12 @@ public class RoastLogEdit extends javax.swing.JDialog {
             }
 
             textRoastTimer.setText(String.format("%02d", minutes) + ":" + String.format("%02d", secondsElapsed));
-        }
+            
+//            // Beep on any 2 minute boundary, if 2 minute alerts are enabled via the Utility.
+//            if (AppPreferences.getPrefs().getBoolean(Constants.TWO_MINUTE_ALERT, false) == true && minutes > 0 && (minutes & 1) == 0 ) {
+//                Utility.play2MinuteAlert();
+//            }
+        }        
     });
 
     private Timer timerDrying = new Timer(1000, new ActionListener() {

@@ -22,4 +22,6 @@ public class Constants
   public static final String SHOULD_REMEMBER_USERNAME = "should-remember-username";
   public static final String LAST_GREEN_WEIGHT = "";
 
+  public static final String TWO_MINUTE_ALERT = "2-minute-alert";
+  public static final String COMPARISON_TIMER_ALERT = "comparison-timer-alert";  
 }

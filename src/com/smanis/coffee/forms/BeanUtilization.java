@@ -5,14 +5,22 @@ import com.smanis.coffee.models.BeanModel;
 import com.smanis.coffee.models.NonEditableTableModel;
 import com.smanis.coffee.service.DataService;
 import com.smanis.coffee.service.TableService;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
+import javax.swing.ListModel;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * @author semanis
@@ -36,35 +44,28 @@ public class BeanUtilization extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jLabel3 = new javax.swing.JLabel();
-        labelBean = new javax.swing.JLabel();
         buttonExit = new javax.swing.JButton();
-        textBeanName = new javax.swing.JTextField();
-        labelPurchased = new javax.swing.JLabel();
-        labelRoasted = new javax.swing.JLabel();
-        labelRemaining = new javax.swing.JLabel();
-        textPurchased = new javax.swing.JTextField();
-        textRoasted = new javax.swing.JTextField();
-        textRemaining = new javax.swing.JTextField();
+        labelBeanUtilization = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableUtilization = new javax.swing.JTable();
 
         jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Bean Utilization");
         setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         setMaximumSize(new java.awt.Dimension(504, 303));
         setMinimumSize(new java.awt.Dimension(504, 303));
         setName("dialogBeanUtilization"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(504, 303));
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
-
-        labelBean.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        labelBean.setText("Bean:");
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         buttonExit.setMnemonic('x');
         buttonExit.setText("Exit");
@@ -73,97 +74,68 @@ public class BeanUtilization extends javax.swing.JDialog {
                 buttonExitActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 5);
+        getContentPane().add(buttonExit, gridBagConstraints);
 
-        textBeanName.setEditable(false);
-        textBeanName.setFocusable(false);
+        labelBeanUtilization.setFont(new java.awt.Font("Dialog", 0, 28)); // NOI18N
+        labelBeanUtilization.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelBeanUtilization.setText("Bean Utilization");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipadx = 84;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 19, 0, 0);
+        getContentPane().add(labelBeanUtilization, gridBagConstraints);
 
-        labelPurchased.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        labelPurchased.setText("Purchased:");
-        labelPurchased.setMaximumSize(new java.awt.Dimension(103, 32));
-        labelPurchased.setMinimumSize(new java.awt.Dimension(103, 32));
-        labelPurchased.setPreferredSize(new java.awt.Dimension(103, 32));
+        tableUtilization.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tableUtilization.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        tableUtilization.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        labelRoasted.setText("Roasted:");
+            },
+            new String [] {
+                "#", "Bean", "Purchased", "Lbs. Purchased", "Grams", "Lbs. Roasted", "Grams", "Lbs. Remaining", "Grams"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, true, false, true
+            };
 
-        labelRemaining.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        labelRemaining.setText("Remaining:");
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
-        textPurchased.setEditable(false);
-        textPurchased.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        textPurchased.setFocusable(false);
-        textPurchased.setMaximumSize(new java.awt.Dimension(102, 32));
-        textPurchased.setMinimumSize(new java.awt.Dimension(102, 32));
-        textPurchased.setPreferredSize(new java.awt.Dimension(102, 32));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableUtilization.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tableUtilization.setIntercellSpacing(new java.awt.Dimension(20, 8));
+        tableUtilization.setRowHeight(36);
+        tableUtilization.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tableUtilization);
 
-        textRoasted.setEditable(false);
-        textRoasted.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        textRoasted.setFocusable(false);
-        textRoasted.setMaximumSize(new java.awt.Dimension(102, 32));
-        textRoasted.setMinimumSize(new java.awt.Dimension(102, 32));
-        textRoasted.setPreferredSize(new java.awt.Dimension(102, 32));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        getContentPane().add(jScrollPane2, gridBagConstraints);
 
-        textRemaining.setEditable(false);
-        textRemaining.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        textRemaining.setFocusable(false);
-        textRemaining.setMaximumSize(new java.awt.Dimension(102, 32));
-        textRemaining.setMinimumSize(new java.awt.Dimension(102, 32));
-        textRemaining.setPreferredSize(new java.awt.Dimension(102, 32));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelBean, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(textBeanName, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 9, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelPurchased, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelRoasted, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelRemaining, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(textRoasted, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                    .addComponent(textPurchased, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textRemaining, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonExit)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(labelBean)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textBeanName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelPurchased, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textPurchased, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelRoasted)
-                    .addComponent(textRoasted, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelRemaining))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonExit)
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-
-        setSize(new java.awt.Dimension(514, 333));
+        setSize(new java.awt.Dimension(1513, 863));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -176,52 +148,80 @@ public class BeanUtilization extends javax.swing.JDialog {
         this.exitForm();
     }//GEN-LAST:event_buttonExitActionPerformed
 
-    public void setBeanModel(BeanModel model) {
-        this.beanModel = model;
+    public void setBeanModel(ListModel listModelBeans) {
+        BeanModel beanModel = null;
+        NonEditableTableModel modelRoasts = null;
 
-        this.textBeanName.setText(this.beanModel.getBeanName());
+        for (int i = 0; i < listModelBeans.getSize(); i++) {
+            beanModel = (BeanModel) listModelBeans.getElementAt(i);
+            int inStock = beanModel.getInStock();
+            
+            // only list In Stock beans.
+            if (inStock == 0) {
+                continue;
+            }
+            
+            String beanId = beanModel.getBeanId();
 
-    }
-
-    public void setRoastLogModel(NonEditableTableModel model) {
-        this.roastLogModel = model;
-        this.calculateBeanUtilization();
+            NonEditableTableModel modelRoastLogs = TableService.getInstance().getTableModelRoastLogsByBeanId(beanId);
+            this.calculateBeanUtilization(beanId, modelRoastLogs, i+1);
+        }
     }
 
     /**
      * Calculates Bean utilization for the specified BeanModel and
      * RoastLogModel.
      */
-    public void calculateBeanUtilization() {
-        int roastCount = this.roastLogModel.getRowCount();
+    public void calculateBeanUtilization(String beanId, NonEditableTableModel tableModelRoasts, int rowNumber) {
+        int roastCount = tableModelRoasts.getRowCount();
         int columnIndex = TableService.getInstance().getColumnIndex("RoastLog", "Green Weight");
 
         float gramsUtilized = 0.0f;
         float gramsPerPound = 453.592f;
 
         for (int i = 0; i < roastCount; i++) {
-            gramsUtilized += Float.valueOf((String) this.roastLogModel.getValueAt(i, columnIndex));
+            gramsUtilized += Float.valueOf((String) tableModelRoasts.getValueAt(i, columnIndex));
         }
 
         ResultSet rs = null;
 
+        DefaultTableModel tableModel = (DefaultTableModel) this.tableUtilization.getModel();
+        
+        Vector tableData = null;
+        
         try {
-            rs = DataService.getInstance().getBeanById(this.beanModel.getBeanId());
-            if (rs != null && rs.next()) {
+            tableData = new Vector<Object>();
+            
+            rs = DataService.getInstance().getBeanById(beanId);
+            
+            while (rs != null && rs.next()) {
+                tableData.add(String.valueOf(rowNumber));
+                tableData.add(rs.getString("Name"));
+                
+                Date purchaseDate = rs.getDate("PurchaseDate");
+                String stringPurchaseDate = new SimpleDateFormat("MM/dd/yy").format(purchaseDate);
+                tableData.add(stringPurchaseDate);
+                
                 float poundsPurchased = rs.getFloat("WeightInPounds");
                 float poundsRoasted = gramsUtilized / gramsPerPound;
                 float poundsRemaining = poundsPurchased - poundsRoasted;
                 poundsRemaining = poundsRemaining < 0.0f ? 0.0f : poundsRemaining;
-
-
-                this.textPurchased.setText(String.format("%2.2f lbs   (%.2f g)", poundsPurchased, poundsPurchased * gramsPerPound));
-                this.textRoasted.setText(String.format("%2.2f lbs   (%.2f g)", poundsRoasted, poundsRoasted * gramsPerPound));
-                this.textRemaining.setText(String.format("%2.2f lbs   (%.2f g)", poundsRemaining, poundsRemaining * gramsPerPound));
+                 
+                
+                tableData.add(String.format("%2.2f", poundsPurchased));
+                tableData.add(String.format("%2.2f", poundsPurchased * gramsPerPound));
+                
+                tableData.add(String.format("%2.2f", poundsRoasted));
+                tableData.add(String.format("%2.2f", poundsRoasted * gramsPerPound));
+                
+                tableData.add(String.format("%2.2f", poundsRemaining));
+                tableData.add(String.format("%2.2f", poundsRemaining * gramsPerPound));
+                
+                tableModel.addRow(tableData);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
     }
 
     //------[ private ]--------------------------------------------------------
@@ -240,29 +240,81 @@ public class BeanUtilization extends javax.swing.JDialog {
         jrp.registerKeyboardAction(actionListener, stroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
 
         // Load up the window preferences, which restores the size/location of the window.
-        AppPreferences.loadWindowPreferences(this);
+        //AppPreferences.loadWindowPreferences(this);
+
+        this.tableUtilization.getColumnModel().getColumn(0).setMinWidth(60);  // Row Number
+        this.tableUtilization.getColumnModel().getColumn(0).setMaxWidth(60); 
+        this.tableUtilization.getColumnModel().getColumn(0).setPreferredWidth(60);
         
+        this.tableUtilization.getColumnModel().getColumn(1).setMinWidth(420);  // Bean Name
+        this.tableUtilization.getColumnModel().getColumn(1).setMaxWidth(420); 
+        this.tableUtilization.getColumnModel().getColumn(1).setPreferredWidth(420);
+        
+        this.tableUtilization.getColumnModel().getColumn(2).setMinWidth(130);  // Purchase Date
+        this.tableUtilization.getColumnModel().getColumn(2).setMaxWidth(130); 
+        this.tableUtilization.getColumnModel().getColumn(2).setPreferredWidth(130);
+        
+        this.tableUtilization.getColumnModel().getColumn(3).setMinWidth(160);  // Lbs. Purchased
+        this.tableUtilization.getColumnModel().getColumn(3).setMinWidth(160);
+        this.tableUtilization.getColumnModel().getColumn(3).setPreferredWidth(160);
+        
+        this.tableUtilization.getColumnModel().getColumn(4).setMinWidth(110);  // Grams Purchased
+        this.tableUtilization.getColumnModel().getColumn(4).setMinWidth(110);
+        this.tableUtilization.getColumnModel().getColumn(4).setPreferredWidth(110);
+
+        this.tableUtilization.getColumnModel().getColumn(5).setMinWidth(140);  // Lbs. Roasted
+        this.tableUtilization.getColumnModel().getColumn(5).setMaxWidth(140);
+        this.tableUtilization.getColumnModel().getColumn(5).setPreferredWidth(140);
+        
+        this.tableUtilization.getColumnModel().getColumn(6).setMinWidth(140);  // Grams. Roasted
+        this.tableUtilization.getColumnModel().getColumn(6).setMaxWidth(140);
+        this.tableUtilization.getColumnModel().getColumn(6).setPreferredWidth(140);
+        
+        
+        this.tableUtilization.getColumnModel().getColumn(7).setMinWidth(160);  // Lbs. Remaining
+        this.tableUtilization.getColumnModel().getColumn(7).setMaxWidth(160);
+        this.tableUtilization.getColumnModel().getColumn(7).setPreferredWidth(160);
+        
+        this.tableUtilization.getColumnModel().getColumn(8).setMinWidth(140);  // Grams. Remaining
+        this.tableUtilization.getColumnModel().getColumn(8).setMaxWidth(140);
+        this.tableUtilization.getColumnModel().getColumn(8).setPreferredWidth(160);
+
+        this.tableUtilization.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 20));
+         
+        DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+        leftRenderer.setHorizontalAlignment(SwingConstants.LEFT);
+
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+
+        int columnCount = this.tableUtilization.getColumnCount();
+
+        this.tableUtilization.getColumnModel().getColumn(0).setCellRenderer(rightRenderer); // Row Number
+        this.tableUtilization.getColumnModel().getColumn(1).setCellRenderer(leftRenderer); // Bean name
+        this.tableUtilization.getColumnModel().getColumn(2).setCellRenderer(centerRenderer); // Purchase Date
+        this.tableUtilization.getColumnModel().getColumn(3).setCellRenderer(rightRenderer); // Lbs. Purchased
+        this.tableUtilization.getColumnModel().getColumn(4).setCellRenderer(rightRenderer); // Grams Purchased
+        this.tableUtilization.getColumnModel().getColumn(5).setCellRenderer(rightRenderer); // Lbs. Roasted
+        this.tableUtilization.getColumnModel().getColumn(6).setCellRenderer(rightRenderer); // Grams Roasted
+        this.tableUtilization.getColumnModel().getColumn(7).setCellRenderer(rightRenderer); // Lbs. Remaining
+        this.tableUtilization.getColumnModel().getColumn(8).setCellRenderer(rightRenderer); // Grams Remaining
     }
 
     private void exitForm() {
-        AppPreferences.saveWindowPreferences(this);
+        //AppPreferences.saveWindowPreferences(this);
 
         this.setVisible(false);
     }
 
-    private BeanModel beanModel;
-    private NonEditableTableModel roastLogModel;
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonExit;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel labelBean;
-    private javax.swing.JLabel labelPurchased;
-    private javax.swing.JLabel labelRemaining;
-    private javax.swing.JLabel labelRoasted;
-    private javax.swing.JTextField textBeanName;
-    private javax.swing.JTextField textPurchased;
-    private javax.swing.JTextField textRemaining;
-    private javax.swing.JTextField textRoasted;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelBeanUtilization;
+    private javax.swing.JTable tableUtilization;
     // End of variables declaration//GEN-END:variables
 }

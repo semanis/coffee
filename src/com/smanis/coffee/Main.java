@@ -21,7 +21,6 @@ public class Main {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    // System.out.println(String.format("%d", 0));
                     UIManager.put("OptionPane.buttonFont", new Font("Dialog", Font.PLAIN, 20));
                     UIManager.put("OptionPane.messageFont", new Font("Dialog", Font.BOLD, 20));
                     UIManager.put("OptionPane.titleText", new Font("Dialog", Font.BOLD, 20));
