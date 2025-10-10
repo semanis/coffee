@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.logging.Level;
@@ -51,6 +52,22 @@ public class Utility {
         return String.format("%.2f", calculatedPercentage);
     }
 
+    
+    public static void checkForCompareAlert(String timerText, long secondsElapsed, ArrayList<String> listTimerAlerts) {
+            if (timerText != null) {
+                // Beep if the roast timer seconds is within 5 seconds of the comparison timestamps.
+                if (AppPreferences.getPrefs().getBoolean(Constants.COMPARISON_TIMER_ALERT, false) == true) {
+                    boolean isWithinFiveSeconds = Utility.isWithinFiveSeconds(secondsElapsed, timerText);
+
+                    if (secondsElapsed > 5 && !listTimerAlerts.contains(timerText) && isWithinFiveSeconds == true) {
+                        listTimerAlerts.add(timerText);
+                        Utility.playComparisonTimerAlert();
+                    }
+                }
+            }
+
+    }
+    
     /**
      * Creates a MaskFormatter for use with a JFormattedTextField.
      *
@@ -258,6 +275,28 @@ public class Utility {
         return isValidTime;
     }
 
+    /**
+     * Used by the RoastLogEdit form to determine if the seconds elapsed for a roast timer is 
+     * within 5 seconds of a String timestamp (formatted as "hh:mm:ss").
+     * 
+     * @param secondsElapsed
+     * @param timestamp
+     * @return 
+     */
+    public static boolean isWithinFiveSeconds(long secondsElapsed, String timestamp) {
+     
+        // Parse the string into a LocalTime object
+        LocalTime time = LocalTime.parse(timestamp);
+        
+        // Convert to total seconds since midnight
+        long timestampSeconds = time.toSecondOfDay();
+        
+        System.out.println("seconds elapsed: " + secondsElapsed);
+        System.out.println("timestamp seconds: " + timestampSeconds + "\n");
+        
+        return timestampSeconds - secondsElapsed <= 5;
+    }
+    
     public static MaskFormatter getMaskFormatter(String pattern) {
         MaskFormatter mf = null;
 
@@ -318,8 +357,8 @@ public class Utility {
     }
 
     public static void playComparisonTimerAlert() {
-        Utility.playTone(1200, 90);
-        Utility.playTone(1200, 90);
+        Utility.playTone(900, 95);
+        Utility.playTone(900, 95);
         Utility.playTone(600, 100);
     }
 
@@ -327,8 +366,8 @@ public class Utility {
      * Alert tone for 2 minute boundary notifications.s
      */
     public static void play2MinuteAlert() {
-        Utility.playTone(1000, 100);
-        Utility.playTone(1000, 100);
+        Utility.playTone(1200, 170);
+        Utility.playTone(1200, 170);
     }
 
     /**

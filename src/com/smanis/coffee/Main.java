@@ -3,7 +3,6 @@ package com.smanis.coffee;
 import static com.smanis.coffee.Utility.setUIFont;
 import com.smanis.coffee.forms.DatabaseLogin;
 import java.awt.Font;
-import java.time.LocalDateTime;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 

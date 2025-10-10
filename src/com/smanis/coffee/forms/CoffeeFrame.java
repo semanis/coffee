@@ -549,6 +549,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         menuUtility.add(menuItemCalculate);
         menuUtility.add(jSeparator2);
 
+        menuItem2MinuteAlert.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         menuItem2MinuteAlert.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         menuItem2MinuteAlert.setSelected(true);
         menuItem2MinuteAlert.setText("2 Minute Audible Alerts");
@@ -559,6 +560,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
         });
         menuUtility.add(menuItem2MinuteAlert);
 
+        menuItemComparisonAlert.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F9, 0));
         menuItemComparisonAlert.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         menuItemComparisonAlert.setSelected(true);
         menuItemComparisonAlert.setText("Comparison Timer Alerts");

@@ -1,3 +1,4 @@
+
 /*
  */
 package com.smanis.coffee.forms;
@@ -17,6 +18,7 @@ import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -791,11 +793,11 @@ public class RoastLogEdit extends javax.swing.JDialog {
     }
 
     public void setComparisonRoast(NonEditableTableModel roastModel, int roastRow) {
-        this.labelCompareRoastTime.setText("(" + (String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Roast")) + ")");
-        this.labelCompareDryTime.setText("(" + (String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Dry")) + ")");
-        this.labelCompareBrownTime.setText("(" + (String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Browning")) + ")");
-        this.labelCompareFcTime.setText("(" + (String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "First Crack")) + ")");
-        this.labelCompareDevTime.setText("(" + (String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Development")) + ")");
+        this.labelCompareRoastTime.setText((String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Roast")));
+        this.labelCompareDryTime.setText((String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Dry")));
+        this.labelCompareBrownTime.setText((String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Browning")));
+        this.labelCompareFcTime.setText((String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "First Crack")));
+        this.labelCompareDevTime.setText((String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Development")));
         this.labelCompareRoastLevel.setText((String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Roast Level")));
         this.labelComparePercentage.setText((String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Moist. Loss")));
     }
@@ -1106,12 +1108,22 @@ public class RoastLogEdit extends javax.swing.JDialog {
             }
 
             textRoastTimer.setText(String.format("%02d", minutes) + ":" + String.format("%02d", secondsElapsed));
+
+            // Beep on any 2 minute boundary, if 2 minute alerts are enabled via the Utility.
+            if (AppPreferences.getPrefs().getBoolean(Constants.TWO_MINUTE_ALERT, false) == true && minutes > 0) {
+                if (!listTimerAlerts.contains(String.valueOf(minutes)) && ((minutes & 1) == 0) == true) {
+                    listTimerAlerts.add(String.valueOf(minutes));
+                    Utility.play2MinuteAlert();
+                }
+            }
+
             
-//            // Beep on any 2 minute boundary, if 2 minute alerts are enabled via the Utility.
-//            if (AppPreferences.getPrefs().getBoolean(Constants.TWO_MINUTE_ALERT, false) == true && minutes > 0 && (minutes & 1) == 0 ) {
-//                Utility.play2MinuteAlert();
-//            }
-        }        
+//            
+//            
+//            Utility.checkForCompareAlert(labelCompareDevTime.getText(), secondsElapsed, listTimerAlerts);
+            //s
+
+        }
     });
 
     private Timer timerDrying = new Timer(1000, new ActionListener() {
@@ -1129,6 +1141,8 @@ public class RoastLogEdit extends javax.swing.JDialog {
             }
 
             textDryTimer.setText(String.format("%02d", minutes) + ":" + String.format("%02d", secondsElapsed));
+            
+            Utility.checkForCompareAlert(labelCompareDryTime.getText(), secondsElapsed, listTimerAlerts);
         }
     });
 
@@ -1147,6 +1161,8 @@ public class RoastLogEdit extends javax.swing.JDialog {
             }
 
             textBrowningTimer.setText(String.format("%02d", minutes) + ":" + String.format("%02d", secondsElapsed));
+            
+            Utility.checkForCompareAlert(labelCompareBrownTime.getText(), secondsElapsed, listTimerAlerts);
         }
     });
 
@@ -1165,6 +1181,8 @@ public class RoastLogEdit extends javax.swing.JDialog {
             }
 
             textFcTimer.setText(String.format("%02d", minutes) + ":" + String.format("%02d", secondsElapsed));
+            
+            Utility.checkForCompareAlert(labelCompareFcTime.getText(), secondsElapsed, listTimerAlerts);
         }
     });
 
@@ -1183,10 +1201,10 @@ public class RoastLogEdit extends javax.swing.JDialog {
             }
 
             textDevTimer.setText(String.format("%02d", minutes) + ":" + String.format("%02d", secondsElapsed));
+            
+            Utility.checkForCompareAlert(labelCompareDevTime.getText(), secondsElapsed, listTimerAlerts);
         }
     });
-
-    private Date roastStartDate = null;
 
     public Boolean wasUpdated = false;
     public Boolean wasInserted = false;
@@ -1197,8 +1215,10 @@ public class RoastLogEdit extends javax.swing.JDialog {
     public long millisFcStart = 0;
     public long millisDevStart = 0;
 
+    private Date roastStartDate = null;
     private NonEditableTableModel tableModelRoastLogs;
 
+    private ArrayList<String> listTimerAlerts = new ArrayList<String>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDryEnd;
