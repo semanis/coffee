@@ -668,7 +668,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addRoast(NonEditableTableModel roastModel, int roastRow) {
-        // Pass of the bean model to the roast log edit form, so that it knows the bean's name
+        // Pass off the bean model to the roast log edit form, so that it knows the bean's name
         // and database ID.
         ListModel beanListModel = this.listBeans.getModel();
         BeanModel beanModel = (BeanModel) beanListModel.getElementAt(this.listBeans.getSelectedIndex());

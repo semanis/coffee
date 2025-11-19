@@ -231,7 +231,7 @@ public class TableService {
         DateFormat formatterDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         DateFormat formatterMdy = new SimpleDateFormat("MM/dd/yy");
         DateFormat formatterIso8601 = new SimpleDateFormat("yyyy-MM-dd");
-        
+
         try {
             ResultSet rs = DataService.getInstance().getBeans();
 
@@ -339,13 +339,15 @@ public class TableService {
                 data.add(Utility.getRoastLevel(rs.getFloat("MoistureLossPercentage")));
                 //data.add(String.format("%.2f", rs.getFloat("Density")));
 
-                String greenWeight = Utility.sqlFloatToString(rs.getFloat("GreenWeight"), "%5.1f");
-                String roastedWeight = Utility.sqlFloatToString(rs.getFloat("RoastedWeight"), "%5.1f");
-                String moistureLoss = Utility.sqlFloatToString(rs.getFloat("MoistureLossPercentage"), "%5.1f");
+                float greenWeight = rs.getFloat("GreenWeight");
+                float roastedWeight = rs.getFloat("RoastedWeight");
+                float difference = greenWeight - roastedWeight;
+                float moistureLossPercentage = rs.getFloat("MoistureLossPercentage");
 
                 data.add(greenWeight);
                 data.add(roastedWeight);
-                data.add(moistureLoss + "% (" + greenWeight + "g / " + roastedWeight + "g)");
+                
+                data.add(Utility.sqlFloatToString(greenWeight, "%5.1f").trim() + "g - " + Utility.sqlFloatToString(roastedWeight, "%5.1f").trim() + "g = " + Utility.sqlFloatToString(difference, "%5.1f").trim() + "g (" + Utility.sqlFloatToString(moistureLossPercentage, "%5.1f").trim() + "%)");
                 data.add(rs.getString("TotalRoastTime"));
                 data.add(rs.getString("TotalDryTime"));
                 data.add(rs.getString("TotalBrowningTime"));

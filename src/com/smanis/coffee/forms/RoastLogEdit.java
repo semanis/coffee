@@ -799,7 +799,16 @@ public class RoastLogEdit extends javax.swing.JDialog {
         this.labelCompareFcTime.setText((String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "First Crack")));
         this.labelCompareDevTime.setText((String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Development")));
         this.labelCompareRoastLevel.setText((String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Roast Level")));
-        this.labelComparePercentage.setText((String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Moist. Loss")));
+        String moistureLoss = (String) roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Moist. Loss"));
+        
+//        // move the actual percentage value to the end of the String.for ease of readability.
+//        int pos = moistureLoss.indexOf("(");
+//        String prefix = moistureLoss.substring(0, pos);
+//        String postfix = moistureLoss.substring(pos);
+//        this.labelComparePercentage.setText(postfix + " " + prefix);
+        this.labelComparePercentage.setText(moistureLoss);
+          
+        this.textAreaRoastNotes.setText((String)roastModel.getValueAt(roastRow, TableService.getInstance().getColumnIndex("RoastLog", "Roast Notes")));
     }
 
     /**
