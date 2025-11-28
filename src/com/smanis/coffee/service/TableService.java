@@ -311,6 +311,9 @@ public class TableService {
                 add("Development");
                 add("Roast Notes");
                 add("Tasting Notes");
+                add("Drying %");
+                add("Browning %");
+                add("Dev %");
             }
         };
 
@@ -319,8 +322,6 @@ public class TableService {
         try {
             ResultSet rs = DataService.getInstance().getRoastLogsByBeanId(beanId);
 
-//         columnNames = getColumns("RoastLog");
-//
 //         // column names are cached after the first call.
             if (TABLE_COLUMNS.get("RoastLog") == null) {
                 //columnNames = getColumnsFromResultSet(rs);
@@ -356,6 +357,32 @@ public class TableService {
                 data.add(rs.getString("RoastNotes"));
                 data.add(rs.getString("TastingNotes"));
 
+                // add("Drying %");
+                // add("Browning %");
+                // add("Dev %");                
+                
+                // Calculate roast milestone percentages.
+                Date roastStart = rs.getDate("RoastStart");
+                Date dryTime = rs.getDate("DryTime");
+                Date firstCrackEnd = rs.getDate("FirstCrackEnd");
+                Date endRoast = rs.getDate("EndRoast");
+                 
+                long roastStartSeconds = roastStart.getTime() / 1000;
+                long dryTimeSeconds = dryTime.getTime() / 1000;
+                long firstCrackEndSeconds = firstCrackEnd.getTime() / 1000;
+                long endRoastSeconds = endRoast.getTime() / 1000;
+               
+                long totalRoastSeconds = endRoastSeconds - roastStartSeconds;
+                
+                long dryingSeconds = (dryTimeSeconds - roastStartSeconds) * 100;
+                long browningSeconds = (firstCrackEndSeconds - dryTimeSeconds) * 100;
+                long devSeconds = (endRoastSeconds - firstCrackEndSeconds) * 100;
+                        
+                data.add(String.format("%2.0f", (float)(dryingSeconds / totalRoastSeconds)) + "%");
+                data.add(String.format("%2.0f", (float)(browningSeconds / totalRoastSeconds)) + "%");
+                data.add(String.format("%2.0f", (float)(devSeconds / totalRoastSeconds)) + "%");
+                
+                
                 dataContainer.add(data);
             }
 
@@ -486,6 +513,13 @@ public class TableService {
             tastingNotes.setText("");
         }
 
+        DefaultTableCellRenderer rendererCenter = new DefaultTableCellRenderer();
+        rendererCenter.setHorizontalAlignment(SwingConstants.CENTER);
+
+        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("RoastLog", "Drying %")).setCellRenderer(rendererCenter);
+        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("RoastLog", "Browning %")).setCellRenderer(rendererCenter);
+        table.getColumnModel().getColumn(TableService.getInstance().getColumnIndex("RoastLog", "Dev %")).setCellRenderer(rendererCenter);
+        
         this.adjustTableColumnWidths(table);
     }
 

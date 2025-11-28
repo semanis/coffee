@@ -347,7 +347,7 @@ public final class DataService {
             case "getRoastLogsByBeanId":
                 query = "SELECT Id, BeanId, RoastStart, GreenWeight, RoastedWeight, "
                         + "MoistureLossPercentage, TotalRoastTime, TotalDryTime, TotalBrowningTime, "
-                        + "TotalFirstCrackTime, TotalDevelopmentTime, RoastNotes, TastingNotes "
+                        + "TotalFirstCrackTime, TotalDevelopmentTime, RoastNotes, TastingNotes, DryTime, FirstCrackEnd, EndRoast "
                         + "FROM RoastLog "
                         + "WHERE BeanId = ? "
                         + "ORDER BY RoastStart DESC";
