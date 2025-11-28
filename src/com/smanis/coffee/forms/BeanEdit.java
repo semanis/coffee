@@ -46,7 +46,6 @@ public class BeanEdit extends javax.swing.JDialog {
         labelName = new javax.swing.JLabel();
         textName = new javax.swing.JTextField();
         labelVendor = new javax.swing.JLabel();
-        textVendor = new javax.swing.JTextField();
         labelPrice = new javax.swing.JLabel();
         ftPrice = new javax.swing.JFormattedTextField();
         labelWeightInPounds = new javax.swing.JLabel();
@@ -76,6 +75,7 @@ public class BeanEdit extends javax.swing.JDialog {
         labelComments = new javax.swing.JLabel();
         labelPurchaseDate = new javax.swing.JLabel();
         textPurchaseDate = new javax.swing.JFormattedTextField();
+        comboVendor = new javax.swing.JComboBox<>();
         panelButtons = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
@@ -127,22 +127,6 @@ public class BeanEdit extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelVendor, gridBagConstraints);
-
-        textVendor.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        textVendor.setMaximumSize(new java.awt.Dimension(300, 34));
-        textVendor.setMinimumSize(new java.awt.Dimension(300, 34));
-        textVendor.setPreferredSize(new java.awt.Dimension(300, 34));
-        textVendor.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                textVendorFocusGained(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
-        panelDetails.add(textVendor, gridBagConstraints);
 
         labelPrice.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
         labelPrice.setText("Price");
@@ -273,7 +257,7 @@ public class BeanEdit extends javax.swing.JDialog {
         panelDetails.add(labelProcess, gridBagConstraints);
 
         comboProcess.setFont(new java.awt.Font("Dialog.plain", 0, 20)); // NOI18N
-        comboProcess.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dry", "Honey", "Monsooned", "Natural", "Washed" }));
+        comboProcess.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dry", "Honey", "Monsooned", "Natural", "Washed", "Wet-Hulled " }));
         comboProcess.setMaximumSize(new java.awt.Dimension(173, 34));
         comboProcess.setMinimumSize(new java.awt.Dimension(173, 34));
         comboProcess.setPreferredSize(new java.awt.Dimension(173, 34));
@@ -484,6 +468,18 @@ public class BeanEdit extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
         panelDetails.add(textPurchaseDate, gridBagConstraints);
 
+        comboVendor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bodhi Leaf Coffee Traders", "Burman Coffee Traders", "Happy Mug", "Home Roasting Supplies", "Sweet Maria's", "The Captain's Coffee", "Theta Ridge Coffee", " " }));
+        comboVendor.setMaximumSize(new java.awt.Dimension(132, 34));
+        comboVendor.setMinimumSize(new java.awt.Dimension(132, 34));
+        comboVendor.setPreferredSize(new java.awt.Dimension(132, 34));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 400;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 10);
+        panelDetails.add(comboVendor, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -566,10 +562,6 @@ public class BeanEdit extends javax.swing.JDialog {
     private void textNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textNameFocusGained
         this.textName.selectAll();
     }//GEN-LAST:event_textNameFocusGained
-
-    private void textVendorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textVendorFocusGained
-        this.textVendor.selectAll();
-    }//GEN-LAST:event_textVendorFocusGained
 
     private void textOriginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textOriginFocusGained
         this.textOrigin.selectAll();
@@ -657,7 +649,7 @@ public class BeanEdit extends javax.swing.JDialog {
                     this.textPurchaseDate.setValue(new SimpleDateFormat("MM/dd/yy").format(purchaseDate));
                 }
 
-                this.textVendor.setText(rs.getString("Vendor"));
+                this.comboVendor.setSelectedItem(rs.getString("Vendor"));
                 this.ftPrice.setValue(rs.getFloat("Price"));
                 this.ftWeight.setValue(rs.getInt("WeightInPounds"));
                 this.ftPricePerPound.setValue(rs.getFloat("PricePerPound"));
@@ -714,7 +706,7 @@ public class BeanEdit extends javax.swing.JDialog {
         HashMap<String, Object> map = new HashMap<>();
         map.put("Name", beanName);
         map.put("PurchaseDate", isoPurchaseDate);
-        map.put("Vendor", this.textVendor.getText());
+        map.put("Vendor", (String)this.comboVendor.getSelectedItem());
         map.put("ProcessMethod", (String) this.comboProcess.getSelectedItem());
 
         Float price = (Float) this.ftPrice.getValue();
@@ -821,6 +813,7 @@ public class BeanEdit extends javax.swing.JDialog {
     private javax.swing.JCheckBox checkboxAnaerobic;
     private javax.swing.JCheckBox checkboxInStock;
     private javax.swing.JComboBox<String> comboProcess;
+    private javax.swing.JComboBox<String> comboVendor;
     private javax.swing.JFormattedTextField ftDensityGrams;
     private javax.swing.JFormattedTextField ftPrice;
     private javax.swing.JFormattedTextField ftPricePerPound;
@@ -852,6 +845,5 @@ public class BeanEdit extends javax.swing.JDialog {
     private javax.swing.JTextField textOrigin;
     private javax.swing.JFormattedTextField textPurchaseDate;
     private javax.swing.JTextField textVariety;
-    private javax.swing.JTextField textVendor;
     // End of variables declaration//GEN-END:variables
 }
