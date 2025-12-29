@@ -61,7 +61,6 @@ public class BeanUtilization extends javax.swing.JDialog {
         setMaximumSize(new java.awt.Dimension(504, 303));
         setMinimumSize(new java.awt.Dimension(504, 303));
         setName("dialogBeanUtilization"); // NOI18N
-        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -123,6 +122,7 @@ public class BeanUtilization extends javax.swing.JDialog {
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
+        labelGramsConversion.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         labelGramsConversion.setText("1 Lb = 453.592g");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -132,6 +132,7 @@ public class BeanUtilization extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
         jPanel1.add(labelGramsConversion, gridBagConstraints);
 
+        buttonExit.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         buttonExit.setMnemonic('x');
         buttonExit.setText("Exit");
         buttonExit.addActionListener(new java.awt.event.ActionListener() {
@@ -199,7 +200,7 @@ public class BeanUtilization extends javax.swing.JDialog {
         float gramsPerPound = 453.592f;
 
         for (int i = 0; i < roastCount; i++) {
-            gramsUtilized += Float.valueOf((String) tableModelRoasts.getValueAt(i, columnIndex));
+            gramsUtilized += Float.valueOf((float)tableModelRoasts.getValueAt(i, columnIndex));
         }
 
         ResultSet rs = null;

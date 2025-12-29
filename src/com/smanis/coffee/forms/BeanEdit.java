@@ -440,6 +440,7 @@ public class BeanEdit extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         panelDetails.add(labelComments, gridBagConstraints);
 
+        labelPurchaseDate.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         labelPurchaseDate.setText("Purchase Date");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -468,7 +469,9 @@ public class BeanEdit extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
         panelDetails.add(textPurchaseDate, gridBagConstraints);
 
-        comboVendor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bodhi Leaf Coffee Traders", "Burman Coffee Traders", "Happy Mug", "Home Roasting Supplies", "Sweet Maria's", "The Captain's Coffee", "Theta Ridge Coffee", " " }));
+        comboVendor.setEditable(true);
+        comboVendor.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        comboVendor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bodhi Leaf Coffee Traders", "Burman Coffee Traders", "Happy Mug", "Home Roasting Supplies", "Sweet Maria's", "The Captain's Coffee", "Theta Ridge Coffee" }));
         comboVendor.setMaximumSize(new java.awt.Dimension(132, 34));
         comboVendor.setMinimumSize(new java.awt.Dimension(132, 34));
         comboVendor.setPreferredSize(new java.awt.Dimension(132, 34));

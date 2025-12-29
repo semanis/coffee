@@ -1171,7 +1171,7 @@ public class RoastLogEdit extends javax.swing.JDialog {
 
             textBrowningTimer.setText(String.format("%02d", minutes) + ":" + String.format("%02d", secondsElapsed));
             
-            Utility.checkForCompareAlert(labelCompareBrownTime.getText(), secondsElapsed, listTimerAlerts);
+  //s          Utility.swCompareAlert(labelCompareBrownTime.getText(), secondsElapsed, listTimerAlerts);
         }
     });
 
@@ -1191,7 +1191,7 @@ public class RoastLogEdit extends javax.swing.JDialog {
 
             textFcTimer.setText(String.format("%02d", minutes) + ":" + String.format("%02d", secondsElapsed));
             
-            Utility.checkForCompareAlert(labelCompareFcTime.getText(), secondsElapsed, listTimerAlerts);
+           Utility.checkForCompareAlert(labelCompareFcTime.getText(), secondsElapsed, listTimerAlerts);
         }
     });
 
@@ -1211,7 +1211,7 @@ public class RoastLogEdit extends javax.swing.JDialog {
 
             textDevTimer.setText(String.format("%02d", minutes) + ":" + String.format("%02d", secondsElapsed));
             
-            Utility.checkForCompareAlert(labelCompareDevTime.getText(), secondsElapsed, listTimerAlerts);
+           Utility.checkForCompareAlert(labelCompareDevTime.getText(), secondsElapsed, listTimerAlerts);
         }
     });
 

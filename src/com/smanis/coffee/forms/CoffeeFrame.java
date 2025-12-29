@@ -497,9 +497,11 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
+        labelTotalRoasts.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         labelTotalRoasts.setText("Total Roasts:");
         jPanel1.add(labelTotalRoasts);
 
+        textRoastCount.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         textRoastCount.setFocusable(false);
         textRoastCount.setMargin(new java.awt.Insets(2, 10, 2, 6));
         textRoastCount.setMaximumSize(new java.awt.Dimension(80, 47));
@@ -850,6 +852,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
         if (dialog.wasPersisted == true) {
             this.refreshBeanTable(dialog.getNewBeanId());
+            // ~!~!
         }
     }//GEN-LAST:event_btnAddBeanActionPerformed
 
@@ -942,7 +945,7 @@ public class CoffeeFrame extends javax.swing.JFrame {
 
         if (dialog.wasPersisted == true) {
             this.refreshBeanTable(null);
-            this.tableBeans.setRowSelectionInterval(selectedRow, selectedRow);
+            this.tableBeans.setRowSelectionInterval(selectedRow, selectedRow);            
         }
     }
 
@@ -1030,7 +1033,6 @@ public class CoffeeFrame extends javax.swing.JFrame {
     private void refreshRoastLogTable() {
         int currentIndex = this.listBeans.getSelectedIndex();
 
-        // Get the first bean ID from the bean selection combobox.
         DefaultListModel listModel = (DefaultListModel) this.listBeans.getModel();
         BeanModel beanModel = (BeanModel) listModel.getElementAt(currentIndex);
         String beanId = beanModel.getBeanId();

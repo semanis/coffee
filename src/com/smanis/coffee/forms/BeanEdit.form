@@ -582,6 +582,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelPurchaseDate">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="20" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Purchase Date"/>
           </Properties>
           <Constraints>
@@ -616,8 +619,12 @@
         </Component>
         <Component class="javax.swing.JComboBox" name="comboVendor">
           <Properties>
+            <Property name="editable" type="boolean" value="true"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="20" style="0"/>
+            </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="8">
+              <StringArray count="7">
                 <StringItem index="0" value="Bodhi Leaf Coffee Traders"/>
                 <StringItem index="1" value="Burman Coffee Traders"/>
                 <StringItem index="2" value="Happy Mug"/>
@@ -625,7 +632,6 @@
                 <StringItem index="4" value="Sweet Maria&apos;s"/>
                 <StringItem index="5" value="The Captain&apos;s Coffee"/>
                 <StringItem index="6" value="Theta Ridge Coffee"/>
-                <StringItem index="7" value=" "/>
               </StringArray>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

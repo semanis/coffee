@@ -284,7 +284,9 @@ public class Utility {
      * @return 
      */
     public static boolean isWithinFiveSeconds(long secondsElapsed, String timestamp) {
-     
+        if (timestamp == "") {
+            return false;
+        }
         // Parse the string into a LocalTime object
         LocalTime time = LocalTime.parse(timestamp);
         
